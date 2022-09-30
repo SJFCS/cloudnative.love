@@ -1,0 +1,18 @@
+课堂练习：
+显示英语前三名：
+select * from t2 order by english desc limit 3;
+显示总分，以降序排列：
+select name,(math+english) as sum from t1 order by sum desc;
+显示总分第一名：
+select name,(math+english) as sum from t1 order by sum desc limit 1;
+select name,(math+english) from t1 order by (math+english) desc limit 1;
+select name,max(math+english) from t1 group by (math+english) desc limit 1;
+
+显示英语最高分的姓名及分数：
+select name,english from t1 order by english desc limit 1;
+select name,max(english) as sum from t1 group by english desc limit 1;
+select name,english from t1 where english in (select max(english) from t1);       子查询
+select name,english from t2 where english = (select max(english) from t2);
+显示总成绩的平均分第一名:
+select name,(math+english)/2 from t1 where (math+english)/2  in (select max((math+english)/2) from t1);
+select name,(math+english)/2 from t1 where (math+english)/2 order by (math+english)/2 desc limit 1;

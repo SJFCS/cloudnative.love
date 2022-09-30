@@ -1,0 +1,10 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.defaultSidebar.category.关于本站": {
+    "message": "关于本站",
+    "description": "The label for category 关于本站 in sidebar defaultSidebar"
+  }
+}

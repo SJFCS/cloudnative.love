@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  traefik:
+    image: "traefik:2.2"
+    container_name: "traefik"
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # docker provider 模式下才需要如下 socket 映射 
+      # - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      # 绑定配置目录
+      - "./config:/etc/traefik"
+      # 证书存放目录
+      - "./certs:/etc/certs"

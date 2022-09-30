@@ -1,0 +1,23 @@
+{
+  "short_name": "CloudNative.love",
+  "name": "CloudNative.love",
+  "icons": [
+    {
+      "src": "/img/docusaurus.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/img/docusaurus.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "id": "/?source=pwa",
+  "start_url": "/?source=pwa",
+  "background_color": "#f6fbfe",
+  "display": "fullscreen",
+  "scope": "/",
+  "theme_color": "#f6fbfe",
+  "description": "CloudNative.love Wiki"
+}

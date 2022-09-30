@@ -1,0 +1,266 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Kubernetes": {
+    "message": "Kubernetes",
+    "description": "The label for category Kubernetes in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Pod": {
+    "message": "Pod",
+    "description": "The label for category Pod in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.命名空间": {
+    "message": "命名空间",
+    "description": "The label for category 命名空间 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.标签选择器": {
+    "message": "标签选择器",
+    "description": "The label for category 标签选择器 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.控制器": {
+    "message": "控制器",
+    "description": "The label for category 控制器 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.配置": {
+    "message": "配置",
+    "description": "The label for category 配置 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.service": {
+    "message": "service",
+    "description": "The label for category service in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ingress": {
+    "message": "ingress",
+    "description": "The label for category ingress in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.storage": {
+    "message": "storage",
+    "description": "The label for category storage in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.调度": {
+    "message": "调度",
+    "description": "The label for category 调度 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.K8S排错troubleshooting": {
+    "message": "K8S排错troubleshooting",
+    "description": "The label for category K8S排错troubleshooting in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kubernetes 网络插件": {
+    "message": "Kubernetes 网络插件",
+    "description": "The label for category Kubernetes 网络插件 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.autoscaling": {
+    "message": "autoscaling",
+    "description": "The label for category autoscaling in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Pod 自动伸缩": {
+    "message": "Pod 自动伸缩",
+    "description": "The label for category Pod 自动伸缩 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.集群缩放": {
+    "message": "集群缩放",
+    "description": "The label for category 集群缩放 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux": {
+    "message": "Linux",
+    "description": "The label for category Linux in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux 常用服务和基础命令": {
+    "message": "Linux 常用服务和基础命令",
+    "description": "The label for category Linux 常用服务和基础命令 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux日志管理&文件同步": {
+    "message": "Linux日志管理&文件同步",
+    "description": "The label for category Linux日志管理&文件同步 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux时间管理": {
+    "message": "Linux时间管理",
+    "description": "The label for category Linux时间管理 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux Network": {
+    "message": "Linux Network",
+    "description": "The label for category Linux Network in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Iptables & Firewalld 详解": {
+    "message": "Iptables & Firewalld 详解",
+    "description": "The label for category Iptables & Firewalld 详解 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux网络管理": {
+    "message": "Linux网络管理",
+    "description": "The label for category Linux网络管理 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.FileSystem - 文件系统": {
+    "message": "FileSystem - 文件系统",
+    "description": "The label for category FileSystem - 文件系统 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux 性能优化": {
+    "message": "Linux 性能优化",
+    "description": "The label for category Linux 性能优化 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux Security": {
+    "message": "Linux Security",
+    "description": "The label for category Linux Security in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.shell": {
+    "message": "shell",
+    "description": "The label for category shell in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Shell": {
+    "message": "Shell",
+    "description": "The label for category Shell in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Container": {
+    "message": "Container",
+    "description": "The label for category Container in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Docker": {
+    "message": "Docker",
+    "description": "The label for category Docker in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Containerd": {
+    "message": "Containerd",
+    "description": "The label for category Containerd in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Container Security": {
+    "message": "Container Security",
+    "description": "The label for category Container Security in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Continuous Integration & Delivery": {
+    "message": "Continuous Integration & Delivery",
+    "description": "The label for category Continuous Integration & Delivery in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kubernetes 配置（YAML）管理": {
+    "message": "Kubernetes 配置（YAML）管理",
+    "description": "The label for category Kubernetes 配置（YAML）管理 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.[Helm](https://github.com/helm/helm) - Kubernetes 包管理器": {
+    "message": "[Helm](https://github.com/helm/helm) - Kubernetes 包管理器",
+    "description": "The label for category [Helm](https://github.com/helm/helm) - Kubernetes 包管理器 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Artifactory - 制品库": {
+    "message": "Artifactory - 制品库",
+    "description": "The label for category Artifactory - 制品库 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.[Harbor](https://github.com/goharbor/harbor)": {
+    "message": "[Harbor](https://github.com/goharbor/harbor)",
+    "description": "The label for category [Harbor](https://github.com/goharbor/harbor) in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Pipeline Orchestration": {
+    "message": "Pipeline Orchestration",
+    "description": "The label for category Pipeline Orchestration in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.[FLux2](https://github.com/fluxcd/flux2/)": {
+    "message": "[FLux2](https://github.com/fluxcd/flux2/)",
+    "description": "The label for category [FLux2](https://github.com/fluxcd/flux2/) in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.[Jenkins](https://www.jenkins.io/zh/doc/)": {
+    "message": "[Jenkins](https://www.jenkins.io/zh/doc/)",
+    "description": "The label for category [Jenkins](https://www.jenkins.io/zh/doc/) in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Tekton Pipeline": {
+    "message": "Tekton Pipeline",
+    "description": "The label for category Tekton Pipeline in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Observability": {
+    "message": "Observability",
+    "description": "The label for category Observability in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Logging": {
+    "message": "Logging",
+    "description": "The label for category Logging in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.通用监控方案：Prometheus + Grafana + Altermanager": {
+    "message": "通用监控方案：Prometheus + Grafana + Altermanager",
+    "description": "The label for category 通用监控方案：Prometheus + Grafana + Altermanager in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.grafana": {
+    "message": "grafana",
+    "description": "The label for category grafana in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.prometheus": {
+    "message": "prometheus",
+    "description": "The label for category prometheus in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Service Mesh": {
+    "message": "Service Mesh",
+    "description": "The label for category Service Mesh in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.istio": {
+    "message": "istio",
+    "description": "The label for category istio in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Infrastructure as Code & Automation": {
+    "message": "Infrastructure as Code & Automation",
+    "description": "The label for category Infrastructure as Code & Automation in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.[Ansible](https://github.com/ansible/ansible)": {
+    "message": "[Ansible](https://github.com/ansible/ansible)",
+    "description": "The label for category [Ansible](https://github.com/ansible/ansible) in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Vagrant": {
+    "message": "Vagrant",
+    "description": "The label for category Vagrant in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Service Proxy & Ingress Gateway": {
+    "message": "Service Proxy & Ingress Gateway",
+    "description": "The label for category Service Proxy & Ingress Gateway in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.HAProxy": {
+    "message": "HAProxy",
+    "description": "The label for category HAProxy in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.[keepalived](https://github.com/acassen/keepalived)": {
+    "message": "[keepalived](https://github.com/acassen/keepalived)",
+    "description": "The label for category [keepalived](https://github.com/acassen/keepalived) in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.[Nginx(Engine X)](https://github.com/nginx/nginx)": {
+    "message": "[Nginx(Engine X)](https://github.com/nginx/nginx)",
+    "description": "The label for category [Nginx(Engine X)](https://github.com/nginx/nginx) in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.[Envoy](https://github.com/envoyproxy/envoy/)": {
+    "message": "[Envoy](https://github.com/envoyproxy/envoy/)",
+    "description": "The label for category [Envoy](https://github.com/envoyproxy/envoy/) in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.http": {
+    "message": "http",
+    "description": "The label for category http in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.[Traefik](https://github.com/containous/traefik/) 配置": {
+    "message": "[Traefik](https://github.com/containous/traefik/) 配置",
+    "description": "The label for category [Traefik](https://github.com/containous/traefik/) 配置 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Storage": {
+    "message": "Storage",
+    "description": "The label for category Storage in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Database": {
+    "message": "Database",
+    "description": "The label for category Database in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ETCD": {
+    "message": "ETCD",
+    "description": "The label for category ETCD in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.MySQL": {
+    "message": "MySQL",
+    "description": "The label for category MySQL in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Redis": {
+    "message": "Redis",
+    "description": "The label for category Redis in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Security": {
+    "message": "Security",
+    "description": "The label for category Security in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Coding": {
+    "message": "Coding",
+    "description": "The label for category Coding in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Golang": {
+    "message": "Golang",
+    "description": "The label for category Golang in sidebar tutorialSidebar"
+  }
+}

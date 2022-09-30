@@ -1,0 +1,58 @@
+{
+  "title": {
+    "message": "CloudCNative.love 💕",
+    "description": "The title in the navbar"
+  },
+  "item.label.Docs": {
+    "message": "文档",
+    "description": "Navbar item with label Docs"
+  },
+  "item.label.Blog": {
+    "message": "博客",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.laboratory": {
+    "message": "实验室",
+    "description": "Navbar item with label laboratory"
+  },
+  "item.label.About": {
+    "message": "关于",
+    "description": "Navbar item with label About"
+  },
+  "item.label.Google Mirror": {
+    "message": "谷歌镜像",
+    "description": "Navbar item with label Google Mirror"
+  },
+  "item.label.Real-time visitors": {
+    "message": "实时访客",
+    "description": "Navbar item with label Real-time visitors"
+  },
+  "item.label.Site monitoring": {
+    "message": "站点监控",
+    "description": "Navbar item with label Site monitoring"
+  },
+  "item.label.Resume": {
+    "message": "我的简历",
+    "description": "Navbar item with label Resume"
+  },
+  "item.label.Architecture": {
+    "message": "关于本站",
+    "description": "Navbar item with label Architecture"
+  },
+  "item.label.Progressing": {
+    "message": "此时此刻",
+    "description": "Navbar item with label Progressing"
+  },
+  "item.label.Workflow": {
+    "message": "工作流",
+    "description": "Navbar item with label Workflow"
+  },
+  "item.label.Archive": {
+    "message": "归档",
+    "description": "Navbar item with label Archive"
+  },
+  "item.label.Subscribe": {
+    "message": "订阅",
+    "description": "Navbar item with label Subscribe"
+  }
+}

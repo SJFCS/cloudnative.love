@@ -1,0 +1,187 @@
+# Jenkins Pipeline
+
+
+## 加快 Pipeline 构建速度
+
+在 「系统管理」-「系统配置」-「Pipeline Speed/Durability Settings」，将它设为 「Performance Optimized」
+
+这也能避免因为 Groovy 脚本没有使用 `@CPS` 注解而报错！
+
+
+## Jenkinsfile 与 CI/CD 代码管理
+
+企业级的 Jenkinsfile 往往是同质化的，每个环节中的几十个仓库，它们用到的 Jenkinsfile 和构建逻辑都一模一样。
+因此完全不需要在每个仓库中放一个 Jenkinfile——这加大了运维成本。
+
+比较优越的解决方案是将 Jenkinsfile 和它用到的 CI/CD 代码放在一起，达成 Jenkinsfile 和 CI/CD 代码的复用。
+
+比如一个专用于运维的代码仓库，结构如下：
+
+```tree
+├───jenkinsfiles
+│   ├─── xxx.Jenkinsfile  # 别的运维相关 Jenkinsfiles
+│   ├───batch「文件夹」  # 批量任务的 Jenkinsfiles，只负责批量调用子任务
+│   ├───cleaning「文件夹」  # 日志、镜像、缓存等历史数据清理的 Jenkinsfiles
+│   └───schedulers「文件夹」  # 统一管理定时执行的 Jenkinsfiles，其中大部分都只负责定时调用其他子任务。
+├───operation  # 上述 Jenkinsfiles 需要用到的 Python 代码
+│   ├─── vm  # 与 virtual machine 相关的脚本（虚拟机的 CURD）
+│   ├─── ftp  # 与 ftp 服务器相关的脚本（数据清理）
+├─── tests   # python 代码的单元测试
+├─── run.py   # 所有脚本的启动入口。
+├─── README.md
+```
+
+所有的脚本都包含一个无参的 `main()` 函数，根目录下的 `run.py` 会根据参数去调用对应模块的 `main()` 函数。
+比如 `python3 run.py operation.ftp.clean` 就会调用 `operation.ftp.clean.main()` 这个函数。
+
+这样做的好处有：
+
+1. 仓库结构清晰，也方便代码复用。
+2. `run.py` 中可以进行一些全局的设置：
+  1. 日志格式、输出级别
+  2. 捕获代码异常，然后打印出更友好的错误信息。（可以自定义一些任务相关的异常，然后在 `run.py` 中根据异常打印出对应的错误信息。）
+  3. 需要注意的是，使用这种代码结构时，Python 代码中一定要抛出有意义的异常，不能直接 `sys.exit`（非常坏的习惯）. 否则 `run.py` 的异常控制就失去了意义。
+
+
+缺点：
+
+1. 构建代码和前后端具体的源代码完全分离了，在当下的 GitOps 流水线下，这样的结构可能会导致：我后端 git 仓库没变更，构建出的镜像却变了。
+  - 后端 git 仓库构建得到的 container image 可能会变，这会导致构建任务无法重复。
+  - 解决方法之一：通过一个批量任务，将 ops 构建代码分发到所有后端仓库。这样源代码和构建代码都在同一个仓库，就能保证一致性。
+
+
+
+### 代码仓库分类
+
+我们目前是将 jenkinsfiles 和 CI/CD 代码分成了七个 Git 仓库进行管理：
+
+1. 四个直接使用源码的仓库：运维、前端、后端、测试的 CI/CD 仓库，结构前面讲过了
+1. 三个打成 package 使用的仓库：
+   3. job_config: 保存了所有 Git 源码仓库和 Jenkins Job 的映射关系，所有任务都通过它提供的 api 获取源码的 git_url/branch 等信息。
+      - 提供按类别查询的功能
+      - 提供自动通过映射关系创建 Jenkins 任务的功能。
+   4. operation_utils: 运维的实用工具包，通用的代码抽取到这里面 
+   6. common_config: 一些通用的配置，以 class 等方式定义在这个包里面。
+
+
+## 脚本片段
+
+>这里省略了 `pipeline.stages.stage.steps` 等外部代码块(block)。
+如果出现 grovvy 脚本（标志性特征是: 控制流语句 if-else/while、变量定义 def），下列代码片段还需要使用 `script` 包裹。
+
+
+### 1. git 仓库相关操作
+
+拉取 git 仓库：
+```groovy
+// 方法一：使用 git 插件拉取，jenkins 能记录到 git 仓库的 reversion
+dir("sub_git_dir"){  // 如果此文件夹不存在，会自动创建它
+  // 使用 git 插件，好处是插件会记录当前的 git reversion(web 页面上能看到)，方便排查。
+  git branch: 'dev', credentialsId: 'git-ssh-credentials-ID', url: 'http://gitlab.svc.local/test_repo'
+}
+
+// 方法二：直接通过 git 命令拉取
+sshagent (credentials: ['git-ssh-credentials-ID']) {
+    sh """
+    git clone -b dev http://gitlab.svc.local/test_repo sub_git_dir
+    """
+}
+```
+
+自动注入 ssh 密钥用于 git 操作：
+
+```groovy
+dir("sub_git_dir"){
+    // 需要插件 sshagent
+    sshagent (credentials: ['git-ssh-credentials-ID']) {
+      sh("git tag -a some_tag -m 'Jenkins'")
+      sh('git push <REPO> --tags')
+  }
+}
+```
+
+### 2. 批量任务
+
+在所有 labels 匹配的节点上运行某个命令：
+
+```groovy
+def nodes = [:]
+
+// 需要插件：Pipeline Utility Steps
+// 会忽略所有不在线的节点！
+nodesByLabel('docker').each {
+  nodes[it] = { ->
+    node(it) {
+      // 清理 docker 的所有历史数据
+      sh('docker system prune --all --force')
+    }
+  }
+}
+
+parallel nodes
+```
+
+如果还需要在多个节点之间共用某些文件/代码/配置，可以使用 `stash`/`unstash`:
+
+```groovy
+// stash 当前文件夹下的所有内容
+stash includes: '**', name: 'operation-scripts', useDefaultExcludes: false
+
+def nodes = [:]
+
+// 需要插件：Pipeline Utility Steps
+nodesByLabel('docker').each {
+  nodes[it] = { ->
+    node(it) {
+      // 将之前暂存的文件再取出到当前节点上。
+      unstash 'operation-scripts'
+      // 清理所有历史数据
+      sh("python3 run.py operation.clean_old_data")
+    }
+  }
+}
+
+parallel nodes
+```
+
+## 3. json/yaml 等文件的读写
+
+读文件很简单：`readCSV`/`readJSON`/`readYaml`/`readFile` 等
+
+而写文件，比如输出 json，完整的 pipeline 如下：
+
+```groovy
+import groovy.json.JsonOutput
+
+pipeline {
+  stages {
+    stage("Xxx") {
+      steps {
+        script {  // groovy 代码需要放到 script 中
+          // 将 groovy 字典转换成 json，写入到 build 描述中
+          def git_hash = sh(  // 目标项目的 hash 值存在 description 里面
+              encoding: 'utf-8',
+              returnStdout: true,
+              script: "git rev-parse HEAD"  // 获取 HEAD 所在的 ref 的值
+          ).trim()
+          def build_description = [
+              "git_hash": git_hash,
+          ]
+          // 需要安装插件：[Build Name and Description Setter]
+          buildDescription JsonOutput.toJson(build_description)
+        }
+      }
+}
+```
+
+## Pipeline 代码复用
+
+可以使用专门的 git 仓库来存放一些可复用的 pipeline 片段，详见：
+
+- [Extending with Shared Libraries - Jenkins Docs](https://www.jenkins.io/doc/book/pipeline/shared-libraries/)
+
+
+## 参考
+
+- [Pipeline Examples - Jenkins Docs](https://jenkins.io/doc/pipeline/examples)
+- [Running Jenkins job simultaneously on all nodes](https://stackoverflow.com/questions/17286614/running-jenkins-job-simultaneously-on-all-nodes#answer-61692506)

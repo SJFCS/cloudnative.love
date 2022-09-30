@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
-import {HtmlClassNameProvider, ThemeClassNames} from '@docusaurus/theme-common';
-import {BlogPostProvider, useBlogPost} from '@docusaurus/theme-common/internal';
+import { HtmlClassNameProvider, ThemeClassNames } from '@docusaurus/theme-common';
+import { BlogPostProvider, useBlogPost } from '@docusaurus/theme-common/internal';
 import BlogLayout from '@theme/BlogLayout';
 import BlogPostItem from '@theme/BlogPostItem';
 import BlogPostPaginator from '@theme/BlogPostPaginator';
@@ -10,9 +10,9 @@ import TOC from '@theme/TOC';
 import Comment from '@site/src/components/Comment';
 import BackToTopButton from '@theme/BackToTopButton';
 
-function BlogPostPageContent({sidebar, children}) {
-  const {metadata, toc} = useBlogPost();
-  const {nextItem, prevItem, frontMatter} = metadata;
+function BlogPostPageContent({ sidebar, children }) {
+  const { metadata, toc } = useBlogPost();
+  const { nextItem, prevItem, frontMatter } = metadata;
   const {
     hide_table_of_contents: hideTableOfContents,
     toc_min_heading_level: tocMinHeadingLevel,
@@ -35,7 +35,7 @@ function BlogPostPageContent({sidebar, children}) {
       {(nextItem || prevItem) && (
         <BlogPostPaginator nextItem={nextItem} prevItem={prevItem} />
       )}
-      <Comment />
+      <div className="giscusTop"><Comment /></div>
       <BackToTopButton />
     </BlogLayout>
   );
