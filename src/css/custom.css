@@ -26,6 +26,7 @@
 /* 云彩 和 云彩阴影 */
    --ifm-cloud-color: #e6f5fd;
    --ifm-cloud-accent: #cdebfb;
+   --ifm-footer-color: #F5FBFE;
 
    /* Font settings */
    --ifm-font-family-base: 'LXGW WenKai';
@@ -61,7 +62,7 @@
 /* 云彩 和 云彩阴影 */
     --ifm-cloud-color: #08304b;
     --ifm-cloud-accent: #084062;
-
+    --ifm-footer-color: #0A2540;
 
   /* Custom design for sidebar hide and expand buttons */
     --docs-color-border: #2e2e2e;
