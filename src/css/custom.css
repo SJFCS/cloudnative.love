@@ -4,19 +4,39 @@
  * work well for content-centric websites.
  */
 
+ @import 'lxgw-wenkai-screen-webfont/style.css';
+ @import 'lxgw-wenkai-webfont/style.css';
+ @import 'jetbrains-mono/css/jetbrains-mono.css';
+
 /* You can override the default Infima variables here. */
 :root {
   /* Theme colors */
-    --ifm-color-primary: #2160fd;
+    --ifm-color-primary: #0795ee;
     --ifm-color-primary-dark: #1959fc;
     --ifm-color-primary-darker: #0f51f8;
     --ifm-color-primary-darkest: #0042e7;
     --ifm-color-primary-light: #3d72f8;
     --ifm-color-primary-lighter: #477af8;
     --ifm-color-primary-lightest: #6791fc;
+   /* variables documented here: https://github.com/facebook/docusaurus/issues/3955 */
+  /* 全局主题 */
+   --ifm-background-color: #F5FBFE;
+   --ifm-navbar-background-color: #F5FBFE;
+   --ifm-dropdown-background-color: #F5FBFE;
+/* 云彩 和 云彩阴影 */
+   --ifm-cloud-color: #e6f5fd;
+   --ifm-cloud-accent: #cdebfb;
+
+   /* Font settings */
+   --ifm-font-family-base: 'LXGW WenKai';
+   --ifm-font-family-monospace: 'jetbrains mono';
+   /* --ifm-font-size-base: 95%;
+   --ifm-line-height-base: 1.75;
+   --ifm-leading-desktop: 1.25; */
+    
   /* Code block */
     --ifm-code-font-size: 95%;
-    --docusaurus-highlighted-code-line-bg: rgba(147, 178, 244, 0.2);
+    --docusaurus-highlighted-code-line-bg: #2c9ceb29;
   
   /* Custom design for sidebar hide and expand buttons */
     --docs-color-border: #e1dada;
@@ -32,7 +52,17 @@
     --ifm-color-primary-light: #3d72f8;
     --ifm-color-primary-lighter: #477af8;
     --ifm-color-primary-lightest: #6791fc;
-    --docusaurus-highlighted-code-line-bg: rgba(33 96 253/0.24);
+    /* Code block */
+    --docusaurus-highlighted-code-line-bg: #2c9ceb29;    
+    /* 全局主题 */
+    --ifm-background-color: #0A2540;
+    --ifm-navbar-background-color: #0A2540;
+    --ifm-dropdown-background-color: #0A2540;
+/* 云彩 和 云彩阴影 */
+    --ifm-cloud-color: #08304b;
+    --ifm-cloud-accent: #084062;
+
+
   /* Custom design for sidebar hide and expand buttons */
     --docs-color-border: #2e2e2e;
     --ifm-toc-border-color: #e1dada;
@@ -102,7 +132,7 @@
     --ifm-menu-color-background-active: var(--docs-color-primary-tint);
   }
   .menu__link--active:not(.menu__link--sublist) {
-    background-color: rgb(55 105 157 / 16%);
+    background-color: #2c9ceb29;
   }
   
   
