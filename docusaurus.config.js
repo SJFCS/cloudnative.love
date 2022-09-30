@@ -55,7 +55,20 @@ const config = {
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+    ({ 
+      giscus: {
+        id: 'comments',
+        repo: 'SJFCS/SJFCS.GITHUB.IO',
+        repoId: 'MDEwOlJlcG9zaXRvcnkzMjM5MTM3NTg=',
+        category: 'Announcements',
+        categoryId: 'DIC_kwDOE06IHs4CRnl1',
+        mapping: 'title',
+        reactionsEnabled: '1',
+        emitMetadata: '0',
+        inputPosition: 'top',
+        lang: 'zh-CN',
+        loading: 'lazy' ,  
+      },          
       navbar: {
         title: 'My Site',
         logo: {
