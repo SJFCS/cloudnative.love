@@ -8,6 +8,7 @@ import BlogPostPaginator from '@theme/BlogPostPaginator';
 import BlogPostPageMetadata from '@theme/BlogPostPage/Metadata';
 import TOC from '@theme/TOC';
 import Comment from '@site/src/components/Comment';
+import BackToTopButton from '@theme/BackToTopButton';
 
 function BlogPostPageContent({sidebar, children}) {
   const {metadata, toc} = useBlogPost();
@@ -35,6 +36,7 @@ function BlogPostPageContent({sidebar, children}) {
         <BlogPostPaginator nextItem={nextItem} prevItem={prevItem} />
       )}
       <Comment />
+      <BackToTopButton />
     </BlogLayout>
   );
 }
