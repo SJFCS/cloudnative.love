@@ -6,84 +6,103 @@
 
 /* You can override the default Infima variables here. */
 :root {
-/* Theme colors */
-  --ifm-color-primary: #2160fd;
-  --ifm-color-primary-dark: #1959fc;
-  --ifm-color-primary-darker: #0f51f8;
-  --ifm-color-primary-darkest: #0042e7;
-  --ifm-color-primary-light: #3d72f8;
-  --ifm-color-primary-lighter: #477af8;
-  --ifm-color-primary-lightest: #6791fc;
-/* Code block */
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(147, 178, 244, 0.2);
-
-/* Custom design for sidebar hide and expand buttons */
-  --docs-color-border: #e1dada;
-  --ifm-toc-border-color: #e1dada;
-}
-
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #1a90ff;
-  --ifm-color-primary-dark: #1959fc;
-  --ifm-color-primary-darker: #0f51f8;
-  --ifm-color-primary-darkest: #0042e7;
-  --ifm-color-primary-light: #3d72f8;
-  --ifm-color-primary-lighter: #477af8;
-  --ifm-color-primary-lightest: #6791fc;
-  --docusaurus-highlighted-code-line-bg: rgba(33 96 253/0.24);
-/* Custom design for sidebar hide and expand buttons */
-  --docs-color-border: #2e2e2e;
-  --ifm-toc-border-color: #e1dada;
-}
-
-/* doc 侧边栏展开按钮间距 */
-.menu__caret {
-padding: 1px 1rem;
-}
-
-/* Custom design for sidebar hide and expand buttons */
-
-aside.theme-doc-sidebar-container {
-  position: relative;
-  clip-path: inset(0px -140px);
-}
-.theme-doc-sidebar-container button[title='Collapse sidebar'],
-.theme-doc-sidebar-container div[title='Expand sidebar'] {
-  position: absolute;
-  top: 96px;
-  right: -14px;
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  border-radius: 4px;
-  border: 1.5px solid var(--ifm-toc-border-color);
-  z-index: 10;
-  background-size: 16px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: var(--docs-color-border);
-  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.707 4.293a1 1 0 0 1 0 1.414L9.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414l-7-7a1 1 0 0 1 0-1.414l7-7a1 1 0 0 1 1.414 0Z' fill='%23181818'/%3E%3C/svg%3E");
-}
-.theme-doc-sidebar-container div[title='Expand sidebar'] {
-  position: sticky;
-  margin-left: 16px;
-  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.293 4.293a1 1 0 0 0 0 1.414L14.586 12l-6.293 6.293a1 1 0 1 0 1.414 1.414l7-7a1 1 0 0 0 0-1.414l-7-7a1 1 0 0 0-1.414 0Z' fill='%23181818'/%3E%3C/svg%3E");
-}
-html[data-theme='dark']
+  /* Theme colors */
+    --ifm-color-primary: #2160fd;
+    --ifm-color-primary-dark: #1959fc;
+    --ifm-color-primary-darker: #0f51f8;
+    --ifm-color-primary-darkest: #0042e7;
+    --ifm-color-primary-light: #3d72f8;
+    --ifm-color-primary-lighter: #477af8;
+    --ifm-color-primary-lightest: #6791fc;
+  /* Code block */
+    --ifm-code-font-size: 95%;
+    --docusaurus-highlighted-code-line-bg: rgba(147, 178, 244, 0.2);
+  
+  /* Custom design for sidebar hide and expand buttons */
+    --docs-color-border: #e1dada;
+    --ifm-toc-border-color: #e1dada;
+  }
+  
+  /* For readability concerns, you should choose a lighter palette in dark mode. */
+  [data-theme='dark'] {
+    --ifm-color-primary: #1a90ff;
+    --ifm-color-primary-dark: #1959fc;
+    --ifm-color-primary-darker: #0f51f8;
+    --ifm-color-primary-darkest: #0042e7;
+    --ifm-color-primary-light: #3d72f8;
+    --ifm-color-primary-lighter: #477af8;
+    --ifm-color-primary-lightest: #6791fc;
+    --docusaurus-highlighted-code-line-bg: rgba(33 96 253/0.24);
+  /* Custom design for sidebar hide and expand buttons */
+    --docs-color-border: #2e2e2e;
+    --ifm-toc-border-color: #e1dada;
+  }
+  
+  /* Custom design for sidebar hide and expand buttons */
+  
+  aside.theme-doc-sidebar-container {
+    position: relative;
+    clip-path: inset(0px -140px);
+  }
+  .theme-doc-sidebar-container button[title='Collapse sidebar'],
+  .theme-doc-sidebar-container div[title='Expand sidebar'] {
+    position: absolute;
+    top: 96px;
+    right: -14px;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border-radius: 4px;
+    border: 1.5px solid var(--ifm-toc-border-color);
+    z-index: 10;
+    background-size: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--docs-color-border);
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.707 4.293a1 1 0 0 1 0 1.414L9.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414l-7-7a1 1 0 0 1 0-1.414l7-7a1 1 0 0 1 1.414 0Z' fill='%23181818'/%3E%3C/svg%3E");
+  }
+  .theme-doc-sidebar-container div[title='Expand sidebar'] {
+    position: sticky;
+    margin-left: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.293 4.293a1 1 0 0 0 0 1.414L14.586 12l-6.293 6.293a1 1 0 1 0 1.414 1.414l7-7a1 1 0 0 0 0-1.414l-7-7a1 1 0 0 0-1.414 0Z' fill='%23181818'/%3E%3C/svg%3E");
+  }
+  html[data-theme='dark']
+    .theme-doc-sidebar-container
+    button[title='Collapse sidebar'] {
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.707 4.293a1 1 0 0 1 0 1.414L9.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414l-7-7a1 1 0 0 1 0-1.414l7-7a1 1 0 0 1 1.414 0Z' fill='%23ffffff'/%3E%3C/svg%3E");
+  }
+  html[data-theme='dark']
+    .theme-doc-sidebar-container
+    div[title='Expand sidebar'] {
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.293 4.293a1 1 0 0 0 0 1.414L14.586 12l-6.293 6.293a1 1 0 1 0 1.414 1.414l7-7a1 1 0 0 0 0-1.414l-7-7a1 1 0 0 0-1.414 0Z' fill='%23ffffff'/%3E%3C/svg%3E");
+  }
   .theme-doc-sidebar-container
-  button[title='Collapse sidebar'] {
-  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.707 4.293a1 1 0 0 1 0 1.414L9.414 12l6.293 6.293a1 1 0 0 1-1.414 1.414l-7-7a1 1 0 0 1 0-1.414l7-7a1 1 0 0 1 1.414 0Z' fill='%23ffffff'/%3E%3C/svg%3E");
-}
-html[data-theme='dark']
-  .theme-doc-sidebar-container
-  div[title='Expand sidebar'] {
-  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.293 4.293a1 1 0 0 0 0 1.414L14.586 12l-6.293 6.293a1 1 0 1 0 1.414 1.414l7-7a1 1 0 0 0 0-1.414l-7-7a1 1 0 0 0-1.414 0Z' fill='%23ffffff'/%3E%3C/svg%3E");
-}
-.theme-doc-sidebar-container
-  :is(div[title='Expand sidebar'], button[title='Collapse sidebar'])
-  svg {
-  display: none;
-}
-/*  */
+    :is(div[title='Expand sidebar'], button[title='Collapse sidebar'])
+    svg {
+    display: none;
+  }
+  /* Custom doc sidebar */
+  nav.menu {
+    padding-right: 0;
+    scrollbar-gutter: auto;
+  }
+  .menu__link {
+    border-radius: 4px 0 0 4px;
+  }
+  ul.menu__list > li > a.menu__link--active {
+    border-right: 2px solid var(--ifm-color-primary);
+  }
+  
+  .menu__caret {
+    padding: 2px 1.5rem;
+    }
+  
+  .menu__link {
+    /* Background tint only for menu links in sidebar */
+    --ifm-menu-color-background-active: var(--docs-color-primary-tint);
+  }
+  .menu__link--active:not(.menu__link--sublist) {
+    background-color: rgb(55 105 157 / 16%);
+  }
+  
+  
