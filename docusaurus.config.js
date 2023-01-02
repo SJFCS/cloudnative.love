@@ -79,6 +79,8 @@ const config = {
         id: 'about',
         path: 'about',
         routeBasePath: 'about',
+        editUrl:
+          'https://github.com/SJFCS/cloudnative.love/edit/main/',
         // sidebarPath: require.resolve('./sidebarsAbout.js'),
         // 添加sidebarsAbout.js 内容如下
         // const sidebars = {

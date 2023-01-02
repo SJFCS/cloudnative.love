@@ -39,7 +39,7 @@ sidebar_position: 0
 - 轮播展示
   - 添加首页 [swiper](https://www.npmjs.com/package/swiper) 轮播
 - 图片缩放
-  - 手机端证书图片支持放大 [react-medium-image-zoom](https://www.npmjs.com/package/react-medium-image-zoom)
+  - 移动端证书图片支持放大 [react-medium-image-zoom](https://www.npmjs.com/package/react-medium-image-zoom)
 - 本地文字索引
   - 集成本地搜索功能 [docusaurus-search-local](https://github.com/easyops-cn/docusaurus-search-local)
 
