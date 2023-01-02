@@ -21,7 +21,7 @@ Arch Linux 最大的特色就是其包管理机制，包直接来自上游，不
 
 - Pop!_OS/Ubuntu
 
-    必须承认 Ubuntu 对机器学习等支持做的比较好，网络上文档也很多,任何问题都比较容易解决
+    Ubuntu 对机器学习等支持做的比较好，网络上文档也很多,任何问题都比较容易解决
 
 - Arch Linux/EndeavourOS/Garuda Linux
   
