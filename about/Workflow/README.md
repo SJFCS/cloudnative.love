@@ -57,7 +57,7 @@ import AsciinemaPlayer from '@site/src/components/AsciinemaPlayer';
 
 终端我使用了[powerlevel10k](https://github.com/romkatv/powerlevel10k) 主题，字体为 [MesloLGS NF](https://github.com/romkatv/powerlevel10k#manual-font-installation) ，当然也推荐 [nerd-fonts](https://github.com/ryanoasis/nerd-fonts) 这款字体，zsh 框架我使用了 [grml-zsh-config](https://grml.org/zsh/)，如果你愿意也可以使用 Oh-My-Zsh
 
-虽然 Arch Linux 的滚动更新较为激进任意出现问题，但好在官方提供了仓库快照 [archive源](https://archive.archlinux.org/)，如果发现问题你可以利用它将系统回滚到之前任意一天的状态。
+虽然 Arch Linux 的滚动更新较为激进容易出现问题，但好在官方提供了仓库快照 [archive源](https://archive.archlinux.org/)，如果发现问题你可以利用它将系统回滚到之前任意一天的状态。
 
 为了避免滚挂 我使用了 BTRFS 文件系统，其快照功能十分好用，但每次都通过 Timeshift 手动创建十分麻烦，推荐安装 [timeshift-autosnap](https://gitlab.com/gobonja/timeshift-autosnap)  利用 Pacman hook 在包更新前自动使用 Timeshift 创建快照。
 
