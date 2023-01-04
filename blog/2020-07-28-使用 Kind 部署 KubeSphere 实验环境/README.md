@@ -124,7 +124,7 @@ kubectl get svc/ks-console -n kubesphere-system
 
 我们部署 Kind 时已将 NodePort 30880 映射到了宿主机 30880 端口，现在打开浏览器访问 `http://localhost:30880/` 既可。默认帐户 `admin` 默认密码 `P@88w0rd` 。
 
-## 集群暂停与开启
+## Kind 集群状态查看
 
 我们可以使用 [--format](https://docs.docker.com/config/formatting/) 来对结果进行格式化输出，使用 [--filter](https://docs.docker.com/engine/reference/commandline/ps/#filtering) 进行对结果进行过滤。
 
@@ -151,6 +151,7 @@ NAME
 kind-kubesphere
 ```
 :::
+## Kind 集群暂停与开启
 
 创建集群后，是否可以在不删除集群的情况下停止并重新启动它？参考这个 [Issue](https://github.com/kubernetes-sigs/kind/issues/831)
 
