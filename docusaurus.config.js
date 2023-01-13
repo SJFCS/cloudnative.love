@@ -49,7 +49,7 @@ const config = {
           // postsPerPage: 15,
           postsPerPage: 'ALL',
           blogSidebarTitle: 'Recent articles',
-          blogSidebarCount: 5,
+          blogSidebarCount: 10,
           // blogSidebarCount: "ALL",
           showReadingTime: true, // 如果设置为 false，「x 分钟阅读」的文字就不会显示    
           editUrl:

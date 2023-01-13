@@ -558,14 +558,10 @@ authors:
   email: jimarcey@gmail.com
 ---
 ```
-
-## 多文档导航栏
-
-https://stackoverflow.com/questions/60783595/is-there-a-way-to-have-two-docs-in-docusaurus-2
-
 ## 更多示例
-https://docusaurus.io/zh-CN/docs/next/markdown-features
-
-https://docusaurus.io/docs/markdown-features/code-blocks
-
-https://docusaurus.io/docs/styling-layout
+- https://docusaurus.io/zh-CN/docs/next/markdown-features
+- https://docusaurus.io/docs/markdown-features/code-blocks
+- https://docusaurus.io/docs/styling-layout
+- [导入代码片段](https://docusaurus.io/zh-CN/docs/next/markdown-features/react#importing-code-snippets)
+- [导入 Markdown](https://docusaurus.io/zh-CN/docs/next/markdown-features/react#importing-markdown)
+- [多文档导航栏](https://stackoverflow.com/questions/60783595/is-there-a-way-to-have-two-docs-in-docusaurus-2)
