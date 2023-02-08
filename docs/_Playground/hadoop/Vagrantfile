@@ -1,0 +1,52 @@
+Vagrant.configure("2") do |config|
+  # config.vm.provider "virtualbox" do |v|
+  #     v.memory = 2048
+  #     v.cpus = 2
+  # end
+
+  config.vm.define "node-1" do |node1|
+      node1.vm.box = "centos/7"
+      node1.vm.box_version = "1809.01"
+      node1.vm.provider :virtualbox do |vb|
+          vb.customize ["modifyvm", :id, "--memory", "4096"]
+          vb.customize ["modifyvm", :id, "--cpus", "2"]
+          end
+      node1.vm.network "private_network", ip: "192.168.56.10"
+      node1.vm.hostname = "node-1"
+      node1.vm.provision "shell", inline: <<-SHELL
+      echo "i'm node-1"
+      sudo timedatectl set-timezone Asia/Shanghai
+      SHELL
+      end
+
+  config.vm.define "node-2" do |node2|
+      node2.vm.box = "centos/7"
+      node2.vm.box_version = "1809.01"
+      node2.vm.provider :virtualbox do |vb|
+          vb.customize ["modifyvm", :id, "--memory", "4096"]
+          vb.customize ["modifyvm", :id, "--cpus", "2"]
+          end
+      node2.vm.network "private_network", ip: "192.168.56.20"
+      node2.vm.hostname = "node-2"
+      node2.vm.provision "shell", inline: <<-SHELL
+          echo "i'm node-2"
+          sudo timedatectl set-timezone Asia/Shanghai
+      SHELL
+  end
+
+  config.vm.define "node-3" do |node3|
+      node3.vm.box = "centos/7"
+      node3.vm.box_version = "1809.01"
+      node3.vm.provider :virtualbox do |vb|
+          vb.customize ["modifyvm", :id, "--memory", "4096"]
+          vb.customize ["modifyvm", :id, "--cpus", "2"]
+          end
+      node3.vm.network "private_network", ip: "192.168.56.30"
+      node3.vm.hostname = "node-3"
+      node3.vm.provision "shell", inline: <<-SHELL
+          echo "i'm node-3"
+          sudo timedatectl set-timezone Asia/Shanghai
+      SHELL
+  end
+
+end
