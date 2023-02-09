@@ -17,3 +17,5 @@ shell> vi /etc/sudoers
 https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/ClusterSetup.html
 
 https://www.w3cschool.cn/hadoop/a86m1jyo.html
+
+hadoop 简介 https://www.bmc.com/blogs/hadoop-cloud-native-kubernetes/

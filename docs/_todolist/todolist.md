@@ -1,6 +1,33 @@
 ---
 title: todolist
 ---
+
+
+2020
+2021 *
+2022
+
+2023 *
+  acp
+  rhce
+  aws
+  其他云原生认证 istio terraform promethuse
+  开源项目
+2024
+  cks.12
+--------------
+2025
+  cka.11
+  ckad.11
+--------------
+2026.3
+--------------
+  本科
+
+
+## 书籍
+[linux-insides](https://github.com/0xAX/linux-insides/blob/master/SUMMARY.md) 是一本关于 linux 内核的书
+
       + 常用命令整理 https://doc.zdzn.net/cheatsheet/bash.html#cut
       + docker-compose 常用和awesome
       + awk
@@ -8,7 +35,6 @@ title: todolist
         - https://www.junmajinlong.com/shell/awk/index/
         - https://www.cnblogs.com/emanlee/p/3327576.html
 
-# 12.26
 
 - [ ] CSI, CNI, CRD和Operator开发
   -   https://github.com/dnsjia/luban
@@ -97,8 +123,6 @@ Gitlab
 - ~ argo https://www.udemy.com/course/hands-on-guide-to-argo-workflows-on-kubernetes/
 - ~ argo rollout https://atbug.com/canary-release-via-argo-rollouts-and-service-mesh/
 
-
-
 ## 阿里云学习 [16小时]
 - ecs，rds，slb，eip，nat
 - 熟悉主流云平台，如AWS,阿里云等的管理工具，精通InfrastructureasCode理念，熟练掌握Terraform，CloudFormaction。
@@ -106,7 +130,6 @@ Gitlab
 - https://help.aliyun.com/learn/getting-started.html
 - https://www.alibabacloud.com/zh/getting-started
 - https://www.bilibili.com/video/BV1aS4y1h7Xx
-
 
 ## 多云集群管理
 
@@ -150,7 +173,6 @@ ceph
 - 优点知识：  Ceph 入门到实战13.0 小时
 - 优点知识：  云原生存储 Rook 实战
 
-
 ## 中间件
 MongoDB [3小时] 性能排查。指标监控。主从复制。数据备份。冷数据分析 预计2天
 - 3h：https://www.bilibili.com/video/BV1WS4y1p7jK/
@@ -162,7 +184,6 @@ zookeeper [5小时]
 [etcd](https://www.bilibili.com/video/BV1eY4y1p774/),
 [tomcat](https://www.bilibili.com/video/BV1WP41157ns/)
 [openvpn](https://www.udemy.com/course/openvpn-verstehen-und-einrichten-sicher-im-netzwerk/) 
-
 
 # 待写文章 
 https://medium.com/inside-sumup/are-kubernetes-cpu-limits-bad-a04430bf54e1
@@ -176,7 +197,6 @@ https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/m
 比如核心链路跨云高可用，实现**Kubernetes集群的灰度版本升级**，极端故障场景的快速回复等等。
 基于业务平台与 VirtualKubelet,以及调度控制器，实现**面向多云和混合云和多云资源交付平台和能力；**
 1.熟悉主流云平台，如AWS,阿里云等的管理工具，精通InfrastructureasCode理念，熟练掌握Terraform，CloudFormaction。
-
 
 webassembly
 openstack,kvm,SDN，Openstack netron,linuxbridge,OVS,libvirt 镜像制作 cloud-init,
