@@ -2,18 +2,52 @@
 title: todolist
 ---
 
+## cert
 
-2020
-2021 *
+Kubernetes 管理员认证       (CKA)                2022.11.27	  2025.11.27
+Kubernetes 应用开发者认证   (CKAD)               2022.12.07	  2025.12.07
+Kubernetes 安全专家认证     (CKS)                2022.12.19 	2024.12.19
+阿里云云计算工程师认证       (ACP)                2021.03.30	 2023.03.30
+Red Hat Certified Engineer 红帽认证工程师 (RHCE) 2023.xx.xx
+DBA MySQL与PostgreSQL
+AWS
+其他云原生认证 istio terraform promethuse
+
+*红帽 Linux 系统管理员认证   (RHCSA)              2018.10.19*
+*阿里云 DevOps 工程师认证    (ACA)                2021.08.31	 2023.08.31*
+*红帽 Linux 系统管理员认证   (RHCSA)              2018.10.19*
+*H3C 网络工程师认证          (H3CNE)              2020.07.20	2023.07.20*
+*H3C 云计算工程师认证        (H3CNE-Cloud)        2020.06.22	2023.06.22*
+*云计算大数据讲师认证        (CETC)*
+
+
+2020 毕业 7k
+2021 *hop 15k
 2022
+2023 *hop 13k
 
-2023 *
-  acp
-  rhce
-  aws
-  MySQL与PostgreSQL
-  其他云原生认证 istio terraform promethuse
   开源项目 
+    可观测性实践
+    大数据分析数据清洗可视化项目，部署调优等等
+    公有云 多云 服务网格 serveless
+    crd oprate cni 等二次开发 +自动nacos优雅下线，自动流量预热，镜像安全流程
+    CICD平台 优雅发布+协作开发和动态环境，抓包+api+文档+测试+issue+权限+终端会话共享+零信任+审计平台+微前端+混沌工程等+全部gitops审计+集成基础设施即代码+开通审批流程+结合财务finops+埋点监控大数据告警监测
+      https://github.com/metersphere/metersphere/
+      https://github.com/localstack/localstack
+    其他云原生工具 IAC vault certmanager 等等
+  笔记
+  Container/ 底层技术 dev  
+  1-Kubernetes/
+    k8s the hard way
+    k8s-OPS
+    k8s-DEV & SouceCodeAnalysis 自己写容器调度器和CNI 等
+    Linux 
+      了解 linux 核心子系统（内存管理 文件系统 网络 进程调度） 内核 crash dump 分析，ebpf入门
+    LB(nginx) & gateway & service match
+    Database(mysql tidb redis MongoDB Neo4j Elasticsearch InfluxDB PostgreSQL 	Cassandra、HBase、
+    BigData
+    Storage(ceph minio)
+
 2024
   cks.12
 --------------
@@ -24,7 +58,9 @@ title: todolist
 2026.3
 --------------
   本科
-
+    23.10
+    24.10
+    25.10
 
 ## 书籍
 [linux-insides](https://github.com/0xAX/linux-insides/blob/master/SUMMARY.md) 是一本关于 linux 内核的书
