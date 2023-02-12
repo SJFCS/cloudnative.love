@@ -1,41 +1,49 @@
 ---
 title: todolist
 ---
-
-## cert
-
-Kubernetes 管理员认证       (CKA)                2022.11.27	  2025.11.27
-Kubernetes 应用开发者认证   (CKAD)               2022.12.07	  2025.12.07
-Kubernetes 安全专家认证     (CKS)                2022.12.19 	2024.12.19
-阿里云云计算工程师认证       (ACP)                2021.03.30	 2023.03.30
-Red Hat Certified Engineer 红帽认证工程师 (RHCE) 2023.xx.xx
-DBA MySQL与PostgreSQL
-AWS
-其他云原生认证 istio terraform promethuse
-
-*红帽 Linux 系统管理员认证   (RHCSA)              2018.10.19*
-*阿里云 DevOps 工程师认证    (ACA)                2021.08.31	 2023.08.31*
-*红帽 Linux 系统管理员认证   (RHCSA)              2018.10.19*
-*H3C 网络工程师认证          (H3CNE)              2020.07.20	2023.07.20*
-*H3C 云计算工程师认证        (H3CNE-Cloud)        2020.06.22	2023.06.22*
-*云计算大数据讲师认证        (CETC)*
+## 计划待做 2023-2025
+| 任务       |   分类   | 进度  | 进行中 |  时间   |
+| :--------- | :------: | :---: | :----: | :-----: |
+| graduate 7 |          | null  |        |  2020   |
+| hop     15 |          | null  |        |  2021   |
+|            |          | null  |        |  2022   |
+| hop     13 |          | null  |        |  2023   |
+| ---------- | -------- | ----  | ------ |  ----   |
+|            |          |       |        |  2023   |
+|            | 工作技能 |  90%  |        |  2024   |
+| H E)       | 量化交易 |       |        |  2025   |
+| hop     20 | 量化交易 |       |        | 2025.11 |
 
 
-2020 毕业 7k
-2021 *hop 15k
-2022
-2023 *hop 13k
+## 证书规划
+### 在期证书
+| 证书名称                         |  考试日期  |   有效期   |
+| :------------------------------- | :--------: | :--------: |
+| Kubernetes 管理员认证     (CKA)  | 2022.11.27 | 2025.11.27 |
+| Kubernetes 应用开发者认证 (CKAD) | 2022.12.07 | 2025.12.07 |
+| Kubernetes 安全专家认证   (CKS)  | 2022.12.19 | 2024.12.19 |
+                 	  
+### 计划证书
+| 证书名称                                         | 计划考试日期 | 有效期 |
+| :----------------------------------------------- | :----------: | :----: |
+| Red Hat Certified Engineer 红帽认证工程师 (RHCE) |   2023.04    |  2026  |
+| 阿里云                     (ACP-->ACE)           |     2024     |  2026  |
+| DBA MySQL                                        |   2023.10    |   /    |
+| AWS                                              |   2023.12    |  2026  |
+| 其他云原生认证 istio terraform promethuse        |   2024.03    |        |
+      
+### 已过期证书（不打算再续期）
+| 证书名称                                  |  考试日期  |   有效期   |
+| :---------------------------------------- | :--------: | :--------: |
+| 阿里云 DevOps 工程师认证    (ACA)         | 2021.08.31 | 2023.08.31 |
+| 红帽 Linux 系统管理员认证   (RHCSA)       | 2018.10.19 |            |
+| H3C 网络工程师认证          (H3CNE)       | 2020.07.20 | 2023.07.20 |
+| H3C 云计算工程师认证        (H3CNE-Cloud) | 2020.06.22 | 2023.06.22 |
+| 云计算大数据讲师认证        (CETC)        |            |     /      |
 
-  开源项目 
-    可观测性实践
-    大数据分析数据清洗可视化项目，部署调优等等
-    公有云 多云 服务网格 serveless
-    crd oprate cni 等二次开发 +自动nacos优雅下线，自动流量预热，镜像安全流程
-    CICD平台 优雅发布+协作开发和动态环境，抓包+api+文档+测试+issue+权限+终端会话共享+零信任+审计平台+微前端+混沌工程等+全部gitops审计+集成基础设施即代码+开通审批流程+结合财务finops+埋点监控大数据告警监测
-      https://github.com/metersphere/metersphere/
-      https://github.com/localstack/localstack
-    其他云原生工具 IAC vault certmanager 等等
-  笔记
+## 技能规划 & 项目规划
+### 文档项目：
+  Bootstrap Kubernetes the hard way on Vagrant on Local Machine. No scripts.
   Container/ 底层技术 dev  
   1-Kubernetes/
     k8s the hard way
@@ -47,22 +55,74 @@ AWS
     Database(mysql tidb redis MongoDB Neo4j Elasticsearch InfluxDB PostgreSQL 	Cassandra、HBase、
     BigData
     Storage(ceph minio)
+### 开源项目：
+  声明式的实验仿真平台 有开源的声明式 和eve前身 两种
+  网课平台，字符录制-音频转换-webide-ide操作回放-环境隔离-终端分享
+  博客切换模式。文章模式。交互模式，ppt模式,playground
+  Alfred，utools 更小更快兼容 wayland 支持自定义 workflow
+  终端软件，笔记软件，在线实验室，课程发布平台，web ide，全部打通
 
-2024
-  cks.12
---------------
-2025
-  cka.11
-  ckad.11
---------------
-2026.3
---------------
-  本科
-    23.10
-    24.10
-    25.10
 
-## 书籍
+  开源项目 
+    utools借鉴google的搜索栏tabl搜索
+    零信任代替谷歌身份验证器
+    可观测性实践
+    大数据分析数据清洗可视化项目，部署调优等等
+    公有云 多云 服务网格 serveless
+    crd oprate cni 等二次开发 +自动nacos优雅下线，自动流量预热，镜像安全流程
+    CICD平台 优雅发布+协作开发和动态环境，抓包+api+文档+测试+issue+权限+终端会话共享+零信任+审计平台+微前端+混沌工程等+全部gitops审计+集成基础设施即代码+开通审批流程+结合财务finops+埋点监控大数据告警监测
+      https://github.com/metersphere/metersphere/
+      https://github.com/localstack/localstack
+    其他云原生工具 IAC vault certmanager 等等
+
+### 翻译项目：
+  [LCTT](https://linux.cn/lctt/) 是“Linux中国”（https://linux.cn/）的翻译组，负责从国外优秀媒体翻译 Linux 相关的技术、资讯、杂文等内容。
+
+### 其他：
+  脚本例子：https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/ubuntu/vagrant/setup-hosts.sh
+  openldap 管理：http://ldapdoc.eryajf.net/
+  大佬：
+  - https://github.com/eryajf
+  操作标准自动化自动化的运维工程，sla保障 https://blog.csdn.net/qq_22211217/article/details/120755428
+
+
+1. 全栈开发  serverless，webassembly，微前端
+2. 深入k8s源码二次开发，多云混部
+3. 学习金融知识和量化交易
+4. homelab
+5. 英语第二语言
+6. 机器学习
+7. 区块链
+8. 视频流媒体
+openstack,kvm,SDN，linuxbridge,OVS,libvirt 镜像制作 cloud-init,
+混沌工程,机器学习流水线编排
+
+负责混部管理系统的开发， 包括差异化调度， 资源隔离， 资源驱逐流程等功能
+比如核心链路跨云高可用，实现**Kubernetes集群的灰度版本升级**，极端故障场景的快速回复等等。
+基于业务平台与 VirtualKubelet,以及调度控制器，实现**面向多云和混合云和多云资源交付平台和能力；**
+1.熟悉主流云平台，如AWS,阿里云等的管理工具，精通InfrastructureasCode理念，熟练掌握Terraform，CloudFormaction。
+
+
+
+
+1,英语，利于考研,外企,大厂,阅读文献和技术文章  收益很高
+2,python 库多生态好，lua易上手，代替shell 提高运维效率
+3,golang,rust,云原生和区块链第一公民,有完善的生态
+x,java 学习一下spring架构，我现在了解的远远不够，包括服务发现框架，配置中心框架，熔断降级，native镜像，openterlemtry
+5,网络,云网融合解决方案,sdn,cni,neutron等,个种网络协议原理和排错，ISP网络+overlay，SDN，网络基础,tcp/ip协议栈,vlan,vxlan,熟悉tcpdump,wireshark,分析网络问题,reg
+6,linux 内核调优，熟悉内核堆栈报报告,能分析coredump
+7,存储各种方案和linux集成,以及i稳定性和debug
+9,云原生，共有云服务，跨云跨区链路，serveless,contraller二次开发等，包括服务网格学习一下新的ebpf
+
+熟悉进程,文件系统,网络常见系统调用,strace/gdb等工具分析程序行为
+熟悉网络栈，内核网络参数工作原理,虚拟网络设备工作原理
+属虚linux存储和文件系统，能分析定位影响应用IO性能的因素
+熟悉namespace,cgroup,upstart,systemd等概念
+熟悉rpm,deb等发行包的制作
+
+## 书籍清单
+SRE
+
 [linux-insides](https://github.com/0xAX/linux-insides/blob/master/SUMMARY.md) 是一本关于 linux 内核的书
 
       + 常用命令整理 https://doc.zdzn.net/cheatsheet/bash.html#cut
@@ -221,54 +281,3 @@ zookeeper [5小时]
 [etcd](https://www.bilibili.com/video/BV1eY4y1p774/),
 [tomcat](https://www.bilibili.com/video/BV1WP41157ns/)
 [openvpn](https://www.udemy.com/course/openvpn-verstehen-und-einrichten-sicher-im-netzwerk/) 
-
-# 待写文章 
-https://medium.com/inside-sumup/are-kubernetes-cpu-limits-bad-a04430bf54e1
-https://home.robusta.dev/blog/stop-using-cpu-limits?nocache=234
-cgroup systemd 两种调度方式 要保持一致 否则资源竞争
-
-https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/ubuntu/vagrant/setup-hosts.sh
-
-# 本次之外
-负责混部管理系统的开发， 包括差异化调度， 资源隔离， 资源驱逐流程等功能
-比如核心链路跨云高可用，实现**Kubernetes集群的灰度版本升级**，极端故障场景的快速回复等等。
-基于业务平台与 VirtualKubelet,以及调度控制器，实现**面向多云和混合云和多云资源交付平台和能力；**
-1.熟悉主流云平台，如AWS,阿里云等的管理工具，精通InfrastructureasCode理念，熟练掌握Terraform，CloudFormaction。
-
-webassembly
-openstack,kvm,SDN，Openstack netron,linuxbridge,OVS,libvirt 镜像制作 cloud-init,
-区块链,混沌工程,人工智能编排
-
-1,英语，利于考研,外企,大厂,阅读文献和技术文章  收益很高
-2,python 库多生态好，lua易上手，代替shell 提高运维效率
-3,golang,rust,云原生和区块链第一公民,有完善的生态
-x,java 学习一下spring架构，我现在了解的远远不够，包括服务发现框架，配置中心框架，熔断降级，native镜像，openterlemtry
-5,网络,云网融合解决方案,sdn,cni,neutron等,个种网络协议原理和排错，ISP网络+overlay，SDN，网络基础,tcp/ip协议栈,vlan,vxlan,熟悉tcpdump,wireshark,分析网络问题,reg
-6,linux 内核调优，熟悉内核堆栈报报告,能分析coredump
-7,存储各种方案和linux集成,以及i稳定性和debug
-9,云原生，共有云服务，跨云跨区链路，serveless,contraller二次开发等，包括服务网格学习一下新的ebpf
-
-操作标准自动化自动化的运维工程，sla保障 https://blog.csdn.net/qq_22211217/article/details/120755428
-熟悉进程,文件系统,网络常见系统调用,strace/gdb等工具分析程序行为
-熟悉网络栈，内核网络参数工作原理,虚拟网络设备工作原理
-属虚linux存储和文件系统，能分析定位影响应用IO性能的因素
-熟悉namespace,cgroup,upstart,systemd等概念
-熟悉rpm,deb等发行包的制作
-
-====================================================================
-**自己翻译这个系列并持续更新 ：Bootstrap Kubernetes the hard way on Vagrant on Local Machine. No scripts.**
-1. 精写技术文章
-2. 全栈开发  serverless，webassembly，微前端
-3. 深入k8s源码二次开发，多云混部
-4. 学习金融知识和量化交易
-5. homelab
-6. 英语第二语言
-7. 机器学习
-8. 区块链
-9. 视频流媒体
-
-声明式的实验仿真平台 有开源的声明式 和eve前身 两种
-网课平台，字符录制-音频转换-webide-ide操作回放-环境隔离
-博客切换模式。文章模式。交互模式，ppt模式
-Alfred，utools 更小更快兼容 wayland 支持自定义 workflow
-终端软件，笔记软件，在线实验室，课程发布平台，web ide，全部打通
