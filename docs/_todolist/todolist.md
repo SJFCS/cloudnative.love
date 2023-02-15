@@ -2,20 +2,15 @@
 title: todolist
 ---
 ## 计划列表（实时更新） 2023-2025
-| 任务       |   分类   | 进度  |   进行中    |  时间   |
-| :--------- | :------: | :---: | :---------: | :-----: |
-| graduate 7 |   null   | null  | completion  |  2020   |
-| hop     15 |   null   | null  | completion  |  2021   |
-|            |   null   | null  | completion  |  2022   |
-| hop     13 |   null   | null  | completion  |  2023   |
-| ---------- | -------- | ----  |   ------    |  ----   |
-| RHCE       | 工作技能 |       | progressing |  2023   |
-| ACE        | 工作技能 |  90%  | progressing |  2024   |
-| DBA        | 工作技能 |       | progressing |  2025   |
-| k8s ops    | 工作技能 |       | progressing |  2025   |
-| linux      | 工作技能 |       | progressing |  2025   |
-| python+go  | 工作技能 |       | progressing |  2025   |
-| hop     20 | 量化交易 |       | progressing | 2025.11 |
+| 任务          |   分类   | 进度  |   进行中    |  时间   |
+| :------------ | :------: | :---: | :---------: | :-----: |
+| [RHCE](#RHCE) | 工作技能 |       | progressing |  2023   |
+| ACE           | 工作技能 |  90%  | progressing |  2024   |
+| DBA           | 工作技能 |       | progressing |  2025   |
+| k8s ops       | 工作技能 |       | progressing |  2025   |
+| linux         | 工作技能 |       | progressing |  2025   |
+| python+go     | 工作技能 |       | progressing |  2025   |
+| hop     20    | 量化交易 |       | progressing | 2025.11 |
 
 
 ## 证书规划
