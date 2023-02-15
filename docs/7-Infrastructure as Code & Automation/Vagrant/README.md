@@ -2,6 +2,7 @@
 title: Vagrant
 tags: [Infrastructure as Code & Automation,HashiCorp,Vagrant]
 ---
+推荐参考 https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/ubuntu/vagrant/setup-hosts.sh
 
 End kernel panic - not syncing attempted to kill the idle task
 

@@ -5,6 +5,7 @@ tags: [Linux]
 ---
 
 待学习：
+      了解 linux 核心子系统（内存管理 文件系统 网络 进程调度） 内核 crash dump 分析，ebpf入门,性能分析io排查
 
 - Linux 系统日志：https://linux.vbird.org/linux_basic/centos7/0570syslog.php
 - Linux 源码：[linux-insides](https://github.com/0xAX/linux-insides)
