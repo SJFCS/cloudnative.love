@@ -60,7 +60,7 @@ Key Results
 
 ## 运维开发技能
 
-java+大数据
+java+大数据 maven管理
   spring 服务发现框架，配置中心框架 熔断降级 native镜像 
   
     其他云原生工具 IAC vault certmanager 等等
@@ -195,6 +195,7 @@ udemy-OpenVPN  https://www.udemy.com/course/openvpn-verstehen-und-einrichten-sic
 
 
 ### 开源项目规划
+  - [ ] GPG 签名 自动 域 账号签名
   - [ ] https://flows.network/
   - [ ] 兼容Alfred，utools 更小更快兼容 wayland 支持自定义 workflow，utools借鉴google的搜索栏tabl搜索
   - [ ] 终端软件，笔记软件交互模式，ppt模式,playground，在线实验室，课程发布平台，web ide，字符录制-音频转换-webide-ide操作回放-环境隔离-终端分享
