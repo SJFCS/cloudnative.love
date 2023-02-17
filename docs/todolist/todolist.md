@@ -321,7 +321,7 @@ https://thiscute.world/posts/learn-english-again/
 
 ## 其他
 
-机器学习  区块链 金融知识和量化交易 机器学习流水线编排
+机器学习(AI绘画，GPT模型，时序预测)  区块链 金融知识和量化交易 机器学习流水线编排
 shell: http://c.biancheng.net/view/vip_4555.html
 设计模式: https://refactoringguru.cn/
 java: https://how2j.cn/
