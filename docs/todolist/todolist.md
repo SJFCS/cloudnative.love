@@ -193,7 +193,7 @@ udemy-OpenVPN  https://www.udemy.com/course/openvpn-verstehen-und-einrichten-sic
 
 
 ### 开源项目规划
-  - git 提交 弹出的gihub认证窗口支持浏览器或者token登录 太神奇了
+  - git 提交 弹出的gihub认证窗口支持浏览器或者token登录 太神奇了 https://juejin.cn/post/7055485446058426405
   - [ ] GPG 签名 自动 域 账号签名
   - [ ] https://flows.network/
   - [ ] 兼容Alfred，utools 更小更快兼容 wayland 支持自定义 workflow，utools借鉴google的搜索栏tabl搜索 https://github.com/kaiye/workflows-youdao https://github.com/kaiye/kaiye.github.com/issues/5
