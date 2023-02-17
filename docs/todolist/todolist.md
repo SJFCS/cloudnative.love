@@ -4,14 +4,39 @@ title: todolist
 ## 计划列表 2023-2025
 | Objective                          | 进度  | 时间  |
 | :--------------------------------- | :---: | :---: |
-| [考取证书](#计划证书)              |       | 2023  |
+| [考取证书](#计划证书)              |进行中| 2023  |
 | [提升运维开发技能](#运维开发技能)  |       | 2024  |
-| [输出技术文档](#技术文档写作)      |       | 2023  |
+| [输出技术文档](#技术文档写作)      |进行中| 2023  |
 | [Kubernetes 进阶](#kubernetes进阶) |       | 2024  |
 | [阅读书籍](#书籍清单)              |       |   /   |
 | [提高英语阅读能力](#英语)          |       |   /   |
+
+近期在做：RHCE考试 linux+shell 文档撰写  预计四月完成吧
+持续做：
+  英语持续学习
+  k8s社区事件翻译
+  持续清理书签
+
 Key Results
 
+2023
+  基础的证书考过
+  linux+shell 文档撰写
+  k8s-OPS指南文档撰写
+  基础运维开发技能学习并撰写笔记
+
+
+  k8s the hard way 文档开题
+  入门 python golang react
+  学习大数据  思科网络和高数视频快过期了
+2024
+  k8s进阶主题分享：多租户 多云 安全策略等等吧
+  k8s-DEV & SouceCodeAnalysis文档撰写 
+  自己写容器调度器和CNI 准入控制器
+  开源项目
+  进阶运维开发技能学习并撰写笔记
+
+  
 ## 证书规划
 ### 在期证书
 | 证书名称                         |  考试日期  |   有效期   |
@@ -23,13 +48,11 @@ Key Results
 ### 计划证书
 | 证书名称                                         | 计划考试日期 | 有效期 |
 | :----------------------------------------------- | :----------: | :----: |
-| Red Hat Certified Engineer 红帽认证工程师 (RHCE) |   2023.04    |  2026  |
+| Red Hat Certified Engineer 红帽认证工程师 (RHCE) |   2023.03.15    |  2026  |
 | 阿里云                     (ACE)                 |     2024     |  2026  |
 | DBA MySQL                                        |   2023.10    |   /    |
 | AWS                                              |   2023.12    |  2026  |
 | 其他云原生认证 istio terraform promethuse        |   2024.03    |        |
-- GCP
-  - https://www.cloudskillsboost.google/
 - aws
   - https://iteablue.com/posts/aws-certification-introduction.html
   - https://www.xiaoheiwoo.com/aws-certification-path/
@@ -37,6 +60,8 @@ Key Results
   - ecs，rds，slb，eip，nat
   - 熟悉主流云平台，如AWS,阿里云等的管理工具，精通InfrastructureasCode理念，熟练掌握Terraform，CloudFormaction。
   - 熟悉云服务的VPC，子网分配，安全组配置，负载均衡，WAF配置，网络安全等基本网络技能。
+  - https://developer.aliyun.com/article/1138429
+  - https://appatjs2ciq4695.h5.xiaoeknow.com/v1/goods/goods_detail/term_63102d1048466_soaaD0?type=3&channel_id=1003835
   - https://help.aliyun.com/learn/getting-started.html
   - https://www.alibabacloud.com/zh/getting-started
   - https://www.bilibili.com/video/BV1aS4y1h7Xx
@@ -129,6 +154,8 @@ redis [6小时]
 - https://www.bilibili.com/video/BV1zN4y1A7fA
 
 ### ci/cd [16小时]
+https://developer.aliyun.com/article/984673
+https://ansible.leops.cn/
 harness.io
 udemy-DevOps https://www.udemy.com/course/devops-catalog/
 udemy-Ansible https://www.udemy.com/course/learn-ansible/
@@ -197,7 +224,7 @@ udemy-OpenVPN  https://www.udemy.com/course/openvpn-verstehen-und-einrichten-sic
   - [ ] GPG 签名 自动 域 账号签名
   - [ ] https://flows.network/
   - [ ] 兼容Alfred，utools 更小更快兼容 wayland 支持自定义 workflow，utools借鉴google的搜索栏tabl搜索 https://github.com/kaiye/workflows-youdao https://github.com/kaiye/kaiye.github.com/issues/5
-  - [ ] 终端软件，笔记软件交互模式，ppt模式,playground，在线实验室，课程发布平台，web ide，字符录制-音频转换-webide-ide操作回放-环境隔离-终端分享
+  - [ ] 终端软件和零信任集成，能共享终端 能操作回放、录制和审计，笔记软件交互模式，ppt模式,playground，在线实验室，课程发布平台，web ide，字符录制-音频转换-webide-ide-环境隔离-终端分享
   - [ ] 零信任 动态身份验证器 环境代理 VPN
   - [ ] 大数据分析数据清洗可视化项目，部署调优等等
   - [ ] openldap管理 http://ldapdoc.eryajf.net/ 对接飞书钉钉等，支持oauth2
@@ -227,6 +254,12 @@ k8s-OPS指南
   腾讯课堂-Kubernetes         https://ke.qq.com/user/index/index.html#/plan/cid=2738602&term_id=103659045
   极客时间-深入剖析 Kubernetes-张磊 https://time.geekbang.org/column/article/71606?cid=100015201
 ### linux
+RH442 红帽 Linux性能调优。难度系数4颗星，学习成本两个月。RH442看着是可以用中文，但是有的填空题用中文做完再提交，回过头来检查发现没有填写成功，所以尽可能的直接用英文作答。
+
+
+这一门最大的收获是：硬件参数获取分析、系统资源使用实时分析、追踪统计、系统调用追踪分析、内存过量分配合理调配、共享内存指定配置、二进制C程序直接分析系统概要、虚拟内存占用统计、程序内存缓存命令率分析、网络tcp/udp buffer分析，系统核心资源定期采集分析，网络延迟调优、systemd服务资源使用限制，cgroup资源限制、磁盘脏页回收、Linux内核模板动态装卸载、tuned资源组调优、numa 架构调优、TLB缓存调优、内核优化、Linux多种文件系统性能优缺点对比等。
+
+
 - ipvs,iptables  基本了解 
 - https://icloudnative.io/posts/ipvs-how-kubernetes-services-direct-traffic-to-pods/
 - https://dudashuang.com/load-blance/
@@ -253,7 +286,7 @@ Linux-book(除了运维服务只是还有arch食用指南)
   EBPF
   基于linux实现vxlan和bgp
 
-
+### 翻译
   - [LCTT](https://linux.cn/lctt/) “Linux中国”翻译组
   - https://github.com/icexmoon/PEP-CN
   - https://github.com/chinesehuazhou/peps-cn/blob/master/%E5%AD%A6%E4%B9%A0Python%EF%BC%8C%E6%80%8E%E8%83%BD%E4%B8%8D%E6%87%82%E7%82%B9PEP%E5%91%A2%EF%BC%9F.md
