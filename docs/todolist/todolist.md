@@ -70,6 +70,7 @@ udemy-Golang https://www.udemy.com/course/go-the-complete-developers-guide/
 极客时间-Go 实战训练营 https://u.geekbang.org/lesson/290
 
 ### 观测性
+chao mesh https://litmuschaos.io/
 openterlemtry sentry
 udemy-Grafana https://www.udemy.com/course/grafana-tutorial/
 udemy-Prometheus https://www.udemy.com/course/prometheus-course/

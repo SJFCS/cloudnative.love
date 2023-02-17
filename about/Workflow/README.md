@@ -13,30 +13,22 @@ title: Workflow
 
 我使用 Arch Linux 作为主力已经有段时间了，尽管初期有着陡峭的学习曲线，但仍阻挡不了我对其的喜爱。这段时间使用下来 Linux 确实能 save my life ，在学习一些技术时 Linux 的环境能帮我节省很多时间。
 
-Arch Linux 最大的特色就是其包管理机制，包直接来自上游，不改名不拆包，及时的滚动更新。官方源、社区源和AUR源可以覆盖常用的所有软件，在 Arch Linux 可以**非常轻松**地将所有一切全部通过包管理其来进行管理。
+Arch Linux 最大的特色就是其包管理机制，包直接来自上游，不改名不拆包（对开发者来说这是一件好事Why are there no -dev packages in Arch Linux?），及时的滚动更新。官方源、社区源和AUR源可以覆盖常用的所有软件，在 Arch Linux 可以**非常轻松**地将所有一切全部通过包管理器来进行管理。
 
 如果你用过 APT 系包管理器，你一定有过满世界找 PPA 源的经历，并且多数 PPA 并非官方维护质量令人担忧，有时找不到 PPA 源只能手动安装 .deb 包。如果你有这样的困扰可以切换到 Arch 系 Linux 这里有世界上最好的包管理！！
 
-如果要我推荐 Linux Laptop 发行版的话，我会推荐一下几个：
+如果要我推荐几个 Linux Laptop 发行版的话，我会推荐一下几个：
 
-- Pop!_OS/Ubuntu
-
-    Ubuntu 对机器学习等支持做的比较好，网络上文档也很多,任何问题都比较容易解决
-
-- Arch Linux/EndeavourOS/Garuda Linux
-  
-    如果有信心解决你所出现的任何问题的话，可以了考虑用 Arch 系的发行版，你会得到一个十分省心的包管理
-
-- Fedora Workstation
-  
+- Pop!_OS/Ubuntu/Rolling Rhino  
+    Ubuntu 系列对机器学习等支持做的比较好，网络上文档也很多,任何问题都比较容易解决  
+    [Rolling Rhino](https://rollingrhino.org/)是一个基于Ubuntu的滚动发行版  
+- Arch Linux/EndeavourOS/Garuda Linux  
+    如果有信心解决你所出现的任何问题的话，可以了考虑用 Arch 系的发行版，你会得到一个十分省心的包管理  
+- Fedora Workstation  
     红帽的 rpm 的应用可以说少得可怜了，如果喜欢红帽系的可以考虑
-
-- NixOS
-  
-    使用 Nix 语言提供了**声明式的包管理**，可以通过一个声明式文件定义系统的全部细节，实现系统完整可复现、版本快速切换等功能。
-
+- NixOS  
+    使用 Nix 语言提供了**声明式的包管理**，可以通过一个声明式文件定义系统的全部细节，实现系统完整可复现、版本快速切换等功能。  
 - 不要用 Manjaro ！！！
-
    - 1、它没有 Archive 源你无法回滚你的系统，
    - 2、延迟两周并不是在测试 Arch 包打包本身的质量，而是在测试他们拿来 Arch 的包和他们自己乱改的核心包之间的兼容性 
    - 3、意味着你要放弃 Arch Linux 最大的特色 AUR 源或者忍受其可能因不兼容而导致问题

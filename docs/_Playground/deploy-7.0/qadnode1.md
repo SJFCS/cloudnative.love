@@ -12,7 +12,7 @@ qadnode4.local rack01
       hostList: ["qadnode1.local","qadnode2.local"]
   configList:
     keepalived_common:
-      default_virtual_ip_address: "172.30.1.69"
+      default_virtual_ip_address: "172.30.3.46"
 
 - service: kerberos
   componentList:
