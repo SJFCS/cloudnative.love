@@ -130,7 +130,6 @@ redis [6小时]
 - https://www.bilibili.com/video/BV1ZK411M7ov
 - https://www.bilibili.com/video/BV1zN4y1A7fA
 
-
 ### ci/cd [16小时]
 harness.io
 udemy-DevOps https://www.udemy.com/course/devops-catalog/
