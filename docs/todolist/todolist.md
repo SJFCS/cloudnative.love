@@ -56,8 +56,6 @@ Key Results
 | 云计算大数据讲师认证        (CETC)        |            |     /      |
 
 
-
-
 ## 运维开发技能
 
 java+大数据 maven管理
@@ -195,9 +193,10 @@ udemy-OpenVPN  https://www.udemy.com/course/openvpn-verstehen-und-einrichten-sic
 
 
 ### 开源项目规划
+  - git 提交 弹出的gihub认证窗口支持浏览器或者token登录 太神奇了
   - [ ] GPG 签名 自动 域 账号签名
   - [ ] https://flows.network/
-  - [ ] 兼容Alfred，utools 更小更快兼容 wayland 支持自定义 workflow，utools借鉴google的搜索栏tabl搜索
+  - [ ] 兼容Alfred，utools 更小更快兼容 wayland 支持自定义 workflow，utools借鉴google的搜索栏tabl搜索 https://github.com/kaiye/workflows-youdao https://github.com/kaiye/kaiye.github.com/issues/5
   - [ ] 终端软件，笔记软件交互模式，ppt模式,playground，在线实验室，课程发布平台，web ide，字符录制-音频转换-webide-ide操作回放-环境隔离-终端分享
   - [ ] 零信任 动态身份验证器 环境代理 VPN
   - [ ] 大数据分析数据清洗可视化项目，部署调优等等
@@ -317,7 +316,12 @@ Linux-book(除了运维服务只是还有arch食用指南)
 - [ ] [linux-insides(Linux 内核揭秘)](https://github.com/0xAX/linux-insides/blob/master/SUMMARY.md) 
 
 ## 英语
-BEC高级
+https://github.com/byoungd/English-level-up-tips
+https://csdiy.wiki/%E5%BF%85%E5%AD%A6%E5%B7%A5%E5%85%B7/workflow/
+https://github.com/yujiangshui/A-Programmers-Guide-to-English
+https://github.com/xiaolai/everyone-can-use-english
+
+BEC higher A
 https://www.thefreedictionary.com/
 https://thiscute.world/posts/learn-english-again/
 
