@@ -1,4 +1,8 @@
 ## Kubernetes进阶
+  k8s进阶主题分享：多租户 多云 安全策略等
+  k8s-DEV & SouceCodeAnalysis文档撰写 
+  自己写容器调度器和CNI 准入控制器
+
 优点知识-Kubernetes 开发课 https://youdianzhishi.com/web/course/1018/2014
 
 深入k8s源码二次开发，多云混部，跨云跨区链路
