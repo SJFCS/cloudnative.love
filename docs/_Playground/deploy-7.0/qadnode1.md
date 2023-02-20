@@ -439,7 +439,7 @@ qadnode4.local rack01
 - service: easy_webmaster
   componentList:
     - component: frontend
-      hostList: ["qadnode2.local"]
+      hostList: ["qadnode4.local"]
 
 - service: easy_standard
   componentList:
