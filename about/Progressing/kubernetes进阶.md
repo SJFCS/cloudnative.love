@@ -1,14 +1,17 @@
 ## Kubernetes进阶
-  k8s进阶主题分享：多租户 多云 安全策略等
-  k8s-DEV & SouceCodeAnalysis文档撰写 
-  自己写容器调度器和CNI 准入控制器
+- k8s进阶主题分享：多租户 多云 安全策略等
+- k8s-DEV & SouceCodeAnalysis文档撰写 
+- 自己写容器调度器和CNI 准入控制器
+- 多云混部管理系统，跨云跨区核心链路跨云高可用，包括差异化调度， 资源隔离， 资源驱逐流程等功能
+- 基于业务平台与 VirtualKubelet,以及调度控制器，实现**面向多云和混合云和多云资源交付平台和能力；**
+  - https://kubevela.io/
+  - https://openkruise.io/zh/
+- 本地联调，网络拉平
 
 优点知识-Kubernetes 开发课 https://youdianzhishi.com/web/course/1018/2014
 
-深入k8s源码二次开发，多云混部，跨云跨区链路
-负责混部管理系统的开发， 包括差异化调度， 资源隔离， 资源驱逐流程等功能
-比如核心链路跨云高可用，实现**Kubernetes集群的灰度版本升级**，极端故障场景的快速恢复等等。
-基于业务平台与 VirtualKubelet,以及调度控制器，实现**面向多云和混合云和多云资源交付平台和能力；**
+
+实现**Kubernetes集群的灰度版本升级**，极端故障场景的快速恢复等等。
 ### 多云集群管理
 多租户，网络拉平
 - kubefed, karmada, virtual kubelet，kubevela,admiralty，kubeedge等
