@@ -3,8 +3,8 @@ title: Linux
 sidebar_position: 2
 tags: [Linux]
 ---
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7
 
-待学习：
       了解 linux 核心子系统（内存管理 文件系统 网络 进程调度） 内核 crash dump 分析，ebpf入门,性能分析io排查
 
 - Linux 系统日志：https://linux.vbird.org/linux_basic/centos7/0570syslog.php

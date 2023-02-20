@@ -12,7 +12,7 @@ authors: songjinfeng
 draft: false
 toc: true
 ---
-
+https://wangdoc.com/ssh/client
 本文对SSH连接验证机制进行了非常详细的分析，还详细介绍了"Shell基本功能"和了解"公钥加密"的概念。，相信能让各位对ssh有个全方位较透彻的了解，而不是仅仅只会用它来连接远程主机。
 
 

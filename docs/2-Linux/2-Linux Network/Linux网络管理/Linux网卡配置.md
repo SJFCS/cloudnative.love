@@ -14,7 +14,7 @@ toc: true
 ---
 
 
-
+nmtui  图形配置
 
 
 https://segmentfault.com/a/1190000015476963
