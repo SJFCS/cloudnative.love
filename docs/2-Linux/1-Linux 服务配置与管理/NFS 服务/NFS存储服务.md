@@ -1,16 +1,5 @@
 ---
 title: NFS存储服务
-
-categories:
-  - Linux常用服务
-series: 
-  - NFS
-lastmod: '2021-05-27'
-
-featuredImage: 
-authors: songjinfeng
-draft: false
-toc: true
 ---
 
 本文将介绍NFS服务搭建和使用。
