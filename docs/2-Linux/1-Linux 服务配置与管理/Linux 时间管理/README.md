@@ -3,6 +3,8 @@ title: Linux 时间管理
 tags: [Linux 时间管理]
 sidebar_position: 0
 ---
+https://linux.vbird.org/linux_server/redhat9/0440ntp.php
+
 在操作系统中存在 System clock (系统时钟), Hardware clock (硬件时钟),UTC,time zone (时区),Daylight Saving Time (DST 夏令时)等概念。本章节解释了它们是什么以及如何读取和设置它们。  
 在系统运行过程中不可避免会产生 Time skew 现象，本章将列举了四种 Time synchronization 方案，及其配置方法。
 
@@ -73,24 +75,12 @@ localtime (本地时间) 取决于当前时区，本地时间=UTC + 时区
 如果硬件时钟继续以大的增量丢失或获得时间，则可能记录了无效的漂移(但只适用于 hwlock 守护进程正在运行的情况)。如果硬件时钟时间设置不正确，或者时间标准没有与 Windows 或 macOS 安装同步，就会发生这种情况。通过首先删除文件/etc/adjtime，然后设置正确的硬件时钟和系统时钟时间，可以删除漂移值。然后你应该检查你的时间标准是否正确。
 
 ## Time synchronization 时间同步
+以下时间同步方案的使用和配置详见: [Time synchronization](./时间同步.md)
+- ntpdate + crontab
+- ntpd
+- chrony
+- systemd-timesyncd
 
-Network Time Protocol (NTP 网络时间协议) 是一种通过分组交换、可变延迟数据网络来同步计算机系统时钟的协议。
-
-下面对比了常见 NTP 同步方式:  
-使用和配置详见: [Time synchronization](./时间同步.md)
-
-1. `ntpdate` 一般搭配 `Crontab` 来调整时间，因为 `ntpdate` 会直接修改时间，所以会造成时间的跳跃。当 `ntpdate` 发现你的时间快了，则会回调到之前的时间点，导致你的系统经历两个相同的时刻，对某些应用而言，这是致命的。因此，请放弃使用 `ntpdate` 来校时。且 `ntpdate` 无法修正时钟振荡频率，治标不治本。
-2.  `ntpd` 和`Chrony` 的修正是连续的，通过减慢时钟或者加快时钟的方式连续的修正，会获得平滑的时间校正而不会造成时钟跳跃。并且可以在修正时间的同时，把 BIOS 计时器的振荡频率偏差记录下来。这样即使网络有问题，本机仍然能维持一个相当精确的走时。
-3. `Chrony` 可以更快的同步，从而最大程度减少了时间和频率误差，对于并非全天 24 小时运行的虚拟计算机而言非常有用，能够更好地响应时钟频率的快速变化，对于具备不稳定时钟的虚拟机或导致时钟频率发生变化的节能技术而言非常有用，而`ntpd`在时差较大时候会禁止同步
-4. `Chrony` 通过 Internet 同步的两台机器之间的典型精度在几毫秒之内，在LAN上，精度通常为几十微秒。利用硬件时间戳或硬件参考时钟，可实现亚微秒的精度。  
-   `NTP`精度在局域网内可达 0.1ms，在互联网上绝大多数的地方精度可以达到 1-50ms。
-5. `Chrony` 无需对服务器进行定期轮询，因此具备间歇性网络连接的系统仍然可以快速同步时
-6. [systemd-timesyncd](https://unix.stackexchange.com/questions/504381/chrony-vs-systemd-timesyncd-what-are-the-differences-and-use-cases-as-ntp-cli) 它实现了一个 SNTP 客户端
-
-:::caution
-- ESX VM 上的 VMware Tools 软件负责同步时间，因此不要在带有 VMware Tools 的 VM 上使用 ntpd。改为在主机上设置 NTPD，让 VMware Tools 完成剩下的工作。
-- 唯一一个可以令时间发生跳变的点，是计算机刚刚启动，但还没有启动很多服务的那个时候。其余的时候，理想的做法是使用 ntpd/Chrony 来校准时钟，而不是调整计算机时钟上的时间。
-:::
-
-
+:::info
 参考链接：[wiki-archlinux-System_time](https://wiki.archlinux.org/title/System_time) 
+:::

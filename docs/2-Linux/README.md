@@ -7,7 +7,13 @@ tags: [Linux]
 https://www.linuxfromscratch.org/lfs/read.html
 https://wiki.archlinux.org/
 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/
+https://tldp.org/
 
+https://www.kernel.org/doc/man-pages/
+https://man7.org/linux/man-pages/
+http://man.he.net/
+https://man.cx/
+https://linux.die.net/man/
 
       了解 linux 核心子系统（内存管理 文件系统 网络 进程调度） 内核 crash dump 分析，ebpf入门,性能分析io排查
 

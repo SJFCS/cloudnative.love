@@ -1,0 +1,1 @@
+本章节只有等传统简单工具 [更多方案见 Observability](/docs/6-Observability/)
