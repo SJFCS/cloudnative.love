@@ -4,8 +4,10 @@ sidebar_position: 2
 tags: [Linux]
 ---
 这不是给初学者看的，目前还在完善，预计4月前完成
+https://www.linuxfromscratch.org/lfs/read.html
+https://wiki.archlinux.org/
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/
 
-https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7
 
       了解 linux 核心子系统（内存管理 文件系统 网络 进程调度） 内核 crash dump 分析，ebpf入门,性能分析io排查
 
