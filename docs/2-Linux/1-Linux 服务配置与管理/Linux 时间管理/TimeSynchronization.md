@@ -312,6 +312,7 @@ chronyc tracking
 ### 参数解释
 <Tabs>
 <TabItem value="默认配置">
+
 ```bash title="cat /etc/chrony.conf  |grep -v -E "^#|^$""
 server 0.centos.pool.ntp.org iburst
 server 1.centos.pool.ntp.org iburst
@@ -324,6 +325,7 @@ logdir /var/log/chrony
 ```
 </TabItem>
 <TabItem value="配置举例">
+
 ```bash
  cat /etc/chrony.conf 
 server 192.168.133.101 trust  #可用于时钟服务器

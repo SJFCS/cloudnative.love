@@ -3,17 +3,14 @@ title: Linux 时间管理
 tags: [Linux 时间管理]
 sidebar_position: 0
 ---
-https://linux.vbird.org/linux_server/redhat9/0440ntp.php
 
 在操作系统中存在 System clock (系统时钟), Hardware clock (硬件时钟),UTC,time zone (时区),Daylight Saving Time (DST 夏令时)等概念。本章节解释了它们是什么以及如何读取和设置它们。  
 在系统运行过程中不可避免会产生 Time skew 现象，本章将列举了四种 Time synchronization 方案，及其配置方法。
 
 ## 名词解释
-?????????
-所有服务器都有两种时钟；系统时钟和硬件时钟。系统时钟由OS拥有，硬件时钟由CMOS拥有。Server在运行时，通常会提供自己的系统时钟作为时钟资源。但是，当服务器关闭时，系统时钟会同步到硬件，当重新启动时，硬件时钟会同步到系统。出现问题是因为两个时钟之间可能存在一些偏移，如果服务器长时间关闭并且再次重启，硬件时钟可能会同步到系统，但可能不准确。
 
 - **Hardware clock 硬件时钟**  
-    *又称 Real Time Clock (RTC 实时时钟)，CMOS 时钟，BIOS 时间*  
+  *又称 Real Time Clock (RTC 实时时钟)，CMOS 时钟，BIOS 时间*  
 	是主板上 BIOS 中保存的时间，由主板电池供电来维持运行，可在 BIOS 中进行设置。
 	系统开机时要读取这个时间，并根据它来设定系统时钟。然后系统时钟就会独立于硬件运行。  
 	:::caution 注意
@@ -21,7 +18,7 @@ https://linux.vbird.org/linux_server/redhat9/0440ntp.php
 	:::
 - **System clock 系统时钟**  
 	*又称 software clock 软件时钟，Local time 本地时间*   
-	它是一个连续的脉冲，帮助计算机时钟保持正确的时间。它记录自 [epoch](https://www.computerhope.com/jargon/e/epoch.htm) 以来经过的秒数，并根据 `/etc/adjtime` 的内容计算当前日期和时间。
+	它是一个连续的脉冲，帮助计算机时钟保持正确的时间。它记录自 [epoch](https://www.computerhope.com/jargon/e/epoch.htm) 以来经过的秒数，并根据 `/etc/adjtime` 的内容计算当前日期和时间。系统关机时会根据系统时钟来设置硬件时钟。  
 - **UTC (Universal Time Coordinated)**  
   即[协调世界时](https://zh.wikipedia.org/zh-hans/%E5%8D%8F%E8%B0%83%E4%B8%96%E7%95%8C%E6%97%B6)是最主要的世界时间标准。
 - **Time zone**  
@@ -39,7 +36,7 @@ localtime (本地时间) 取决于当前时区，本地时间=UTC + 时区
 如果一台机器上安装了多个操作系统，它们都将从相同的硬件时钟获得当前时间:  
 建议将其设置为 UTC 而不是本地时间，以避免系统间的冲突。
 
-如果硬件时钟设置为本地时间将会导致的问题：
+如果硬件时钟设置为本地时间将会导致以下问题：
 - 多个操作系统可能会在 DST 改变后调整它，从而导致过度校正; 
 - 当在不同时区之间旅行和使用其中一个操作系统重置系统/硬件时钟时 可能出现问题;
 - 在引导过程中导致一些意想不到的行为例如，系统时间向后退等很多问题。
@@ -78,12 +75,20 @@ localtime (本地时间) 取决于当前时区，本地时间=UTC + 时区
 如果硬件时钟继续以大的增量丢失或获得时间，则可能记录了无效的漂移(但只适用于 hwlock 守护进程正在运行的情况)。如果硬件时钟时间设置不正确，或者时间标准没有与 Windows 或 macOS 安装同步，就会发生这种情况。通过首先删除文件/etc/adjtime，然后设置正确的硬件时钟和系统时钟时间，可以删除漂移值。然后你应该检查你的时间标准是否正确。
 
 ## Time synchronization 时间同步
-以下时间同步方案的使用和配置详见: [Time synchronization](./时间同步.md)
+以下工具方便我们去管理和调整时间，使用和配置详见: [常用命令](./TimeTools)
+- timedatectl
+- hwclock/clock
+- tzselect
+- date
+
+以下时间同步方案的使用和配置详见: [时间同步](./TimeSynchronization.md)
 - ntpdate + crontab
 - ntpd
 - chrony
 - systemd-timesyncd
 
-:::info
-参考链接：[wiki-archlinux-System_time](https://wiki.archlinux.org/title/System_time) 
+:::info 参考链接：
+- [wiki-archlinux-System_time](https://wiki.archlinux.org/title/System_time) 
+- https://linux.vbird.org/linux_server/redhat9/0440ntp.php
+
 :::
