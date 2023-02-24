@@ -80,14 +80,32 @@ $ timedatectl set-local-rtc 0
 :::
 
 ### 管理 NTP 时间同步
+:::info 参考文档
+- [Arch-Wiki systemd-timesyncd](https://wiki.archlinux.org/title/systemd-timesyncd)
+:::
+如果只是简单做时间同步，可直接使用 systemd-timesyncd ，它在带有 systemd 的系统上充当简单的 sntp 客户端，不能像 chrony 和 ntpd 作为时间服务器使用。
+
+```bash title="/etc/systemd/timesyncd.conf or /etc/systemd/timesyncd.conf.d/local.conf"
+[Time]
+NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
+FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
+```
+查看你的配置 `timedatectl show-timesync --all`
+:::caution
+注意：如果您的系统没有chrony/ntp，则运行set-ntp子命令尝试激活 timesyncd 组件时遇到错误。
+```bash
+# timedatectl set-ntp true
+Failed to set ntp: NTP not supported
+```
+:::
 启动 NTP/Chrony 时间同步服务
 ```bash
-timedatectl set-ntp 1
+timedatectl set-ntp yes
 # yes/no,1/0,true/flase
 ```
 禁用 NTP/Chrony 时间同步服务
 ```bash
-timedatectl set-ntp 0
+timedatectl set-ntp no
 # yes/no,1/0,true/flase
 ```
 

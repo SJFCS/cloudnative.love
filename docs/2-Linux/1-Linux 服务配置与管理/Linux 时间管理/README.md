@@ -60,7 +60,7 @@ localtime (本地时间) 取决于当前时区，本地时间=UTC + 时区
 
 - **Ubuntu 中的 UTC**
   
-  如果在 Ubuntu 安装期间在任何磁盘上检测到 Windows，Ubuntu 及其衍生产品的硬件时钟设置将被解释为"Local time"。这样做显然是为了让新的 Linux 用户不用编辑注册表就可以在他们的 Windows 电脑上试用 Ubuntu。要更改此行为，请参见 [timedatectl set-local-rtc](./常用命令#timedatectl) 。
+  如果在 Ubuntu 安装期间在任何磁盘上检测到 Windows，Ubuntu 及其衍生产品的硬件时钟设置将被解释为"Local time"。这样做显然是为了让新的 Linux 用户不用编辑注册表就可以在他们的 Windows 电脑上试用 Ubuntu。要更改此行为，请参见 [timedatectl set-local-rtc](./TimeTools.md#timedatectl) 。
 
 ## Time skew 时间偏移
 
@@ -85,7 +85,6 @@ localtime (本地时间) 取决于当前时区，本地时间=UTC + 时区
 - ntpdate + crontab
 - ntpd
 - chrony
-- systemd-timesyncd
 
 :::info 参考链接：
 - [wiki-archlinux-System_time](https://wiki.archlinux.org/title/System_time) 

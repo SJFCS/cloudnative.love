@@ -7,7 +7,6 @@ title: 时间同步
 - ntpdate + crontab
 - ntpd
 - chrony
-- systemd-timesyncd
 
 :::info
 常见的 NTP 时间服务器:
@@ -40,7 +39,7 @@ firewall-cmd --reload
 ```
 :::
 :::caution
-ESX VM 上的 VMware Tools 软件负责同步时间，因此不要在带有 VMware Tools 的 VM 上使用 ntpd。改为在主机上设置 NTPD，让 VMware Tools 完成剩下的工作。
+ESX VM 上的 VMware Tools 软件负责同步时间，因此不要在带有 VMware Tools 的 VM 上使用 ntpd/chrony。改为在主机上设置 NTPD/chrony，让 VMware Tools 完成剩下的工作。
 :::
 ## ntpadte
 ntpdate 它允许本地时间与 Internet 上的时间服务器进行一次性的时间同步。它通常配合 crontab 定时任务来对时间进行持续校准。
@@ -94,19 +93,6 @@ sudo sed -i -e 's/^server/#&/' \
 sudo systemctl enable --now ntpd
 ```
 
-<!-- 如果这台作为内网时钟源服务端的话，做如下设置
-#ntp实现同步本机时钟
-server 127.127.1.0  #local clock，如果是时间服务器请修改为对应IP        
-fudge 127.127.1.0  stratum 10
-如下按需修改：
-restrict 10.0.0.0 mask 255.255.255.0      #允许10.0.0.0 网段中的服务器访问本ntp服务器进行时间同步（按自己内网来）
-restrict 10.0.0.16                #允许单个IP地址访问本ntp服务器（按ip来）
-restrict 192.168.111.0 mask 255.255.255.0 nomodify notrap              #允许内网其他机器同步时间，如果不添加该约束默认允许所有IP访问本机同步服务
-其它配置不用进行修改，保存退出配置文件
-
-client 添加 server IP（这里IP是上边服务端的也就是时钟源的 ip） iburst -->
-
-
 ```bash title="HostB Client 节点"
 sudo yum install -y ntp
 sudo sed -i -e 's/^server/#&/' \
@@ -114,15 +100,8 @@ sudo sed -i -e 's/^server/#&/' \
             /etc/ntp.conf
 sudo systemctl enable --now ntpd
 ```
-然后使用 `ntpq -p` 命令观察是否同步
-```bash
-[vagrant@HostA ~]$ ntpq -p
-     remote           refid      st t when poll reach   delay   offset  jitter
-==============================================================================
- LOCAL(0)        .LOCL.          10 l  202   64   30    0.000    0.000   0.000
-*203.107.6.88    100.107.25.114   2 u   60   64   17   18.521  6600087   1.382
-# `*` 代表当前同步的源
-```
+然后使用 `ntpq -p` 命令观察是否同步。`*` 代表当前同步的源
+
 :::caution
 如果本机与上源时间相差太大, ntpd 可能不会运行。  
 - 可在启动 ntpd 前使用 `sudo ntpdate ntp.aliyun.com` 或 `sudo ntpd -qg` 从上源取得时间初值。(-g 允许第一次调整很大, -q 设置时间后退出进程)  
@@ -186,41 +165,24 @@ disable monitor
    - 要缩短初始同步所用的时间，请将 `iburst` 添加到 `server` 命令的末尾
 2. 权限设定
    - 格式: restrict address [mask mask] option
-   - 一些DDoS攻击可以利用NTP服务器将流量放大,为了防止你的服务器被卷入这种攻击，建议你将你的服务器配置为只响应你信任的特定服务器的NTP请求。  
-     ntpq和ntpdc查询可用于放大攻击（详见CVE-2013-5211），不要在可公开访问的系统上删除限制默认命令中的noquery选项。
+   - 一些 DDoS 攻击可以利用 NTP 服务器将流量放大,为了防止你的服务器被卷入这种攻击，建议你将你的服务器配置为只响应你信任的特定服务器的 NTP 请求。  
+     ntpq 和 ntpdc 查询可用于放大攻击（详见[CVE-2013-5211](https://access.redhat.com/security/cve/CVE-2013-5211)），不要在可公开访问的系统上删除限制默认命令中的noquery选项。
    - 其中地址和掩码指定要对其应用限制的 IP 地址，也可以是 default ，default 就类似 0.0.0.0。
    - restrict -6 表示 IPV6 地址的权限设置。
    - 或者省略掩码和子网掩码，指定一个单独的IP地址。
-   - 更多 option 选项可以参考 [redhat_ch-configuring_ntp_using_ntpd](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-configuring_ntp_using_ntpd)  
+   - 更多 option 选项可以参考 [RedHat-Docs 19.17.1. Configure Access Control to an NTP Service](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-configuring_ntp_using_ntpd#s2-Configure_Access_Control_to_an_NTP_service)  
     如果 option 完全没有设定，那就表示该 IP (或网域)“没有任何限制”
-### 拓展文档:
-- https://docs.ntpsec.org/latest/
-- https://access.redhat.com/solutions/393663
-- https://serverfault.com/questions/957302/securing-hardening-ntp-client-on-linux-servers-config-file
-- https://unix.stackexchange.com/questions/677523/ntp-server-reachable-but-never-select-set-the-time
-
-
 ## chrony
-监听端口： 323/udp，123/udp（chrony并且兼容ntpd监听在udp123端口上，自己则监听在udp的323端口上。）
+[Chrony](https://chrony.tuxfamily.org) 有两个核心组件：一个是 `chronyd` 守护进程，主要用于调整内核中运行的系统时间和时间服务器同步。它确定计算机增减时间的比率，并对此进行调整补偿。另一个是 `chronyc`，它提供一个用户界面，用于监控性能并进行多样化的配置。`chronyc` 可以在 `chronyd` 实例控制的计算机上工作，也可以在一台不同的远程计算机上工作。
 
-`Chrony` 有两个核心组件：一个是 `chronyd` 守护进程，主要用于调整内核中运行的系统时间和时间服务器同步。它确定计算机增减时间的比率，并对此进行调整补偿。另一个是 `chronyc`，它提供一个用户界面，用于监控性能并进行多样化的配置。`chronyc` 可以在 `chronyd` 实例控制的计算机上工作，也可以在一台不同的远程计算机上工作。
+- 端口 `123/udp` 为默认 NTP 监听端口，对外提供 NTP 服务，可配置 `port` 参数来修改。
+- 端口 `323/udp` 为默认管理端口。可配置 `cmdport` 参数来修改。
 
-- 端口 `123/udp` 为标准的 `NTP` 监听端口，如果要对外提供 `NTP Server` 功能，必须开启防火墙和监听地址为外部可访问地址。如需修改，你可以通过配置 `port` 参数来修改。
-- 端口 `323/udp` 为默认的管理端口。如需修改，你可以通过配置 `cmdport` 参数来修改。
-
-
-如果在chrony配置文件中指定了ntp服务器的地址，那么chrony就是一台客户端，会去同步ntp服务器的时间，如果在chrony配置了允许某些客户端来向自己同步时间，则chrony也充当了一台服务器，chrony即可同时充当客户端和服务端。
-
-chrony 官网: https://chrony.tuxfamily.org
-chrony 官方文档: https://chrony.tuxfamily.org/documentation.html
-chrony-faq: https://chrony.tuxfamily.org/faq.html
-https://chrony.tuxfamily.org/faq.html  
-https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-configuring_ntp_using_the_chrony_suite  
-https://wiki.archlinux.org/title/Chrony  
-https://www.ibm.com/docs/en/db2/11.5?topic=suntp-setting-up-chrony-as-network-time-protocol-server-client-by-using-chronyd-linux  
-https://cloud.tencent.com/developer/article/1546322  
-
-
+:::tip 为什么推荐 Chrony 而不是 NTPD
+1. `Chrony` 可以更快的同步只需要几分钟而不是几小时，从而最大程度减少了时间和频率误差，对于并非全天 24 小时运行的虚拟计算机而言非常有用，
+2. 能够更好地响应时钟频率的快速变化，对于具备不稳定时钟的虚拟机或导致时钟频率发生变化的节能技术(power-saving technologies)而言非常有用，
+3. `Chrony` 无需对服务器进行定期轮询，因此具备间歇性网络连接的系统仍然可以快速同步时
+:::
 
 ### 安装配置
 
@@ -247,25 +209,6 @@ sudo sed -i -e 's/^server/#&/' \
 sudo systemctl enable --now chronyd
 ```
 
-<!-- 配置： vi /etc/chrony.conf
-先注释掉网络时钟源，再做如下配置
-server 127.0.0.1 iburst        #本地作为时钟源
-local stratum 10           #允许本地同步
-allow        #允许所有连接
-开机启动：systemctl enable chronyd
-启动服务：systemctl start chronyd
-查看状态：systemctl status chronyd
-查看同步：chronyc sources -v     #带星号*为同步成功
-
-
-或者： timedatectl 命令，NPT synchronized 为yes就是同步完成
-
-client:
-然后客户端也是以这台服务端的作为时钟源进行设置
-vi /etc/chrony.conf
-server  ip（上一台服务端的ip）  iburst
-allow    #允许所有 -->
-
 1.  从节点修改Chrony.conf配置文件
 ```bash title="HostB Client 节点"
 sudo sed -i -e 's/^server/#&/' \
@@ -276,44 +219,38 @@ sudo sed -i -e 's/^server/#&/' \
 
 ### 基本命令
 
-一种是交互式模式，一种是命令行模式。输入chronyc回车就进入交互式模式
+一种是交互式模式，一种是命令行模式。输入 chronyc 回车就进入交互式模式
 
 ```bash
 # 查看时间同步源服务器的信息
-chronyc sources -v # 这里需要注意的是第二个参数，`*` 代表当前同步的源，`-` 代表通过组合算法计算后排除的源。
-
+chronyc sources -v          #`*` 代表当前同步的源，`-` 代表通过组合算法计算后排除的源。
 # 查看时间同步源状态
- chronyc sourcestats -v
-
+chronyc sourcestats -v
 # 查看时间同步源在线/离线
 chronyc activity
-
 # 在客户端报告已访问到服务器
 chronyc clients 
-
 # 检查 NTP 访问是否对特定主机可用
 chronyc accheck
-
 # 手动添加一台新的 NTP 服务器
 chronyc add server
-
 # 手动移除 NTP 服务器或对等服务器
 chronyc delete
-
 # 在客户端报告已访问到服务器
 chronyc clients
 # 手动设置守护进程时间
 chronyc settime
-
 # 校准时间服务器，显示系统时间信息
 chronyc tracking
+# 强制同步时间
+chronyc -a makestep
 ```
 
 ### 参数解释
 <Tabs>
 <TabItem value="默认配置">
 
-```bash title="cat /etc/chrony.conf  |grep -v -E "^#|^$""
+```bash title='cat /etc/chrony.conf  |grep -v -E "^#|^$"'
 server 0.centos.pool.ntp.org iburst
 server 1.centos.pool.ntp.org iburst
 server 2.centos.pool.ntp.org iburst
@@ -327,27 +264,10 @@ logdir /var/log/chrony
 <TabItem value="配置举例">
 
 ```bash
- cat /etc/chrony.conf 
-server 192.168.133.101 trust  #可用于时钟服务器
-local stratum 10  #即使server指令中时间服务器不可用，也允许将本地时间作为标准时间授时给其它客户端
-logdir /var/log/magtools/
-driftfile /var/lib/chrony/drift  #根据实际时间计算出计算机增减时间的比率，将它记录到一个文件中，会在重启后为系统时钟作出补偿
-makestep 1.0 3  #通常chronyd将根据需求通过减慢或加速时钟，使得系统逐步纠正所有时间偏差。在某些特定情况下，系统时钟可能会漂移过快，导致该调整过程消耗很长的时间来纠正系统时钟。该指令强制chronyd在调整期大于某个域值时调整系统时钟
-cmdport 0
-rtcsync  #启用内核模式，系统时间每11分钟会拷贝到实时时钟（RTC）
-allow 0.0.0.0/0  #指定一台主机、子网，或者网络以允许或拒绝访问本服务器
-```
-</TabItem>
-</Tabs>
-
-```bash
-
 server ntp1.aliyun.com 　　　　    # server 指定上层时钟服务器
 server ntp.ntsc.ac.cn prefer 　　　# prefer 最高优先级、 iburst 加快第一次时的同步速度,前四次 NTP 请求，会发送一个八个数据包，包间隔通常为2秒,而不是以 minpoll x 指定的最小间隔，可加快初始同步速度。
 # 默认的轮询间隔为minpoll 6 代表 64s,maxpoll 9 代表 512s。
 # 如果修改默认设定的话，为了保持时间精度，推荐设定比默认的值更小的值。
-
-通过修改/etc/chrony.conf文件修改轮询间隔，如果修改默认设定的话，为了保持时间精度，推荐设定比默认的值更小的值。
 allow 192.168.0.0/24   # allow/deny NETADD/NETMASK/all 允许/拒绝客户端来同步,allow 0.0.0.0/0代表允许所以任意设备
 rtcsync #RTC 时间同步,系统时间每11分钟会拷贝到实时时钟（RTC）
 local stratum 10 # 远程 server 不可用时，允许将本地时间作为标准时间授时给其它客户端，层级为 10
@@ -364,20 +284,9 @@ logchange 0.5 # 如果时钟调整大于0.5秒，则向系统日志发送消息
 cmdallow all
 bindcmdaddress 127.0.0.1 #命令管理接口监听的地址，用于接收由chronyc执行的命令
 bindcmdaddress ::1
-
 ```
-
-
-## systemd-timesyncd
-另外，关于 systemd-timesyncd 服务的几句话，它在带有 systemd 的系统上充当简单的 sntp 客户端，不像 chrony 和 ntp，后者也可以作为时间服务器。
-
-注意：如果您的系统没有chrony/ntp，则运行set-ntp子命令尝试激活 timesyncd 组件时遇到错误。
-
-```bash
-# timedatectl set-ntp true
-Failed to set ntp: NTP not supported
-```
-
+</TabItem>
+</Tabs>
 
 ## 同步硬件时钟
 ```bash
@@ -386,50 +295,24 @@ Failed to set ntp: NTP not supported
 ntpd https://www.ibm.com/support/pages/synchronizing-hardware-clock-system-time-when-using-ntp
 chrony  rtcsync  RTC将会每隔11分钟更新real-time clock(硬件时钟)，推荐设定。
 
-
-
-
-## 翻译
-
-参考:https://www.thegeekdiary.com/centos-rhel-7-chrony-vs-ntp-differences-between-ntpd-and-chronyd/
-
-Chosing between Chrony and NTP
-– In RHEL 7 ntpd is replaced by chronyd as the default network time protocol daemon.
-– Basic configuration for synchronize time and date is stored in the file /etc/chrony.conf.
-– ntpd is still included in yum repository for customers who need to run an NTP service.
-– Chrony is a different implementation of the network time protocol (NTP) than the network time protocol daemon (ntpd) that is able to synchronize the system clock faster and with better accuracy than ntpd.
-Benefits of Chrony include:
-
-1. Faster synchronization requiring only minutes instead of hours to minimize the time and frequency error, which is useful on desktops or systems not running 24 hours a day.
-2. Better response to rapid changes in the clock frequency, which is useful for virtual machines that have unstable clocks or for power-saving technologies that don’t keep the clock frequency constant.
-3. After the initial synchronization, it never steps the clock so as not to affect applications needing system time to be monotonic.
-4. Better stability when dealing with temporary asymmetric delays, for example when the link is saturated by a large download.
-5. Periodic polling of servers is not required, so systems with intermittent network connections can still quickly synchronize clocks.
-
-When to use chrony
-Chrony would be considered a best match for the systems which are frequently suspended or otherwise intermittently disconnected from a network (mobile and virtual servers etc).
-
-When to use NTP
-The NTP daemon (ntpd) should be considered for systems which are normally kept permanently on. Systems which are required to use broadcast or multicast IP, or to perform authentication of packets with the Autokey protocol, should consider using ntpd.
+## 引文
+:::info 参考文档
+- [RedHat-Docs Chapter 19. Configuring NTP Using ntpd](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-configuring_ntp_using_ntpd)
+- [RedHat-Docs Chapter 18. Configuring NTP Using the chrony Suite](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-configuring_ntp_using_the_chrony_suite)
+- [Differences Between ntpd and chronyd](https://www.thegeekdiary.com/centos-rhel-7-chrony-vs-ntp-differences-between-ntpd-and-chronyd/)
+- 1. [chrony vs. systemd-timesyncd – What are the differences and use cases as NTP clients?](https://unix.stackexchange.com/questions/504381/chrony-vs-systemd-timesyncd-what-are-the-differences-and-use-cases-as-ntp-cli)
+:::
+:::tip 拓展阅读
+- [使用对称密钥配置经过身份验证的 NTP](https://access.redhat.com/solutions/393663)
+- [chrony 中的网络时间安全概述(NTS)](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/)assembly_overview-of-network-time-security-in-chrony_configuring-basic-system-settings
+- [The Secure Network Time Protocol (NTPsec) Distribution](https://docs.ntpsec.org/latest/)
+- [ntp-server-reachable-but-never-select-set-the-time](https://unix.stackexchange.com/questions/677523/ntp-server-reachable-but-never-select-set-the-time)
+:::
 
 
 
 
 
-
-
----
- chronyc -a makestep
-
-
-
-
-
-1. `Chrony` 可以更快的同步只需要几分钟而不是几小时，从而最大程度减少了时间和频率误差，对于并非全天 24 小时运行的虚拟计算机而言非常有用，能够更好地响应时钟频率的快速变化，对于具备不稳定时钟的虚拟机或导致时钟频率发生变化的节能技术而言非常有用，而`ntpd`在时差较大时候会禁止同步
-2. `Chrony` 通过 Internet 同步的两台机器之间的典型精度在几毫秒之内，在LAN上，精度通常为几十微秒。利用硬件时间戳或硬件参考时钟，可实现亚微秒的精度。  
-   `NTP`精度在局域网内可达 0.1ms，在互联网上绝大多数的地方精度可以达到 1-50ms。
-3. `Chrony` 无需对服务器进行定期轮询，因此具备间歇性网络连接的系统仍然可以快速同步时
-4. [systemd-timesyncd](https://unix.stackexchange.com/questions/504381/chrony-vs-systemd-timesyncd-what-are-the-differences-and-use-cases-as-ntp-cli) 它实现了一个 SNTP 客户端
 
 
 
