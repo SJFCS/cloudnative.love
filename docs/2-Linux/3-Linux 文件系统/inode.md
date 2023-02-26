@@ -2,6 +2,15 @@
 title: Linux文件系统-inode
 
 ---
+mkfs.ext4 -N 200000000 /dev/mapper/openstack-gnocchi
+
+
+
+
+
+
+
+
 转载：http://www.ruanyifeng.com/blog/2011/12/inode.html
 
 作者： [阮一峰](https://www.ruanyifeng.com/) 
