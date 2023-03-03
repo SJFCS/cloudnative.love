@@ -1,0 +1,1 @@
+https://go.dev/blog/go2-here-we-come
