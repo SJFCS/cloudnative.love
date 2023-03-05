@@ -4,6 +4,11 @@ sidebar_position: 2
 tags: [Linux]
 ---
 这不是给初学者看的，目前还在完善，预计4月前完成
+https://github.com/snori74/linuxupskillchallenge
+
+https://github.com/trimstray/the-practical-linux-hardening-guide
+https://linuxtools-rst.readthedocs.io/zh_CN/latest/
+
 https://www.linuxfromscratch.org/lfs/read.html
 https://wiki.archlinux.org/
 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/
