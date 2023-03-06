@@ -2,7 +2,7 @@
 sidebar_position: 0
 slug: /
 ---
-# My Knowledge Wiki 🌿
+# My Knowledge Wiki 🎉
 
 本 Wiki 文档主要为个人笔记，用于整理记录云原生相关的各类技术和经验，内容形式包括译文翻译、网络转载、和原创笔记等。
 
