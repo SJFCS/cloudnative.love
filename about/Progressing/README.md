@@ -32,8 +32,8 @@ sidebar_position: 4
     >Kubernetes-增强-提案-翻译
   :::tip 日常进度记录
   todolist：
-    + 3.7 完成 [DHCP](/docs/Linux/Linux%20服务配置与管理/DHCP)
-    + xx
+    + 3.7 [DHCP](/docs/Linux/Linux%20服务配置与管理/DHCP)
+    + 3.8 [DNS](/docs/Linux/Linux%20服务配置与管理/DNS)
   done：
     + xx
     + xx

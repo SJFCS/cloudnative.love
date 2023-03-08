@@ -177,17 +177,14 @@ import TabItem from '@theme/TabItem';
 ```html
 <Tabs>
 <!-- <Tabs groupId="卡片组"> -->
-
-  <TabItem value="卡片1">
-  <!-- <TabItem value="卡片1" label="卡片1标题"> -->
-  卡片1内容...
-  </TabItem>
-
-  <TabItem value="卡片2">
-  <!-- <TabItem value="卡片2" label="卡片2标题"> -->
-  卡片2内容...
-  </TabItem>
-
+<TabItem value="卡片1">
+<!-- <TabItem value="卡片1" label="卡片1标题"> -->
+卡片1内容...
+</TabItem>
+<TabItem value="卡片2">
+<!-- <TabItem value="卡片2" label="卡片2标题"> -->
+卡片2内容...
+</TabItem>
 </Tabs>
 ```
 

@@ -49,7 +49,8 @@ import DocCardList from '@theme/DocCardList';
 
 <DocCardList />
 ```
-<!-- ## 本站标签分类
+<!-- 
+## 本站标签分类
 
 文件夹一般设置在三个层级以内，主要靠打标签的功能来实现跨边界的二度信息归类。
 
@@ -64,4 +65,11 @@ import DocCardList from '@theme/DocCardList';
 
 - 没有具体归属的则放在以tagC命名的文件夹下,打上安全标签和自身标签
   - 安全/Jumpserver
-  - 安全/Metasploit -->
+  - 安全/Metasploit 
+名词解释缩写格式：子网广播转发 (Subnet Broadcast Forwarding，SBF)
+
+react引入均放在文档开头
+
+命令行尽量不带$和#，除非命令下方贴出返回结果。避免# 用sudo 代替
+-->
+
