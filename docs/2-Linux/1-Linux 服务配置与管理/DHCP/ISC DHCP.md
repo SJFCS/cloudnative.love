@@ -10,13 +10,15 @@ Linux 上使用最广泛的 DHCP 服务器是 ISC DHCP（Internet Systems Consor
 
 ## ISC DHCP 安装
 
-可以使用以下命令安装ISC DHCP服务器：
+可以使用以下命令安装并启动 ISC DHCP 服务器：
 <Tabs>
 <TabItem value="Ubuntu/Debian">
 
 ```bash
 sudo apt-get install isc-dhcp-server
 dpkg -L isc-dhcp-server
+sudo systemctl start isc-dhcp-server
+
 ```
 </TabItem>
 <TabItem value="CentOS/RedHat">
@@ -24,6 +26,7 @@ dpkg -L isc-dhcp-server
 ```bash
 sudo yum install dhcp
 rpm -ql dhcp
+sudo systemctl start dhcp
 ```
 </TabItem>
 </Tabs>
@@ -50,7 +53,198 @@ rpm -ql dhcp
 /var/lib/dhcpd/dhcpd.leases
 /var/lib/dhcpd/dhcpd6.leases
 ```
-## 配置解析
+
+
+## 配置案例
+
+
+
+### 单域案例
+【进阶—超级作用域】
+场景：C段网络中只可以容纳253台主机，而我的需求比这个还大时就需要扩大DHCP服务器对这个网段的作用域；前提是网段不变，要是能用B段的直接用就行了，不存在扩大作用域的说法
+
+目的：为不同段的网络做DHCP功能
+
+
+Centos 6.8三台 分别为DHCP Server、Client1、Client2
+网络模式均为仅主机模式，用到的网卡是自定义的VM10
+
+
+开启DHCP服务器的路由转发功能并使其生效
+
+[root@localhost ~]# sysctl -p
+net.ipv4.ip_forward = 1
+net.ipv4.conf.default.rp_filter = 1
+net.ipv4.conf.default.accept_source_route = 0
+kernel.sysrq = 0
+kernel.core_uses_pid = 1
+net.ipv4.tcp_syncookies = 1
+kernel.msgmnb = 65536
+kernel.msgmax = 65536
+kernel.shmmax = 68719476736
+kernel.shmall = 4294967296
+### 多域案例
+【高级—DHCP中继】
+DHCP中继被称为DHCP Relay；是为了实现不同子网和物理网段之间处理和转发dhcp信息
+
+Centos 6.8四台 分别为DHCP Server、DHCP中继、Client1、Client2 
+
+
+### 转发案例
+编辑ISC DHCP服务器的配置文件/etc/dhcp/dhcpd.conf，添加以下内容：
+
+```bash
+subnet 192.168.1.0 netmask 255.255.255.0 {
+  range 192.168.1.10 192.168.1.50;
+  option routers 192.168.1.1;
+  option domain-name-servers 8.8.8.8, 8.8.4.4;
+}
+
+## 指定ntp
+要配置DHCP服务器以指定NTP服务器，请按照以下步骤操作：
+
+
+
+打开DHCP服务器的配置文件，通常在/etc/dhcp/dhcpd.conf。
+
+
+
+找到要为其配置NTP服务器的子网段的定义，例如：
+
+
+
+
+subnet 192.168.1.0 netmask 255.255.255.0 {
+  range 192.168.1.10 192.168.1.50;
+  option routers 192.168.1.1;
+}
+
+
+
+在子网段定义中添加以下行以指定NTP服务器：
+
+
+option ntp-servers 192.168.1.100;
+
+
+其中192.168.1.100是您要使用的NTP服务器的IP地址。如果您有多个NTP服务器，请将它们用逗号分隔。
+
+
+
+保存并关闭文件。
+
+
+
+重新启动DHCP服务器以应用更改。
+
+
+
+
+现在，DHCP客户端将从DHCP服务器获取NTP服务器的IP地址，并使用它来同步其时间。
+##  
+https://www.linuxtips.fr/en/setting-up-a-dhcp-server-synced-with-dnd-debian-ubuntu/
+##
+
+## 指定固定IP
+以下是一个简单的DHCP服务器配置文件，其中包括一个固定IP地址分配的示例：
+
+
+# /etc/dhcp/dhcpd.conf
+
+# 设置DHCP服务器的名称和域名
+option domain-name &quot;example.com&quot;;
+option domain-name-servers 8.8.8.8;
+
+# 定义DHCP地址池
+subnet 192.168.1.0 netmask 255.255.255.0 {
+  range 192.168.1.10 192.168.1.100;
+  option routers 192.168.1.1;
+  option broadcast-address 192.168.1.255;
+}
+
+# 配置固定IP地址
+host my-computer {
+  hardware ethernet 00:11:22:33:44:55;
+  fixed-address 192.168.1.5;
+}
+
+# 其他配置选项
+default-lease-time 600;
+max-lease-time 7200;
+
+在上面的示例中，我们为一个名为"my-computer"的设备分配了固定IP地址192.168.1.5。要将此配置文件加载到DHCP服务器中，请使用以下命令：
+
+
+sudo service dhcpd restart
+
+请注意，实际的配置文件可能因系统和网络环境的不同而有所不同。
+##
+```
+
+这里配置了一个子网为192.168.1.0/24的DHCP服务器，分配的IP地址范围是192.168.1.10 - 192.168.1.50，默认网关是192.168.1.1，DNS服务器是Google的公共DNS。
+
+其中，option routers指定了网关地址，option domain-name-servers指定了DNS服务器地址。
+
+
+
+
+### 配置网络接口：
+编辑网络接口的配置文件/etc/network/interfaces，将DHCP服务器的IP地址绑定到网络接口上：
+```
+auto eth0
+iface eth0 inet static
+address 192.168.1.1
+netmask 255.255.255.0
+broadcast 192.168.1.255
+```
+
+以上配置表示网络接口eth0使用静态IP地址192.168.1.1，并设置子网掩码为255.255.255.0，广播地址为192.168.1.255。
+
+### 中继安装
+
+DHCP Relay是一个网络协议，它可以将 DHCP 请求从一个网络中转到另一个网络上的 DHCP 服务器。在 Linux 上，可以使用 dhcrelay 命令来配置 DHCP Relay。
+
+安装 dhcp-relay 软件包。在 Ubuntu 上，可以使用以下命令安装它：
+
+```bash
+sudo apt-get install dhcp-relay
+```
+
+安装 dhcp-relay 软件包。在 CentOS 上，可以使用以下命令安装：
+
+```
+sudo yum install dhcp-relay
+
+```
+
+编辑 /etc/default/dhcp-relay 文件，并指定 DHCP 服务器的 IP 地址和需要中转的网络接口。例如，如果 DHCP 服务器的 IP 地址是 192.168.1.1，需要中转的网络接口是 eth0，则可以将以下行添加到 /etc/default/dhcp-relay 文件中：
+
+
+```bash
+DHCPD_SERVERS=&quot;192.168.1.1&quot;
+INTERFACES=&quot;eth0&quot;
+```
+如果要中继多个 DHCP 服务器，可以使用逗号分隔它们的 IP 地址。
+
+
+
+3.编辑 /etc/dhcp/dhcrelay.conf 文件，并指定需要中转的 DHCP 子网。例如，如果需要中转的 DHCP 子网是 192.168.2.0/24，则可以将以下行添加到 /etc/dhcp/dhcrelay.conf 文件中：
+
+```bash
+relay 192.168.2.0/24
+```
+
+
+启动 dhcrelay 服务。在 Ubuntu 上，可以使用以下命令启动它：
+
+```bash
+sudo service isc-dhcp-relay start
+sudo systemctl enable --now dhcp-relay
+
+```
+完成上述步骤后，DHCP 请求将被转发到指定的 DHCP 服务器上。您可以使用 tcpdump 命令来检查是否已正确配置 DHCP Relay。
+
+## 参数详解
 
 查看示例配置
 
@@ -272,233 +466,9 @@ shared-network 224-29 {
 
 
 
-## 配置DHCP服务器
 
 
 
-### 架构1
-![1678267081916](image/ISCDHCP/1678267081916.png)
-【进阶—超级作用域】
-场景：C段网络中只可以容纳253台主机，而我的需求比这个还大时就需要扩大DHCP服务器对这个网段的作用域；前提是网段不变，要是能用B段的直接用就行了，不存在扩大作用域的说法
 
-目的：为不同段的网络做DHCP功能
+DHCP服务器应该服务于两个VLAN。
 
-
-Centos 6.8三台 分别为DHCP Server、Client1、Client2
-网络模式均为仅主机模式，用到的网卡是自定义的VM10
-
-
-开启DHCP服务器的路由转发功能并使其生效
-
-[root@localhost ~]# sysctl -p
-net.ipv4.ip_forward = 1
-net.ipv4.conf.default.rp_filter = 1
-net.ipv4.conf.default.accept_source_route = 0
-kernel.sysrq = 0
-kernel.core_uses_pid = 1
-net.ipv4.tcp_syncookies = 1
-kernel.msgmnb = 65536
-kernel.msgmax = 65536
-kernel.shmmax = 68719476736
-kernel.shmall = 4294967296
-### 架构2
-![1678267188145](image/ISCDHCP/1678267188145.png)
-【高级—DHCP中继】
-DHCP中继被称为DHCP Relay；是为了实现不同子网和物理网段之间处理和转发dhcp信息
-
-Centos 6.8四台 分别为DHCP Server、DHCP中继、Client1、Client2 
-
-
-### 架构3
-编辑ISC DHCP服务器的配置文件/etc/dhcp/dhcpd.conf，添加以下内容：
-
-```bash
-subnet 192.168.1.0 netmask 255.255.255.0 {
-  range 192.168.1.10 192.168.1.50;
-  option routers 192.168.1.1;
-  option domain-name-servers 8.8.8.8, 8.8.4.4;
-}
-
-## 指定ntp
-要配置DHCP服务器以指定NTP服务器，请按照以下步骤操作：
-
-
-
-打开DHCP服务器的配置文件，通常在/etc/dhcp/dhcpd.conf。
-
-
-
-找到要为其配置NTP服务器的子网段的定义，例如：
-
-
-
-
-subnet 192.168.1.0 netmask 255.255.255.0 {
-  range 192.168.1.10 192.168.1.50;
-  option routers 192.168.1.1;
-}
-
-
-
-在子网段定义中添加以下行以指定NTP服务器：
-
-
-option ntp-servers 192.168.1.100;
-
-
-其中192.168.1.100是您要使用的NTP服务器的IP地址。如果您有多个NTP服务器，请将它们用逗号分隔。
-
-
-
-保存并关闭文件。
-
-
-
-重新启动DHCP服务器以应用更改。
-
-
-
-
-现在，DHCP客户端将从DHCP服务器获取NTP服务器的IP地址，并使用它来同步其时间。
-##  
-https://www.linuxtips.fr/en/setting-up-a-dhcp-server-synced-with-dnd-debian-ubuntu/
-##
-
-## 指定固定IP
-以下是一个简单的DHCP服务器配置文件，其中包括一个固定IP地址分配的示例：
-
-
-# /etc/dhcp/dhcpd.conf
-
-# 设置DHCP服务器的名称和域名
-option domain-name &quot;example.com&quot;;
-option domain-name-servers 8.8.8.8;
-
-# 定义DHCP地址池
-subnet 192.168.1.0 netmask 255.255.255.0 {
-  range 192.168.1.10 192.168.1.100;
-  option routers 192.168.1.1;
-  option broadcast-address 192.168.1.255;
-}
-
-# 配置固定IP地址
-host my-computer {
-  hardware ethernet 00:11:22:33:44:55;
-  fixed-address 192.168.1.5;
-}
-
-# 其他配置选项
-default-lease-time 600;
-max-lease-time 7200;
-
-在上面的示例中，我们为一个名为"my-computer"的设备分配了固定IP地址192.168.1.5。要将此配置文件加载到DHCP服务器中，请使用以下命令：
-
-
-sudo service dhcpd restart
-
-请注意，实际的配置文件可能因系统和网络环境的不同而有所不同。
-##
-```
-
-这里配置了一个子网为192.168.1.0/24的DHCP服务器，分配的IP地址范围是192.168.1.10 - 192.168.1.50，默认网关是192.168.1.1，DNS服务器是Google的公共DNS。
-
-其中，option routers指定了网关地址，option domain-name-servers指定了DNS服务器地址。
-
-
-### 启动DHCP服务器
-
-启动DHCP服务器命令如下：
-
-```
-sudo service isc-dhcp-server start
-sudo service dhcp start
-
-```
-至此，DHCP服务器的配置就完成了。在子网192.168.1.0/24中连接到网络的设备将自动从DHCP服务器获取IP地址和其他网络配置信息，无需手动配置。
-
-### 配置网络接口：
-编辑网络接口的配置文件/etc/network/interfaces，将DHCP服务器的IP地址绑定到网络接口上：
-```
-auto eth0
-iface eth0 inet static
-address 192.168.1.1
-netmask 255.255.255.0
-broadcast 192.168.1.255
-```
-
-以上配置表示网络接口eth0使用静态IP地址192.168.1.1，并设置子网掩码为255.255.255.0，广播地址为192.168.1.255。
-
-### 中继安装
-
-DHCP Relay是一个网络协议，它可以将 DHCP 请求从一个网络中转到另一个网络上的 DHCP 服务器。在 Linux 上，可以使用 dhcrelay 命令来配置 DHCP Relay。
-
-安装 dhcp-relay 软件包。在 Ubuntu 上，可以使用以下命令安装它：
-
-```bash
-sudo apt-get install dhcp-relay
-```
-
-安装 dhcp-relay 软件包。在 CentOS 上，可以使用以下命令安装：
-
-```
-sudo yum install dhcp-relay
-
-```
-
-编辑 /etc/default/dhcp-relay 文件，并指定 DHCP 服务器的 IP 地址和需要中转的网络接口。例如，如果 DHCP 服务器的 IP 地址是 192.168.1.1，需要中转的网络接口是 eth0，则可以将以下行添加到 /etc/default/dhcp-relay 文件中：
-
-
-```bash
-DHCPD_SERVERS=&quot;192.168.1.1&quot;
-INTERFACES=&quot;eth0&quot;
-```
-如果要中继多个 DHCP 服务器，可以使用逗号分隔它们的 IP 地址。
-
-
-
-3.编辑 /etc/dhcp/dhcrelay.conf 文件，并指定需要中转的 DHCP 子网。例如，如果需要中转的 DHCP 子网是 192.168.2.0/24，则可以将以下行添加到 /etc/dhcp/dhcrelay.conf 文件中：
-
-```bash
-relay 192.168.2.0/24
-```
-
-
-启动 dhcrelay 服务。在 Ubuntu 上，可以使用以下命令启动它：
-
-```bash
-sudo service isc-dhcp-relay start
-sudo systemctl enable --now dhcp-relay
-
-```
-完成上述步骤后，DHCP 请求将被转发到指定的 DHCP 服务器上。您可以使用 tcpdump 命令来检查是否已正确配置 DHCP Relay。
-
-
-
-## 补充
-如果不让 dhcp 修改 `/etc/resolv.conf` 里的内容，就在网卡配置文件 `/etc/sysconfig/network-scripts/ifcfg-*` 里添加 `PEERDNS=no` 。
-
-每次重启网卡默认都获取的同一个ip，有时候想换个ip都很麻烦。在 `/var/lib/dhclient/` 目录下有`.leases`文件，将它们清空或者删除这些文件中对应网卡的部分，再重启网络就可以获取新的动态ip。  或者，在 `/etc/sysconfig/network-scripts/ifcfg-eth0` 加入`DHCPRELEASE=yes`。 
-
-当运行`ifdown eth0`的时候就会发出`dhcprelase`报文，查看`/etc/sysconfig/network-scripts/ifdown-eth`脚本中实际上是调用`dhclient`命令，用下面这个命令应该也可以。
-
-### linux如何重新通过dhcp获取ip地址
-
-在Windows中，为了释放和更新DHCP分配的IP，我们使用命令：
-```cmd
-ipconfig /release
-ipconfig /renew
-```
-
-linux 中使用
-```bash
-sudo dhclient -r
-sudo dhclient -r eth0
-# -r表示release(释放)
-
-sudo dhclient
-sudo dhclient eth0
-```
-
-https://blog.csdn.net/qq_41959899/article/details/108969660  
-https://www.geeksforgeeks.org/dynamic-host-configuration-protocol-dhcp/  
-https://zhuanlan.zhihu.com/p/372608515
