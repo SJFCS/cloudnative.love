@@ -1,16 +1,5 @@
 ---
 title: sersync 基于 rsync+inotify 实现数据实时同步
-
-categories:
-  - Linux常用服务
-series: 
-  - Linux文件同步
-lastmod: '2020-10-07'
-
-featuredImage: 
-authors: zhuanzai
-draft: false
-toc: true
 ---
 
 

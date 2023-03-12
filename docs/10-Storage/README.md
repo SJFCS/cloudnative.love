@@ -1,6 +1,6 @@
 ---
 title: Storage
-sidebar_position: 9
+sidebar_position: 10
 tags: [Storage]
 ---
 # 分布式数据存储

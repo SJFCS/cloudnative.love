@@ -1,10 +1,25 @@
 ---
 title: Infrastructure as Code & Automation
-sidebar_position: 7
+sidebar_position: 8
 tags: [Infrastructure as Code & Automation]
 ---
 https://www.ibm.com/cloud/blog/chef-ansible-puppet-terraform
 Terraform vs. Pulumi vs. Crossplane
+
+
+
+Crossplane 可以实现一份代码交付在不同的云上，Terraform 需要为不同的云服务商编写不同的代码？
+
+是的，Crossplane的一个重要优势是实现了云平台的可移植性，它可以使用相同的代码和配置在不同的云平台上交付。Crossplane支持多个云供应商和本地基础设施，提供了一种单一的、声明式的API和资源定义方式，将云供应商的API集成到统一的控制平面中。
+
+相比之下，Terraform需要为不同的云服务商编写不同的代码，因为它是一种特定于云供应商的工具。Terraform提供了一组适用于特定云供应商的资源类型和数据源，需要根据不同的云平台编写不同的代码。
+
+因此，Crossplane可以更好地实现云平台的可移植性和多云策略，而Terraform则更适合特定云供应商的定制化需求。
+
+目前云厂商对Crossplane的支持相对于Terraform来说还不够完善。由于Crossplane是比较新的开源项目，因此支持的云供应商和资源类型相对较少。但是，随着Crossplane的不断发展和成熟，越来越多的云供应商开始支持它，未来也会有更多的云平台提供原生支持。
+
+
+
 ## IaaC - 基础设施即代码
 
 - 基础架构即代码意味着我们可以使用机器可读的自动化语言来定义和描述 IT基础架构的状态，并在其中进行所需的更改。

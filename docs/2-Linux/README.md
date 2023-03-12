@@ -6,6 +6,13 @@ tags: [Linux]
 这不是给初学者看的，目前还在完善，预计4月前完成
 
 
+
+
+
+  
+[![Linu Kernel Map](https://raw.githubusercontent.com/makelinux/linux_kernel_map/main/LKM.svg "Linu Kernel Map")](https://makelinux.github.io/kernel/map/)
+
+
 ```
 Linux性能调优 linux Performance Tuning  红帽 RH442
   - https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/performance_tuning_guide/index
