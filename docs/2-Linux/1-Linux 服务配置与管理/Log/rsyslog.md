@@ -1,16 +1,5 @@
 ---
 title: rsyslog
-
-categories:
-  - Linux常用服务
-series: 
-  - Linux日志管理
-lastmod: '2020-02-05'
-
-featuredImage: 
-authors: zhuanzai
-draft: false
-toc: true
 ---
 ## 1. rsyslog介绍
 

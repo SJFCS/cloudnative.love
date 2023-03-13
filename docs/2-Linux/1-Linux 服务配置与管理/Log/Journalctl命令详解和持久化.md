@@ -1,16 +1,5 @@
 ---
 title: Journalctl命令详解和持久化
-
-categories:
-  - Linux常用服务
-series: 
-  - Linux日志管理
-lastmod: '2020-10-27'
-
-featuredImage: 
-authors: songjinfeng
-draft: false
-toc: true
 ---
 
 ## 简介

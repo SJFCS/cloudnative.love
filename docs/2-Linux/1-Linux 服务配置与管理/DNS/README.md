@@ -1,5 +1,5 @@
 ---
-title: Linux DNS 服务
+title: DNS
 ---
 
 本章节介绍 DNS基础概念和原理，以及诸多命令工具，涵盖以下 DNS 服务器的搭建和使用。

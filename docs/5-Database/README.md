@@ -1,6 +1,6 @@
 ---
 title: Database
-sidebar_position: 10
+sidebar_position: 5
 tags: [Database]
 ---
 ## 一、关系数据库与非关系数据库（NoSQL）

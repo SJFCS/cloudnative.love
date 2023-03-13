@@ -1,6 +1,6 @@
 ---
 title: Coding
-sidebar_position: 13
+sidebar_position: 11
 tags: [Coding]
 ---
 ```mdx-code-block

@@ -1,16 +1,5 @@
 ---
 title: logrotate日志切割
-
-categories:
-  - Linux常用服务
-series: 
-  - Linux日志管理
-lastmod: '2020-10-17'
-
-featuredImage: 
-authors: zhuanzai
-draft: false
-toc: true
 ---
 
 

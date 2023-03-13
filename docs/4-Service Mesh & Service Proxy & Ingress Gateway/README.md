@@ -1,6 +1,6 @@
 ---
 title: Service Proxy & Ingress Gateway
-sidebar_position: 8
+sidebar_position: 4
 tags: [Service Proxy & Ingress Gateway]
 ---
 ## Service Proxy

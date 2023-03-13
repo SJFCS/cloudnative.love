@@ -1,16 +1,5 @@
 ---
 title: Rsync同步shell脚本实践
-
-categories:
-  - Linux常用服务
-series: 
-  - Linux文件同步
-lastmod: '2020-10-27'
-
-featuredImage: 
-authors: songjinfeng
-draft: false
-toc: true
 ---
 
 
