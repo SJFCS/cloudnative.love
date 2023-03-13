@@ -1,0 +1,72 @@
+
+# vi:set ft=ruby sw=4 ts=4 sts=4:
+
+
+# node.vm.provision "shell", path: "./init/init.sh", args: "#{MIRROR} #{DOCKER_USERNAME} #{DOCKER_PASSWORD} #{DOCKER_REGISTRY}", privileged: false, reset: true
+
+ENV["LC_ALL"] = "en_US.UTF-8"
+
+servers = [
+    {name: "server1", ip: "192.168.33.10", role: "master"},
+    {name: "server2", ip: "192.168.33.11", role: "node"},
+    {name: "server3", ip: "192.168.33.12", role: "node"}
+]
+
+
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "ubuntu/bionic64"
+
+
+
+
+
+
+
+2.使用循环来定义每个虚拟机，并从另一个文件中读取共享的配置。
+
+```ruby
+servers.each do |server|
+  config.vm.define server[:name] do |node|
+    node.vm.box = "ubuntu/trusty64"
+    node.vm.hostname = server[:name]
+    node.vm.network "private_network", ip: server[:ip]
+    node.vm.provision "shell", path: "provision.sh"
+    node.vm.provision "shell", inline: File.read("shared_provisioning.sh")
+    # 其他节点特定配置
+    if name == "node1"
+      # ...
+    elsif name == "node2"
+      # ...
+    else
+      # ...
+    end
+  end
+end
+```
+3.创建一个名为"shared_provisioning.sh"的文件，其中包含要在所有虚拟机上运行的共享配置。
+```bash
+#!/bin/bash
+
+# 共享配置
+sudo timedatectl set-timezone Asia/Shanghai
+# 更新apt包索引并安装包以允许apt通过 HTTPS 使用存储库：
+sudo apt-get update
+sudo apt-get install \
+   ca-certificates \
+   curl \
+   gnupg \
+   lsb-release
+# 添加 Docker 的官方 GPG 密钥：
+sudo mkdir -m 0755 -p /etc/apt/keyrings
+# 使用以下命令设置存储库：
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo \
+"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+# 安装 Docker 引擎
+sudo chmod a+r /etc/apt/keyrings/docker.gpg #避免默认umask可能配置不正确，导致无法检测存储库公钥文件
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo usermod -aG docker vagrant
+```

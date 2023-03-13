@@ -2,6 +2,15 @@
 title: Vagrant
 tags: [Infrastructure as Code & Automation,HashiCorp,Vagrant]
 ---
+todo
+- vagrant 模板 循环创建，常用脚本
+- git gpg签名
+- ssh密钥
+- https://github.com/wizardbyron/provisioners/projects/1
+- ansible
+- https://github.com/lvthillo/vagrant-ansible-kubernetes
+- https://www.itwonderlab.com/en/ansible-kubernetes-vagrant-tutorial/
+- https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant/
 推荐参考 https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/ubuntu/vagrant/setup-hosts.sh
 
 End kernel panic - not syncing attempted to kill the idle task
@@ -233,21 +242,7 @@ https://junmajinlong.com/virtual/vagrant/vagrant_snapshot/
 
 
 ## 免密
-### 添加免密
-在 Vagrantfile 中使用以下代码可以将本机的 ~/.ssh/id_rsa.pub 添加到虚拟机内：
-```ruby
-config.vm.provision "shell", inline: <<-SHELL
-    mkdir -p /home/vagrant/.ssh
-    cat /vagrant/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
-    # wget --no-check-certificate \
-    # 'https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub' \
-    # -O /home/vagrant/.ssh/authorized_keys
-    chown -R vagrant:vagrant /home/vagrant/.ssh
-    chmod 700 /home/vagrant/.ssh
-    chmod 600 /home/vagrant/.ssh/authorized_keys
-  SHELL
-```
-这段代码会在虚拟机启动时执行，首先创建 /home/vagrant/.ssh 目录，然后将本机的 ~/.ssh/id_rsa.pub 内容追加到 /home/vagrant/.ssh/authorized_keys 中，最后设置权限和所有权。这样就可以使用本机的私钥登录虚拟机了。
+https://developer.hashicorp.com/vagrant/docs/vagrantfile/ssh_settings
 
 ### 默认 vagrant ssh
 
@@ -278,6 +273,13 @@ vagrant ssh -c my-vagrant
 
 
 ### 指定密钥
+```bash
+$ cat ~/.ssh/id_rsa.pub | ssh -i ~/.ssh/id_rsa.pub -p 2222 vagrant@localhost 'cat >> .ssh/authorized_keys && echo "SSH key copied."'
+
+$ ssh -i ~/.ssh/id_rsa.pub -p 2222 vagrant@localhost
+
+
+```
 
 这些默认的密钥文件是 Vagrant 在创建虚拟机时自动生成的，用于方便地进行 SSH 连接和管理。但是，在生产环境中，建议使用自己的密钥文件，以提高安全性。可以在 Vagrantfile 中设置 config.ssh.private_key_path 和 config.ssh.public_key_path 来指定自己的密钥文件路径，例如：
 
@@ -288,6 +290,62 @@ Vagrant.configure("2") do |config|
   config.ssh.public_key_path = "~/.ssh/id_rsa.pub"
 end
 ```
+* The following settings shouldn't exist: public_key_path  
+这个错误提示通常是由于在 Vagrantfile 中使用了 public_key_path 选项，但该选项在最新版的 Vagrant 中已经被废弃了。如果你使用的是较老的 Vagrant 版本，该选项可能仍然有效。  
+public_key_path 选项用于指定 SSH 公钥文件的路径。在旧版的 Vagrant 中，该选项可以用来指定多个公钥文件路径，以便在虚拟机中进行 SSH 认证时使用。但在最新版的 Vagrant 中，该选项已被废弃，取而代之的是 authorized_keys 选项。
+
+* The following settings shouldn't exist: authorized_keys  
+这个错误提示通常是由于在 Vagrantfile 中使用了 authorized_keys 选项，但该选项在当前的 Vagrant 版本中已经被废弃了。如果你使用的是较老的 Vagrant 版本，该选项可能仍然有效。  
+authorized_keys 选项用于指定需要添加到虚拟机中的 SSH 授权密钥。该选项支持多个密钥，可以将它们放到一个数组中进行指定。但在当前的 Vagrant 版本中，该选项已被废弃，取而代之的是 insert_key 选项。  
+insert_key 选项用于指定是否将本地的 SSH 密钥添加到虚拟机中。该选项有三个取值：
+  true：将本地的 SSH 密钥添加到虚拟机中；
+- false：不将本地的 SSH 密钥添加到虚拟机中；
+- "if-authorized"：只有在本地的 SSH 密钥已被添加到虚拟机中时才添加。
+
+
+#### 貌似新版本不支持了。。用下面的方法
+```ruby
+  config.vm.provision "shell" do |s|
+    ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+    s.inline = <<-SHELL
+      echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+      echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
+    SHELL
+  end
+```
+这个工作示例附加~/.ssh/id_rsa.pub到~/.ssh/authorized_keysvagrant 和 root 用户，这将允许您使用现有的 SSH 密钥。
+
+或者：
+
+复制所需的公钥将直接进入[供应](https://developer.hashicorp.com/vagrant/docs/provisioning)阶段。确切的答案取决于您喜欢使用什么配置（shell、Chef、Puppet 等）。最微不足道的是file密钥的配置器，如下所示：
+```ruby
+config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/me.pub"
+
+
+Vagrant.configure(2) do |config|
+  # ... other config
+  config.vm.provision "shell", inline: <<-SHELL
+    cat /home/vagrant/.ssh/me.pub >> /home/vagrant/.ssh/authorized_keys
+  SHELL
+  # ... other config
+end
+```
+### 添加免密
+在 Vagrantfile 中使用以下代码可以将本机的 ~/.ssh/id_rsa.pub 添加到虚拟机内：
+```ruby
+config.vm.provision "shell", inline: <<-SHELL
+    mkdir -p /home/vagrant/.ssh
+    cat /vagrant/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
+    # wget --no-check-certificate \
+    # 'https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub' \
+    # -O /home/vagrant/.ssh/authorized_keys
+    chown -R vagrant:vagrant /home/vagrant/.ssh
+    chmod 700 /home/vagrant/.ssh
+    chmod 600 /home/vagrant/.ssh/authorized_keys
+  SHELL
+```
+这段代码会在虚拟机启动时执行，首先创建 /home/vagrant/.ssh 目录，然后将本机的 ~/.ssh/id_rsa.pub 内容追加到 /home/vagrant/.ssh/authorized_keys 中，最后设置权限和所有权。这样就可以使用本机的私钥登录虚拟机了。
+
 ### 配置添加到sshconfig文件中
 
 Vagrant默认情况下不会将SSH配置添加到sshconfig文件中，因为这可能会干扰其他SSH设置。但是，您可以使用以下命令将Vagrant SSH配置添加到sshconfig文件中：
@@ -367,3 +425,70 @@ Vagrant.configure("2") do |config|
 end
 ```
 该Vagrantfile将创建一个Ubuntu 20.04虚拟机，并在其中安装VSCode Server。它会下载VSCode Server二进制文件，安装它，配置它，并在远程主机上启动它。它还会将端口8080映射到远程主机的8080端口，以便可以通过浏览器访问VSCode Server。
+
+
+## 复用配置，循环创建主机
+
+https://developer.hashicorp.com/vagrant/docs/vagrantfile/tips
+
+您可以使用循环来定义多个虚拟机，同时使用另一个文件来存储共享的配置。例如：
+
+1.在Vagrantfile中创建一个数组，其中包含要定义的虚拟机名称。
+
+```ruby
+servers = [
+  {name: "server1", ip: "192.168.33.10"},
+  {name: "server2", ip: "192.168.33.11"},
+  {name: "server3", ip: "192.168.33.12"}
+]
+
+```
+2.使用循环来定义每个虚拟机，并从另一个文件中读取共享的配置。
+
+```ruby
+servers.each do |server|
+  config.vm.define server[:name] do |node|
+    node.vm.box = "ubuntu/trusty64"
+    node.vm.hostname = server[:name]
+    node.vm.network "private_network", ip: server[:ip]
+    node.vm.provision "shell", path: "provision.sh"
+    node.vm.provision "shell", inline: File.read("shared_provisioning.sh")
+    # 其他节点特定配置
+    if name == "node1"
+      # ...
+    elsif name == "node2"
+      # ...
+    else
+      # ...
+    end
+  end
+end
+```
+3.创建一个名为"shared_provisioning.sh"的文件，其中包含要在所有虚拟机上运行的共享配置。
+```bash
+#!/bin/bash
+
+# 共享配置
+sudo timedatectl set-timezone Asia/Shanghai
+# 更新apt包索引并安装包以允许apt通过 HTTPS 使用存储库：
+sudo apt-get update
+sudo apt-get install \
+   ca-certificates \
+   curl \
+   gnupg \
+   lsb-release
+# 添加 Docker 的官方 GPG 密钥：
+sudo mkdir -m 0755 -p /etc/apt/keyrings
+# 使用以下命令设置存储库：
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo \
+"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+# 安装 Docker 引擎
+sudo chmod a+r /etc/apt/keyrings/docker.gpg #避免默认umask可能配置不正确，导致无法检测存储库公钥文件
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo usermod -aG docker vagrant
+```
+
+这样，您就可以轻松地扩展Vagrant配置，而无需重复编写相同的代码。
