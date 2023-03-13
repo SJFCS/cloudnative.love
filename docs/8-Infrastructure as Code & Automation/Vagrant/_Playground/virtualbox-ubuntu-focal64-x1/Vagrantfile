@@ -1,22 +1,46 @@
 Vagrant.configure("2") do |config|
-  # 全局配置
-  # config.vm.provider "virtualbox" do |v|
-  #     v.memory = 2048
-  #     v.cpus = 2
-  # end
+    # 全局配置
+    # config.vm.provider "virtualbox" do |v|
+    #     v.memory = 2048
+    #     v.cpus = 2
+    # end
 
-  config.vm.define "node-1" do |node1|
-      node1.vm.box = "ubuntu/focal64"
-      node1.vm.provider :virtualbox do |vb|
-          vb.customize ["modifyvm", :id, "--memory", "4096"]
-          vb.customize ["modifyvm", :id, "--cpus", "2"]
-          end
-      node1.vm.network "private_network", ip: "192.168.56.10"
-      node1.vm.hostname = "node-1"
-      node1.vm.provision "shell", inline: <<-SHELL
-      echo "i'm node-1"
-      sudo timedatectl set-timezone Asia/Shanghai
-      SHELL
-      end
-
+    config.vm.define "node1" do |node1|
+        config.vm.boot_timeout = 6000
+        node1.vm.box = "ubuntu/focal64"
+        config.ssh.private_key_path = "~/.ssh/id_rsa"
+        config.ssh.public_key_path = "~/.ssh/id_rsa.pub"
+        node1.vm.provider :virtualbox do |vb|
+                vb.memory = "4096"
+                vb.cpus = 2
+                # vb.name = "node1"
+                # vb.gui = true # Vagrant允许在VirtualBox中使用GUI界面来显示虚拟机
+        end
+        node1.vm.synced_folder "./sharedir", "/home/vagrant/sharedir/", create: true, owner: "vagrant", group: "vagrant", mount_options: ["dmode=755","fmode=644"], type: "rsync"
+        node1.vm.network "private_network", ip: "192.168.56.10"
+        node1.vm.hostname = "node1"
+        node1.vm.provision "shell", inline: <<-SHELL
+        echo "i'm node1"
+        sudo timedatectl set-timezone Asia/Shanghai
+        # 更新apt包索引并安装包以允许apt通过 HTTPS 使用存储库：
+        sudo apt-get update
+        sudo apt-get install \
+           ca-certificates \
+           curl \
+           gnupg \
+           lsb-release
+        # 添加 Docker 的官方 GPG 密钥：
+        sudo mkdir -m 0755 -p /etc/apt/keyrings
+        # 使用以下命令设置存储库：
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+        echo \
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+        # 安装 Docker 引擎
+        sudo chmod a+r /etc/apt/keyrings/docker.gpg #避免默认umask可能配置不正确，导致无法检测存储库公钥文件
+        sudo apt-get update
+        sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+        sudo usermod -aG docker vagrant
+        SHELL
+        end
 end

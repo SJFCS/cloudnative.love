@@ -12,6 +12,14 @@ authors: songjinfeng
 draft: false
 toc: true
 ---
+为什么 ssh 密钥默认为 600 而不是 400？authorized_keys 不可变？
+- https://www.reddit.com/r/linux4noobs/comments/bjpbnl/why_are_ssh_keys_600_and_not_400_by_default/
+
+你真的了解authorized_keys 么？
+- https://www.503error.com/2020/%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3authorized_keys-%E4%B9%88%EF%BC%9F/1718.html
+- https://www.ibm.com/docs/en/zos/2.3.0?topic=daemon-format-authorized-keys-file
+
+
 https://wangdoc.com/ssh/client
 本文对SSH连接验证机制进行了非常详细的分析，还详细介绍了"Shell基本功能"和了解"公钥加密"的概念。，相信能让各位对ssh有个全方位较透彻的了解，而不是仅仅只会用它来连接远程主机。
 

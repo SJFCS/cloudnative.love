@@ -34,6 +34,8 @@ sidebar_position: 4
   todolist：
     + 3.7 [DHCP](/docs/Linux/Linux%20服务配置与管理/DHCP)
     + 3.8 [DNS](/docs/Linux/Linux%20服务配置与管理/DNS)
+    + 3.10-3.12 数据库简介和greenplum使用和调优  
+        http://docs-cn.greenplum.org/v6/admin_guide/query/topics/parallel-proc.html#topic2__iy139990
   done：
     + xx
     + xx

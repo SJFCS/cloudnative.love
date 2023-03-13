@@ -98,6 +98,22 @@ func main() {
   // highlight-success-end
 }
 ```
+## 引入外部文档
+
+```js
+import CodeBlock from '@theme/CodeBlock';
+import Source from '!!raw-loader!./kubesphere.yaml';
+
+<CodeBlock language="yaml" title="kubesphere.yaml">{Source}</CodeBlock>
+```
+
+import CodeBlock from '@theme/CodeBlock';
+import Source from '!!raw-loader!./kubesphere.yaml';
+
+<CodeBlock language="yaml" title="kubesphere.yaml">{Source}</CodeBlock>
+
+
+
 
 ## 提示和标注
 Docusaurus 有一个特殊的语法来创建警告和标注：
