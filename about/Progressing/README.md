@@ -3,7 +3,15 @@ title: 目前正在做什么
 sidebar_position: 4
 ---
 # 2023.3-2024.3
-
+:::info 短期计划
+- 四月2-Linux 8-Infrastructure as Code & Automation 6-Container
+- 四月中旬考完RHCE  处理将要过期的视频
+- 六月5-Database 3-Continuous Integration & Delivery  MySQL OCP证书
+- 八月4-Service Mesh & Service Proxy & Ingress Gateway
+- 十月10-Storage 7-Observability  关注年底活动阿里云ACE
+- 十二月Kubernetes-OPS-Guide Kubernetes-The-Hard-Way-Translate Kubernetes-Enhancement-Proposal-Translate 9-Security
+- 明年一月开始 11-Coding Kubernetes-DEV-Notes
+:::
 这里是我今年的 OKR
 :::info todolist
 

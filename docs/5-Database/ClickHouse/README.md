@@ -1,1 +1,1 @@
-Greenplum
+ck
