@@ -17,7 +17,6 @@ cat ~/.ssh/known_hosts
  ```
 ## Ansible 安装使用
 ```bash
-yum install ansible
 vi /etc/ansible/ansible.cfg
 [defaultes]
 host_key_checking = False

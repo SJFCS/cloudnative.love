@@ -5,6 +5,25 @@ tags: [Infrastructure as Code & Automation,HashiCorp,Vagrant]
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import DocCardList from '@theme/DocCardList';
+
+
+<DocCardList />
+
+- 简介
+- 官网
+- 区别优势
+- 基本概念
+
+virtuabox: https://linuxhint.com/install-virtualbox-arch-linux/
+
+自动完成
+Vagrant 提供了自动完成命令的能力。目前 支持bash和shell。zsh这些可以通过运行启用 vagrant autocomplete install --bash --zsh。
+
+
+destroy只删除虚拟机而不会删除box 如果想删除box 请运行 vagrant box remove xx
+https://stackoverflow.com/questions/16647069/should-i-use-vagrant-or-docker-for-creating-an-isolated-environment
+
 
 
 todo
@@ -59,6 +78,8 @@ Vagrant 将虚拟机镜像成为 Box
   vagrant halt    # 关闭虚拟机
   vagrant destroy # 删除虚拟机
   ```
+
+
 
 ##  vagrantfile 配置
 ### 定义虚拟机规格
@@ -368,6 +389,39 @@ mount -t vboxsf sharing /mnt/share
 
 
 ### ssh 配置
+#### 用户名密码登录
+```
+#  官方提供的镜像的账号都是不允许远程登录的，所有配官方镜像的congfig不应该添加config.ssh.username参数，否则创建虚拟机时多次尝试ssh登录，都会失败，浪费大量时间
+#  个人镜像设置远程登录了，可以使用username和password参数
+Vagrant.configure("2") do |config|
+  config.ssh.username = "user"
+  config.ssh.password = "password"
+end
+
+请注意，您需要确保这些用户存在于来宾操作系统上
+```
+
+```
+mkdir -p /home/hgp/vagrant/centos
+cd /home/hgp/vagrant/centos
+vagrant init
+# 此时目录下面生成Vagrantfile文件，修改里面的几个参数，例如 config.vm.box 改成本地镜像仓库的镜像名，否则在当前目录查找镜像
+# config.vm.network :private_network, ip: "192.168.57.101"
+# config.vm.box = "centos-7.3"
+# config.vm.boot_timeout = 360
+# config.ssh.username = "root"
+# config.ssh.password = "root"
+# vb.gui = true
+```
+
+```
+# 修改PubkeyAuthentication 和 PasswordAuthentication 参数
+PubkeyAuthentication yes #这两项为打开公钥模式
+PasswordAuthentication yes #打开密码验证模式
+# 重启sshd服务
+systemctl restart sshd
+```
+
 
 当使用 Vagrant 启动多个虚拟机时，每个虚拟机都会在本地分配一个不同的 SSH 端口。默认情况下，Vagrant 将使用端口范围为 2200 到 2250 的随机端口，以避免端口冲突。这些端口会被映射到虚拟机的 22 端口，以便在本地使用 SSH 连接到虚拟机。
 
