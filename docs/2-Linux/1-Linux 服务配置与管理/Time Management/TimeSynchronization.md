@@ -41,7 +41,7 @@ firewall-cmd --reload
 :::caution
 ESX VM 上的 VMware Tools 软件负责同步时间，因此不要在带有 VMware Tools 的 VM 上使用 ntpd/chrony。改为在主机上设置 NTPD/chrony，让 VMware Tools 完成剩下的工作。
 :::
-## ntpadte
+## ntpdate
 ntpdate 它允许本地时间与 Internet 上的时间服务器进行一次性的时间同步。它通常配合 crontab 定时任务来对时间进行持续校准。
 ### 手动同步
 ```bash title="以 ntp.aliyun.com 时间服务器为例"
