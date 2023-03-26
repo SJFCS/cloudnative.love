@@ -3,6 +3,15 @@ title: ETCD
 tags: [Database,ETCD]
 ---
 
+- https://cizixs.com/2016/08/02/intro-to-etcd/
+- https://www.cnblogs.com/doscho/p/6227351.html
+- https://blog.51cto.com/u_15127570/2710980
+
+
+
+
+
+
 可以使用本文件夹中的 [docker-compose.yml](./docker-compose.yml) 启动一个多节点的 etcd 集群，或者也可以根据 [使用 systemd 部署三节点的 Etcd 集群](./ETCD 的备份与恢复.md) 这篇文档使用二进制文件部署 Etcd 集群。
 
 ## 使用 etcdctl 直接修改/查看 kubernetes 数据

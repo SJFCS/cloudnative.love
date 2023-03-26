@@ -10,7 +10,7 @@ tags: [Linux]
 
 
   
-[![Linu Kernel Map](https://raw.githubusercontent.com/makelinux/linux_kernel_map/main/LKM.svg "Linu Kernel Map")](https://makelinux.github.io/kernel/map/)
+[![Linux Kernel Map](https://raw.githubusercontent.com/makelinux/linux_kernel_map/main/LKM.svg "Linux Kernel Map")](https://makelinux.github.io/kernel/map/)
 
 
 ```

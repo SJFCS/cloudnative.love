@@ -1,5 +1,5 @@
 
-# 血的教训:echo '''''后面不能换行，不能有空格，要直接接内容，否则输出的文件第一行是空行，导致docker-entrypoint.sh文件第一行是空行的话，alpine执行抛 standard_init_linux.go:207: exec user process caused "exec format error" 错误
+注意:echo '''''后面不能换行，不能有空格，要直接接内容，否则输出的文件第一行是空行，导致docker-entrypoint.sh文件第一行是空行的话，alpine执行抛 standard_init_linux.go:207: exec user process caused "exec format error" 错误
 ```
 docker rmi openvpn:2.4.6-r3
 mkdir -p openvpn-2.4.6-r3 && cd openvpn-2.4.6-r3

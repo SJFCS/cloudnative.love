@@ -1,6 +1,10 @@
 ---
 title: DNS
 ---
+- github dns 污染指向 127.0.0.1 
+- https://wiki.archlinux.org/title/Dnscrypt-proxy
+- https://www.v2ex.com/t/742709
+- https://boce.aliyun.com/detect/dns/DNS_PING-55e41bb2aff9db99decd9d9da1be445d-1652369079406
 
 本章节介绍 DNS基础概念和原理，以及诸多命令工具，涵盖以下 DNS 服务器的搭建和使用。
 - dnsmasq
