@@ -1,93 +1,11 @@
 ---
-title: 时间同步
-sidebar_position: 2
+title: ntpd
+sidebar_position: 1
 ---
-为了避免主机时间因为长期运作下所导致的时间偏差，进行时间同步 (synchronize) 是非常必要的。 Network Time Protocol (NTP 网络时间协议) 是一种通过分组交换、可变延迟数据网络来同步计算机系统时钟的协议。
- 
-本节介绍了以下 NTP 时间同步方案: 
-- ntpdate + crontab
-- ntpd
-- chrony
-
-:::caution
-常见的 NTP 时间服务器:
-1. [ntp.aliyun.com](https://help.aliyun.com/document_detail/92704.html)  
-  阿里云 NTP 服务器，提供了阿里云内网和公网 NTP 服务器，用于同步各网络中 ECS 实例的本地时间。
-1. [pool.ntp.org](https://www.pool.ntp.org/zh/use.html) 
-  一个超大的 NTP 服务集群, 为上百万的客户端提供可靠易用的网络时间协议(NTP)服务的项目
-:::tip
-
-:::tip
-在开始前请确保你已经设置了正确的时区和防火墙
-- Time Zone
-```bash
-sudo timedatectl set-timezone "Asia/Shanghai" 
-# sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
-```
-- Firewall
-```bash title="防火墙"
-# 打开防火墙端口以允许传入的 NTP 请求：
-firewall-cmd --permanent --add-service=ntp
-
-# UDP 端口号 123 必须在防火墙中打开以允许客户端访问：
-firewall-cmd --permanent --zone=public --add-port=123/udp
-# UDP 端口 323 必须在防火墙中打开才能从远程系统连接：
-firewall-cmd --permanent --zone=public --add-port=323/udp
-
-firewall-cmd --reload
-
-```
-:::
-:::caution
-ESX VM 上的 VMware Tools 软件负责同步时间，因此不要在带有 VMware Tools 的 VM 上使用 ntpd/chrony。改为在主机上设置 NTPD/chrony，让 VMware Tools 完成剩下的工作。
-:::
-## ntpdate
-ntpdate 它允许本地时间与 Internet 上的时间服务器进行一次性的时间同步。它通常配合 crontab 定时任务来对时间进行持续校准。
-### 手动同步
-```bash title="以 ntp.aliyun.com 时间服务器为例"
-sudo ntpdate ntp.aliyun.com 
-22 Feb 21:46:44 ntpdate[3645]: step time server 84.16.73.33 offset 85807.801323 sec
-```
-:::tip
-ntpdate 在端口 123 上运行  
-如果 ntpdate 启动失败并出现错误 `the NTP socket is in use, exiting` 请做如下排查
-- 请确保你的防火墙允许此端口
-- 如果安装并运行了 ntpd/chrony 服务，将会占用 ntpdate 工作所需的 123 udp 端口。若不想停止服务则可以使用 `ntpdate -u <ntp-server-addres>` 。
-:::
-
-### ntpdate + crontab 定时同步
-```bash
-sudo ntpdate ntp.aliyun.com 
-sudo sh -c 'echo "0 */1 * * * /usr/sbin/ntpdate ntp.aliyun.com  >/dev/null 2>&1" >> /var/spool/cron/root'
-timedatectl status && crontab -l
-# sudo hwclock -w              # 将系统时间写入 RTC 硬件时钟
-```
-### 添加开机启动
-可以在其他服务启动前同步好时间
-```bash
-sudo bash -c 'cat << EOF >> /etc/rc.local
-/usr/sbin/ntpdate ntp.aliyun.com 
-EOF'
-sudo chmod +x /etc/rc.d/rc.local
-```
-
-:::info
-- 由于 `ntpdate` 会直接修改时间，所以会造成时间的跳跃。当 `ntpdate` 发现你的时间快了，则会回调到之前的时间点，导致你的系统经历两个相同的时刻，对某些应用而言，这是致命的。因此，请放弃使用 `ntpdate` 来校时。且 `ntpdate` 无法修正时钟振荡频率，治标不治本。
-- 唯一一个可以令时间发生跳跃的时间点，是计算机刚刚启动，但还没有启动很多服务的那个时候。其余的时候，理想的做法是使用 `ntpd/Chrony` 来校准时钟，而不是调整计算机时钟上的时间。
-- `ntpd` 和`Chrony` 的修正是连续的，通过减慢时钟或者加快时钟的方式连续的修正，会获得平滑的时间校正而不会造成时钟跳跃。并且可以在修正时间的同时，把 BIOS 计时器的振荡频率偏差记录下来。这样即使网络有问题，本机仍然能维持一个相当精确的走时。
-:::
-
-:::tip
-集群环境对接 NTP Server 配置时，建议主节点对接外部 NTP Server，从节点对接主节点。配置主要涉及对接的 NTP Server 的 IP 地址、允许访问的地址等信息配置。下面将分布进行详细的介绍和说明。
-:::
-
-## ntpd
 
 ### 安装配置
 - HostA Server 节点，以本地时间对外提供时间服务，且同步外部 NTP Server: **ntp.aliyun.com**
 - HostB Client 节点，同步 **HostA**
-
 
 ```bash title="HostA Server 节点"
 sudo yum install -y ntp
@@ -318,11 +236,7 @@ chrony: rtcsync RTC 将会每隔11分钟更新 real-time clock(硬件时钟) ，
 - [ntp-server-reachable-but-never-select-set-the-time](https://unix.stackexchange.com/questions/677523/ntp-server-reachable-but-never-select-set-the-time)
 :::
 
-
-
-
-
-
-
-
-
+## 引文
+:::info 参考文档
+- [RedHat-Docs Chapter 19. Configuring NTP Using ntpd](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-configuring_ntp_using_ntpd)
+:::

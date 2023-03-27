@@ -60,7 +60,7 @@ localtime (本地时间) 取决于当前时区，本地时间=UTC + 时区
 
 - **Ubuntu 中的 UTC**
   
-  如果在 Ubuntu 安装期间在任何磁盘上检测到 Windows，Ubuntu 及其衍生产品的硬件时钟设置将被解释为"Local time"。这样做显然是为了让新的 Linux 用户不用编辑注册表就可以在他们的 Windows 电脑上试用 Ubuntu。要更改此行为，请参见 [timedatectl set-local-rtc](./TimeTools.md#timedatectl) 。
+  如果在 Ubuntu 安装期间在任何磁盘上检测到 Windows，Ubuntu 及其衍生产品的硬件时钟设置将被解释为"Local time"。这样做显然是为了让新的 Linux 用户不用编辑注册表就可以在他们的 Windows 电脑上试用 Ubuntu。要更改此行为，请参见 [timedatectl set-local-rtc](./时间管理工具/timedatectl.md) 。
 
 ## Time skew 时间偏移
 
@@ -75,13 +75,13 @@ localtime (本地时间) 取决于当前时区，本地时间=UTC + 时区
 如果硬件时钟继续以大的增量丢失或获得时间，则可能记录了无效的漂移(但只适用于 hwlock 守护进程正在运行的情况)。如果硬件时钟时间设置不正确，或者时间标准没有与 Windows 或 macOS 安装同步，就会发生这种情况。通过首先删除文件/etc/adjtime，然后设置正确的硬件时钟和系统时钟时间，可以删除漂移值。然后你应该检查你的时间标准是否正确。
 
 ## Time synchronization 时间同步
-以下工具方便我们去管理和调整时间，使用和配置详见: [常用命令](./TimeTools)
+以下工具方便我们去管理和调整时间，使用和配置: 
 - timedatectl
 - hwclock/clock
 - tzselect
 - date
 
-以下时间同步方案的使用和配置详见: [时间同步](./TimeSynchronization.md)
+以下时间同步方案的使用和配置: 
 - ntpdate + crontab
 - ntpd
 - chrony
