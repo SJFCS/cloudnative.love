@@ -2,7 +2,8 @@
 title: hwclock&clock
 ---
 
-*hwclock is a tool for accessing the Hardware Clock*  
+读取和设置硬件时钟 
+
 hwclock 和 clock 用法相近，只不过 clock 命令除了支持 x86 硬件体系外，还支持 Alpha 硬件体系。  
 hwclock 可以将 System clock 写入 Hardware clock，它将会创建并更新 /etc/adjtime 。有关此文件详细信息请参见 [hwlock (8) The Adjtime File](https://man.archlinux.org/man/hwclock.8#The_Adjtime_File)。
 ### 查看当前时间设置

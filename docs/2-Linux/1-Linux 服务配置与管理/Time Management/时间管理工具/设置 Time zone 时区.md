@@ -1,4 +1,8 @@
-## 自动设置 Time zone 时区
+---
+title: 设置 Time zone 时区
+---
+根据位置自动设置 Time zone 时区，临时会话设置时区
+
 ### 基于地理定位的设置
 要根据 IP 地址位置自动设置时区，可以使用地理定位 API 检索时区，例如 `curl https://ipapi.co/timezone` ，并将输出传递给 timedatectl set-timezone 进行自动设置。一些提供免费或部分免费服务的地理知识产权应用程式介面如下:
 [Abstract IP geolocation API](https://www.abstractapi.com/ip-geolocation-api)  

@@ -71,5 +71,12 @@ import DocCardList from '@theme/DocCardList';
 react引入均放在文档开头
 
 命令行尽量不带$和#，除非命令下方贴出返回结果。避免# 用sudo 代替
+
+
+readme 可以不写一句话简介，文章要写
+当用下面组件时 有用
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList />
 -->
 

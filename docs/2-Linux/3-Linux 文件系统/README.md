@@ -1,3 +1,27 @@
+https://blog.csdn.net/Pipcie/article/details/105060672?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-5-105060672-blog-125421417.235^v27^pc_relevant_landingrelevant&spm=1001.2101.3001.4242.4&utm_relevant_index=8
+
+https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/9/html/managing_storage_devices/monitoring-an-iscsi-session-using-the-iscsiadm-utility_configuring-an-iscsi-initiator
+
+
+
+ISCSI/SAN/NAS常用名词解释
+
+**iSCSI：**Internet 小型计算机系统接口 (iSCSI：Internet Small Computer System Interface) Internet 小型计算机系统接口(iSCSI)是一种基于 TCP/IP 的协议,用来建立和管理 IP 存储设备、主机和客户机等之间的相互连接,并创建存储区域网络(SAN).
+
+**SAN网络：**Storage Area Network 存储区域网络,多采用高速光纤通道,对速率、冗余性要求高.使用iscsi存储协议块级传输.
+
+**NAS网络：**Network Attachment Storage 网络附件存储,采用普通以太网,对速率、冗余无特别要求,使用NFS、CIFS共享协议文件级传输.
+
+**SAN和NAS的区别：**SAN一般特指存储网络的构建方式,NAS一般特指产品.SAN有单独的存储网络,NAS使用现有网络,家庭网络存储设备：FREENAS,用的是FREEBSD系统.
+
+NFS 与 ISCSI 的区别
+
+NFS 是以文件为单位的,共享出去的是文件.而ISCSI是以block为单位,共享出去的是设备,端口：3260/tcp.
+
+
+iSCSI 网络存储,在工作上分为服务端(target)和客户端(initiator).iSCSI服务端用于存放硬盘存储资源的服务器,能够为用户提供可用的存储资源,iSCSI客户端则是用户使用的软件,用于访问远程服务端的存储资源.
+
+
 # FileSystem - 文件系统
 
 补充无损扩容\数据恢复\快照结构哲学等等

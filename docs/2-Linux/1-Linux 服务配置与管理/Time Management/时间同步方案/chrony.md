@@ -2,6 +2,7 @@
 title: chrony
 sidebar_position: 3
 ---
+Chrony 时间同步和配置解析
 
 [Chrony](https://chrony.tuxfamily.org) 有两个核心组件：一个是 `chronyd` 守护进程，主要用于调整内核中运行的系统时间和时间服务器同步。它确定计算机增减时间的比率，并对此进行调整补偿。另一个是 `chronyc`，它提供一个用户界面，用于监控性能并进行多样化的配置。`chronyc` 可以在 `chronyd` 实例控制的计算机上工作，也可以在一台不同的远程计算机上工作。
 

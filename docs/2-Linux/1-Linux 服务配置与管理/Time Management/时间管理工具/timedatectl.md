@@ -1,6 +1,8 @@
 ---
 title: timedatectl
 ---
+查看和修改系统时钟和时区设置
+
 :::caution
 - Timedatectl 的使用需要一个活动的 D-Bus。因此，可能无法在 chroot 下使用此命令(例如在安装期间)。在这些情况下，您可以使用 hwlock 命令，或者使用 [systemd-nspawn](https://wiki.archlinux.org/title/Systemd-nspawn) 代替 chroot。
 - 如果 /etc/adjtime 不存在，Systemd 假设硬件时钟设置为 UTC。

@@ -1,7 +1,8 @@
 ---
-title: ntpdate + crontab 定时同步
+title: ntpdate + crontab
 sidebar_position: 1
 ---
+ntpdate + crontab 定时同步
 
 ## ntpdate
 ntpdate 它允许本地时间与 Internet 上的时间服务器进行一次性的时间同步。它通常配合 crontab 定时任务来对时间进行持续校准。

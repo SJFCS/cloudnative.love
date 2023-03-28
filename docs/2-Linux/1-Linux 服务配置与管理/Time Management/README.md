@@ -4,33 +4,41 @@ tags: [Linux 时间管理]
 sidebar_position: 0
 ---
 
-在操作系统中存在 System clock (系统时钟), Hardware clock (硬件时钟),UTC,time zone (时区),Daylight Saving Time (DST 夏令时)等概念。本章节解释了它们是什么以及如何读取和设置它们。  
-在系统运行过程中不可避免会产生 Time skew 现象，本章将列举了四种 Time synchronization 方案，及其配置方法。
+在操作系统中存在 System clock (系统时钟), Hardware clock (硬件时钟),Coordinated Universal Time(协调世界时,UTC),Time Zone (时区),Daylight Saving Time (夏令时,DST)等概念，本节将解释它们是什么，以及在不同操作系统中的默认行为。
+
+你可以在下列文章中学会如何读取和设置它们。  
+
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList />
 
 ## 名词解释
 
-- **Hardware clock 硬件时钟**  
-  *又称 Real Time Clock (RTC 实时时钟)，CMOS 时钟，BIOS 时间*  
-	是主板上 BIOS 中保存的时间，由主板电池供电来维持运行，可在 BIOS 中进行设置。
-	系统开机时要读取这个时间，并根据它来设定系统时钟。然后系统时钟就会独立于硬件运行。  
-	:::caution 注意
-	系统启动时根据硬件时钟设定系统时钟的过程可能存在时区换算，这要视具体的系统及相关设置而定。详见: [Time standard 时间标准](#time-standard-时间标准)
-	:::
-- **System clock 系统时钟**  
-	*又称 software clock 软件时钟，Local time 本地时间*   
-	它是一个连续的脉冲，帮助计算机时钟保持正确的时间。它记录自 [epoch](https://www.computerhope.com/jargon/e/epoch.htm) 以来经过的秒数，并根据 `/etc/adjtime` 的内容计算当前日期和时间。系统关机时会根据系统时钟来设置硬件时钟。  
-- **UTC (Universal Time Coordinated)**  
-  即[协调世界时](https://zh.wikipedia.org/zh-hans/%E5%8D%8F%E8%B0%83%E4%B8%96%E7%95%8C%E6%97%B6)是最主要的世界时间标准。
-- **Time zone**  
-	是根据世界各国家与地区不同的经度而划分的时间定义，全球共分为24个时区，这些时区决定了当地的本地时间。  
-	比如北京处于东八区，即北京时间为 UTC + 8。  
-    中国标准时间用 CST (China Standard Time)表示。
-- **DST (Daylight Saving Time)**  
-	夏令时 [DST](https://en.wikipedia.org/wiki/Daylight_saving_time) 的典型实现是在春季将时钟拨快一小时（“ spring forward”），在秋季将时钟拨慢一小时（“ fall back”）以返回标准时间。
+### Hardware clock
+Hardware clock (硬件时钟) 又称 **Real Time Clock (RTC 实时时钟)**，硬件时钟通常嵌入在计算机主板的 CMOS 芯片中，并由小型电池供电。它可以在计算机关闭时继续运行，并保持准确的时间，以便在下次开机时重新启动计算机时使用。
+
+:::caution
+系统开机时要读取 Hardware clock (硬件时钟)，视**具体的系统及相关设置**而定，根据时区/夏令时换算为 System clock (系统时钟)，然后系统时钟就会独立于硬件运行。
+
+**具体系统及相关设置**详见: [Time standard 时间标准](#time-standard-时间标准)
+:::
+
+### System clock
+System clock (系统时钟) 又称 **software clock (软件时钟)，Local time (本地时间)**
+它是一个连续的脉冲，帮助计算机时钟保持正确的时间。它记录自 [epoch](https://www.computerhope.com/jargon/e/epoch.htm) 以来经过的秒数，并根据 `/etc/adjtime` 的内容计算当前日期和时间。系统关机时会根据系统时钟来设置硬件时钟。  
+
+### Universal Time Coordinated
+UTC [协调世界时](https://zh.wikipedia.org/zh-hans/%E5%8D%8F%E8%B0%83%E4%B8%96%E7%95%8C%E6%97%B6)是最主要的世界时间标准。
+### Time zone
+Time zone (时区) 是根据世界各国家与地区不同的经度而划分的时间定义，全球共分为24个时区，这些时区决定了当地的本地时间。
+- 如北京处于东八区，即北京时间为 UTC + 8。
+- 中国标准时间用 CST (China Standard Time)表示。
+### DST (Daylight Saving Time)
+夏令时 [DST](https://en.wikipedia.org/wiki/Daylight_saving_time) 的典型实现是在春季将时钟拨快一小时（“ spring forward”），在秋季将时钟拨慢一小时（“ fall back”）以返回标准时间。
 
 ## Time standard 时间标准
 
-时间标准分为 localtime (本地时间) 和 Coordinated Universal Time (协调世界时 UTC).  
+时间标准分为 localtime (本地时间) 和 Coordinated Universal Time (协调世界时 UTC)。  
 localtime (本地时间) 取决于当前时区，本地时间=UTC + 时区
 
 如果一台机器上安装了多个操作系统，它们都将从相同的硬件时钟获得当前时间:  
@@ -41,53 +49,26 @@ localtime (本地时间) 取决于当前时区，本地时间=UTC + 时区
 - 当在不同时区之间旅行和使用其中一个操作系统重置系统/硬件时钟时 可能出现问题;
 - 在引导过程中导致一些意想不到的行为例如，系统时间向后退等很多问题。
 
-
-- **Microsoft Windows 中的 UTC**
+### Windows 中的 UTC
   
-  为了使用 Windows 进行双重引导，建议将 Windows 配置为使用 UTC，而不是将 Linux 配置为使用 Local time 。
+为了使用 Windows 进行双重引导，建议将 Windows 配置为使用 UTC，而不是将 Linux 配置为使用 Local time 。您可以在管理员命令提示符下运行:
+```cmd
+reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_DWORD /f
+```
+或者，创建一个包含以下内容的 * . reg 文件(在桌面上) ，然后双击它将其导入到注册表中:
+```reg
+Windows Registry Editor Version 5.00
 
-  您可以在管理员命令提示符下运行:
-  ```
-  reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_DWORD /f
-  ```
-  或者，创建一个包含以下内容的 * . reg 文件(在桌面上) ，然后双击它将其导入到注册表中:
-  ```
-  Windows Registry Editor Version 5.00
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation]
+"RealTimeIsUniversal"=dword:00000001
+```
 
-  [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation]
-  "RealTimeIsUniversal"=dword:00000001
-  ```
-
-- **Ubuntu 中的 UTC**
+### Ubuntu 中的 UTC
   
-  如果在 Ubuntu 安装期间在任何磁盘上检测到 Windows，Ubuntu 及其衍生产品的硬件时钟设置将被解释为"Local time"。这样做显然是为了让新的 Linux 用户不用编辑注册表就可以在他们的 Windows 电脑上试用 Ubuntu。要更改此行为，请参见 [timedatectl set-local-rtc](./时间管理工具/timedatectl.md) 。
+如果在 Ubuntu 安装期间在任何磁盘上检测到 Windows，Ubuntu 及其衍生产品的硬件时钟设置将被解释为"Local time"。这样做显然是为了让新的 Linux 用户不用编辑注册表就可以在他们的 Windows 电脑上试用 Ubuntu。要更改此行为，请参见 [timedatectl set-local-rtc](./时间管理工具/timedatectl.md) 。
 
-## Time skew 时间偏移
-
-没有一个时钟是完美的，不同的振荡频率导致了时钟出现误差。这种现象被称为“ time skew 时间偏移”或“ time drift 时间漂移”。
-
-`/etc/adjtime` 文件记录了时钟的漂移值。当使用 hwlock 设置硬件时钟时，新的漂移值和设置时钟的时间被写入文件 `/etc/adjtime`，覆盖以前的值。你也可以手动更新 `hwclock --adjust` 。当 hwlock 守护进程是启用时，在关机前也会更新时钟的漂移值。
-
-:::info 注意
-如果在前一次设置后24小时内再次设置时钟，则不重新计算漂移，因为时钟认为经过的时间周期太短，无法准确计算漂移。
-:::
-
-如果硬件时钟继续以大的增量丢失或获得时间，则可能记录了无效的漂移(但只适用于 hwlock 守护进程正在运行的情况)。如果硬件时钟时间设置不正确，或者时间标准没有与 Windows 或 macOS 安装同步，就会发生这种情况。通过首先删除文件/etc/adjtime，然后设置正确的硬件时钟和系统时钟时间，可以删除漂移值。然后你应该检查你的时间标准是否正确。
-
-## Time synchronization 时间同步
-以下工具方便我们去管理和调整时间，使用和配置: 
-- timedatectl
-- hwclock/clock
-- tzselect
-- date
-
-以下时间同步方案的使用和配置: 
-- ntpdate + crontab
-- ntpd
-- chrony
-
+## 引文
 :::info 参考链接：
 - [wiki-archlinux-System_time](https://wiki.archlinux.org/title/System_time) 
 - https://linux.vbird.org/linux_server/redhat9/0440ntp.php
-
 :::

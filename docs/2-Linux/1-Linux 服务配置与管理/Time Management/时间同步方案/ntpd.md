@@ -1,7 +1,8 @@
 ---
 title: ntpd
-sidebar_position: 1
+sidebar_position: 2
 ---
+ntpd 时间同步和配置解析
 
 ### 安装配置
 - HostA Server 节点，以本地时间对外提供时间服务，且同步外部 NTP Server: **ntp.aliyun.com**
