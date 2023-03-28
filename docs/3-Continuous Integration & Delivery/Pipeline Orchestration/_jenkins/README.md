@@ -1,13 +1,22 @@
 # Jenkins
 
 
+4、jenkins on k8s
+  1，编译环境和物理服务器耦合度较高，不同编译环境需要准备大量的物理节点
+  2，空闲期（如夜里）资源浪费
+  3，不能并行构建任务需要排队
+
+- https://meigit.readthedocs.io/en/latest/gitlab_ci_.gitlab-ci.yml_detail.html
+- https://github.com/AndreyVMarkelov/jenkins-pipeline-shared-lib-sample
+
+
 [Jenkins](https://www.jenkins.io/zh/doc/) 是当下最流行的 CI/CD 工具之一，优势在于：
 
 1. 众多插件供选用，因此功能繁多。（虽然是良莠不齐，甚至好多都已经停更好多年了。）
-1. 提供功能完善的 Web UI，有视图-文件夹的概念，可以很方便地将 Jobs 进行分类。用户使用方便。
-1. 任务之间可以互相调用，可以使用一些 Batch Job 去并行/串行地调用其他 Jobs。很适合分层结构项目的 CI/CD。
-1. 可以定时构建。
-1. 一个仓库可以存在很多个 Pipelines，在构建任务中指定 Jenkinsfile 的位置。
+2. 提供功能完善的 Web UI，有视图-文件夹的概念，可以很方便地将 Jobs 进行分类。用户使用方便。
+3. 任务之间可以互相调用，可以使用一些 Batch Job 去并行/串行地调用其他 Jobs。很适合分层结构项目的 CI/CD。
+4. 可以定时构建。
+5. 一个仓库可以存在很多个 Pipelines，在构建任务中指定 Jenkinsfile 的位置。
    - 而 gitlab/drone 的 pipeline 文件名称是固定的，而且貌似一个仓库只能有一个。
 
 但是也存在很多问题：
