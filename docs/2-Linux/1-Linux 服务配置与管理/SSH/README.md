@@ -1,5 +1,5 @@
 ---
-title: SSH
+title: SSH!!
 ---
 为什么 ssh 密钥默认为 600 而不是 400？authorized_keys 不可变？
 - https://www.reddit.com/r/linux4noobs/comments/bjpbnl/why_are_ssh_keys_600_and_not_400_by_default/

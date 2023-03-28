@@ -1,3 +1,7 @@
+---
+title: Dnsmasq
+sidebar_position: 2
+---
 dnsmasq 是一种轻量级 DNS 和 DHCP 服务器，它可以用于简单的网络环境中。下面是一个 dnsmasq 的配置案例，其中包含了 DNS 和 DHCP 的配置。
 
 1.安装 dnsmasq
@@ -67,4 +71,3 @@ sudo service dnsmasq start
 ## 问题
 
 客户端需要进行以下配置才能实现DHCP动态DNS更新 （通过安全认证的方式）
-

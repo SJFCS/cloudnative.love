@@ -78,5 +78,9 @@ readme 可以不写一句话简介，文章要写
 import DocCardList from '@theme/DocCardList';
 
 <DocCardList />
+
+
+
+所有实验都要有vagrant或者dockerfile
 -->
 

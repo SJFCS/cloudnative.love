@@ -1,12 +1,13 @@
 ---
 title: ISC DHCP
+sidebar_position: 1
 ---
+- 高可用 https://blog.csdn.net/CleverCode/article/details/101450976
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Linux 上使用最广泛的 DHCP 服务器是 ISC DHCP（Internet Systems Consortium DHCP）。这是因为它是开源软件，具有很好的扩展性和可配置性，大多数 Linux 发行版中预装了ISC DHCP。而且 ISC DHCP 是一种经过验证的解决方案，已经被广泛应用于生产环境中。
-
+Linux 上使用最广泛的 DHCP 服务器是 ISC DHCP（Internet Systems Consortium DHCP）。大多数 Linux 发行版中预装了ISC DHCP。而且 ISC DHCP 是一种经过验证的解决方案，已经被广泛应用于生产环境中。
 
 ## ISC DHCP 安装
 
@@ -17,8 +18,7 @@ Linux 上使用最广泛的 DHCP 服务器是 ISC DHCP（Internet Systems Consor
 ```bash
 sudo apt-get install isc-dhcp-server
 dpkg -L isc-dhcp-server
-sudo systemctl start isc-dhcp-server
-
+sudo systemctl enable --now isc-dhcp-server
 ```
 </TabItem>
 <TabItem value="CentOS/RedHat">
@@ -26,7 +26,7 @@ sudo systemctl start isc-dhcp-server
 ```bash
 sudo yum install dhcp
 rpm -ql dhcp
-sudo systemctl start dhcp
+sudo systemctl enable --now dhcp
 ```
 </TabItem>
 </Tabs>
@@ -54,10 +54,7 @@ sudo systemctl start dhcp
 /var/lib/dhcpd/dhcpd6.leases
 ```
 
-
 ## 配置案例
-
-
 
 ### 单域案例
 【进阶—超级作用域】
@@ -65,10 +62,8 @@ sudo systemctl start dhcp
 
 目的：为不同段的网络做DHCP功能
 
-
 Centos 6.8三台 分别为DHCP Server、Client1、Client2
 网络模式均为仅主机模式，用到的网卡是自定义的VM10
-
 
 开启DHCP服务器的路由转发功能并使其生效
 
@@ -89,7 +84,6 @@ DHCP中继被称为DHCP Relay；是为了实现不同子网和物理网段之间
 
 Centos 6.8四台 分别为DHCP Server、DHCP中继、Client1、Client2 
 
-
 ### 转发案例
 编辑ISC DHCP服务器的配置文件/etc/dhcp/dhcpd.conf，添加以下内容：
 
@@ -99,46 +93,24 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
   option routers 192.168.1.1;
   option domain-name-servers 8.8.8.8, 8.8.4.4;
 }
-
 ## 指定ntp
+
 要配置DHCP服务器以指定NTP服务器，请按照以下步骤操作：
-
-
-
 打开DHCP服务器的配置文件，通常在/etc/dhcp/dhcpd.conf。
-
-
-
 找到要为其配置NTP服务器的子网段的定义，例如：
-
-
-
 
 subnet 192.168.1.0 netmask 255.255.255.0 {
   range 192.168.1.10 192.168.1.50;
   option routers 192.168.1.1;
 }
 
-
-
 在子网段定义中添加以下行以指定NTP服务器：
-
 
 option ntp-servers 192.168.1.100;
 
-
 其中192.168.1.100是您要使用的NTP服务器的IP地址。如果您有多个NTP服务器，请将它们用逗号分隔。
 
-
-
-保存并关闭文件。
-
-
-
-重新启动DHCP服务器以应用更改。
-
-
-
+保存并关闭文件。重新启动DHCP服务器以应用更改。
 
 现在，DHCP客户端将从DHCP服务器获取NTP服务器的IP地址，并使用它来同步其时间。
 ##  
@@ -147,7 +119,6 @@ https://www.linuxtips.fr/en/setting-up-a-dhcp-server-synced-with-dnd-debian-ubun
 
 ## 指定固定IP
 以下是一个简单的DHCP服务器配置文件，其中包括一个固定IP地址分配的示例：
-
 
 # /etc/dhcp/dhcpd.conf
 
@@ -184,9 +155,6 @@ sudo service dhcpd restart
 这里配置了一个子网为192.168.1.0/24的DHCP服务器，分配的IP地址范围是192.168.1.10 - 192.168.1.50，默认网关是192.168.1.1，DNS服务器是Google的公共DNS。
 
 其中，option routers指定了网关地址，option domain-name-servers指定了DNS服务器地址。
-
-
-
 
 ### 配置网络接口：
 编辑网络接口的配置文件/etc/network/interfaces，将DHCP服务器的IP地址绑定到网络接口上：
@@ -463,11 +431,6 @@ shared-network 224-29 {
 # 因此，在启用广播转发功能之前，请确保已经了解其工作原理，并采取相应的安全措施。
 # :::
 ```
-
-
-
-
-
 
 
 DHCP服务器应该服务于两个VLAN。

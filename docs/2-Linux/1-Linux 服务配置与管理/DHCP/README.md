@@ -14,9 +14,19 @@ DHCP (Dynamic Host Configuration Protocol 动态主机配置协议) 和 BOOTP（
 DHCP 是应用层的协议，客户端使用 UDP 68 端口，服务端使用 UDP 67 端口。
 :::
 
-## 工作原理
+本节将介绍 DHCP 协议的工作原理。下列文章介绍了常见 DHCP Server 的配置。
 
-DORA Process 是 DHCP 协议中的一个重要组成部分，用于向客户端提供 IP 地址及其他配置参数，它有四个主要阶段：D - Discover，O - Offer，R - Request，A - Acknowledge 。
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList />
+
+## DHCP 工作原理
+
+DORA Process 是 DHCP 协议中的一个重要组成部分，用于向客户端提供 IP 地址及其他配置参数，它有四个主要阶段：
+- D - Discover
+- O - Offer
+- R - Request
+- A - Acknowledge
 ![1678351144391](image/README/1678351144391.png)
 ### DHCP Discover - [广播]
   - 客户端没有任何 IP 地址，所以使用 0.0.0.0 作为源 IP 地址，发送 DHCP 广播请求（DHCPDISCOVER 报文），以查找 DHCP 服务器。
@@ -98,13 +108,6 @@ T1 时刻是租期到一半的时候，T2 时刻是租期到 87.5% 的时候。�
 :::tip
 有些机器希望一直使用一个固定的IP，也就是静态IP，除了手动进行配置，DHCP服务器也可以实现这个功能。DHCP服务器可以根据MAC地址来分配这台机器固定IP地址（保留地址），即使重启或重装了系统也不会改变根据MAC地址分配的地址。
 :::
-
-## 补充
-如果不让 dhcp 修改 `/etc/resolv.conf` 里的内容，就在网卡配置文件 `/etc/sysconfig/network-scripts/ifcfg-*` 里添加 `PEERDNS=no` 。
-
-每次重启网卡默认都获取的同一个ip，有时候想换个ip都很麻烦。在 `/var/lib/dhclient/` 目录下有`.leases`文件，将它们清空或者删除这些文件中对应网卡的部分，再重启网络就可以获取新的动态ip。  或者，在 `/etc/sysconfig/network-scripts/ifcfg-eth0` 加入`DHCPRELEASE=yes`。 
-
-当运行`ifdown eth0`的时候就会发出`dhcprelase`报文，查看`/etc/sysconfig/network-scripts/ifdown-eth`脚本中实际上是调用`dhclient`命令，用下面这个命令应该也可以。
 
 ## 参考文档
 https://zhuanlan.zhihu.com/p/372608515
