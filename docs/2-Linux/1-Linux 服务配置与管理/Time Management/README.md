@@ -52,7 +52,7 @@ localtime (本地时间) 取决于当前时区，本地时间=UTC + 时区
 ### Windows 中的 UTC
   
 为了使用 Windows 进行双重引导，建议将 Windows 配置为使用 UTC，而不是将 Linux 配置为使用 Local time 。您可以在管理员命令提示符下运行:
-```cmd
+```powershell
 reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_DWORD /f
 ```
 或者，创建一个包含以下内容的 * . reg 文件(在桌面上) ，然后双击它将其导入到注册表中:

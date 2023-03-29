@@ -1,7 +1,18 @@
 ---
 title: Git
 ---
-脱敏
+如何脱敏
+
+gpg签名：
+- https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
+- https://timberkito.com/?p=141
+- https://blog.csdn.net/weixin_40277264/article/details/111933705
+- https://stackoverflow.com/questions/73726815/git-commit-failed-couldnt-load-public-key
+- https://docs.github.com/en/authentication/managing-commit-signature-verification/associating-an-email-with-your-gpg-key
+- https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key
+- https://docs.github.com/zh/authentication/managing-commit-signature-verification/generating-a-new-gpg-key
+- https://docs.github.com/zh/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key?platform=windows
+
 
 # Git Docs
 

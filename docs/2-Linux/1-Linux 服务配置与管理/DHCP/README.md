@@ -74,7 +74,7 @@ DORA Process 是 DHCP 协议中的一个重要组成部分，用于向客户端�
 - 重新请求租约状态：当客户端的IP租约过期或在一定时间内未能成功续租时，客户端会发送DHCP请求消息以请求新的IP租约。此时客户端处于重新请求租约状态。
 - 释放状态：当客户端不再需要IP地址时，它可以向服务器发送DHCP释放消息，以释放已经分配的IP地址。此时客户端处于释放状态。
   例如在Windows中，为了释放和更新DHCP分配的IP，我们使用命令：
-  ```cmd
+  ```powershell
   ipconfig /release
   ipconfig /renew
   ```
