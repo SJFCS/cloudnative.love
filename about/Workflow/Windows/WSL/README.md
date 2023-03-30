@@ -6,7 +6,7 @@ title: WSL + Docker 环境配置
 :::tip 安利 wsl 工具
 - 用于管理 Linux (WSL)的 Windows 子系统的全功能实用程序：https://github.com/DDoSolitary/LxRunOffline
   - 可以通过 `LxRunOffline list -v` 命令来查看WSL的IP地址和GUID：
-- 建议安装[windows terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=zh-cn&gl=cn)配合 WSL2 食用
+- 建议安装 [windows terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=zh-cn&gl=cn) 配合 WSL2 食用
 :::
 
 ## 安装 WSL

@@ -1,15 +1,21 @@
+# 将注释掉的代码块删除，以提高可读性。
+# 使用更具描述性的变量名称，例如network_mode代替默认网络模式"default_network_mode"。
+# 改进逻辑表达式，例如使用"presence"方法而不是字符串empty?方法来检查非空字符串。
+# 可以将默认值定义为常量，并将它们放在一个单独的配置块中，这样更易于管理和修改。
+# 对于操作系统版本，可以使用判空语法（&.）来避免出现空指针错误。
+# 在Guest OS上安装VirtualBox Guest Additions非常有用，因此可以考虑添加一个脚本，以确保所有Guest服务器都安装了它。
+# 可以使用.compact方法删除数组中的nil值，而不是使用if语句检查每个变量是否为空。
+
 Vagrant.configure("2") do |config|
     servers = [
-      {name: "server1", ip: "192.168.33.10:private_network,10.0.0.10:public_network"},
-      {name: "server2", os: "ubuntu/lunar64:v20230301.0.0", ip: "192.168.33.11", cpu: "2", mem: "2048"},
+      {name: "server1", network: "192.168.56.10:private_network,10.0.0.10:public_network"},
+      {name: "server2", os: "ubuntu/lunar64:20230301.0.0", network: "192.168.56.11", cpu: "2", mem: "2048"},
     ]
-    
+    # providers = ["virtualbox","vmware_fusion","docker","hyperv","libvirt"]
     default_cpu = "1"
     default_mem = "1024"
     default_network_mode = "private_network"
-    default_os = "ubuntu/trusty64"
-
-    # default_os = "ubuntu/jammy64:v20230314.0.0"
+    default_os = "ubuntu/jammy64"
     
     servers.each do |server|
       config.vm.define server[:name] do |node|
@@ -24,36 +30,31 @@ Vagrant.configure("2") do |config|
         # end
 
 
-        # if defined?(name)
-        #   puts "变量 name 已定义"
+        os_name = server[:os]&.split(":")&.[](0) || default_os&.split(":")&.[](0)
+        os_version = server[:os]&.split(":")&.[](1) || default_os&.split(":")&.[](1)
+        if os_version.to_s.strip != ''
+          puts "#{server[:name]} 系统版本： #{os_name}:#{os_version}"
+        else
+          puts "#{server[:name]} 系统版本： #{os_name}"
+        end
+
+        node.vm.box = os_name
+        if os_version.to_s.strip != ''
+          node.vm.box_version = os_version
+        end
+        #这里使用了字符串方法strip来删除字符串两端的空格，并且使用不等于操作符!=而不是empty?方法来检查字符串是否为空或nil。这样做可以确保os_version既不为空也不包含只有空格的字符串（例如“ ”）。
+        # if defined?(os_version)
+        #   puts "变量 name 已定义 "
         # else
         #   puts "变量 name 未定义"
         # end
 
-        # node1.vm.box = "centos/7"
-        # node1.vm.box_version = "1809.01"
-        config.ssh.password = "vagrant"
-
-        os_name = server[:os]&.split(":")&.[](0) || default_os&.split(":")&.[](0)
-        puts "os_name #{os_name}"
-        os_version = server[:os]&.split(":")&.[](1) || default_os&.split(":")&.[](1)
-        puts "os_version #{os_version}"
-        node.vm.box = os_name
-        node.vm.hostname = os_version
-
-        # 可以使用 Ruby 的 String#split 方法来切割字符串，并取出第一个元素，示例如下：
-        # node.vm.box = server[:os].split(":").first || default_os
-        # 这将会把 server[:os] 字符串以冒号为分隔符切割成数组，然后取出第一个元素 "ubuntu/focal64" 作为 node.vm.box 的值。如果 server[:os] 为 nil 或者没有冒号，那么 default_os 将会被赋值给 node.vm.box。
-        # 然后使用数组下标 [1] 来取得第二个元素
-
-
-        node.vm.network default_network_mode
-    
-        if server.key?(:ip)
-          server[:ip].split(",").each do |ip_with_network|
-            ip, network_mode = ip_with_network.split(':')
+        if server.key?(:network)
+          server[:network].split(",").each do |network|
+            ip, network_mode = network.split(':')
             ip.strip!
-            network_mode = network_mode&.to_sym || :private_network
+            network_mode = network_mode&.to_sym || default_network_mode
+            puts "#{server[:name]} 系统网络： #{ip} #{network_mode}"
             node.vm.network network_mode, ip: ip
           end
         end
@@ -62,38 +63,12 @@ Vagrant.configure("2") do |config|
           vb.memory = server[:mem] || default_mem
           vb.cpus = server[:cpu] || default_cpu
         end
-       end
+        # providers.each do |provider|
+        #   config.vm.provider provider do |v|
+        #     v.memory = server[:mem] || default_mem
+        #     v.cpus = server[:cpu] || default_cpu
+        #   end
+        # end
+      end
     end
 end
-
-
-
-
-
-# Vagrant.configure("2") do |config|
-#   servers = [
-#     {name: "server1", ip: "192.168.33.10:private_network,10.0.0.10:public_network"},
-#     {name: "server2", os: "ubuntu/focal64:v20230214.0.0", ip: "192.168.33.11"},
-#     {name: "server3", ip: "192.168.33.12", cpu: "2", mem: "2048"}
-#   ]
-
-#   default_cpu = "1"
-#   default_mem = "1024"
-#   default_network_mode = "private_network"
-#   default_os = "ubuntu/bionic64:123"
-
-#   servers.each do |server|
-#     config.vm.define server[:name] do |node|
-#       node.vm.box = (server[:os]&.split(":")&.[](0) || default_os)&.split(":")&.[](0)
-
-#       node.vm.hostname = server[:name]
-
-#       node.vm.network server[:ip].split(",").map { |ip| ip.split(":") }.map { |ip, mode| mode ? "#{mode},#{ip}" : "#{default_network_mode},#{ip}" }
-
-#       node.vm.provider :virtualbox do |vb|
-#         vb.customize ["modifyvm", :id, "--cpus", server[:cpu] || default_cpu]
-#         vb.customize ["modifyvm", :id, "--memory", server[:mem] || default_mem]
-#       end
-#     end
-#   end
-# end
