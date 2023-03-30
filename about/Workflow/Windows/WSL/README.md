@@ -4,7 +4,9 @@ title: WSL + Docker 环境配置
 本文介绍 WSL + Docker 环境配置
 
 :::tip 安利 wsl 工具
-用于管理 Linux (WSL)的 Windows 子系统的全功能实用程序：https://github.com/DDoSolitary/LxRunOffline
+- 用于管理 Linux (WSL)的 Windows 子系统的全功能实用程序：https://github.com/DDoSolitary/LxRunOffline
+  - 可以通过 `LxRunOffline list -v` 命令来查看WSL的IP地址和GUID：
+- 建议安装[windows terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=zh-cn&gl=cn)配合 WSL2 食用
 :::
 
 ## 安装 WSL
@@ -107,7 +109,8 @@ su - $USER # 重新登录ssh终端 刷新权限
 :::
 
 ## Docker-Compose
-docker 已经集成了 `docker compose` 子命令，没必要单独安装 `docker-compose` 。
+从 Docker 1.29 版本开始，"docker-compose" 命令被合并到 Docker CLI 中，并且可以通过 "docker compose" 命令运行。因此，现在 Docker 官方文档中推荐使用 "docker compose" 命令。
+
 ```bash
 export Version="v2.17.2"
 curl -L https://github.com/docker/compose/releases/download/${Version}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
@@ -155,7 +158,6 @@ WSL 获得了一个与 Docker 网络冲突的 IP 地址，因此必须更改 WSL
 
 **2. Import Ubuntu**
 
-
 运行一下命令导入 Ubuntu 的文件系统
 ```powershell
 wsl --import <Distro 系统名称> <InstallLocation 安装目录> <FileName 镜像包> [Options]
@@ -168,6 +170,66 @@ wsl --import ubuntu-2 "C:\Users\myname\WSL2\ubuntu2" "C:\Users\myname\Downloads\
 ```powershell
 wsl -d <Distribution Name>
 ```
+
+### WSL 如何迁移
+
+查看已安装的 wsl 子系统发行版
+```powershell
+wsl -l --all -v
+```
+
+关闭指定 wsl 子系统发行版
+```powershell
+wsl --shutdown              #优雅关闭全部 WSL 实例
+wsl --shutdown -d Ubuntu    #优雅关闭 WSL 实例
+wsl --terminate -t Ubuntu    #强制终止 WSL 实例
+```
+导出 wsl 子系统发行版
+```powershell
+wsl --export Ubuntu c:\wsl-ubuntu.tar
+```
+ 
+删除 wsl 子系统发行版
+```powershell
+wsl --unregister Ubuntu
+```
+导入并安装 wsl 子系统发行版
+```powershell
+wsl --import Ubuntu c:\wsl-ubuntu c:\wsl-ubuntu.tar --version 2
+```
+
+设置为默认 wsl 子系统发行版
+```powershell
+wsl --set-default Ubuntu
+# 登录
+wsl -d Ubuntu
+```
+### wsl import 之后的子系统，会默认root用户登录，如何指定用户？
+
+- 手动指定用户
+```powershell
+wsl -d <distro> -u <username>
+```
+- 命令指定默认用户
+```powershell
+ubuntu config --default-user <username>
+```
+- 配置文件指定默认用户
+打开 WSL 发行版的 Linux 终端并编辑 `/etc/wsl.conf` 文件。如果该文件不存在，请创建它。在该文件中添加以下行：
+```conf
+[user]
+default=<username>
+```
+- 修改注册表指定默认用户
+Windows + R 输入 regedit 并按回车键，打开注册表。导航到以下注册表路径：
+```powershell
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Lxss\<distribution_GUID>
+# <distribution_GUID>" 替换为您要更改默认用户的 WSL 发行版的 GUID。
+# 可以查看 <distribution_GUID> 文件夹内的 DistributionName 来确定发行版
+```
+1. 在右侧窗格中，找到 "DefaultUid" 键，并双击它以编辑其值。
+2. 在 "编辑 DWORD (32 位) 值" 对话框中，将 "数值数据" 更改为您要设置为默认用户的 Linux 用户的 UID(如1000)。
+3. 单击 "确定" 保存更改并关闭注册表编辑器。
 
 ### VS Code 配置默认终端为 WSL
 
@@ -182,4 +244,37 @@ sudo dpkg-reconfigure locales
 # 使用空格键选中en_US.UTF-8、zh_CN.UTF-8
 # 使用Tab键切换至OK，再将en_US.UTF-8选为默认。
 ```
+### Ubuntu上的Node版本不支持“空位合并”运算符（??=）
+我:
+```
+在wsl ubuntu 中运行node项目 报错如下，可是在windows和Linux中运行都没有问题，怀疑和wsl有关，帮我看一下
+/core/bin/docusaurus.mjs:30
+process.env.BABEL_ENV ??= 'development';
+```
+ChatGPT：
+```
+这个错误可能是因为在WSL Ubuntu上的Node版本不支持“空位合并”运算符（??=），而在Windows和Linux上的Node版本支持该运算符。您可以检查在WSL Ubuntu上安装的Node版本并确保它支持该运算符。或者，您可以考虑在代码中使用传统的变量赋值运算符（=）来避免这个问题。
+```
 
+ChatGPT YYDS !!!
+
+然后我跑去[升级 nodejs 版本](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04)后就解决了
+
+### 关于 WSL 的网络堆栈
+
+WSL (Windows Subsystem for Linux) 实际上是在 Windows 系统上运行的一个 Linux 虚拟机，它与 Windows 系统共享同一个网络栈。因此，当在WSL中运行的应用程序监听本地端口时，它们实际上是在 Windows 系统上监听该端口，因此可以通过 Windows 系统上的 IP 地址和端口号来访问这些应用程序。这种共享本地端口的机制使得 WSL 可以与 Windows 系统之间进行无缝的网络通信。
+
+**不想 wsl 与 Windows 系统共享同一个网络栈**
+
+如果您不想WSL与Windows系统共享同一个网络栈，可以通过配置 WSL 的网络模式来实现。WSL 支持两种网络模式：默认的 “基于Windows的网络模式” 和 “桥接网络模式” 。在 “桥接网络模式” 下， WSL 将使用自己的网络栈，与Windows 系统分开。要启用 “桥接网络模式” ，请按照以下步骤操作：
+- 运行命令：`wsl --set-version <distribution name> 2` 将WSL版本设置为2。
+- 在 WSL 中编辑 `/etc/wsl.conf` 文件（如果文件不存在，则创建它），添加以下内容：
+  ```conf
+  [network]
+  generateResolvConf = false
+  ```
+- 在 WSL 中编辑 `/etc/resolv.conf` 文件，将其中的DNS服务器地址设置为您的路由器或互联网服务提供商提供的 DNS 服务器地址。
+- 重启 WSL ，使更改生效。
+  ```powershell
+  wsl --shutdown -d Ubuntu    #优雅关闭 WSL 实例，直到再次打开 WSL 并开始使用它。
+  ```

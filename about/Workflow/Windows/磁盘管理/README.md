@@ -1,9 +1,10 @@
-## 目录映射到盘符
-
-在 Windows 中有一个叫做 subst.exe 的程序，它可以将目录映射到盘符。用法如下：
-– subst.exe 列出当前所有的虚拟盘符
-– subst.exe Z: C:\DirName       # 将 C:\DirName 映射到 Z:
-– subst.exe Z: /D               # 删除虚拟盘符 D:
+---
+title: 目录映射到盘符
+---
+subst.exe 可将目录映射到盘符。用法如下：
+- `subst.exe`                     # 列出当前所有的虚拟盘符
+- `subst.exe Z: C:\DirName`       # 将 C:\DirName 映射到 Z:
+- `subst.exe Z: /D`               # 删除虚拟盘符 D:
 
 :::tip
 subst.exe 的映射仅在当前 session 有效!  

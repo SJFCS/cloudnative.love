@@ -6,7 +6,3 @@ spec:
         image: $REGISTRY_HOST/mysql:$IMAGE_MYSQL_VERSION
         imagePullPolicy: Always
 
-
-```yaml
-
-```
