@@ -1,74 +1,164 @@
-# 将注释掉的代码块删除，以提高可读性。
-# 使用更具描述性的变量名称，例如network_mode代替默认网络模式"default_network_mode"。
-# 改进逻辑表达式，例如使用"presence"方法而不是字符串empty?方法来检查非空字符串。
-# 可以将默认值定义为常量，并将它们放在一个单独的配置块中，这样更易于管理和修改。
-# 对于操作系统版本，可以使用判空语法（&.）来避免出现空指针错误。
-# 在Guest OS上安装VirtualBox Guest Additions非常有用，因此可以考虑添加一个脚本，以确保所有Guest服务器都安装了它。
-# 可以使用.compact方法删除数组中的nil值，而不是使用if语句检查每个变量是否为空。
-
+# $ VAGRANT_EXPERIMENTAL=disks vagrant up
+# $ vagrant ssh -c lsblk
+# 磁盘大小
+# https://stackoverflow.com/questions/49822594/vagrant-how-to-specify-the-disk-size
+# https://sleeplessbeastie.eu/2021/05/10/how-to-define-multiple-disks-inside-vagrant-using-virtualbox-provider/
 Vagrant.configure("2") do |config|
+## 自定义节点  
     servers = [
-      {name: "server1", network: "192.168.56.10:private_network,10.0.0.10:public_network"},
-      {name: "server2", os: "ubuntu/lunar64:20230301.0.0", network: "192.168.56.11", cpu: "2", mem: "2048"},
+      {
+        name: "server1", 
+        network: "192.168.56.10:private_network,10.0.0.10:public_network",
+        mount: "./sharedir1:/vagrant1,./sharedir2:/vagrant2",
+        disk: "disk1:100GB:primary,disk2:10GB",
+        dvd: "ded1:/WePE_32_V1.2.iso"
+      },
+      {
+        name: "server2", 
+        os: "ubuntu/lunar64:20230301.0.0", 
+        network: "192.168.56.11", 
+        cpu: "2", 
+        mem: "2048"
+      },
     ]
-    # providers = ["virtualbox","vmware_fusion","docker","hyperv","libvirt"]
+
+   
+## 默认配置    
     default_cpu = "1"
     default_mem = "1024"
     default_network_mode = "private_network"
-    default_os = "ubuntu/jammy64"
+    default_os = "centos/7"
+    default_synced_folder = {
+    # NFS 或 rsync
+    # vagrant plugin install vagrant-vbguest
+    # vagrant reload --provision
+      create: true,
+      owner: "vagrant",
+      group: "vagrant",
+      mount_options: ["dmode=755", "fmode=644"],
+      type: "virtualbox"
+    } 
     
     servers.each do |server|
       config.vm.define server[:name] do |node|
-        # if server[:os]
-        #   os_name, os_version = server[:os].split(':')
-        #   puts "操作系统名称：#{os_name}"
-        #   puts "操作系统版本：#{os_version}"
-        # else
-        #   os_name, os_version = default_os.split(':')
-        #   puts "未指定操作系统,使用默认操作系统名称：#{os_name}"
-        #   puts "未指定操作系统,使用默认操作系统版本：#{os_version}"          
-        # end
-
-
+## 设置系统版本
         os_name = server[:os]&.split(":")&.[](0) || default_os&.split(":")&.[](0)
         os_version = server[:os]&.split(":")&.[](1) || default_os&.split(":")&.[](1)
-        if os_version.to_s.strip != ''
-          puts "#{server[:name]} 系统版本： #{os_name}:#{os_version}"
-        else
-          puts "#{server[:name]} 系统版本： #{os_name}"
-        end
-
-        node.vm.box = os_name
-        if os_version.to_s.strip != ''
-          node.vm.box_version = os_version
-        end
-        #这里使用了字符串方法strip来删除字符串两端的空格，并且使用不等于操作符!=而不是empty?方法来检查字符串是否为空或nil。这样做可以确保os_version既不为空也不包含只有空格的字符串（例如“ ”）。
-        # if defined?(os_version)
-        #   puts "变量 name 已定义 "
+        puts "#{server[:name]} 系统版本: #{os_name}#{":#{os_version}" if os_version.to_s.strip != ''}"
+        # 这个简化的方式使用了三目运算符，当 os_version.to_s.strip != '' 时输出 :#{os_version}，否则不输出。
+        # 与下面代码等价
+        # if os_version.to_s.strip != ''
+        #   puts "#{server[:name]} 系统版本： #{os_name}:#{os_version}"
         # else
-        #   puts "变量 name 未定义"
+        #   puts "#{server[:name]} 系统版本： #{os_name}"
         # end
-
-        if server.key?(:network)
-          server[:network].split(",").each do |network|
-            ip, network_mode = network.split(':')
-            ip.strip!
-            network_mode = network_mode&.to_sym || default_network_mode
-            puts "#{server[:name]} 系统网络： #{ip} #{network_mode}"
-            node.vm.network network_mode, ip: ip
-          end
+        node.vm.box = os_name
+        node.vm.box_version = os_version.to_s.strip != '' ? os_version : nil
+        # 这里使用了字符串方法strip来删除字符串两端的空格，并且使用不等于操作符!=而不是empty?方法来检查字符串是否为空或nil。这样做可以确保os_version既不为空也不包含只有空格的字符串（例如“ ”）。
+        # 与下面代码等价
+        # if os_version.to_s.strip != ''
+        #   node.vm.box_version = os_version
+        # end
+# 设置网络
+        server[:network]&.split(",").each do |network|
+          ip, network_mode = network.split(':').map(&:strip)
+          network_mode = (network_mode&.to_sym || default_network_mode)
+          puts "#{server[:name]} 系统网络： #{ip} #{network_mode}"
+          node.vm.network network_mode, ip: ip
         end
-    
+        # 这个简化的方式使用了 safe navigation operator &.，&:strip 等效于 {|x| x.strip}。还可以合并 ip 和 network_mode 的 strip 操作，使其更简洁。
+        # 为什么删除了 if server.key?(:network)       
+        # 如果 server 中没有 :network 键，那么 server[:network] 返回 nil，调用 split 方法会抛出 NoMethodError 错误。
+        # 为了避免这个错误，原来的代码使用了 if server.key?(:network) 判断 :network 是否存在，只有存在才会执行下面的操作。
+        # 而简化后的代码使用 safe navigation operator &.，如果 server[:network] 为 nil，则 &. 部分返回 nil，整个表达式会直接返回 nil，不会执行 each 方法，所以不需要再使用 if 判断了。
+        # 注意到简化后的代码在 network.split(':').map(&:strip) 进行了 strip 操作，即使 ip 或 network_mode 为 nil，也不会出错，因为 map 方法会跳过 nil 值。
+        # 与下面等价
+        # if server.key?(:network)
+        #   server[:network].split(",").each do |network|
+        #     ip, network_mode = network.split(':')
+        #     ip.strip!
+        #     network_mode = network_mode&.to_sym || default_network_mode
+        #     puts "#{server[:name]} 系统网络： #{ip} #{network_mode}"
+        #     node.vm.network network_mode, ip: ip
+        #   end
+        # end
+## 设置 provider 规格
         node.vm.provider :virtualbox do |vb|
           vb.memory = server[:mem] || default_mem
           vb.cpus = server[:cpu] || default_cpu
         end
-        # providers.each do |provider|
-        #   config.vm.provider provider do |v|
-        #     v.memory = server[:mem] || default_mem
-        #     v.cpus = server[:cpu] || default_cpu
+## 共享目录
+        # node.vm.synced_folder ".", "/vagrant", default_synced_folder
+        # node.vm.synced_folder "./share_dir", "/vagrant", create: true, owner: "vagrant", group: "vagrant", mount_options: ["dmode=755","fmode=644"], type: "virtualbox"
+        server[:mount].to_s.split(",").each do |mount|
+          mount_point, mount_path = mount.split(':').map(&:strip)
+          puts "#{server[:name]} 挂载目录： #{mount_point} -> #{mount_path}"
+          node.vm.synced_folder mount_point, mount_path, default_synced_folder
+        end
+        # 这个优化使用了 safe navigation operator &.，如果 server[:mount] 为 nil，则整个表达式会直接返回 nil，不会执行 each 方法，所以不需要再使用 if 判断了。
+        # 同时，合并了 mount_point 和 mount_path 的 strip 操作，使其更简洁。
+        # __dir__ 表示当前文件所在目录的绝对路径。File.expand_path(mount_path, __dir__) 将 mount_path 转换为绝对路径。
+        # 与下面等价
+        # if server.key?(:mount)
+        #   server[:mount].split(",").each do |mount|
+        #     mount_point, mount_path = mount.split(':')
+        #     mount_point.strip!
+        #     mount_path.strip!
+        #     puts "#{server[:name]} 挂载目录： #{mount_point} -> #{mount_path}"
+        #     node.vm.synced_folder mount_point, mount_path, default_synced_folder
         #   end
+        # end
+
+
+## 添加设备
+
+        # config.vm.disk :dvd, name: "installer", file: "./installer.iso"
+        # config.vm.disk :floppy, name: "cool_files"
+## 挂载磁盘
+        # config.vm.disk :disk, name: "ddmm", size: "100GB", primary: true
+        # config.vm.disk :disk, name: "backup", size: "10GB"
+        if server.key?(:disk)
+ 
+          server[:disk].split(",").each do |disk|
+            name, size, primary = disk.split(':')
+            puts "#{server[:name]} 挂载磁盘： #{name} #{size} #{primary ? 'primary' : '' if primary}"
+            node.vm.disk :disk, name: name, size: size, primary: !!primary && true
+            # 在上述代码中，我们使用了一个逻辑表达式来设置 primary 参数。首先，我们将 primary 变量转换为布尔值，可以使用双重取反 !! 来实现。如果 primary 为 nil 或 false，则转换后的布尔值为 false，否则为 true。
+            # 然后，我们使用逻辑与 && 运算符来将布尔值与 primary 变量的值进行比较。如果布尔值为 true，则返回 true ，并将其赋给 primary 参数；否则返回 false，并将其赋给 primary 参数。
+            # 这样，当 primary 存在时，并且其值为真时，调用 node.vm.disk 方法时将 primary 参数设置为 true，否则设置为 false。由于我们没有使用 if 语句，代码也更加简洁。
+            # 下面一个有趣的语法
+            # disks << [name, size, type]
+            # node.disk.attach name, size
+            # node.disk.attach name, size, type: type
+          end
+        end
+
+        # disks = server[:disk].to_s.split(",").map do |disk|
+        #   name, size, type = disk.split(':').map(&:strip)
+        #   type = type&.to_sym || :sata
+        #   puts "#{server[:name]} 挂载磁盘： #{name} #{size} #{type}"
+        #   [name, size, type]
+        # end
+        # node.disk.attach(*disks.flatten)
+
+
+
+## 挂载 DVD 镜像
+
+        if server.key?(:dvd)
+          iso, location = server[:dvd].split(':')
+          iso.strip!
+          location.strip!
+          puts "#{server[:name]} 挂载 DVD： #{iso} #{location}"
+          node.vm.provision "file", source: location, destination: iso
+          node.vm.provision "shell", inline: "mkdir -p /mnt/cdrom && mount -o loop #{iso} /mnt/cdrom && echo '/mnt/cdrom /media/cdrom iso9660 defaults 0 0' >> /etc/fstab"
+        end        
+## 脚本        
+        # node.vm.provision "shell", path: "bootstrap.sh"
+        # node.vm.provision "ansible" do |ansible|
+        #   ansible.playbook = "playbook.yml"
         # end
       end
     end
 end
+

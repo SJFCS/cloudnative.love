@@ -1,0 +1,60 @@
+require 'yaml'
+
+VAGRANT_EXPERIMENTAL="disks"
+
+servers = YAML.load_file('servers.yml')
+
+Vagrant.configure("2") do |config|
+  # 默认配置
+  default_cpu = "1"
+  default_mem = "1024"
+  default_network_mode = "private_network"
+  default_os = "ubuntu/jammy64"
+  default_synced_folder = {
+    create: true,
+    owner: "vagrant",
+    group: "vagrant",
+    mount_options: ["dmode=755", "fmode=644"],
+    type: "virtualbox"
+  }
+
+  servers.each do |server|
+    config.vm.define server["name"] do |node|
+      node.vm.box = server["os"] || default_os
+      node.vm.hostname = server["name"]
+
+      server["network"].each do |network|
+        node.vm.network(network["mode"] || default_network_mode, ip: network["ip"])
+      end
+
+      server["mount"].each do |mount|
+        node.vm.synced_folder(mount["host"], mount["guest"], default_synced_folder)
+      end
+
+      if server["cpu"] || server["mem"]
+        node.vm.provider "virtualbox" do |vb|
+          vb.customize ["modifyvm", :id, "--memory", server["mem"] || default_mem]
+          vb.customize ["modifyvm", :id, "--cpus", server["cpu"] || default_cpu]
+        end
+      end
+
+      server["disk"]&.each_with_index do |disk, index|
+        disk_config = {
+          auto_config: true,
+          name: disk["name"],
+          size: disk["size"],
+          primary: disk["type"] == "primary"
+        }
+        node.vm.disk :disk, disk_config
+      end
+
+      server["dvd"]&.each do |dvd|
+        dvd_config = {
+          name: dvd["iso"],
+          file: dvd["location"]
+        }
+        node.vm.disk :dvd, dvd_config
+      end
+    end
+  end
+end
