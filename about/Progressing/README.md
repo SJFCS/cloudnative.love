@@ -4,8 +4,8 @@ sidebar_position: 4
 ---
 # 2023.3-2024.3
 :::info 短期计划
-- 四月2-Linux 8-Infrastructure as Code & Automation 6-Container
-- 四月中旬考完RHCE  处理将要过期的视频
+- 四月2-Linux vagrant 四月中旬考完RHCE  处理将要过期的视频
+- 8-Infrastructure as Code & Automation 6-Container
 - 六月5-Database 3-Continuous Integration & Delivery  MySQL OCP证书
 - 八月4-Service Mesh & Service Proxy & Ingress Gateway
 - 十月10-Storage 7-Observability  关注年底活动阿里云ACE
