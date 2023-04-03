@@ -3,7 +3,9 @@ title: Linux
 sidebar_position: 2
 tags: [Linux]
 ---
-  
+https://people.eecs.berkeley.edu/~brewer/cs262/unix.pdf
+
+
 [![Linux Kernel Map](https://raw.githubusercontent.com/makelinux/linux_kernel_map/main/LKM.svg "Linux Kernel Map")](https://makelinux.github.io/kernel/map/)
 
 https://github.com/snori74/linuxupskillchallenge
