@@ -1,5 +1,11 @@
 # $ VAGRANT_EXPERIMENTAL=disks vagrant up
 # $ vagrant ssh -c lsblk
+# dhcp 网络
+# ssh 配置
+# https://www.one-tab.com/page/i30k9GbGSnKumHBY6rigHw
+
+
+
 # 磁盘大小
 # https://stackoverflow.com/questions/49822594/vagrant-how-to-specify-the-disk-size
 # https://sleeplessbeastie.eu/2021/05/10/how-to-define-multiple-disks-inside-vagrant-using-virtualbox-provider/
@@ -38,7 +44,23 @@ Vagrant.configure("2") do |config|
       mount_options: ["dmode=755", "fmode=644"],
       type: "virtualbox"
     } 
-    
+## ssh    
+    # config.ssh.username = "user"
+    # config.ssh.password = "password"
+    # config.vm.boot_timeout = 360
+    # vb.gui = true
+
+# # 修改PubkeyAuthentication 和 PasswordAuthentication 参数
+# PubkeyAuthentication yes #这两项为打开公钥模式
+# PasswordAuthentication yes #打开密码验证模式
+# # 重启sshd服务
+# systemctl restart sshd
+
+# 默认使用 ~/.vagrant.d/insecure_private_key 作为私钥
+#    使用 ~/.vagrant.d/insecure_public_key 作为公钥
+
+
+
     servers.each do |server|
       config.vm.define server[:name] do |node|
 ## 设置系统版本
