@@ -14,6 +14,7 @@ toc: true
 
 
 **原文来自：http://www.codebelief.com/article/2017/02/26-examples-of-find-command-on-linux/**
+https://www.imooc.com/article/48513
 
 Linux系统中的 `find` 命令在查找文件时非常有用而且方便。它可以根据不同的条件来查找文件，例如权限、拥有者、修改日期/时间、文件大小等等。在这篇文章中，我们将学习如何使用 `find` 命令以及它所提供的选项来查找文件。
 

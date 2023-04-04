@@ -17,3 +17,5 @@ set nss-config-dir=/etc/pki/nssdb/
 # 测试
 echo &quot;hello world&quot; | mail -s &quot;hello&quot; xxx@qq.com
 ```
+
+
