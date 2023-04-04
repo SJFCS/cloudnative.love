@@ -1,18 +1,15 @@
 Vagrant.configure("2") do |config|
-    config.vm.box = "ubuntu/bionic64"
-    # 第一个网络接口用于vagrant ssh连接，默认使用NAT网络
-    # config.vm.network "forwarded_port", guest: 22, host: 2222, id: "ssh", auto_correct: true
-    # auto_correct: true意味着如果已经存在一个端口映射到指定的主机端口（host），则Vagrant将自动更改将要映射到的主机端口（host）以确保其不与现有的端口冲突。这将确保端口映射不会出现问题，因为Vagrant会自动做出更改以避免冲突。
+  config.vm.box = "ubuntu/xenial64"
 
-    # 第二个网络接口用于DHCP实验
-    config.vm.provider "virtualbox" do |v|
-      v.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
-    end
-    config.vm.network "private_network", ip: "192.168.33.10", virtualbox__intnet: "dhcp_lab_net", auto_config: false
+  # DHCP server configuration
+  config.vm.define "dhcp" do |dhcp|
+    dhcp.vm.network "private_network", ip: "192.168.33.10"
+    dhcp.vm.provision "shell", inline: "apt-get update && apt-get -y install isc-dhcp-server && sed -i 's/INTERFACESv4=\"\"/INTERFACESv4=\"eth1\"/' /etc/default/isc-dhcp-server && cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.bak && echo 'subnet 192.168.33.0 netmask 255.255.255.0 {\n  range 192.168.33.100 192.168.33.150;\n}' > /etc/dhcp/dhcpd.conf && systemctl restart isc-dhcp-server"
+  end
+
+  # DHCP client configuration
+  config.vm.define "client" do |client|
+    client.vm.network "private_network", type: "dhcp"
+    client.vm.provision "shell", inline: "apt-get update && apt-get -y install dhcp-client && dhclient"
+  end
 end
-
-# 在此配置中，我们为虚拟机设置了一个私有网络，并将其连接到名为"dhcp_lab_net"的内部网络。我们还禁止了自动配置，以便手动分配IP。
-
-
-# virtualbox__intnet参数是针对VirtualBox提供器的特定参数。它用于将虚拟机连接到VirtualBox中的内部网络（intnet）。在这种情况下，dhcp_lab_net是您为内部网络指定的自定义名称。
-# 对于其他提供商（如VMware、Hyper-V等），您需要使用相应的参数和配置。例如，如果使用VMware Workstation/Fusion，您需要使用vmware__network_adapter参数。具体配置可能因提供商而异。

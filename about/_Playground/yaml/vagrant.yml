@@ -1,0 +1,79 @@
+global:
+  hostmanager:
+    manage_host: true
+    ignore_private_ip: false
+    include_offline: true
+environments:
+  Web:
+    box: 
+      name: 'debian/jessie64'
+      # url: 'https://atlas.hashicorp.com/debian/jessie64'
+    hostname: 'web.vagrant-yml.dev'
+    aliases : 'www.web.vagrant-yml.dev test.web.vagrant-yml.dev'
+    vbguest:
+      auto_update: false
+      no_remote: false
+      auto_reboot: true
+    ssh:
+      forward_agent: true
+    network:
+      private: dhcp # or x.x.x.x
+      public: dhcp # or x.x.x.x
+    virtualbox:
+      name: MyWebServer
+      gui: true
+      memory: 1024
+      cpus: 2
+      other:  # See http://www.virtualbox.org/manual/ch08.html
+        modifyvm:
+          --natdnshostresolver1: "on"
+          --rtcuseutc: "on"
+    synced_folders:
+      vagrant: false
+      docroot:
+        host_path: 'srv'
+        guest_path: '/srv'
+        params:
+          :create: true
+          :type: nfs
+          :mount_options: ['nolock,vers=3,udp,noatime,actimeo=1']
+    port_forward:
+      forward1:
+        host_port: 8080
+        guest_port: 80
+      forward2:
+        host_port: 8081
+        guest_port: 81
+    provision:
+      hello:
+        type: 'shell'
+        params:
+          :inline: "echo hello"
+      # withfabric:
+      #   type: 'fabric'
+      #   params:
+      #     :fabfile_path: ./fabfile.py
+      #     :tasks: 
+      #       - vagrant
+      #       - apache
+      # withansible:
+      #   type: 'ansible'
+      #   params:
+      #     :inventory_path: "ansible/local"
+      #     :playbook: "ansible/site.yml"
+      #     :extra_vars:
+      #       development: true
+      #       uservar: "vagrant"
+      #     :limit: "all"
+      #     :verbose: "vvv"
+  database:
+    box: 
+      name: 'ubuntu/trusty64'
+    hostname: 'mysql.vagrant-yml.dev'
+    vbguest:
+      auto_update: true
+      no_remote: false
+      auto_reboot: true
+  sandbox:
+    box:
+      name: 'ubuntu/trusty64'
