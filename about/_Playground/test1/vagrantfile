@@ -1,5 +1,8 @@
 # VAGRANT_EXPERIMENTAL=disks vagrant up
+# vagrant global-status --prune
+require 'uri'
 require 'open-uri'
+# 配置域
 # 公钥要用
 # 磁盘大小
 # https://stackoverflow.com/questions/49822594/vagrant-how-to-specify-the-disk-size
@@ -8,21 +11,30 @@ Vagrant.configure("2") do |config|
   ## 自定义节点
   servers = [
     {
-      name: "server1", 
+      name: "server1",
+      region: "dev",
       network: "192.168.56.10:private_network,10.0.0.10:public_network",
       mount: "./sharedir1:/vagrant1,./sharedir2:/vagrant2",
       disk: "disk1:100GB:primary,disk2:10GB",
-      dvd: "ded1:/WePE_32_V1.2.iso"
+      # dvd: "dvd1:/WePE_32_V1.2.iso",
+      dvd: "dvd2:/home/admin/Storage/6.ISO/WePE64_V2.2.iso"
     },
     {
       name: "server2", 
-      os: "ubuntu/lunar64:20230301.0.0", 
-      network: "192.168.56.11", 
+      os: "ubuntu/lunar64:20230301.0.0",
+      mount: "./sharedir1:/vagrant1",
+      network: "192.168.56.11",
+      disk: "disk1:100GB,disk2:10GB",
       cpu: "2", 
       mem: "2048"
     },
+    {
+      name: "server3", 
+      network: "192.168.56.21"
+    }
   ]
-  ## 默认配置    
+  ## 默认配置
+  default_region = "local"
   default_cpu = "1"
   default_mem = "1024"
   default_network_mode = "private_network"
@@ -40,125 +52,152 @@ Vagrant.configure("2") do |config|
   ## 创建机器
   servers.each do |server|
     config.vm.define server[:name] do |node|
+
       ## 设置系统版本
       os_name = server[:os]&.split(":")&.[](0) || default_os&.split(":")&.[](0)
       os_version = server[:os]&.split(":")&.[](1) || default_os&.split(":")&.[](1)
       puts "#{server[:name]} 系统版本: #{os_name}#{":#{os_version}" if os_version.to_s.strip != ''}"
-        # 这个简化的方式使用了三目运算符，当 os_version.to_s.strip != '' 时输出 :#{os_version}，否则不输出。
-        # 与下面代码等价
-        # if os_version.to_s.strip != ''
-        #   puts "#{server[:name]} 系统版本： #{os_name}:#{os_version}"
-        # else
-        #   puts "#{server[:name]} 系统版本： #{os_name}"
-        # end
       node.vm.box = os_name
       node.vm.box_version = os_version.to_s.strip != '' ? os_version : nil
-        # 这里使用了字符串方法strip来删除字符串两端的空格，并且使用不等于操作符!=而不是empty?方法来检查字符串是否为空或nil。这样做可以确保os_version既不为空也不包含只有空格的字符串（例如“ ”）。
-        # 与下面代码等价
-        # if os_version.to_s.strip != ''
-        #   node.vm.box_version = os_version
-        # end
-        ## 设置网络
-      server[:network]&.split(",").each do |network|
+      ## 设置主机名
+      host_region = server[:region]&.split || [default_region]
+      host_name = "#{server[:name]}.#{host_region.join}"
+      puts "主机名: #{host_name}"
+      node.vm.hostname = host_name
+      ## 设置hosts
+      # 定义一个用于存储每个虚拟机名称和 IP 地址的数组
+      hosts = []
+      # 遍历所有虚拟机
+      servers.each do |server|
+        # 获取主机名
+        host_region_local = server[:region]&.split || [default_region]
+        host_name_local = "#{server[:name]}"
+        host_name_full_local = "#{server[:name]}.#{host_region_local.join}"
+        # 获取网络配置、选取所有的 IP 地址
+        ips = server[:network]&.split(",")&.map { |network| network.split(":").first }&.compact || []
+        # 添加虚拟机名称和 IP 地址到 hosts 数组中
+        hosts << {ips: ips, hostName: host_name_local, hostNameFull: host_name_full_local}
+      end
+      # 写入hosts
+      hosts.each do |hosts| 
+        hosts[:ips].each do |ip| 
+          puts "Host: #{ip}\t#{hosts[:hostName]}\t#{hosts[:hostNameFull]}" 
+          node.vm.provision "shell", inline: "echo '#{ip}\t#{hosts[:hostName]}\t#{hosts[:hostNameFull]}' >> /etc/hosts", privileged: true, run: "once"
+        end 
+      end
+
+      #???????????????
+      # config.vm.provision "shell", inline: <<-SHELL
+      # if grep -q "127.0.1.1" /etc/hosts ; then
+      #   sed -i '/127.0.1.1/d' /etc/hosts
+      # fi
+      # sed -i '1 i\127.0.1.1 localhost' /etc/hosts
+      # SHELL
+
+
+      ## 仅添加本机hosts
+      # server[:network]&.split(",")&.each do |network|
+      #   ip, _ = network.split(":")
+      #   puts "Host: #{ip.ljust(15)}#{host_name}"
+      #   node.vm.provision "shell", inline: "echo '#{ip.ljust(15)}#{host_name}' >> /etc/hosts", privileged: true, run: "once"
+      # end
+
+      ## 设置网络
+      # config.vm.network "private_network", ip: "192.168.33.10", nic: "enp0s8"
+      # config.vm.network "private_network", ip: "192.168.33.10", dhcp: true, virtualbox__dhcp_server: true
+      # config.vm.network "public_network", bridge: "en0: Wi-Fi (AirPort)"
+      # 上述命令将创建一个 IP 地址为 192.168.50.10 的 private 网络，同时将虚拟机连接到 Mac 上的 Wi-Fi 网卡。注意，此处使用 private_network 命令创建一个网络，而不是 hostonly。
+      # config.vm.network "private_network", ip: "192.168.62.10", virtualbox__intnet: false, auto_config: false
+
+      server[:network]&.split(",")&.each do |network|
         ip, network_mode = network.split(':').map(&:strip)
         network_mode = (network_mode&.to_sym || default_network_mode)
         puts "#{server[:name]} 系统网络： #{ip} #{network_mode}"
-        node.vm.network network_mode, ip: ip
+        node.vm.network network_mode, ip: ip, virtualbox__intnet: false, auto_config: true
       end
-        # 这个简化的方式使用了 safe navigation operator &.，&:strip 等效于 {|x| x.strip}。还可以合并 ip 和 network_mode 的 strip 操作，使其更简洁。
-        # 为什么删除了 if server.key?(:network)       
-        # 如果 server 中没有 :network 键，那么 server[:network] 返回 nil，调用 split 方法会抛出 NoMethodError 错误。
-        # 为了避免这个错误，原来的代码使用了 if server.key?(:network) 判断 :network 是否存在，只有存在才会执行下面的操作。
-        # 而简化后的代码使用 safe navigation operator &.，如果 server[:network] 为 nil，则 &. 部分返回 nil，整个表达式会直接返回 nil，不会执行 each 方法，所以不需要再使用 if 判断了。
-        # 注意到简化后的代码在 network.split(':').map(&:strip) 进行了 strip 操作，即使 ip 或 network_mode 为 nil，也不会出错，因为 map 方法会跳过 nil 值。
-        # 与下面等价
-        # if server.key?(:network)
-        #   server[:network].split(",").each do |network|
-        #     ip, network_mode = network.split(':')
-        #     ip.strip!
-        #     network_mode = network_mode&.to_sym || default_network_mode
-        #     puts "#{server[:name]} 系统网络： #{ip} #{network_mode}"
-        #     node.vm.network network_mode, ip: ip
-        #   end
-        # end
+
+      # server[:network].to_s.split(",").each do |network|
+      #   ip, network_mode = network.split(':').map(&:strip)
+      #   network_mode = (network_mode&.to_sym || default_network_mode)
+      #   puts "#{server[:name]} 系统网络： #{ip} #{network_mode}"
+      #   node.vm.network network_mode, ip: ip
+      # end
+ 
+      # if server.key?(:network)
+      #   server[:network].split(",").each do |network|
+      #     ip, network_mode = network.split(':')
+      #     ip.strip!
+      #     network_mode = network_mode&.to_sym || default_network_mode
+      #     puts "#{server[:name]} 系统网络： #{ip} #{network_mode}"
+      #     node.vm.network network_mode, ip: ip
+      #   end
+      # end
       ## 设置 provider 规格
       node.vm.provider :virtualbox do |vb|
         vb.memory = server[:mem] || default_mem
         vb.cpus = server[:cpu] || default_cpu
       end
       ## 共享目录
-      server[:mount].to_s.split(",").each do |mount|
+      server[:mount]&.split(",")&.each do |mount|
         mount_point, mount_path = mount.split(':').map(&:strip)
         puts "#{server[:name]} 挂载目录： #{mount_point} -> #{mount_path}"
         node.vm.synced_folder mount_point, mount_path, default_synced_folder
-      end
-        # 这个优化使用了 safe navigation operator &.，如果 server[:mount] 为 nil，则整个表达式会直接返回 nil，不会执行 each 方法，所以不需要再使用 if 判断了。
-        # 同时，合并了 mount_point 和 mount_path 的 strip 操作，使其更简洁。
-        # __dir__ 表示当前文件所在目录的绝对路径。File.expand_path(mount_path, __dir__) 将 mount_path 转换为绝对路径。
-        # 与下面等价
-        # if server.key?(:mount)
-        #   server[:mount].split(",").each do |mount|
-        #     mount_point, mount_path = mount.split(':')
-        #     mount_point.strip!
-        #     mount_path.strip!
-        #     puts "#{server[:name]} 挂载目录： #{mount_point} -> #{mount_path}"
-        #     node.vm.synced_folder mount_point, mount_path, default_synced_folder
-        #   end
-        # end
-
-      ## 挂载磁盘
-      # server[:disk]&.split(",")&.each do |disk|
-      #   name, size, primary = disk.split(':')
-      #   puts "#{server[:name]} 挂载磁盘： #{name} #{size} #{primary ? 'primary' : '' if primary}"
-      #   node.vm.disk :disk, name: name, size: size, primary: !!primary && true
+      end      
+      # server[:mount].to_s.split(",").each do |mount|
+      #   mount_point, mount_path = mount.split(':').map(&:strip)
+      #   puts "#{server[:name]} 挂载目录： #{mount_point} -> #{mount_path}"
+      #   node.vm.synced_folder mount_point, mount_path, default_synced_folder
       # end
-      if server.key?(:disk)
-        server[:disk].split(",").each do |disk|
-          name, size, primary = disk.split(':')
-          puts "#{server[:name]} 挂载磁盘： #{name} #{size} #{primary ? 'primary' : '' if primary}"
-          node.vm.disk :disk, name: name, size: size, primary: !!primary && true
-        end
+      ##########################
+              # config.vm.disk :dvd, name: "installer", file: "./installer.iso"
+              # config.vm.disk :floppy, name: "cool_files"
+              # config.vm.disk :disk, name: "ddmm", size: "100GB", primary: true
+      ##########################
+      ## 挂载磁盘
+      server[:disk]&.split(",")&.each do |disk|
+        name, size, primary = disk.split(':').map(&:strip)
+        puts "#{server[:name]} 挂载磁盘： #{name} #{size} #{primary ? 'primary' : '' if primary}"
+        node.vm.disk :disk, name: name, size: size, primary: !!primary && true
       end
+      # if server.key?(:disk)
+      #   server[:disk].split(",").each do |disk|
+      #     name, size, primary = disk.split(':')
+      #     puts "#{server[:name]} 挂载磁盘： #{name} #{size} #{primary ? 'primary' : '' if primary}"
+      #     node.vm.disk :disk, name: name, size: size, primary: !!primary && true
+      #   end
+      # end
 
       ## 挂载 DVD 镜像
-      # server[:dvd]&.to_s.split(":") do |iso, location|
-      #   # iso.to_s.strip!
-      #   # location.to_s.strip!
-      #   puts "#{server[:name]} 挂载 DVD: #{iso} #{location}"
-      #   node.vm.provision "file", source: location, destination: iso
-      #   node.vm.provision "shell", inline: <<-SHELL
-      #     mkdir -p /mnt/cdrom &&
-      #     mount -o loop #{iso} /mnt/cdrom &&
-      #     echo '/mnt/cdrom /media/cdrom iso9660 defaults 0 0' >> /etc/fstab
-      #   SHELL
-      # end
-      if server.key?(:dvd)
-        iso, location = server[:dvd].split(':')
-        iso.strip!
-        location.strip!
-        puts "#{server[:name]} 挂载 DVD: #{iso} #{location}"
-        node.vm.provision "file", source: location, destination: iso
-        node.vm.provision "shell", inline: "mkdir -p /mnt/cdrom && mount -o loop #{iso} /mnt/cdrom && echo '/mnt/cdrom /media/cdrom iso9660 defaults 0 0' >> /etc/fstab"
+      server[:dvd]&.split(",")&.each do |dvd|
+        name, file = dvd.split(':').map(&:strip)
+        puts "#{server[:name]} 挂载dvd： #{name} #{file}"
+        node.vm.disk :dvd, name: name, file: file
+      end
+      ## 设置启动顺序
+      # VirtualBox provider
+      config.vm.provider "virtualbox" do |vb|
+        vb.customize ["modifyvm", :id, "--boot1", "disk"]
+        vb.customize ["modifyvm", :id, "--boot2", "dvd"]
+        vb.customize ["modifyvm", :id, "--boot3", "none"]
       end
 
       ## 自定义密钥
       ssh_pub_keys = [
+        # 从本地文件中获取公钥
         File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip,
-        open('https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub').read.strip,
+        # 从远程地址获取 vagrant 公钥
+        URI.open('https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub').read.strip,
+        # 自定义公钥
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICuTis0fYCI4SkLURxHhxxHrSq1ahq9MpvswhzII9w9b ubuntu_vagrant_insecure_key"
       ]
       config.vm.provision "shell", inline: <<-SHELL
-        # install -d -m 0700 -o vagrant -g vagrant /home/vagrant/.ssh
-        # echo "#{ssh_pub_keys.join("\n")}" | install -m 0600 -o vagrant -g vagrant /dev/stdin /home/vagrant/.ssh/authorized_keys
         echo "#{ssh_pub_keys.join("\n")}" >> /home/vagrant/.ssh/authorized_keys
       SHELL
-      
-      # Vagrant.configure("2") do |config|
-      #   config.vm.box = "ubuntu/focal64"
+      # install -d -m 0700 -o vagrant -g vagrant /home/vagrant/.ssh
+      # echo "#{ssh_pub_keys.join("\n")}" | install -m 0600 -o vagrant -g vagrant /dev/stdin /home/vagrant/.ssh/authorized_keys
       #   config.ssh.insert_key = false
       #   config.ssh.private_key_path = ["~/.ssh/id_rsa", "~/.vagrant.d/insecure_private_key"]
       #   config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
-      # end
         
       ## 脚本        
       # node.vm.provision "shell", path: "bootstrap.sh"
