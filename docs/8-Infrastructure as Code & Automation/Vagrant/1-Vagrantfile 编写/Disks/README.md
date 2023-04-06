@@ -1,4 +1,6 @@
-https://developer.hashicorp.com/vagrant/docs/disks/configuration
+- https://developer.hashicorp.com/vagrant/docs/disks/configuration
+- https://stackoverflow.com/questions/49822594/vagrant-how-to-specify-the-disk-size
+- https://sleeplessbeastie.eu/2021/05/10/how-to-define-multiple-disks-inside-vagrant-using-virtualbox-provider/
 
 
 ```

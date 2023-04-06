@@ -2,11 +2,7 @@
 # vagrant global-status --prune
 require 'uri'
 require 'open-uri'
-# 配置域
-# 公钥要用
-# 磁盘大小
-# https://stackoverflow.com/questions/49822594/vagrant-how-to-specify-the-disk-size
-# https://sleeplessbeastie.eu/2021/05/10/how-to-define-multiple-disks-inside-vagrant-using-virtualbox-provider/
+index = 0
 Vagrant.configure("2") do |config|
   ## 自定义节点
   servers = [
@@ -16,7 +12,6 @@ Vagrant.configure("2") do |config|
       network: "192.168.56.10:private_network,10.0.0.10:public_network",
       mount: "./sharedir1:/vagrant1,./sharedir2:/vagrant2",
       disk: "disk1:100GB:primary,disk2:10GB",
-      # dvd: "dvd1:/WePE_32_V1.2.iso",
       dvd: "dvd2:/home/admin/Storage/6.ISO/WePE64_V2.2.iso"
     },
     {
@@ -30,7 +25,7 @@ Vagrant.configure("2") do |config|
     },
     {
       name: "server3", 
-      network: "192.168.56.21"
+      # network: "192.168.56.21"
     }
   ]
   ## 默认配置
@@ -64,74 +59,53 @@ Vagrant.configure("2") do |config|
       host_name = "#{server[:name]}.#{host_region.join}"
       puts "主机名: #{host_name}"
       node.vm.hostname = host_name
-      ## 设置hosts
-      # 定义一个用于存储每个虚拟机名称和 IP 地址的数组
-      hosts = []
-      # 遍历所有虚拟机
+
+      # 设置hosts
+      # 存储 IP 地址和主机名的数组
+      local_hosts = []
       servers.each do |server|
-        # 获取主机名
-        host_region_local = server[:region]&.split || [default_region]
-        host_name_local = "#{server[:name]}"
-        host_name_full_local = "#{server[:name]}.#{host_region_local.join}"
-        # 获取网络配置、选取所有的 IP 地址
-        ips = server[:network]&.split(",")&.map { |network| network.split(":").first }&.compact || []
-        # 添加虚拟机名称和 IP 地址到 hosts 数组中
-        hosts << {ips: ips, hostName: host_name_local, hostNameFull: host_name_full_local}
+        server[:network]&.split(",")&.each do |network|
+          ip, _ = network.split(":")
+          host_region_local = server[:region]&.split || [default_region]
+          host_name_local = "#{server[:name]}"
+          host_name_full_local = "#{server[:name]}.#{host_region_local.join}"
+          local_hosts << { ip: ip, hostName: host_name_local, hostNameFull: host_name_full_local }
+        end
       end
-      # 写入hosts
-      hosts.each do |hosts| 
-        hosts[:ips].each do |ip| 
-          puts "Host: #{ip}\t#{hosts[:hostName]}\t#{hosts[:hostNameFull]}" 
-          node.vm.provision "shell", inline: "echo '#{ip}\t#{hosts[:hostName]}\t#{hosts[:hostNameFull]}' >> /etc/hosts", privileged: true, run: "once"
-        end 
+      # 将所有本地主机的 IP 地址和主机名写入 hosts 文件
+      hosts_str = ""
+      local_hosts.each do |host|
+        hosts_str += "#{host[:ip]}\t#{host[:hostName]}\t#{host[:hostNameFull]}\n"
       end
-
-      #???????????????
-      # config.vm.provision "shell", inline: <<-SHELL
-      # if grep -q "127.0.1.1" /etc/hosts ; then
-      #   sed -i '/127.0.1.1/d' /etc/hosts
-      # fi
-      # sed -i '1 i\127.0.1.1 localhost' /etc/hosts
-      # SHELL
-
-
-      ## 仅添加本机hosts
-      # server[:network]&.split(",")&.each do |network|
-      #   ip, _ = network.split(":")
-      #   puts "Host: #{ip.ljust(15)}#{host_name}"
-      #   node.vm.provision "shell", inline: "echo '#{ip.ljust(15)}#{host_name}' >> /etc/hosts", privileged: true, run: "once"
-      # end
-
+      puts "#{hosts_str}"
+      node.vm.provision "shell", inline: "echo '#{hosts_str}' >> /etc/hosts && sed -i '/^127\.0\.0\.1(?!.*localhost$).*/ s/^/# /g' /etc/hosts", privileged: true, run: "once"
       ## 设置网络
       # config.vm.network "private_network", ip: "192.168.33.10", nic: "enp0s8"
       # config.vm.network "private_network", ip: "192.168.33.10", dhcp: true, virtualbox__dhcp_server: true
       # config.vm.network "public_network", bridge: "en0: Wi-Fi (AirPort)"
       # 上述命令将创建一个 IP 地址为 192.168.50.10 的 private 网络，同时将虚拟机连接到 Mac 上的 Wi-Fi 网卡。注意，此处使用 private_network 命令创建一个网络，而不是 hostonly。
       # config.vm.network "private_network", ip: "192.168.62.10", virtualbox__intnet: false, auto_config: false
-
       server[:network]&.split(",")&.each do |network|
         ip, network_mode = network.split(':').map(&:strip)
         network_mode = (network_mode&.to_sym || default_network_mode)
         puts "#{server[:name]} 系统网络： #{ip} #{network_mode}"
         node.vm.network network_mode, ip: ip, virtualbox__intnet: false, auto_config: true
       end
-
-      # server[:network].to_s.split(",").each do |network|
-      #   ip, network_mode = network.split(':').map(&:strip)
-      #   network_mode = (network_mode&.to_sym || default_network_mode)
-      #   puts "#{server[:name]} 系统网络： #{ip} #{network_mode}"
-      #   node.vm.network network_mode, ip: ip
-      # end
- 
-      # if server.key?(:network)
-      #   server[:network].split(",").each do |network|
-      #     ip, network_mode = network.split(':')
-      #     ip.strip!
-      #     network_mode = network_mode&.to_sym || default_network_mode
-      #     puts "#{server[:name]} 系统网络： #{ip} #{network_mode}"
-      #     node.vm.network network_mode, ip: ip
+      # 避免window上无法创建2xxx端口
+      # port = 8000 + index
+      # puts port
+      # config.vm.network "forwarded_port", guest: 22, host: port, auto_correct: true, id: "ssh"
+      # index += 1
+      # servers.each do |server|
+      #   # 定义一个唯一的端口号
+      #   port = 8000 + servers.index(server)
+      #   config.vm.define server[:name] do |node|
+      #     # ...
+      #     config.vm.network "forwarded_port", guest: 22, host: port, auto_correct: true, id: "ssh"
       #   end
       # end
+
+      
       ## 设置 provider 规格
       node.vm.provider :virtualbox do |vb|
         vb.memory = server[:mem] || default_mem
@@ -143,29 +117,12 @@ Vagrant.configure("2") do |config|
         puts "#{server[:name]} 挂载目录： #{mount_point} -> #{mount_path}"
         node.vm.synced_folder mount_point, mount_path, default_synced_folder
       end      
-      # server[:mount].to_s.split(",").each do |mount|
-      #   mount_point, mount_path = mount.split(':').map(&:strip)
-      #   puts "#{server[:name]} 挂载目录： #{mount_point} -> #{mount_path}"
-      #   node.vm.synced_folder mount_point, mount_path, default_synced_folder
-      # end
-      ##########################
-              # config.vm.disk :dvd, name: "installer", file: "./installer.iso"
-              # config.vm.disk :floppy, name: "cool_files"
-              # config.vm.disk :disk, name: "ddmm", size: "100GB", primary: true
-      ##########################
       ## 挂载磁盘
       server[:disk]&.split(",")&.each do |disk|
         name, size, primary = disk.split(':').map(&:strip)
         puts "#{server[:name]} 挂载磁盘： #{name} #{size} #{primary ? 'primary' : '' if primary}"
         node.vm.disk :disk, name: name, size: size, primary: !!primary && true
       end
-      # if server.key?(:disk)
-      #   server[:disk].split(",").each do |disk|
-      #     name, size, primary = disk.split(':')
-      #     puts "#{server[:name]} 挂载磁盘： #{name} #{size} #{primary ? 'primary' : '' if primary}"
-      #     node.vm.disk :disk, name: name, size: size, primary: !!primary && true
-      #   end
-      # end
 
       ## 挂载 DVD 镜像
       server[:dvd]&.split(",")&.each do |dvd|
@@ -193,12 +150,7 @@ Vagrant.configure("2") do |config|
       config.vm.provision "shell", inline: <<-SHELL
         echo "#{ssh_pub_keys.join("\n")}" >> /home/vagrant/.ssh/authorized_keys
       SHELL
-      # install -d -m 0700 -o vagrant -g vagrant /home/vagrant/.ssh
-      # echo "#{ssh_pub_keys.join("\n")}" | install -m 0600 -o vagrant -g vagrant /dev/stdin /home/vagrant/.ssh/authorized_keys
-      #   config.ssh.insert_key = false
-      #   config.ssh.private_key_path = ["~/.ssh/id_rsa", "~/.vagrant.d/insecure_private_key"]
-      #   config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
-        
+
       ## 脚本        
       # node.vm.provision "shell", path: "bootstrap.sh"
       # node.vm.provision "ansible" do |ansible|
