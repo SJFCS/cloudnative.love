@@ -22,6 +22,9 @@
 require 'uri'
 require 'open-uri'
 Vagrant.configure("2") do |config|
+####################################################################################
+##                                    配置信息                                     ##
+####################################################################################
   ## 自定义节点
   servers = [
     {
@@ -30,7 +33,7 @@ Vagrant.configure("2") do |config|
       cpu: "2", 
       mem: "2048",
       region: "dev",
-      provision_shell: "bootstrap.sh:args:-- xx:-- 'xxx',bootstrap2.sh",
+      provision_shell: "bootstrap.sh:arg1 arg2 arg3,bootstrap2.sh",
       network: "192.168.56.10:private_network,192.168.63.20:public_network",
       port_forward: "8121:22:ssh,8980:80:name",
       mount: "./sharedir1:/vagrant1,./sharedir2:/vagrant2",
@@ -39,6 +42,7 @@ Vagrant.configure("2") do |config|
     },
     {
       name: "server2", 
+      port_forward: "8122:22:ssh"
     }
   ]
   ## 默认配置
