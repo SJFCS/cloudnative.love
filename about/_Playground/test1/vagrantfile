@@ -1,98 +1,23 @@
-# name: "server1",
-# os: "ubuntu/lunar64:20230301.0.0",
-# region: "dev",
-# network: "192.168.56.10:private_network,10.0.0.10:public_network",
-# mount: "./sharedir1:/vagrant1,./sharedir2:/vagrant2",
-# disk: "disk1:100GB:primary,disk2:10GB",
-# dvd: "dvd2:/home/admin/Storage/6.ISO/WePE64_V2.2.iso"
 
-# port_forward: "22:2222:ssh,80:8080"
-  # common和自定义
+# =================================== readme ===================================
+# 下载virtualBox和vagrant，打开终端进入本文件所在目录。执行vagrant up 启动虚拟机，vagrant destroy 删除虚拟机
+# 系统镜像在 https://app.vagrantup.com/boxes/search
+# 如果要修改 disk 信息，请用此命令开启实验特性并启动虚拟机： VAGRANT_EXPERIMENTAL=disks vagrant up
+# servers内最小配置需保留name，逗号之间不能有空格
+# provision_shell参数可以用多个:分割
+  # provision_shell: "bootstrap.sh:arg1:-- xx:-- 'xxx',bootstrap2.sh",
+  # 参数: arg1 -- xx -- 'xxx'
+# port_forward 在windows10上默认2xxx端口无法创建，疑似vitrualBox的锅，所以最好指定一下
+# =================================== readme ===================================
+
+# ::todo::
+# tags: "mysql:master,redis:master"
+# common和自定义
 # provision_ansible: "playbook.yml"
 # provision_shell: "bootstrap.sh"
-  # common和自定义
-# 自定义密钥 port_forward: "22:2222:ssh,80:8080"
-# ssh_pub_keys = [
-#         # 从本地文件中获取公钥
-#         File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip,
-#         # 从远程地址获取 vagrant 公钥
-#         URI.open('https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub').read.strip,
-#         # 自定义公钥
-#         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICuTis0fYCI4SkLURxHhxxHrSq1ahq9MpvswhzII9w9b ubuntu_vagrant_insecure_key"
-#       ]
+# 自定义密钥 # 互相免密
+# ssh_pub_keys 
 
-
-
-# 添加内容如下：
-
-# ## 端口转发
-# port_forwards = server[:port_forward]&.split(",")&.map do |pf|
-#   host_port, guest_port, protocol = pf.split(':').map(&:strip)
-#   vb_customization = "modifyvm", :id, "--natpf1"
-#   pf_name = "#{server[:name]}_#{host_port}_#{guest_port}"
-#   vb_customization += " #{pf_name},"
-#   vb_customization += "#{protocol.upcase}," if protocol
-#   vb_customization += "#{node.vm.networks[0][:ipv4_address]},"
-#   vb_customization += "#{guest_port},"
-#   vb_customization += "#{host_port}"
-#   puts "#{server[:name]} 端口转发：#{vb_customization.join(" ")}"
-#   {name: pf_name, host_port: host_port, guest_port: guest_port, protocol: protocol}
-# end
-
-# ## Ansible 脚本
-# if server[:provision_ansible]
-#   ansible_playbook = server[:provision_ansible]
-# elsif server[:provision_ansible] == false
-#   ansible_playbook = nil
-# else
-#   ansible_playbook = "playbook.yml"
-# end
-# node.vm.provision "ansible" do |ansible|
-#   ansible.playbook = ansible_playbook
-# end
-# ## Shell 脚本
-# if server[:provision_shell]
-#   shell_script = server[:provision_shell]
-# elsif server[:provision_shell] == false
-#   shell_script = nil
-# else
-#   shell_script = "bootstrap.sh"
-# end
-# node.vm.provision "shell", path: shell_script if shell_script
-
-# ## 自定义密钥
-# if server[:ssh_pub_keys]
-#   ssh_pub_keys = server[:ssh_pub_keys]
-# else
-#   ssh_pub_keys = [
-#     # 从本地文件中获取公钥
-#     File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip,
-#     # 从远程地址获取 vagrant 公钥
-#     URI.open('https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub').read.strip,
-#     # 自定义公钥
-#     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICuTis0fYCI4SkLURxHhxxHrSq1ahq9MpvswhzII9w9b ubuntu_vagrant_insecure_key"
-#   ]
-# end
-# node.vm.provision "shell", inline: <<-SHELL
-#   echo "#{ssh_pub_keys.join("\n")}" >> /home/vagrant/.ssh/authorized_keys
-# SHELL
-
-# ## 删除 127 的注释
-# node.vm.provision "shell", 
-# inline: "sudo sed -i '/^127\.[0-9]\+\.[0-9]\+\.[0-9]\+[localhost$]/s/^/#/' /etc/hosts", 
-# privileged: true
-
-# ## 删除端口转发规则
-# if port_forwards&.size.to_i > 0
-#   node.vm.provision "shell", privileged: true, run: "once", inline: <<-SHELL
-#     for rule in #{port_forwards.map{|pf| pf[:name]}.join(" ")}; do
-#       VBoxManage controlvm "#{node.config.vm.hostname}" natpf1 delete "$rule" || true
-#     done
-#   SHELL
-# end
-
-
-# VAGRANT_EXPERIMENTAL=disks vagrant up
 # vagrant global-status --prune
 require 'uri'
 require 'open-uri'
@@ -101,24 +26,19 @@ Vagrant.configure("2") do |config|
   servers = [
     {
       name: "server1",
+      os: "ubuntu/lunar64:20230301.0.0",
+      cpu: "2", 
+      mem: "2048",
       region: "dev",
-      network: "192.168.56.10:private_network,192.168.63.20:private_network",
+      provision_shell: "bootstrap.sh:args:-- xx:-- 'xxx',bootstrap2.sh",
+      network: "192.168.56.10:private_network,192.168.63.20:public_network",
+      port_forward: "8121:22:ssh,8980:80:name",
       mount: "./sharedir1:/vagrant1,./sharedir2:/vagrant2",
       disk: "disk1:100GB:primary,disk2:10GB",
       dvd: "dvd2:/home/admin/Storage/6.ISO/WePE64_V2.2.iso"
     },
     {
       name: "server2", 
-      os: "ubuntu/lunar64:20230301.0.0",
-      mount: "./sharedir1:/vagrant1",
-      network: "192.168.56.11",
-      disk: "disk1:100GB,disk2:10GB",
-      cpu: "2", 
-      mem: "2048"
-    },
-    {
-      name: "server3", 
-      # network: "192.168.56.21"
     }
   ]
   ## 默认配置
@@ -129,6 +49,7 @@ Vagrant.configure("2") do |config|
   default_os = "ubuntu/jammy64"
   config.vm.boot_timeout = 360
   # vb.gui = true
+  # 挂载选项
   default_synced_folder = {
     create: true,
     owner: "vagrant",
@@ -136,9 +57,22 @@ Vagrant.configure("2") do |config|
     mount_options: ["dmode=755", "fmode=644"],
     type: "virtualbox"
     # virtualbox、NFS 或 rsync
-  } 
+  }
+  # 设置启动顺序
+  boot_order = ["disk", "dvd", "none"]
+  ## 自定义密钥
+  ssh_pub_keys = [
+    # 从本地文件中获取公钥
+    File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip,
+    # 从远程地址获取 vagrant 公钥
+    URI.open('https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub').read.strip,
+    # 自定义公钥
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICuTis0fYCI4SkLURxHhxxHrSq1ahq9MpvswhzII9w9b ubuntu_vagrant_insecure_key"
+  ]
 
-  ## 创建机器
+####################################################################################
+##                                    创建主机                                     ##
+####################################################################################
   servers.each do |server|
     config.vm.define server[:name] do |node|
 
@@ -158,7 +92,7 @@ Vagrant.configure("2") do |config|
       ## 设置主机名
       host_region = server[:region]&.split || [default_region]
       host_name = "#{server[:name]}.#{host_region.join}"
-      puts "主机名: #{host_name}"
+      puts "#{server[:name]} 主机名: #{host_name}"
       node.vm.hostname = host_name
 
       ## 设置网络
@@ -168,7 +102,12 @@ Vagrant.configure("2") do |config|
         puts "#{server[:name]} 系统网络： #{ip} #{network_mode}"
         node.vm.network network_mode, ip: ip, virtualbox__intnet: false, auto_config: true
       end
-
+      ## 端口转发
+      server[:port_forward]&.split(",")&.each do |forward|
+        host_port, guest_port, id = forward.split(':').map(&:strip)
+        puts "#{server[:name]} 端口映射： host_port: #{host_port} guest_port: #{guest_port} #{"id: #{id}" if id.to_s.strip != ''}"
+        node.vm.network "forwarded_port", host: host_port, guest: guest_port, id: id, auto_correct: true
+      end
       ## 共享目录
       server[:mount]&.split(",")&.each do |mount|
         mount_point, mount_path = mount.split(':').map(&:strip)
@@ -190,23 +129,15 @@ Vagrant.configure("2") do |config|
         node.vm.disk :dvd, name: name, file: file
       end
       
-      ## 设置启动顺序
+      # 设置启动顺序
       node.vm.provider "virtualbox" do |vb|
-        vb.customize ["modifyvm", :id, "--boot1", "disk"]
-        vb.customize ["modifyvm", :id, "--boot2", "dvd"]
-        vb.customize ["modifyvm", :id, "--boot3", "none"]
+        vb.customize ["modifyvm", :id, "--boot1", boot_order[0]]
+        vb.customize ["modifyvm", :id, "--boot2", boot_order[1]]
+        vb.customize ["modifyvm", :id, "--boot3", boot_order[2]]
       end
 
       ## 自定义密钥
-      ssh_pub_keys = [
-        # 从本地文件中获取公钥
-        File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip,
-        # 从远程地址获取 vagrant 公钥
-        URI.open('https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub').read.strip,
-        # 自定义公钥
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICuTis0fYCI4SkLURxHhxxHrSq1ahq9MpvswhzII9w9b ubuntu_vagrant_insecure_key"
-      ]
-      node.vm.provision "shell", inline: <<-SHELL
+      node.vm.provision "shell", name: "Add Pub_Keys...", inline: <<-SHELL
         echo "#{ssh_pub_keys.join("\n")}" >> /home/vagrant/.ssh/authorized_keys
       SHELL
 
@@ -221,19 +152,25 @@ Vagrant.configure("2") do |config|
           hosts_str += "#{ip_address}\t#{host_name_local}\t#{host_name_full_local}\n"
         end
       end
+      puts "---------------------Hosts---------------------"
       puts "#{hosts_str}"
-      node.vm.provision "shell", inline: "echo '#{hosts_str}' >> /etc/hosts", privileged: true, run: "once"
-      # 删除 127 
-      # node.vm.provision "shell", 
-      # inline: "sudo sed -i '/^127\.[0-9]\+\.[0-9]\+\.[0-9]\+[localhost$]/s/^/#/' /etc/hosts", 
-      # privileged: true
+      node.vm.provision "shell", name: "Add Hosts...", inline: "echo '#{hosts_str}' >> /etc/hosts", privileged: true, run: "once"
+      # 删除 以127开头且不以localhost结尾的行
+      node.vm.provision "shell", 
+      inline: "sudo sed -i  '/^[^#].*localhost$/!{/^127/d}' /etc/hosts", 
+      privileged: true
 
-      ## 脚本
-      # node.vm.provision "shell", path: "bootstrap.sh"
+      ## shell
+      server[:provision_shell]&.split(',')&.each do |script|
+        script, *args = script.split(':')
+        puts "#{server[:name]} Shell脚本: #{script} 参数: #{args.join(' ')}"
+        node.vm.provision "shell", name: "Run shell script...", path: script, args: args.join(' ')
+      end
+
+      ## ansible
       # node.vm.provision "ansible" do |ansible|
       #   ansible.playbook = "playbook.yml"
       # end
-
     end
   end
 end
