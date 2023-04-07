@@ -305,6 +305,7 @@ FROM eclipse-temurin:17-jre-alpine
 - Alpine 并不比其他发行版小。 一旦你添加了任何需要的包，一个 Alpine Linux 镜像就和更主流的发行版一样大。
 - Alpine 并不安全，没有为 alpine 维护的安全漏洞 (CVE) 列表，因此像 Clair (SAST) 这样的工具无法正确扫描它
 - 无法使用 LXCFS 来提升容器资源可见性
+- alpine 的镜像有性能问题超过 4 core 以上的应用场景，会发现 CPU 使用率上不去，原因未知,所以我们认为是 alpine 这个镜像本身，不适合 API 网关应用场景 (对性能有极致要求)
 - 详情请参考以下文章
   - [Moving to Ubuntu for our Docker image](https://www.dotcms.com/blog/post/moving-to-ubuntu-for-our-docker-image)
   - [Stop using Alpine Docker images](https://medium.com/inside-sumup/stop-using-alpine-docker-images-fbf122c63010)
@@ -314,7 +315,7 @@ FROM eclipse-temurin:17-jre-alpine
     - 有一种特殊情况会同时遇到 Alpine 的绝大多数问题：将 Python 用于数据科学。numpy 和 pandas 之类的包都被预编译成了 wheel，wheel 是 Python 新的打包格式，被编译成了二进制，用于替代 Python 传统的 egg 文件，可以通过 pip 直接安装。但这些 wheel 都绑定了特定的 C 库，这就意味着在大多数使用 glibc 的镜像中都可以正常安装，但 Alpine 就不行。如果非要在 Alpine 中安装，你需要安装很多依赖，重头构建，耗时又费力。
 
 
-### distroless/ubi
+### distroless/ubi/bazel 
 
 distroless/ubi都可以从容器中移除所有不必要的 cruft，它们仅包含您的应用程序及其运行时依赖项。它们不包含包管理器、shell 以及您希望在标准 Linux 发行版中找到的任何其他程序。它有着更小的攻击面和更小的体积。
 
