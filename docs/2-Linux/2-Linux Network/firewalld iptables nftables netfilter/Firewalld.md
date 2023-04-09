@@ -1,8 +1,87 @@
 ---
 title: Firewalld基本使用
 ---
+## 速记
+打开防火墙：
+```bash
+sudo systemctl start firewalld.service
+```
+
+在防火墙中允许 HTTP 流量：
+```bash
+sudo firewall-cmd --add-service=http --permanent
+sudo firewall-cmd --reload
+```
+
+上述命令使用 --add-service 参数将 http 服务添加到防火墙中，并使用 --permanent 参数将更改永久性保存下来。
+
+在防火墙中允许特定端口：
+```bash
+sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
+sudo firewall-cmd --reload
+```
+上述命令使防火墙允许 8080 端口的 TCP 流量进入。
+
+查看当前防火墙规则：
+```bash
+sudo firewall-cmd --list-all
+```
+上述命令将显示当前所有规则和配置。
+
+从防火墙中删除规则：
+```bash
+sudo firewall-cmd --zone=public --remove-service=http --permanent
+sudo firewall-cmd --reload
+```
+上述命令从防火墙中删除 http 服务，并使用 --permanent 参数将更改永久性保存下来。
 
 
+在 firewalld 中，您可以使用 --permanent 参数将更改永久性保存到防火墙配置文件中。这意味着，一旦您添加、删除或修改了防火墙规则并使用 --permanent 参数，这些更改将在系统重启后仍然有效。
+
+比如，您可以使用以下命令将 HTTP 服务添加到防火墙规则中，并使更改永久性保存：
+```bash
+sudo firewall-cmd --add-service=http --permanent
+```
+然后，您可以使用以下命令重新加载防火墙以使更改生效：
+```bash
+sudo firewall-cmd --reload
+```
+此外，您还可以使用以下命令从防火墙配置中删除规则，并将更改永久性保存：
+```bash
+sudo firewall-cmd --zone=public --remove-service=http --permanent
+```
+这些命令将使您的防火墙规则在系统重启后仍然保持不变。
+
+## 域
+在 firewalld 中，“域”是一种定义防火墙规则的方式，用于指定应用于哪些网络接口或源 IP 地址。在防火墙中，您可以为每个网络接口或源 IP 地址分配一个或多个预定义的域。每个域都有一个针对该域的默认规则集。
+
+以下是 firewalld 中预定义的几个域：
+
+public：用于公共或未知网络；
+external：用于外部网络，例如通过拨号连接到的网络；
+dmz：用于主机位于 DMZ（分离区域）中的网络；
+work：用于工作场所或办公室网络；
+home：用于家庭网络；
+internal：用于内部网络。
+如果您在启动 firewalld 时未指定任何域，则默认使用 public 域。
+
+要查看当前使用的所有域，可以使用以下命令：
+
+sudo firewall-cmd --get-zones
+要查看某个域的详细信息，可以使用以下命令并指定要查看的域的名称（例如 internal）：
+
+sudo firewall-cmd --zone=internal --list-all
+在使用防火墙规则时，您可以通过指定要使用的域名称来选择要应用规则的网络接口或源 IP 地址。例如，以下命令将 HTTP 服务添加到指定域中，从而为该网络接口打开 HTTP 流量：
+```bash
+sudo firewall-cmd --zone=internal --add-service=http
+```
+希望这些信息能够帮助您了解防火墙中域的概念。
+如果您在执行 `firewall-cmd --permanent --add-port=88/tcp` 命令时没有指定任何域，则此命令将默认添加TCP 88端口到 "public" 域的防火墙规则中。
+
+您可以使用以下命令来查看 "public" 域的防火墙规则：
+```bash
+sudo firewall-cmd --zone=public --list-all
+```
 ## 简介
 
 在RHEL7里有几种防火墙共存：firewalld、iptables、ebtables，默认是使用firewalld，他们的作用都是用于维护规则，而真正使用规则干活的是内核的netfilter
