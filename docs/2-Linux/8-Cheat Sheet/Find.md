@@ -12,7 +12,10 @@ draft: false
 toc: true
 ---
 
-
+linux 删除文件夹内除了指定目录外的文件夹
+```bash
+find /path/to/directory -mindepth 1 -maxdepth 1 ! -name '指定目录名' -type d -exec rm -rf {} +
+```
 **原文来自：http://www.codebelief.com/article/2017/02/26-examples-of-find-command-on-linux/**
 https://www.imooc.com/article/48513
 

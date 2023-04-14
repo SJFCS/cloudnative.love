@@ -1,0 +1,185 @@
+
+# =================================== readme ===================================
+# 下载virtualBox和vagrant，打开终端进入本文件所在目录。执行vagrant up 启动虚拟机，vagrant destroy 删除虚拟机
+# 系统镜像在 https://app.vagrantup.com/boxes/search
+
+
+# 如果要修改 disk 信息，请用此命令开启实验特性并启动虚拟机：VAGRANT_EXPERIMENTAL=disks vagrant up
+# 在windows10上有几率无法创建默认2xxx的端口转发，会让虚拟机在创建时候卡在 SSH auth method: private key，疑似VitrualBox和win10不兼容的锅，所以最好通过 port_forward 参数指定虚拟机22端口转发到宿主机大于3000的端口上
+# servers[ ] 可以只保留 name 其他不需要的可删除，所有参数逗号之间不能有空格
+# disk指定为primary时候代表更改系统磁盘大小如： disk: "disk1:100GB:primary"，如不指定则为添加一块100GB的新磁盘到系统
+# VitrualBox private_network 网络默认ip范围不能超过 192.168.56/21，如需特定请修改 VitrualBox 的网络配置
+# provision_shell参数可以用多个:分割
+  # provision_shell: "bootstrap.sh:arg1:-- xx:-- 'xxx',bootstrap2.sh",
+  # 参数: arg1 -- xx -- 'xxx'
+# =================================== readme ===================================
+
+# ::todo::
+# tags: "mysql:master,redis:master"
+# common和自定义
+# provision_ansible: "playbook.yml"
+# provision_shell: "bootstrap.sh"
+# 自定义密钥 # 互相免密
+# ssh_pub_keys 
+
+# vagrant global-status --prune
+require 'uri'
+require 'open-uri'
+Vagrant.configure("2") do |config|
+####################################################################################
+##                                    配置信息                                     ##
+####################################################################################
+  ## 自定义节点
+  servers = [
+    {
+      name: "server1",
+      os: "ubuntu/lunar64:20230301.0.0",
+      cpu: "2", 
+      mem: "2048",
+      region: "dev",
+      provision_shell: "bootstrap.sh:arg1 arg2 arg3,bootstrap2.sh",
+      network: "192.168.56.10:private_network,192.168.63.20:public_network",
+      port_forward: "8121:22:ssh,8980:80:name",
+      mount: "./sharedir1:/vagrant1,./sharedir2:/vagrant2",
+      disk: "disk1:100GB:primary,disk2:10GB",
+      dvd: "dvd2:/home/admin/Storage/6.ISO/WePE64_V2.2.iso"
+    },
+    {
+      name: "server2", 
+      port_forward: "8122:22:ssh"
+    }
+  ]
+  ## 默认配置
+  config.vm.boot_timeout = 360
+  # vb.gui = true
+  default_region = "local"
+  default_cpu = "1"
+  default_mem = "1024"
+  default_network_mode = "private_network"
+  default_os = "ubuntu/jammy64"
+  # 挂载选项
+  default_synced_folder = {
+    create: true,
+    owner: "vagrant",
+    group: "vagrant",
+    mount_options: ["dmode=755", "fmode=644"],
+    type: "virtualbox"
+    # virtualbox、NFS 或 rsync
+  }
+  # 设置启动顺序
+  boot_order = ["disk", "dvd", "none"]
+  ## 自定义密钥
+  ssh_pub_keys = [
+    # 从本地文件中获取公钥
+    File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip,
+    # 从远程地址获取 vagrant 公钥
+    URI.open('https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub').read.strip,
+    # 自定义公钥
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICuTis0fYCI4SkLURxHhxxHrSq1ahq9MpvswhzII9w9b ubuntu_vagrant_insecure_key"
+  ]
+
+####################################################################################
+##                                    创建主机                                     ##
+####################################################################################
+  servers.each do |server|
+    config.vm.define server[:name] do |node|
+
+      ## 设置 provider 规格
+      node.vm.provider :virtualbox do |vb|
+        vb.memory = server[:mem] || default_mem
+        vb.cpus = server[:cpu] || default_cpu
+      end
+
+      ## 设置系统版本
+      os_name = server[:os]&.split(":")&.[](0) || default_os&.split(":")&.[](0)
+      os_version = server[:os]&.split(":")&.[](1) || default_os&.split(":")&.[](1)
+      puts "#{server[:name]} 系统版本: #{os_name}#{":#{os_version}" if os_version.to_s.strip != ''}"
+      node.vm.box = os_name
+      node.vm.box_version = os_version.to_s.strip != '' ? os_version : nil
+             
+      ## 设置主机名
+      host_region = server[:region]&.split || [default_region]
+      host_name = "#{server[:name]}.#{host_region.join}"
+      puts "#{server[:name]} 主机名: #{host_name}"
+      node.vm.hostname = host_name
+
+      ## 设置网络
+      server[:network]&.split(",")&.each do |network|
+        ip, network_mode = network.split(':').map(&:strip)
+        network_mode = (network_mode&.to_sym || default_network_mode)
+        puts "#{server[:name]} 系统网络： #{ip} #{network_mode}"
+        node.vm.network network_mode, ip: ip, virtualbox__intnet: false, auto_config: true
+      end
+      ## 端口转发
+      server[:port_forward]&.split(",")&.each do |forward|
+        host_port, guest_port, id = forward.split(':').map(&:strip)
+        puts "#{server[:name]} 端口映射： host_port: #{host_port} guest_port: #{guest_port} #{"id: #{id}" if id.to_s.strip != ''}"
+        node.vm.network "forwarded_port", host: host_port, guest: guest_port, id: id, auto_correct: true
+      end
+      ## 共享目录
+      server[:mount]&.split(",")&.each do |mount|
+        mount_point, mount_path = mount.split(':').map(&:strip)
+        puts "#{server[:name]} 挂载目录： #{mount_point} -> #{mount_path}"
+        node.vm.synced_folder mount_point, mount_path, default_synced_folder
+      end 
+
+      ## 挂载磁盘
+      server[:disk]&.split(",")&.each do |disk|
+        name, size, primary = disk.split(':').map(&:strip)
+        puts "#{server[:name]} 挂载磁盘： #{name} #{size} #{primary ? 'primary' : '' if primary}"
+        node.vm.disk :disk, name: name, size: size, primary: !!primary && true
+      end
+
+      ## 挂载 DVD 镜像
+      server[:dvd]&.split(",")&.each do |dvd|
+        name, file = dvd.split(':').map(&:strip)
+        puts "#{server[:name]} 挂载dvd： #{name} #{file}"
+        node.vm.disk :dvd, name: name, file: file
+      end
+      
+      # 设置启动顺序
+      node.vm.provider "virtualbox" do |vb|
+        vb.customize ["modifyvm", :id, "--boot1", boot_order[0]]
+        vb.customize ["modifyvm", :id, "--boot2", boot_order[1]]
+        vb.customize ["modifyvm", :id, "--boot3", boot_order[2]]
+      end
+
+      ## 自定义密钥
+      node.vm.provision "shell", name: "Add Pub_Keys...", inline: <<-SHELL
+        echo "#{ssh_pub_keys.join("\n")}" >> /home/vagrant/.ssh/authorized_keys
+      SHELL
+
+      # 设置hosts
+      hosts_str = ""
+      servers.each do |server|
+        server[:network]&.split(",")&.each do |network|
+          ip_address, _ = network.split(":")
+          host_region_local = server[:region]&.split || [default_region]
+          host_name_local = "#{server[:name]}"
+          host_name_full_local = "#{server[:name]}.#{host_region_local.join}"
+          hosts_str += "#{ip_address}\t#{host_name_local}\t#{host_name_full_local}\n"
+        end
+      end
+      puts "---------------------Hosts---------------------"
+      puts "#{hosts_str}"
+      node.vm.provision "shell", name: "Add Hosts...", inline: "echo '#{hosts_str}' >> /etc/hosts", privileged: true, run: "once"
+      # 删除 以127开头且不以localhost结尾的行
+      node.vm.provision "shell", 
+      inline: "sudo sed -i  '/^[^#].*localhost$/!{/^127/d}' /etc/hosts", 
+      privileged: true
+
+      ## shell
+      server[:provision_shell]&.split(',')&.each do |script|
+        script, *args = script.split(':')
+        puts "#{server[:name]} Shell脚本: #{script} 参数: #{args.join(' ')}"
+        node.vm.provision "shell", name: "Run shell script...", path: script, args: args.join(' ')
+      end
+
+      ## ansible
+      # node.vm.provision "ansible" do |ansible|
+      #   ansible.playbook = "playbook.yml"
+      # end
+    end
+  end
+end
+
