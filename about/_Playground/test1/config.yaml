@@ -1,4 +1,3 @@
-# dnsdomainname 设置域
 servers:
   - name: server1
     os: ubuntu/lunar64:20230301.0.0
@@ -9,7 +8,7 @@ servers:
       - "bootstrap.sh:arg1 arg2 arg3"
       - "bootstrap2.sh"
     network:
-      - 192.168.56.10:private_network
+      - 192.168.56.10:private_network:add_hosts
       - 192.168.63.20:public_network
     port_forward:
       - 8121:22:ssh
@@ -26,7 +25,8 @@ servers:
     port_forward:
       - 8122:22:ssh
     network:
-      - 192.168.56.20:private_network
+      - 192.168.56.20:private_network:add_hosts
+
 default_config:
   default_region: local
   default_cpu: 1
@@ -38,17 +38,16 @@ default_config:
     create: true
     owner: vagrant
     group: vagrant
-    mount_options: '["dmode=755", "fmode=644"]'
-    type: virtualbox
-      # virtualbox、NFS 或 rsync
+    mount_options: ["dmode=755", "fmode=644"]
+    type: virtualbox -# virtualbox、NFS 或 rsync
   # 设置启动顺序
-  boot_order: '["disk", "dvd", "none"]'
+  boot_order: ["disk", "dvd", "none"]
       # 自定义密钥
   ssh_pub_keys:
     remote_key:
-      - "https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub"
+      - "https://raw.githubusercontent.com/hashicorp/vagrant/main/keys/vagrant.pub"
     local_key:
       - "#{Dir.home}/.ssh/id_rsa.pub"
-      - "/root/.ssh/id_rsa.pub"
     content_key:
-      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICuTis0fYCI4SkLURxHhxxHrSq1ahq9MpvswhzII9w9b ubuntu_vagrant_insecure_key"
+      - "test-key"
+      - "demo-key"
