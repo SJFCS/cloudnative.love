@@ -1,5 +1,5 @@
-# todo: 多provider支持
-# 空网卡
+ # dhcp 空网卡
+# 快照 别名 本地hosts ssh同步  hook  多provider支持  消息推送   审批 
 ```ruby
 config.vm.provider "aliyun" do |aliyun, override|
   aliyun.access_key_id = "YOUR_ACCESS_KEY"
