@@ -10,6 +10,10 @@ import DocCardList from '@theme/DocCardList';
 
 <DocCardList />
 
+Terraform 更适合用于云环境和基础设施管理。如果您想要管理本地或远程虚拟机，或者快速关闭和重建虚拟机以进行开发和测试，那么 Vagrant 可能更加适合。
+
+
+ vagrant global-status --prune
 
 - 简介
 - 官网

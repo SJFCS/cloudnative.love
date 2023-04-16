@@ -1,6 +1,11 @@
-# printf("%-10s%-10s%-10s\n", "Name", "Age", "Gender")
-# vagrant global-status 
-# vagrant global-status --prune
+# -*- mode: ruby -*-
+# # vi: set ft=ruby :
+
+######################################## VAGRANT YAML ###########################################
+# Project : https://github.com/SJFCS/cloudnative.love/tree/main/about/_Playground/vagrant-yaml  #
+# Author  : SongJinfeng@outlook.com                                                             #
+#################################################################################################
+
 require 'uri'
 require 'open-uri'
 require 'yaml'
@@ -9,8 +14,10 @@ servers = config['servers']
 default_config = config['default_config']
 # puts servers.to_yaml
 # puts default_config.to_yaml
+
 Vagrant.configure("2") do |config|
-  config.vm.boot_timeout = 360
+  config.vm.boot_timeout = default_config['boot_timeout']
+
   # 设置公钥变量
   puts "---------------------Public Keys---------------------"
   ssh_pub_keys = []
