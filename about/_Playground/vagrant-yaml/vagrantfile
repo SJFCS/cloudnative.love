@@ -5,6 +5,9 @@
 # Project : https://github.com/SJFCS/cloudnative.love/tree/main/about/_Playground/vagrant-yaml  #
 # Author  : SongJinfeng@outlook.com                                                             #
 #################################################################################################
+# ENV['VAGRANT_EXPERIMENTAL'] = 'disks'
+# config.vagrant.global_experiments = ["disks"]
+# config.vagrant.global_experiments = Vagrant::DEFAULT_GLOBAL_EXPERIMENTS + ["disks"]
 
 require 'uri'
 require 'open-uri'
