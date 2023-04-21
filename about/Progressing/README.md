@@ -4,25 +4,23 @@ sidebar_position: 4
 ---
 # 2023.3-2024.3
 :::info 短期计划
-- 四月2-Linux vagrant 四月中旬考完RHCE  处理将要过期的视频
-- 8-Infrastructure as Code & Automation 6-Container
-- 六月5-Database 3-Continuous Integration & Delivery  MySQL OCP证书
+- 四月2-Linux vagrant 四月中旬考完RHCE  处理将要过期的视频  - 8-Infrastructure as Code & Automation  (趁着这个五一处理完这部分)
+- 五-六月5-Database [MySQL OCP](https://education.oracle.com/%E4%BA%A7%E5%93%81%E7%9B%AE%E5%BD%95-outrackpath-trackp_888/trackp_888)
+- 七月-八月 考取[AWS SAP](https://aws.amazon.com/cn/certification/certified-solutions-architect-professional/?ch=sec&sec=rmg&d=1)
+- ACE 开发能力和各种中间件和gateway proxy的运维能力
+- 6-Container  3-Continuous Integration & Delivery
 - 八月4-Service Mesh & Service Proxy & Ingress Gateway
-- 十月10-Storage 7-Observability  关注年底活动阿里云ACE
+- 十月10-Storage 7-Observability  
 - 十二月Kubernetes-OPS-Guide Kubernetes-The-Hard-Way-Translate Kubernetes-Enhancement-Proposal-Translate 9-Security
 - 明年一月开始 11-Coding Kubernetes-DEV-Notes
 :::
-这里是我今年的 OKR
-:::info todolist
 
-:::
 ## O1：提升运维开发基础技能
 :::note 现状分析
 最近在网易这边工作很清闲，我打算利用这部分时间去提升一下我的专业技能，增强我的开发能力，当然基本的运维知识也不能落下。我打算以证促学，我认为认证考试都很简单，不能依赖证书数量来作为一个人能力的体现，但考证过程中一些大纲可以帮助你快速系统的去学习一些技术，而且当完成一项认证并拿到证书和徽章时比较有成就感。
 :::
-+ KR1：考取RHCE\阿里云ACE\MySQL OCP证书
-+ KR2：考取AWS SAP\AWS DOP 证书
-+ KR3：完成[运维开发技能清单](/about/Progressing/运维开发技能清单.md)，并完成python和golang的学习
++ KR1：考取RHCE \ 阿里云ACE \ [AWS SAP](https://aws.amazon.com/cn/certification/certified-solutions-architect-professional/?ch=sec&sec=rmg&d=1) \ [MySQL OCP](https://education.oracle.com/%E4%BA%A7%E5%93%81%E7%9B%AE%E5%BD%95-outrackpath-trackp_888/trackp_888)证书
++ KR2：完成[运维开发技能清单](/about/Progressing/运维开发技能清单.md)，并完成python和golang的学习
   :::tip 日常进度记录
 
   :::
