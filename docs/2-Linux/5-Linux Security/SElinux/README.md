@@ -86,3 +86,90 @@ wget：Web Get，用于从 Web 上下载文件。
 
 restorecon: Restore Context，在恢复文件或目录的 SELinux 上下文；
 SELinux Context ON restore，由于单词结合起来可以形成 acronym，类似于 SCON，可以帮助您记住 restorecon；
+
+
+
+
+
+
+## q1
+```bash
+Semanage fcontext-m-t httpd _ sys _ content _ t/var/www/html/file1
+Restorecon-Rv/var/www/html
+```
+启动httpd时候这一步有什么用
+这个命令的作用是为/var/www/html/file1设置SELinux上下文，即将httpd_sys_content_t类型的SELinux上下文分配给该文件。接下来的Restorecon命令则将/var/www/html目录下的所有文件和子目录的SELinux上下文都重置为默认值，以确保它们与HTTP服务器的访问策略一致。这些命令的目的是确保HTTP服务器可以访问/var/www/html/file1，同时保持系统的安全性。
+
+假设/var/www/html目录下还有file2和file3，需要为它们设置SELinux上下文，可以使用类似于以下的命令：
+
+```bash
+
+semanage fcontext -m -t httpd_sys_content_t /var/www/html/file2
+semanage fcontext -m -t httpd_sys_content_t /var/www/html/file3
+```
+
+```bash
+restorecon -Rv /var/www/html
+```
+这将为file2和file3设置httpd_sys_content_t类型的SELinux上下文。然后，可以使用以下命令将/var/www/html目录以及其下的所有文件和子目录的SELinux上下文重置为默认值：
+
+### 添加修改
+```bash
+ValueError: File context for /var/www/html/file2 is not defined
+```
+这个错误通常表示SELinux上下文策略中没有为文件/var/www/html/file2定义相应的文件上下文。可以使用以下命令手动为文件设置SELinux上下文：
+```bash
+semanage fcontext -a -t httpd_sys_content_t /var/www/html/file2
+# 这将为文件/var/www/html/file2添加httpd_sys_content_t类型的SELinux上下文。然后，可以使用以下命令将/var/www/html目录以及其下的所有文件和子目录的SELinux上下文重置为默认值：
+restorecon -Rv /var/www/html
+# 这将确保HTTP服务器可以访问所有在/var/www/html目录下的文件。
+```
+
+### semanage fcontext是用于管理SELinux上下文的命令，其中包含两个选项：-a和-m。
+- -a用于添加新的SELinux上下文规则，即将新的文件路径与SELinux上下文类型关联起来。例如，使用semanage fcontext -a -t httpd_sys_content_t /var/www/html将/var/www/html目录与httpd_sys_content_t类型的SELinux上下文关联起来，使得HTTP服务器可以访问该目录下的文件。
+
+- -m用于修改现有的SELinux上下文规则。例如，使用semanage fcontext -m -t httpd_sys_script_exec_t /var/www/cgi-bin/test.cgi将/var/www/cgi-bin/test.cgi的SELinux上下文类型从默认的httpd_sys_content_t修改为httpd_sys_script_exec_t。这使得test.cgi脚本文件可以被HTTP服务器执行。
+
+###  httpd_sys_content_t 是什么，都有哪些类型，如何查看可选信息
+```
+semanage fcontext -a -t httpd_sys_content_t /var/www/html/file2
+```
+httpd_sys_content_t是一个SELinux上下文类型，用于标识文件或目录是Web服务器的内容。在SELinux策略中，每个文件和目录都必须具有一个类型，该类型确定了如何保护该文件或目录。例如，httpd_sys_content_t类型表示文件或目录包含Web服务器的内容，因此需要保护它们免受未经授权的访问，但允许Web服务器访问。
+
+**除了httpd_sys_content_t，还有许多其他SELinux上下文类型，用于标识不同类型的文件和目录。例如：**
+
+- httpd_sys_script_exec_t：用于标识可执行的CGI脚本文件。
+- httpd_sys_rw_content_t：用于标识允许Web服务器写入的文件或目录。
+- httpd_log_t：用于标识Web服务器日志文件。
+
+要查看所有可用的SELinux上下文类型，可以使用以下命令：
+```bash
+semanage fcontext -l
+```
+
+
+```
+semanage fcontext -a -t httpd_sys_content_t /var/www/html/file2 的作用是将文件 /var/www/html/file2 的SELinux上下文类型设置为 httpd_sys_content_t。
+
+
+SELinux是一个安全子系统，可以限制应用程序的访问权限和行为，以保护系统免受攻击和滥用。SELinux使用策略来确定哪些进程可以访问哪些文件和目录，以及如何访问它们。文件和目录的SELinux上下文类型是策略中的一部分，它们指定了一个对象的安全属性，用于决定进程如何访问该对象。
+
+
+在这种情况下，将文件 /var/www/html/file2 的SELinux上下文类型设置为 httpd_sys_content_t 是为了使Web服务器（如Apache）能够访问该文件。httpd_sys_content_t是用于标识Web服务器内容的SELinux上下文类型，这意味着通过将文件的SELinux上下文类型设置为此类型，Web服务器可以访问该文件并向客户端提供内容。
+
+
+httpd_sys_content_t类型是由httpd软件包提供的。httpd软件包是Apache HTTP服务器的软件包，它包含了一组SELinux策略模块，其中包括定义httpd_sys_content_t类型的模块。
+
+```
+
+
+
+## q2
+
+·-l-extents Number,PE个数；-L-size Size,容量
+6849
+
+ext4使用resize2fs立即生效；xfs使用xfs_growfs立即生效
+
+
+

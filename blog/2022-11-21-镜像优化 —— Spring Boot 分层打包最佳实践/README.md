@@ -105,7 +105,7 @@ exec java -jar /app.jar
 - 而 shell 格式是由 "/bin/sh -e" 启动的子进程。 /bin/sh 进程 PID 为1，而被启动的进程不是 PID 不为 1 ，从而无法收到 Unix 的信号，自然不能收到从 docker stop 发来的 SIGTERM 信号。
 - 像 distroless 之类的基础镜像中没有 sh 也无法使用 shell 格式。
 - 扩展阅读 
-  - [Dockerfile 中 ENTRYPOINT 和 CMD 的区别](/docs/Container/Docker/Dockerfile%20中%20ENTRYPOINT%20和%20CMD%20的区别)。
+  - [Dockerfile 中 ENTRYPOINT 和 CMD 的区别](/docs/Kubernetes/Container%20Runtime/Docker/Dockerfile%20中%20ENTRYPOINT%20和%20CMD%20的区别)。
   - [这里有一个奇怪的现象](https://stackoverflow.com/questions/52968361/different-process-are-running-as-pid-1-when-running-cmd-entrypoint-in-shell-form)
 
 </TabItem>
