@@ -8,6 +8,7 @@
 # ENV['VAGRANT_EXPERIMENTAL'] = 'disks'
 # config.vagrant.global_experiments = ["disks"]
 # config.vagrant.global_experiments = Vagrant::DEFAULT_GLOBAL_EXPERIMENTS + ["disks"]
+# todo gui
 
 require 'uri'
 require 'open-uri'
