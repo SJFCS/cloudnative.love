@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'CloudCNative.love 💕',
+  title: 'CloudNative.love 💕',
   tagline: '脚下虽有万水千山，但行者必至！',
   url: 'https://cloudnative.love',
   baseUrl: '/',
