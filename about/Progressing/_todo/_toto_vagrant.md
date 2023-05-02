@@ -184,3 +184,29 @@ Vagrant.configure("2") do |config|
 
 end
 ```
+
+## 通过lable生成 inventory
+```ruby
+Vagrant.configure("2") do |config|
+  # ...
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "playbook.yml"
+  end
+
+  config.vm.provision "shell", inline: "echo hello"
+
+  # enable vagrant_ansible_inventory plugin
+  config.trigger.after :up do
+    run("vagrant plugin install vagrant_ansible_inventory") unless Vagrant.has_plugin?("vagrant_ansible_inventory")
+  end
+  config.vm.provision :ansible do |ansible|
+    ansible.limit = "all"
+    ansible.playbook = "playbook.yml"
+    ansible.groups = {
+      "web" => ["web1", "web2"],
+      "db" => ["db1"],
+    }
+  end
+end
+```

@@ -12,9 +12,10 @@ import Translate, { translate } from '@docusaurus/Translate';
 const data = [
   { cover: require('@site/static/img/cert/CKA.webp').default, title: <Translate>Certified Kubernetes Administrator (CKA)</Translate> },
   { cover: require('@site/static/img/cert/CKS.webp').default, title: <Translate>Certified Kubernetes Security Specialist (CKS)</Translate> },
+  { cover: require('@site/static/img/cert/RHCE.webp').default, title: <Translate>Red Hat Certified Engineer (RHCE)</Translate> },
   { cover: require('@site/static/img/cert/ACP.webp').default, title: <Translate>Alibaba Cloud Certified Professional - Cloud Computing (ACP)</Translate> },
+  { cover: require('@site/static/img/cert/RHCSA.webp').default, title: <Translate>Red Hat Certified System Administrator (RHCSA)</Translate> },
   { cover: require('@site/static/img/cert/ACA-DEVOPS.webp').default, title: <Translate>Alibaba Cloud Certified Associate - DevOps (ACA)</Translate> },
-  { cover: require('@site/static/img/cert/RHCSA.webp').default, title: <Translate>Red Hat Certified System Administrator (RHCSA®)</Translate> },
   { cover: require('@site/static/img/cert/H3CNE-Cloud.webp').default, title: <Translate>H3C Certified Network Engineer for Cloud (H3CNE-Cloud)</Translate> },
   { cover: require('@site/static/img/cert/H3CNE-Net.webp').default, title: <Translate>H3C Certified Network Engineer (H3CNE)</Translate> },
   { cover: require('@site/static/img/cert/2018年山东省职业院校技能大赛 云计算技术与应用赛项 二等奖.webp').default, title: <Translate>2018 Shandong Province Vocational College Cloud Computing Technology and Applications Competition Second Prize</Translate> },

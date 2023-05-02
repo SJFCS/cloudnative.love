@@ -6,5 +6,29 @@
   "sidebar.defaultSidebar.category.关于本站": {
     "message": "关于本站",
     "description": "The label for category 关于本站 in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.目前正在做什么": {
+    "message": "目前正在做什么",
+    "description": "The label for category 目前正在做什么 in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Workflow": {
+    "message": "Workflow",
+    "description": "The label for category Workflow in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Mac": {
+    "message": "Mac",
+    "description": "The label for category Mac in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Windows": {
+    "message": "Windows",
+    "description": "The label for category Windows in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.WSL + Docker 环境配置": {
+    "message": "WSL + Docker 环境配置",
+    "description": "The label for category WSL + Docker 环境配置 in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.中英等宽字体": {
+    "message": "中英等宽字体",
+    "description": "The label for category 中英等宽字体 in sidebar defaultSidebar"
   }
 }

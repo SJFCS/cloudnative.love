@@ -54,5 +54,9 @@
   "item.label.Subscribe": {
     "message": "订阅",
     "description": "Navbar item with label Subscribe"
+  },
+  "logo.alt": {
+    "message": "CloudCNative.love Logo",
+    "description": "The alt text of navbar logo"
   }
 }

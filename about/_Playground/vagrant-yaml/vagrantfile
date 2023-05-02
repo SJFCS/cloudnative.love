@@ -5,10 +5,7 @@
 # Project : https://github.com/SJFCS/cloudnative.love/tree/main/about/_Playground/vagrant-yaml  #
 # Author  : SongJinfeng@outlook.com                                                             #
 #################################################################################################
-# ENV['VAGRANT_EXPERIMENTAL'] = 'disks'
-# config.vagrant.global_experiments = ["disks"]
-# config.vagrant.global_experiments = Vagrant::DEFAULT_GLOBAL_EXPERIMENTS + ["disks"]
-# todo gui
+ENV['VAGRANT_EXPERIMENTAL'] = 'disks'
 
 require 'uri'
 require 'open-uri'
@@ -56,13 +53,10 @@ Vagrant.configure("2") do |config|
       cpus = server['cpu'] || default_config['default_cpu']
       memory = server['mem'] || default_config['default_mem']
       puts "#{server['name']} CPU: #{cpus} Memory: #{memory}"
-      name = "Alice"
-      age = 25
-      grade = 3.5
-
       puts "#{server['name']} 启动顺序:  #{default_config['boot_order']}"
+      
       node.vm.provider "virtualbox" do |vb|
-        # vb.gui = true
+        vb.gui = server['gui'] || default_config['default_gui']
         # 设置规格
         vb.cpus = cpus
         vb.memory = memory

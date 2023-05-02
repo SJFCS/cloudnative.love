@@ -5,6 +5,8 @@ sidebar_position: 5
 
 # [Ansible Roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)
 
+https://github.com/easzlab/kubeasz
+
 对于更庞大的项目（如 [kubespray](https://github.com/kubernetes-sigs/kubespray)），单纯的使用 playbooks 仍然显得过于复杂，这时就有必要引入更高层次的抽象——Roles。
 
 Ansible Roles 是一种对 Playbooks 进行分组编排的方法，它通过将 playbook 拆分成更细致的结构，抽取出公共部分，来提高 playbook 配置的重用度。

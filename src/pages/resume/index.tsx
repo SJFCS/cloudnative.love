@@ -1,11 +1,10 @@
 import React from 'react';
 import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
 import Translate, { translate } from '@docusaurus/Translate';
 import './Resume.css';
 import Head from '@site/src/components/Greeting/Head';
 
-import Zoom from 'react-medium-image-zoom'
+const Zoom = require('react-medium-image-zoom').default;
 import 'react-medium-image-zoom/dist/styles.css'
 
 const TITLE = translate({ message: 'Resume' });
@@ -43,6 +42,31 @@ export default function Resume() {
               <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer" href="https://www.credly.com/badges/c37a3b97-5438-4c05-a28b-6ea2d6f38905"><Translate>Certified Kubernetes Application Developer (CKAD)</Translate></a>
             </div>
           </div>
+          <div className="relative row-span-2 col-span-2 shadow-sm md:shadow-2xl">
+            <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="/img/cert/RHCE.webp" /></Zoom>
+            <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
+              <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer" href="https://www.credly.com/badges/14b87040-30ed-446d-b269-b693a2f0a0d0"> <Translate>Red Hat Certified Engineer (RHCE)</Translate></a>
+            </div>
+          </div>
+          <div className="relative shadow-sm md:shadow-2xl">
+            <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="/img/cert/RHCSA.webp" /></Zoom>
+            <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
+              <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer" href="https://www.credly.com/badges/46d4a035-24e7-4408-9237-42eba03c64cf"><Translate>Red Hat Certified System Administrator (RHCSA)</Translate></a>
+            </div>
+          </div>
+          <div className="relative  shadow-sm md:shadow-2xl">
+            <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="/img/cert/ACA-DEVOPS.webp" /></Zoom>
+            <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
+              <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer"><Translate>Alibaba Cloud Certified Associate - DevOps (ACA)</Translate></a>
+            </div>
+          </div>
+          <div className="relative  shadow-sm md:shadow-2xl">
+            <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="/img/cert/H3CNE-Net.webp" /></Zoom>
+            <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
+              <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer"><Translate>H3C Certified Network Engineer (H3CNE)</Translate></a>
+            </div>
+          </div>
+
 
           <div className="relative row-span-2 col-span-2 shadow-sm md:shadow-2xl">
             <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="/img/cert/ACP.webp" /></Zoom>
@@ -50,7 +74,12 @@ export default function Resume() {
               <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer"><Translate>Alibaba Cloud Certified Professional - Cloud Computing (ACP)</Translate></a>
             </div>
           </div>
-
+          <div className="relative shadow-sm md:shadow-2xl">
+            <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="/img/cert/H3CNE-Cloud.webp" /></Zoom>
+            <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
+              <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer"><Translate>H3C Certified Network Engineer for Cloud (H3CNE-Cloud)</Translate></a>
+            </div>
+          </div>
           <div className="relative shadow-sm md:shadow-2xl">
             <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="/img/cert/2018年山东省职业院校技能大赛 云计算技术与应用赛项 二等奖.webp" /></Zoom>
             <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
@@ -66,45 +95,18 @@ export default function Resume() {
           </div>
 
           <div className="relative  shadow-sm md:shadow-2xl">
-            <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="/img/cert/H3CNE-Net.webp" /></Zoom>
-            <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
-              <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer"><Translate>H3C Certified Network Engineer (H3CNE)</Translate></a>
-            </div>
-          </div>
-
-          <div className="relative shadow-sm md:shadow-2xl">
-            <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="/img/cert/H3CNE-Cloud.webp" /></Zoom>
-            <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
-              <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer"><Translate>H3C Certified Network Engineer for Cloud (H3CNE-Cloud)</Translate></a>
-            </div>
-          </div>
-
-          <div className="relative  shadow-sm md:shadow-2xl">
-            <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="/img/cert/ACA-DEVOPS.webp" /></Zoom>
-            <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
-              <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer"><Translate>Alibaba Cloud Certified Associate - DevOps (ACA)</Translate></a>
-            </div>
-          </div>
-
-          <div className="relative  shadow-sm md:shadow-2xl">
             <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="/img/cert/2018年山东省职业院校 云计算大数据行业技能大赛 一等奖.webp" /></Zoom>
             <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
               <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer"><Translate>2018 Shandong vocational colleges cloud computing big data industry skills competition first prize</Translate></a>
             </div>
           </div>
-          <div className="relative row-span-2 col-span-2 shadow-sm md:shadow-2xl">
-            <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="/img/cert/RHCSA.webp" /></Zoom>
-            <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
-              <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer"><Translate>Red Hat Certified System Administrator (RHCSA®)</Translate></a>
-            </div>
-          </div>
 
-          <div className="relative shadow-sm md:shadow-2xl">
+          {/* <div className="relative shadow-sm md:shadow-2xl">
             <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="https://image-fusice.oss-cn-hangzhou.aliyuncs.com/image/images/2021.07.23-14:42:52-%E5%B1%B1%E4%B8%9C%20%E7%9C%81%E4%BC%98%20%E7%A7%80%E6%AF%95%20%E4%B8%9A%E7%94%9F.jpg" /></Zoom>
             <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
               <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer"><Translate>Outstanding Graduates of Shandong Province ( Top 5 % )</Translate></a>
             </div>
-          </div>
+          </div> */}
         </section>
 
         {/* <section className="my-4 max-w-5xl mx-auto">

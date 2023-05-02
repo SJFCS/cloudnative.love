@@ -1,5 +1,5 @@
 # Application Definition
-
+为了应付配置 config 不断增长的复杂性和维护难题，kubernetes 社区出现了 helm/kustomize，此外还死了一票 ksonnet 之类的前浪。
 目前 kubernetes 配置有如下几种流行的编写方法：
 
 1. helm: 基于 go-templates 的模板化、参数化配置。

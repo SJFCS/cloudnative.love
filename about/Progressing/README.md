@@ -4,7 +4,10 @@ sidebar_position: 4
 ---
 # 2023.3-2024.3
 :::info 短期计划
-- 四月2-Linux vagrant 四月中旬考完RHCE  处理将要过期的视频  - 8-Infrastructure as Code & Automation  (趁着这个五一处理完这部分)
+- 五一计划：
+  - 1 8-Infrastructure as Code & Automation  (趁着这个五一处理完这部分)
+  - 2 RHCE 通关指南 容器命名空间kubelet流程原理基本的文章架构 vagrant yaml 详解
+  - 4 处理视频课程资源
 - 五-六月5-Database [MySQL OCP](https://education.oracle.com/%E4%BA%A7%E5%93%81%E7%9B%AE%E5%BD%95-outrackpath-trackp_888/trackp_888)
 - 七月-八月 考取[AWS SAP](https://aws.amazon.com/cn/certification/certified-solutions-architect-professional/?ch=sec&sec=rmg&d=1)
 - ACE 开发能力和各种中间件和gateway proxy的运维能力
@@ -32,8 +35,6 @@ sidebar_position: 4
 + KR2：[Kubernetes-The-Hard-Way-Translate](/docs/Kubernetes/Kubernetes-The-Hard-Way-Translate) 
     >翻译原文并添加 vagrant/Terraform 实验环境,集成 crowdin 翻译  
     >Kubernetes the hard way on Vagrant on Local Machine. No scripts.  
-+ KR3：[Kubernetes-Enhancement-Proposal-(KEP)-Translate](/docs/Kubernetes/Kubernetes-The-Hard-Way-Translate)
-    >Kubernetes-增强-提案-翻译
   :::tip 日常进度记录
   todolist：
 

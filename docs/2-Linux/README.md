@@ -5,6 +5,7 @@ tags: [Linux]
 ---
 https://people.eecs.berkeley.edu/~brewer/cs262/unix.pdf
 
+http://www.penguintutor.com/linux/
 
 [![Linux Kernel Map](https://raw.githubusercontent.com/makelinux/linux_kernel_map/main/LKM.svg "Linux Kernel Map")](https://makelinux.github.io/kernel/map/)
 
