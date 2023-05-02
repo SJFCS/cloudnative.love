@@ -1,6 +1,6 @@
 {
   "title": {
-    "message": "CloudCNative.love 💕",
+    "message": "CloudNative.love 💕",
     "description": "The title in the navbar"
   },
   "item.label.Docs": {
@@ -56,7 +56,7 @@
     "description": "Navbar item with label Subscribe"
   },
   "logo.alt": {
-    "message": "CloudCNative.love Logo",
+    "message": "CloudNative.love Logo",
     "description": "The alt text of navbar logo"
   }
 }
