@@ -183,9 +183,9 @@ const config = {
         isCloseable: false,
       },
       navbar: {
-        title: 'CloudCNative.love 💕',
+        title: 'CloudNative.love 💕',
         logo: {
-          alt: 'CloudCNative.love Logo',
+          alt: 'CloudNative.love Logo',
           src: 'img/logo.png',
         },
         items: [
