@@ -2,20 +2,11 @@
 title: 目前正在做什么
 sidebar_position: 4
 ---
-# 2023.3-2024.3
-:::info 短期计划
-- 五一计划：
-  - 1 8-Infrastructure as Code & Automation  (趁着这个五一处理完这部分)
-  - 2 RHCE 通关指南 容器命名空间kubelet流程原理基本的文章架构 vagrant yaml 详解
-  - 4 处理视频课程资源
-- 五-六月5-Database [MySQL OCP](https://education.oracle.com/%E4%BA%A7%E5%93%81%E7%9B%AE%E5%BD%95-outrackpath-trackp_888/trackp_888)
-- 七月-八月 考取[AWS SAP](https://aws.amazon.com/cn/certification/certified-solutions-architect-professional/?ch=sec&sec=rmg&d=1)
-- ACE 开发能力和各种中间件和gateway proxy的运维能力
-- 6-Container  3-Continuous Integration & Delivery
-- 八月4-Service Mesh & Service Proxy & Ingress Gateway
-- 十月10-Storage 7-Observability  
-- 十二月Kubernetes-OPS-Guide Kubernetes-The-Hard-Way-Translate Kubernetes-Enhancement-Proposal-Translate 9-Security
-- 明年一月开始 11-Coding Kubernetes-DEV-Notes
+:::info todo
+- 5-6 IaC, Linux, Database, 处理临期资源 [Terraform Associate](https://www.hashicorp.com/certification/terraform-associate) [MySQL OCP](https://education.oracle.com/%E4%BA%A7%E5%93%81%E7%9B%AE%E5%BD%95-outrackpath-trackp_888/trackp_888)
+- 7-8 Kubernetes, CI/CD [AWS SAP](https://aws.amazon.com/cn/certification/certified-solutions-architect-professional/?ch=sec&sec=rmg&d=1)
+- 9-10 Proxy, Observability  [ACE](https://edu.aliyun.com/certification/ace01)
+- 11-12 Storage Security
 :::
 
 ## O1：提升运维开发基础技能

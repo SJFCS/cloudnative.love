@@ -1,3 +1,6 @@
+---
+title: Linux 文件系统
+---
 https://blog.csdn.net/Pipcie/article/details/105060672?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-5-105060672-blog-125421417.235^v27^pc_relevant_landingrelevant&spm=1001.2101.3001.4242.4&utm_relevant_index=8
 
 https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/9/html/managing_storage_devices/monitoring-an-iscsi-session-using-the-iscsiadm-utility_configuring-an-iscsi-initiator
