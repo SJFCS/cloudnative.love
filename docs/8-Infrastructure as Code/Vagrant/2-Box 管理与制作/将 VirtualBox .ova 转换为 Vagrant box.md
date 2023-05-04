@@ -1,14 +1,13 @@
-Here's a step by step guide to convert a Virtualbox .ova to a Vagrant box.
+这是将VirtualBox .OVA转换为Vagrant Box的逐步指南。
 
-1. List your VMs to find the VM id you want to convert:
-
+1.列出您的VM，以查找要转换的VM ID：
 ```
+/c/Program\ Files/Oracle/VirtualBox/VBoxManage.exe 
 $ VBoxManage list vms
 "testing" {a3f59eed-b9c5-4a5f-9977-187f8eb8c4d4}
 ```
 
-2. You can now package the .ova VM as Vagrant box:
-
+2.您现在可以将.OVA VM打包为Vagrant框：
 ```
 $ vagrant package --base a3f59eed-b9c5-4a5f-9977-187f8eb8c4d4 --output name-of-your-box.box
 
@@ -16,17 +15,15 @@ $ vagrant package --base a3f59eed-b9c5-4a5f-9977-187f8eb8c4d4 --output name-of-y
 
 the command `vagrant package` runs for quite some time before it can creates a Vagrant box. Be faithful and wait.
 
-3. Add the new box to the list of local Vagrant boxes:
-
+3.将新box添加到本地：
 ```
 $ vagrant box add new-box-name name-of-your-box.box
 vagrant box add --name
 ```
 
-4. Init, up, ssh and start usign your Vagrant box:
+4. 开始使用你的新镜像
 ```
 $ vagrant init #Init the new box with a Vagrantfile
 $ vagrant up
 $ vagrant ssh
 ```
-And enjoy!

@@ -10,16 +10,29 @@ sidebar_position: 4
 
 - https://developer.hashicorp.com/vagrant/docs/disks/configuration
 - https://stackoverflow.com/questions/49822594/vagrant-how-to-specify-the-disk-size
+```
+在命令行运行以下命令：
+
+vagrant plugin install vagrant-disksize
+并在您的 Vagrantfile 中使用以下内容：
+
+vagrant.configure('2') do |config|
+  config.vm.box = 'ubuntu/xenial64'
+  config.disksize.size = '50GB'
+end
+```
 - https://sleeplessbeastie.eu/2021/05/10/how-to-define-multiple-disks-inside-vagrant-using-virtualbox-provider/
 
+Vagrant本身不提供连接到外部Ceph集群的插件，但是你可以尝试使用第三方插件来简化连接过程。例如，"vagrant-ceph"插件提供了一些命令来连接到Ceph集群并将其挂载到Vagrant虚拟机中。你可以通过以下命令来安装该插件：
 
-```
-VAGRANT_EXPERIMENTAL="disks"
-```
+vagrant plugin install vagrant-ceph
+
+
+
 此功能目前需要使用实验标志。
 
-
-```
+```ruby
+ENV['VAGRANT_EXPERIMENTAL'] = 'disks'
 config.vm.disk :disk, name: "backup", size: "10GB"
 config.vm.disk :dvd, name: "installer", file: "./installer.iso"
 config.vm.disk :floppy, name: "cool_files"
@@ -33,7 +46,7 @@ config.vm.disk :disk, size: "100GB", primary: true
 
 
 例如，此 Ubuntu 客户机现在将配备 100GB 空间，而不是默认空间：
-```
+```ruby
 Vagrant.configure("2") do |config|
   config.vm.define "hashicorp" do |h|
     h.vm.box = "hashicorp/bionic64"

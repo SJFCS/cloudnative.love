@@ -7,6 +7,8 @@ import DocCardList from '@theme/DocCardList';
 
 <DocCardList />
 
+https://fastzhong.com/posts/vagrant/
+
 vagrant global-status --prune
 自动完成
 Vagrant 提供了自动完成命令的能力。目前 支持 bash 和 shell。zsh 这些可以通过运行启用 vagrant autocomplete install --bash --zsh。
