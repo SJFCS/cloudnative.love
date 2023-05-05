@@ -84,7 +84,8 @@ Vagrant.configure("2") do |config|
         ip, network_mode = network.split(':').map(&:strip)
         network_mode = (network_mode&.to_sym || default_config['default_network_mode'])
         puts "#{server['name']} 系统网络:  #{ip} #{network_mode}"
-        node.vm.network network_mode, ip: ip, virtualbox__intnet: false, auto_config: true
+        node.vm.network network_mode, ip: ip, auto_config: true
+        # node.vm.network network_mode, ip: ip, virtualbox__intnet: false, auto_config: true
       end
       
       ## 端口转发

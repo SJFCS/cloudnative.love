@@ -1,5 +1,10 @@
+---
+title: 基础配置
+sidebar_position: 1
+---
 
-##  vagrantfile 配置
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 - https://github.com/wizardbyron/provisioners
 - https://www.itwonderlab.com/en/ansible-kubernetes-vagrant-tutorial/
@@ -11,24 +16,10 @@
 - https://github.com/contiv/netplugin/blob/master/Vagrantfile
 
 
-### 定义虚拟机规格
+## 定义虚拟机规格
 
 <Tabs>
-<TabItem value="方式1">
-
-```ruby
-Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/trusty64"
-    config.vm.provider "virtualbox" do |v|
-    #  highlight-start
-    v.customize ["modifyvm", :id, "--memory", "4096"]
-    v.customize ["modifyvm", :id, "--cpus", "1"]
-    #  highlight-end
-  end
-end
-```
-</TabItem>
-<TabItem value="方式2">
+<TabItem value="通用方式">
 
 ```ruby
 Vagrant.configure("2") do |config|
@@ -41,6 +32,22 @@ Vagrant.configure("2") do |config|
   end
 end
 ```
+
+</TabItem>
+<TabItem value="VirtualBox customize 方式">
+
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/trusty64"
+    config.vm.provider "virtualbox" do |v|
+    #  highlight-start
+    v.customize ["modifyvm", :id, "--memory", "4096"]
+    v.customize ["modifyvm", :id, "--cpus", "1"]
+    #  highlight-end
+  end
+end
+```
+
 </TabItem>
 </Tabs>
 
@@ -55,8 +62,17 @@ end
 - `v.memory` 和 `v.cpus` 更为方便，因为它是通过 Vagrant 提供的 API 直接配置虚拟机的内存和 CPU，**可以跨平台使用**。
 :::
 
-### 复用配置，循环创建主机
 
+## 常用设置
+```ruby
+  config.vm.box = "precise64"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+```
+
+
+## 多机示例
+
+### 循环
 一个简单的示例：
 ```ruby
   Vagrant.configure("2") do |config|
@@ -67,10 +83,10 @@ end
             inline: "echo hello from node #{i}"
         end
       end
-
   end
 ```
 
+### 多机
 `config.vm.define`是Vagrantfile配置文件中用于定义虚拟机的名称和设置的命令。它允许用户定义多个虚拟机并为每个虚拟机定义不同的配置。
 
 例如，以下是一个Vagrantfile配置文件的示例，其中定义了两个虚拟机：web和db。
@@ -92,8 +108,7 @@ end
 在上面的配置文件中，config.vm.define命令定义了两个虚拟机：web和db。每个虚拟机都有自己的配置，例如操作系统镜像和网络设置。这使得用户能够在同一个Vagrantfile中定义多个虚拟机，从而简化了配置和管理。
 
 
-
-https://developer.hashicorp.com/vagrant/docs/vagrantfile/tips
+### 声明配置
 
 您可以使用循环来定义多个虚拟机，同时使用另一个文件来存储共享的配置。例如：
 
@@ -128,79 +143,9 @@ servers.each do |server|
   end
 end
 ```
-3.创建一个名为"shared_provisioning.sh"的文件，其中包含要在所有虚拟机上运行的共享配置。
-```bash
-#!/bin/bash
-
-# 共享配置
-sudo timedatectl set-timezone Asia/Shanghai
-# 更新apt包索引并安装包以允许apt通过 HTTPS 使用存储库：
-sudo apt-get update
-sudo apt-get install \
-   ca-certificates \
-   curl \
-   gnupg \
-   lsb-release
-# 添加 Docker 的官方 GPG 密钥：
-sudo mkdir -m 0755 -p /etc/apt/keyrings
-# 使用以下命令设置存储库：
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-echo \
-"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-# 安装 Docker 引擎
-sudo chmod a+r /etc/apt/keyrings/docker.gpg #避免默认umask可能配置不正确，导致无法检测存储库公钥文件
-sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-sudo usermod -aG docker vagrant
-```
-
-这样，您就可以轻松地扩展Vagrant配置，而无需重复编写相同的代码。
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-```ruby
-https://stackoverflow.com/questions/28471542/cant-ssh-to-vagrant-vms-using-the-insecure-private-key-vagrant-1-7-2
-
-hosts = {
-  "host0" => "192.168.33.10",
-  "host1" => "192.168.33.11",
-  "host2" => "192.168.33.12"
-}
-
-Vagrant.configure("2") do |config|
-  config.vm.box = "precise64"
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
-  config.ssh.private_key_path = File.expand_path('~/.vagrant.d/insecure_private_key')
-
-  hosts.each do |name, ip|
-    config.vm.define name do |machine|
-      machine.vm.hostname = "%s.example.org" % name
-      machine.vm.network :private_network, ip: ip
-      machine.vm.provider "virtualbox" do |v|
-          v.name = name
-      #    #v.customize ["modifyvm", :id, "--memory", 200]
-      end
-    end
-  end
-end
-```
-
-### 覆盖配置
+## 覆盖配置
 
 ```ruby
 Vagrant.configure("2") do |config|
@@ -213,7 +158,7 @@ end
 ```
 在上述情况下，Vagrant 将默认使用“ubuntu/trusty64”，但如果使用 VMware Fusion 提供程序，则会使用“centos/7”。
 
-### 兼容多个 Provider 的示例：
+## 兼容多个 Provider 的示例：
 
 <Tabs>
 <TabItem value="全局配置">
@@ -280,60 +225,10 @@ end
 
 使用循环可以使配置更加简洁和易于维护，特别是当需要兼容多个 Provider 时。
 
-### 挂载目录
-```ruby
-config.vm.synced_folder   
-   "your_folder"(必须)   //物理机目录，可以是绝对地址或相对地址，相对地址是指相对与vagrant配置文件所在目录
-  ,"vm_folder(必须)"    // 挂载到虚拟机上的目录地址
-  ,create(boolean)--可选     //默认为false，若配置为true，挂载到虚拟机上的目录若不存在则自动创建
-  ,disabled(boolean):--可选   //默认为false，若为true,则禁用该项挂载
-  ,owner(string):'www'--可选   //虚拟机系统下文件所有者(确保系统下有该用户，否则会报错)，默认为vagrant
-  ,group(string):'www'--可选   //虚拟机系统下文件所有组( (确保系统下有该用户组，否则会报错)，默认为vagrant
-  ,mount_options(array):["dmode=775","fmode=664"]--可选  //dmode配置目录权限，fmode配置文件权限  默认权限777
-  ,type(string):--可选     //指定文件共享方式，例如：'nfs'，vagrant默认根据系统环境选择最佳的文件共享方式
-```
-
-```ruby
-config.vm.define "master" do |device|
-  device.vm.network "private_network", ip: "192.168.3.100"
-  device.vm.hostname = "master"
-  device.vm.provider "virtualbox" do |vb|
-    vb.memory = "2048"
-    vb.cpus = 2
-    vb.name = "master"
-  end
-  device.vm.synced_folder "./share_dir", "/vagrant", create: true, owner: "root", group: "root", mount_options: ["dmode=755","fmode=644"], type: "rsync"
-end
-
-```
-
-vagrant-vbguest是一个Vagrant插件，它会自动在来宾系统上安装主机的 VirtualBox Guest Additions。
-- https://github.com/dotless-de/vagrant-vbguest
-
-```
-vagrant plugin install vagrant-vbguest
-```
-
-```
-vagrant reload --provision
-```
 
 
-在默认情况下，文件同步会有一些性能问题，因为它是通过 VirtualBox 的共享文件夹功能实现的。如果需要更好的性能和可靠性，可以考虑使用其他文件同步方式，比如 NFS 或 rsync。例如，下面的配置将使用 NFS 来进行文件同步：
-
-需要注意的是，使用 NFS 或 rsync 进行文件同步可能需要安装额外的软件，并且在不同的操作系统上配置方式可能会有所差异。
-
-然后ssh连接到服务器。因为系统调用fstab的时候，Virtualbox的共享目录的模块还没有加载，所以我之前安装总是失败。最终的解决方案如下：在文件 /etc/rc.local 中（用root用户）追加如下命令
-
-```bash
-mount -t vboxsf sharing /mnt/share
-```
-
-
-
-
-### ssh 配置
-#### 用户名密码登录
+## ssh 配置
+### 用户名密码登录
 ```
 #  官方提供的镜像的账号都是不允许远程登录的，所有配官方镜像的congfig不应该添加config.ssh.username参数，否则创建虚拟机时多次尝试ssh登录，都会失败，浪费大量时间
 #  个人镜像设置远程登录了，可以使用username和password参数
@@ -410,7 +305,7 @@ Host db
 
 https://developer.hashicorp.com/vagrant/docs/vagrantfile/ssh_settings
 
-### 指定账号密码登录
+## 指定账号密码登录
 ```ruby
     manager1.ssh.username = "vagrant"
     manager1.ssh.password = "vagrant"
@@ -422,7 +317,7 @@ vi /etc/ssh/sshd_config
 service sshd restart
 ```
 
-### 默认 vagrant ssh
+## 默认 vagrant ssh
 
 
 ```bash
@@ -475,7 +370,7 @@ end
 ```
 上面代码中
 
-### 配置添加到sshconfig文件中
+## 配置添加到sshconfig文件中
 
 Vagrant默认情况下不会将SSH配置添加到sshconfig文件中，因为这可能会干扰其他SSH设置。但是，您可以使用以下命令将Vagrant SSH配置添加到sshconfig文件中：
 
@@ -505,71 +400,3 @@ node1.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/aut
 
 
 
-
-
-## vagrant 管理
-### 快照
-
-安装Vagrant快照插件：
-```bash
-vagrant plugin install vagrant-vbox-snapshot
-```
-```bash
-$ vagrant snapshot
-Usage: vagrant snapshot <command> [<args>]
-
-Available subcommands:
-     back
-     delete
-     go
-     list
-     take
-
-For help on any individual command run `vagrant snapshot <command> -h
-```
-
-使用方法：
-
-- 创建一个快照
-    ```bash
-    vagrant snapshot take "Name"
-    ```
-- 查看快照列表
-    ```bash
-    vagrant snapshot list
-    ```
-- 从指定快照中恢复
-    ```bash
-    vagrant snapshot go "Name"
-    ```
-- 删除一个快照
-    ```bash
-    vagrant snapshot delete "Name"
-    ```
-
-### 不想在 vagrant reload 的时候重复的运行一些任务
-
-你可以使用 Vagrant 的 provision flag 来控制是否运行某些任务。在 Vagrantfile 中，你可以为每个 provisioner 指定一个唯一的标识符，并在运行 vagrant reload 时指定哪些标识符应该被运行。
-
-例如，假设你有一个名为 "shell" 的 shell provisioner：
-
-```ruby
-config.vm.provision "shell", inline: "echo 'Hello, World!'"
-```
-
-你可以为该 provisioner 指定一个标识符：
-
-```ruby
-config.vm.provision "shell", id: "hello_world", inline: "echo 'Hello, World!'"
-```
-
-然后，在运行 vagrant reload 时，你可以使用 --provision-with 标志来指定要运行的 provisioner，如下所示：
-
-```bash
-vagrant reload --provision-with hello_world
-```
-
-这将只运行标识符为 "hello_world" 的 provisioner，而不运行其他 provisioner。
-
-
-https://junmajinlong.com/virtual/vagrant/vagrant_snapshot/

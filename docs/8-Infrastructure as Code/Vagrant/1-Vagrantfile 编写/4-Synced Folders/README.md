@@ -3,47 +3,29 @@ title: Synced Folders
 sidebar_position: 5
 ---
 
-
-```
-default_synced_folder:
-create: true
-owner: vagrant
-group: vagrant
-mount_options: ["dmode=755", "fmode=644"]
-type: virtualbox # virtualbox、NFS 或 rsync
-
-
-## 共享目录
-server['mount']&.each do |mount|
-mount_point, mount_path = mount.split(':').map(&:strip)
-puts "#{server['name']} 挂载目录:  #{mount_point} -> #{mount_path}"
-# node.vm.synced_folder mount_point, mount_path, default_synced_folder
-node.vm.synced_folder mount_point, mount_path, default_config['default_synced_folder']
-end 
-```
-
-使用sync共享目录创建阿里云主机
-
-本机要安装rsnyc
+## 挂载目录
 
 ```ruby
 Vagrant.configure("2") do |config|
-  config.vm.box = "generic/alpine39"
-  config.vm.provider "aliyun" do |aliyun, override|
-    override.vm.synced_folder ".", "/vagrant", type: "rsync"
-  end
+  # ...
+  device.vm.synced_folder "your_folder", "vm_folder",  #(必须)物理机目录 虚拟机上的目录
+  create: true,#--可选     //默认为false，若配置为true，挂载到虚拟机上的目录若不存在则自动创建
+  owner: "vagrant",#--可选   //虚拟机系统下文件所有者(确保系统下有该用户，否则会报错)，默认为vagrant
+  group: "vagrant",#--可选   //虚拟机系统下文件所有组( (确保系统下有该用户组，否则会报错)，默认为vagrant
+  mount_options: ["dmode=755","fmode=644"], #--可选  //dmode配置目录权限，fmode配置文件权限  默认权限777
+  type: "rsync", #--可选     //指定文件共享方式，例如：'nfs'，vagrant默认根据系统环境选择最佳的文件共享方式
+  disabled: "false" #--可选   //默认为false，若为true,则禁用该项挂载
+
 end
 ```
-安装vagrant-aliyun插件：
-```bash
-vagrant plugin install vagrant-aliyun
+
+vagrant-vbgues t是一个Vagrant插件，它会自动在来宾系统上安装主机的 VirtualBox Guest Additions。
+- https://github.com/dotless-de/vagrant-vbguest
+
+```
+vagrant plugin install vagrant-vbguest
 ```
 
-配置阿里云的访问密钥和秘钥：
+在默认情况下，文件同步会有一些性能问题，因为它是通过 VirtualBox 的共享文件夹功能实现的。如果需要更好的性能和可靠性，可以考虑使用其他文件同步方式，比如 NFS 或 rsync。例如，下面的配置将使用 NFS 来进行文件同步：
 
-```bash
-export ALICLOUD_ACCESS_KEY="your_access_key"
-export ALICLOUD_SECRET_KEY="your_secret_key"
-```
-
-vagrant up --provider=aliyun
+需要注意的是，使用 NFS 或 rsync 进行文件同步可能需要安装额外的软件，并且在不同的操作系统上配置方式可能会有所差异。
