@@ -1,3 +1,11 @@
+---
+title: VirtualBox .ova 转换为 Vagrant box 逐步指南
+---
+
+:::tip
+来自：https://gist.github.com/aondio/66a79be10982f051116bc18f1a5d07dc
+:::
+
 这是将VirtualBox .OVA转换为Vagrant Box的逐步指南。
 
 1.列出您的VM，以查找要转换的VM ID：

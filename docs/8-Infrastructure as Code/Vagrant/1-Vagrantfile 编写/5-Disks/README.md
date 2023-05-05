@@ -2,26 +2,22 @@
 title: Disks
 sidebar_position: 4
 ---
+:::tip
+参考文档：https://developer.hashicorp.com/vagrant/docs/disks/configuration
+:::
 
-
-
-
-
-
-- https://developer.hashicorp.com/vagrant/docs/disks/configuration
-- 
 较旧版本的 vagrant 可使用 vagrant-disksize 插件来创建磁盘 详见：https://stackoverflow.com/questions/49822594/vagrant-how-to-specify-the-disk-size
-```
-在命令行运行以下命令：
-
+```bash
 vagrant plugin install 
-并在您的 Vagrantfile 中使用以下内容：
-
+```
+```ruby
 vagrant.configure('2') do |config|
   config.vm.box = 'ubuntu/xenial64'
   config.disksize.size = '50GB'
 end
 ```
+
+
 - https://sleeplessbeastie.eu/2021/05/10/how-to-define-multiple-disks-inside-vagrant-using-virtualbox-provider/
 
 Vagrant本身不提供连接到外部Ceph集群的插件，但是你可以尝试使用第三方插件来简化连接过程。例如，"vagrant-ceph"插件提供了一些命令来连接到Ceph集群并将其挂载到Vagrant虚拟机中。你可以通过以下命令来安装该插件：

@@ -34,6 +34,6 @@ https://stackoverflow.com/questions/16647069/should-i-use-vagrant-or-docker-for-
 | `vagrant ssh-config [options] [name or id]`              | 输出用于 ssh 连接的一些信息                    |
 | `vagrant status [name or id]`                            | 获取当前虚拟机的状态                           |
 
-## results matching ""
+我不想执行vagrant up 创建虚拟机，因为那样做太慢了，不利于调试。
 
-## No results matching ""
+您可以使用 vagrant validate 命令验证Vagrantfile文件的语法和结构是否正确。这将帮助您快速发现任何潜在的错误或问题，并使您能够快速进行调试，而无需等待虚拟机启动的时间。如果您想检查配置设置是否正确，也可以使用 vagrant provision --dry-run 命令来模拟部署过程并检查输出结果。这些命令都不会创建虚拟机实例，因此它们非常适合在调试期间使用。

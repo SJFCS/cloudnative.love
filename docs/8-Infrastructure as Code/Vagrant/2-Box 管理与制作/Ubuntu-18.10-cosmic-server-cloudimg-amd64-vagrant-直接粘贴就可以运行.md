@@ -1,5 +1,16 @@
 #### 前提：在命令运行的目录路径下准备好 Ubuntu-18.10-cosmic-server-cloudimg-amd64-vagrant.box
+
 ```
+# 修改PubkeyAuthentication 和 PasswordAuthentication 参数
+PubkeyAuthentication yes #这两项为打开公钥模式
+PasswordAuthentication yes #打开密码验证模式
+# 重启sshd服务
+systemctl restart sshd
+```
+
+```
+
+
 # 步骤01 导入vagrant官方的ubuntu-1804虚拟机模板
 vagrant box add Ubuntu-18.10-cosmic-server-cloudimg-amd64 Ubuntu-18.10-cosmic-server-cloudimg-amd64-vagrant.box
 
