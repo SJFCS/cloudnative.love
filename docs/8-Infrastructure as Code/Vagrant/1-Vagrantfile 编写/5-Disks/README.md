@@ -9,11 +9,12 @@ sidebar_position: 4
 
 
 - https://developer.hashicorp.com/vagrant/docs/disks/configuration
-- https://stackoverflow.com/questions/49822594/vagrant-how-to-specify-the-disk-size
+- 
+较旧版本的 vagrant 可使用 vagrant-disksize 插件来创建磁盘 详见：https://stackoverflow.com/questions/49822594/vagrant-how-to-specify-the-disk-size
 ```
 在命令行运行以下命令：
 
-vagrant plugin install vagrant-disksize
+vagrant plugin install 
 并在您的 Vagrantfile 中使用以下内容：
 
 vagrant.configure('2') do |config|
