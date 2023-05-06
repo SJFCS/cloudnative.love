@@ -9,12 +9,10 @@ import DocCardList from '@theme/DocCardList';
 
 https://fastzhong.com/posts/vagrant/
 
-vagrant global-status --prune
-自动完成
-Vagrant 提供了自动完成命令的能力。目前 支持 bash 和 shell。zsh 这些可以通过运行启用 vagrant autocomplete install --bash --zsh。
+## 自动补全
+Vagrant 提供了自动完成命令的能力。目前 支持 bash 和 shell。zsh 这些可以通过运行启用 `vagrant autocomplete install --bash --zsh`
 
-destroy 只删除虚拟机而不会删除 box 如果想删除 box 请运行 vagrant box remove xx
-https://stackoverflow.com/questions/16647069/should-i-use-vagrant-or-docker-for-creating-an-isolated-environment
+## 常用命令
 
 | 命令                                                     | 简单说明                                       |
 | -------------------------------------------------------- | ---------------------------------------------- |
@@ -34,6 +32,7 @@ https://stackoverflow.com/questions/16647069/should-i-use-vagrant-or-docker-for-
 | `vagrant ssh-config [options] [name or id]`              | 输出用于 ssh 连接的一些信息                    |
 | `vagrant status [name or id]`                            | 获取当前虚拟机的状态                           |
 
-我不想执行vagrant up 创建虚拟机，因为那样做太慢了，不利于调试。
 
-您可以使用 vagrant validate 命令验证Vagrantfile文件的语法和结构是否正确。这将帮助您快速发现任何潜在的错误或问题，并使您能够快速进行调试，而无需等待虚拟机启动的时间。如果您想检查配置设置是否正确，也可以使用 vagrant provision --dry-run 命令来模拟部署过程并检查输出结果。这些命令都不会创建虚拟机实例，因此它们非常适合在调试期间使用。
+`vagrant global-status` 会列出当前系统上所有 Vagrant 管理的虚拟机的状态，包括虚拟机的 ID、名称、状态、所在目录等信息。而 --prune 选项会在列出虚拟机状态的同时，删除所有已经不存在的虚拟机记录，以避免记录残留，节省系统资源。
+
+如果不想执行vagrant up 创建虚拟机，因为那样做太慢了，不利于调试。您可以使用 `vagrant validate` 命令验证 Vagrantfile 文件的语法和结构是否正确。这将帮助您快速发现任何潜在的错误或问题，并使您能够快速进行调试，而无需等待虚拟机启动的时间。如果您想检查配置设置是否正确，也可以使用 `vagrant provision --dry-run` 命令来模拟部署过程并检查输出结果。这些命令都不会创建虚拟机实例，因此它们非常适合在调试期间使用。

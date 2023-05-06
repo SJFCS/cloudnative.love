@@ -19,8 +19,6 @@ sidebar_position: 1
 ### 安装ansible命令参数
 
 ```
-yum install ansible 
-
 ansible <host-pattern> [options]
 --version	#显示ansible版本信息
 -i			#指定主机清单文件路径，默认是在/etc/ansible/hosts

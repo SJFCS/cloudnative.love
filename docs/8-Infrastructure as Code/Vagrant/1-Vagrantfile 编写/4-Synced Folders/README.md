@@ -2,7 +2,9 @@
 title: Synced Folders
 sidebar_position: 5
 ---
-
+:::tip
+参考文档：https://developer.hashicorp.com/vagrant/docs/synced-folders
+:::
 ## 挂载目录
 
 ```ruby

@@ -1,8 +1,0 @@
-Vagrant.configure("2") do |config|
-  config.ssh.insert_key = false
-  config.ssh.private_key_path = ["~/.ssh/id_rsa", "~/.vagrant.d/insecure_private_key"]
-  config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
-  config.vm.box = "ubuntu/focal64"
-end
-
-# 开启 config.ssh.insert_key = false 后.ssh/authorized_keys 会添加一条非安全公钥 vagrant insecure public key

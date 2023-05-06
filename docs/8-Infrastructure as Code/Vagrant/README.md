@@ -38,14 +38,34 @@ Vagrant 将虚拟机镜称为为 Box
     config.vm.network "private_network", ip: "192.168.56.10"
   end
   ```
-- 启动,连接,关闭,销毁虚拟机
+- 启动,连接,关闭和销毁虚拟机
   ```bash
   vagrant up      # 启动虚拟机
   vagrant ssh     # 连接虚拟机
   vagrant halt    # 关闭虚拟机
-  vagrant destroy # 删除虚拟机
+  vagrant destroy # 删除虚拟机 
   ```
 
 如果要学习更多高级用法请继续阅读本文档。
+```
+更多用法如暂停,快照等详见文档
 
+vagrant suspend [name|id]
+
+https://developer.hashicorp.com/vagrant/docs/cli/upload
+
+  # vagrant snapshot中 “push”和“pop”用于管理当前虚拟机的本地快照，而“save”和“restore”用于管理当前虚拟机的全局快照，无论是本地还是远程。
+
+  vagrant snapshot push # 将当前虚拟机的状态保存为一个新的本地快照，并将该快照推送到快照栈顶部。
+  vagrant snapshot pop  # 将当前虚拟机恢复到上一个本地快照的状态，并将该快照从快照栈中弹出
+    --[no-]provision- 强制供应商运行（或阻止他们这样做）。
+    --no-delete- 防止在恢复后删除快照（以便您以后可以再次恢复到同一点）。
+    --no-start- 防止来宾在恢复后启动
+  vagrant snapshot save [vm-name] NAME # 将当前虚拟机的状态保存为一个全局快照，并将该快照上传到远程快照存储库（如果配置了的话）。可以使用
+  vagrant snapshot restore [vm-name] NAME # 将当前虚拟机恢复到指定的全局快照的状态。
+    --[no-]provision- 强制供应商运行（或阻止他们这样做）。
+    --no-start- 防止来宾在恢复后启动
+  vagrant snapshot list
+  vagrant snapshot delete [vm-name] NAME
+```
 <DocCardList />

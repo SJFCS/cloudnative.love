@@ -5,16 +5,9 @@ tags: [Infrastructure as Code & Automation,Ansible]
 
 ![1682902674876](image/README/1682902674876.png)
 
-Ansible是一种自动化配置管理工具，可用于自动化执行多步骤部署和管理操作。可视化平台可以使Ansible的管理更加简单和可视化。以下是使用可视化平台管理Ansible的步骤：
+Ansible是一种自动化配置管理工具，可用于自动化执行多步骤部署和管理操作。
 
-安装可视化平台：有许多Ansible可视化平台可供选择，例如：Ansible Tower，Rundeck，AWX，ansible-cmdb等。在选择之后，根据平台提供的文档，遵循平台的安装指南，在服务器上安装平台。
-
-
-
-
-
-
-
+Ansible可视化平台可供选择，例如：Ansible Tower，Rundeck，AWX，ansible-cmdb等。
 
 
 - https://galaxy.ansible.com/

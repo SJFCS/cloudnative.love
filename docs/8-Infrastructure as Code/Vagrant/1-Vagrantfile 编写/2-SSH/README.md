@@ -65,29 +65,6 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-```
-    sed --in-place=.bak -r 's/^#?(PermitRootLogin|PermitEmptyPasswords|PasswordAuthentication|X11Forwarding) yes/\1 no/' /etc/ssh/sshd_config
-
-
-# 这个命令的作用是修改 SSH 服务的配置文件 /etc/ssh/sshd_config，禁用某些不安全的选项。具体来说，这个命令使用了 sed 工具来执行以下操作：
-# 使用正则表达式搜索 /etc/ssh/sshd_config 中，包含以下四个参数之一的行，以及 "yes"：
-# PermitRootLogin
-# PermitEmptyPasswords
-# PasswordAuthentication
-# X11Forwarding
-# 对于找到的行，将其中的 "yes" 替换为 "no"，表示关闭对应的功能。
-# 注意，如果这行以 "#" 开头，表示是注释行，也需要进行修改，将 "#" 后面的 "yes" 替换为 "no"。
-# 最后，将修改后的内容直接写回到 /etc/ssh/sshd_config 文件中，并将原文件备份为 .bak 文件。
-# 总之，这个命令用于自动执行一些常见的 SSH 安全设置，以确保系统的安全性。
-
-# 删除 authorized_keys 文件中包含 "vagrant insecure public key" 的行。
-    sed --in-place=.bak '/== vagrant insecure public key$/d' /home/vagrant/.ssh/authorized_keys
-# 去除 authorized_keys 文件中所有重复的行。
-    sed --in-place=.bak '$!N; /^\(.*\)\n\1$/!P; D' /home/vagrant/.ssh/authorized_keys
-
-```
-
-
 ## ssh-config
 
 Vagrant默认情况下不会将SSH配置添加到sshconfig文件中，因为这可能会干扰其他SSH设置。但是，您可以使用以下命令将Vagrant SSH配置添加到sshconfig文件中：
