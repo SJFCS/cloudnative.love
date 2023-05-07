@@ -32,7 +32,7 @@ end
 
 如果在配置文件中没有指定密钥路径，则 Vagrant 会默认使用 ~/.vagrant.d/insecure_private_key 作为私钥，没有默认的公钥路径。需要手动复制私钥内容到虚拟机的 authorized_keys 文件中。
 
-开启 config.ssh.insert_key = false 后.ssh/authorized_keys 会添加一条非安全公钥 vagrant insecure public key
+开启 config.ssh.insert_key = false 后.ssh/authorized_keys 会使用非安全公钥 vagrant insecure public key。如下我们将本地公钥`~/.ssh/id_rsa.pub` 添加到虚拟机中:
 ```ruby
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/focal64"
@@ -66,13 +66,6 @@ end
 ```
 
 ## ssh-config
-
-Vagrant默认情况下不会将SSH配置添加到sshconfig文件中，因为这可能会干扰其他SSH设置。但是，您可以使用以下命令将Vagrant SSH配置添加到sshconfig文件中：
-
-```bash
-vagrant ssh-config --host <host-name> >> ~/.ssh/config
-```
-其中，`<host-name>`是您在Vagrantfile中定义的主机名称。该命令将Vagrant SSH配置附加到sshconfig文件中的末尾，而不会覆盖现有配置。这使您可以轻松地管理多个SSH配置，并避免冲突。
 
 当使用 Vagrant 启动多个虚拟机时，每个虚拟机都会在本地分配一个不同的 SSH 端口。默认情况下，Vagrant 将使用端口范围为 2200 到 2250 的随机端口，以避免端口冲突。这些端口会被映射到虚拟机的 22 端口，以便在本地使用 SSH 连接到虚拟机。
 
@@ -114,3 +107,8 @@ Host db
   IdentitiesOnly yes
 ```
 
+Vagrant默认情况下不会将SSH配置添加到sshconfig文件中，因为这可能会干扰其他SSH设置。但是，您可以使用以下命令将Vagrant SSH配置添加到sshconfig文件中：
+
+```bash
+vagrant ssh-config --host <host-name> >> ~/.ssh/config
+```

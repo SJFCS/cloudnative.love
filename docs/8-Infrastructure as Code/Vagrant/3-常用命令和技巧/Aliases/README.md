@@ -8,13 +8,11 @@ title: Aliases
 Aliases 别名可以在 `VAGRANT_HOME/aliases` 文件中定义，也可以在使用环境变量定义的自定义文件中定义 `VAGRANT_ALIAS_FILE`。
 
 ## 内部别名
-内部命令别名直接调用 CLI 类，允许您将一个 Vagrant 命令作为另一个 Vagrant 命令的别名。此技术对于创建您认为应该存在的命令非常有用。例如，如果vagrant stop感觉比 更直观vagrant halt，则以下别名定义将使该更改成为可能：
+内部命令别名直接调用 CLI 类，允许您将一个 Vagrant 命令作为另一个 Vagrant 命令的别名，例如：
 ```bash
-# 基本命令级别名
 start = up 
-stop =  halt 
-# 高级命令行别名
-eradicate =  ! vagrant destroy &&  rm -rf .vagrant
+stop =  halt
+clean =  ! vagrant destroy &&  rm -rf .vagrant
 ```
 
 ## 外部别名
@@ -27,6 +25,6 @@ metrics = !ps aux | grep "[V]BoxHeadless" | grep $(cat .vagrant/machines/default
 
 上面的别名，来自一个活动的 Vagrant 项目的上下文，将 CPU 和内存利用率直接打印到控制台：
 
-```
+```bash
 CPU: 4.20%, Memory: 11.00%
 ```

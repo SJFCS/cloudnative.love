@@ -23,6 +23,7 @@ Vagrant.configure("2") do |config|
   end
 end
 ```
+然后 `vagrant up` 启动虚拟机
 ## 导出虚拟机
 ```bash
 vagrant package --base=Ubuntu-18.10-cosmic-server-cloudimg-amd64 --output=Ubuntu-18.10-cosmic-server-cloudimg-amd64-vagrant.box
