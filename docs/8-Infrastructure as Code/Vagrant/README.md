@@ -49,3 +49,7 @@ Vagrant 将虚拟机镜称为为 Box
 更多用法请继续阅读本文档。
 
 <DocCardList />
+
+
+## FQA
+- https://serverfault.com/questions/453185/vagrant-virtualbox-dns-10-0-2-3-not-working

@@ -3,6 +3,9 @@ title: Playbook
 sidebar_position: 3
 ---
 
+https://www.devopsschool.com/blog/understanding-ansible-playbook-using-diagram/
+
+https://redian.news/wxnews/256183
 ## Playbook简介
 
 **1.什么是playbook，playbook翻译过来就是“剧本”，那playbook组成如下**
