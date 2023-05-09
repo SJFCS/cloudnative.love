@@ -1,6 +1,21 @@
 ---
 title: SSH!!
 ---
+
+```bash
+ssh-agent bash
+ssh-add <ssh-key-path>
+# ssh-agent bash: 启动 SSH 代理并打开一个新的 shell 环境。SSH 代理是一个进程，它可以管理用户的 SSH 密钥并使得用户不需要重复地输入密码进行 SSH 认证。在使用 SSH 连接时，每次需要使用私钥进行认证操作，使用 SSH 代理可以减少重复输入密码的次数，并提高 SSH 连接的安全性。
+
+# ssh-add <ssh-key-path>：将指定路径下的 SSH 密钥加载到 SSH 代理中。在使用 SSH 代理时，需要手动将 SSH 密钥添加到代理中，才能使用代理进行 SSH 认证操作。只要 SSH 代理存活（例如使用 ssh-agent bash 命令开启的代理），则添加的 SSH 密钥会一直保存在代理中，直到代理被关闭或密钥被手动删除。
+
+# ansible [pattern] -m [module] -u [remote user] -a "[module options]"
+# -u root     # 使用 root 账户登录远程主机，这个对应前面 playbook 中的 remote_user
+# all         # [pattern]，all 表示选中 my-hosts 中的所有主机
+# -m [module] # 指定使用的 ansible 模块，默认使用 `command`，即在远程主机上执行 -a 参数中的命令
+# -a "ls -al"    # 指定 module 的参数，这里是提供给 `command` 模块的参数。
+```
+
 为什么 ssh 密钥默认为 600 而不是 400？authorized_keys 不可变？
 - https://www.reddit.com/r/linux4noobs/comments/bjpbnl/why_are_ssh_keys_600_and_not_400_by_default/
 

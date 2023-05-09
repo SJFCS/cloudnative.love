@@ -181,8 +181,18 @@ This action is caution
 <details>
 <summary>下拉框示例</summary>
 
-The date will be excised from the path and appended to the beginning of the URL slug.
+处展开内容
 
+</details>
+
+<details style={{backgroundColor: 'rgb(255, 248, 230)', border: '1px solid rgb(230, 167, 0)'}}>
+  <summary>点击此处展开内容</summary>
+  处展开内容
+</details>
+
+<details style={{backgroundColor: '#e9f5e7', border: '1px solid rgb(230, 167, 0)'}}>
+  <summary>点击此处展开内容</summary>
+  处展开内容
 </details>
 
 ## 卡片组

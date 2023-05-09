@@ -5,7 +5,7 @@ sidebar_position: 1
 import CodeBlock from '@theme/CodeBlock';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import vagrantfile from '!!raw-loader!../Ansible-Playground/vagrantfile';
+import vagrantfile from '!!raw-loader!../Ansible-Playground/Vagrantfile';
 import config from '!!raw-loader!../Ansible-Playground/config.yaml';
 
 本节带你快速入门使用 Ansible，包括 Ansible 配置、Invenytory 与 Ad-Hoc 的使用方法。
@@ -70,40 +70,77 @@ Ansible 默认情况下也会使用这个指纹对主机进行验证，因此我
   # 添加 -H 参数，只保存主机 IP/域名的 hash 值，更安全
   ```
 
+- ping 模块
+  ```shell
+  # 使用环境变量 ANSIBLE_HOST_KEY_CHECKING 临时关闭主机指纹检查
+  ANSIBLE_HOST_KEY_CHECKING=false ansible -i inventory.yaml all -m ping
+  ```
+
+  经测试，不论登录成功与否，`ping` 模块都会自动将所有主机的指纹添加到 known_hosts 中。
+  但是在 ping 的文档里没有讲到这个功能，这算是未定义行为。
+
+
+- 其他方法
+  - 参考中有个问答，里面有人提供了一个 playbook 批量添加指纹，但是该方法**不支持「主机别名」**！
+  - 该 playbook 会将别名当作 host 解析，根本不理会 `ansible_host` 参数。
+  - 另外测试发现它用到了 ansbile 的 local 连接，而这种用法在 wsl1(ubuntu) 上无法使用，会报权限错误。
+  ```yaml
+  ---
+  - hosts: all
+    connection: local
+    gather_facts: no
+    tasks:
+      - name: Scan host fingerprint
+        command: ssh-keyscan -H {{ inventory_hostname }},{{ ansible_host }}
+        register: fingerprint
+
+      - debug:
+          var: fingerprint.stdout_lines
+  ```
+- 自己写个小脚本读取 `ansible-inventory -i xxx.yml --list` 输出的 json，将它转换成 `ssh-keyscan` 可读的文本。
+
+- 可以使用Ansible的"ssh_host_key_fingerprint"模块来批量扫描主机指纹。该模块可以通过SSH连接到目标主机，并返回其公钥指纹。以下是一个示例Ansible playbook：
+
+  ```yaml
+  - hosts: all
+    gather_facts: no
+    tasks:
+      - name: Get SSH fingerprint
+        ssh_host_key_fingerprint:
+        register: ssh_fingerprint
+      - debug:
+          var: ssh_fingerprint.stdout_lines
+  ```
+  需要在Ansible控制节点上安装sshpass和ssh-keyscan工具。
 :::caution
-不建议修改 ansible.cfg 使 `host_key_checking = False` 或者设置变量 `ANSIBLE_HOST_KEY_CHECKING=false` 跳过检查主机指纹。
+不建议修改 ansible.cfg 使 `host_key_checking = False` 或设置变量 `ANSIBLE_HOST_KEY_CHECKING=false` 跳过检查主机指纹，这可能会连接到了黑客伪造的主机。
 :::
 
 ### 设置免密登录
 
-Ansible 通过 SSH 协议连接远程主机进行操作，为了安全考虑建议通过密钥免密连接而不是密码，如果使用密码则 Ansible 会使用 sshpass 来实现自动登录，这被认为是不安全的。
+Ansible 通过 SSH 协议连接远程主机进行操作，为了安全考虑建议通过密钥免密连接而不是密码，如果使用密码则 Ansible 会使用 
+sshpass 来实现自动登录，这被认为是不安全的。
+
+<details style={{backgroundColor: 'rgb(255, 248, 230)', border: '1px solid rgb(230, 167, 0)'}}>
+<summary>sshpass 安全问题和建议</summary>
 
 :::caution
 sshpass 存在以下安全问题：
 - 密码以明文形式传递，在查看 sshpass 进程时，可能会获取到密码。这是因为在某些系统中，命令行参数会被保存在进程的环境变量中，因此密码可能会被保存在 sshpass 进程的环境变量中。
-- 手动运行 sshpass 时密码存储在命令行历史记录中，可能会被其他用户（如管理员）查看。
-:::
+- 当手动运行 sshpass 时密码存储在命令行历史记录中，可能会被其他用户（如管理员）查看。
 
 如果非要使用密码建议：
-- 请不要直接将密码明文写在 inventory 中，请将密码作为外置变量引入并使用 vault 来加密。
-- 在使用 sshpass 命令时，使用 -e 选项来禁用密码在环境变量中的传递。
+- 不要直接将密码明文写在 inventory 中，请将密码作为外置变量引入并使用 vault 来加密。
+- 在手动运行 sshpass 命令时，使用 -e 选项来禁用密码在环境变量中的传递。
 - 限制 sshpass 进程的访问权限，避免不必要的特权用户访问进程，从而减少密码泄露的风险。
+:::
 
-control 节点上创建密钥对并分发给其他 node 节点
-```bash
-ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa -q && cat ~/.ssh/id_rsa.pub  
-sshpass -p <your_passwd>  ssh-copy-id -i ~/.ssh/id_rsa.pub <user@IP>
-```
+</details>
 
-vagrant 默认禁止密码登录，需要登录 node 节点上手动导入 control 节点的公钥
-```bash
-# 手动在需要免密的节点上做以下配置
-mkdir -p -m 700 ~/.ssh
-echo "<control_public_key>" >> ~/.ssh/authorized_keys
-chmod 600 .ssh/authorized_keys
-```
+<details>
+<summary>SSH 安全配置选项</summary>
 
-:::infoSSH安全配置选项
+:::info
 大量的远程主机都使用同一个密码提供 ssh 远程登录是很不安全的，一般都建议所有主机都只开启私钥登录，禁用密码登录。相关配置在主机的 `/etc/ssh/sshd_config` 中。可使用如下脚本进行设置。
 
 ```bash
@@ -131,14 +168,33 @@ sudo sed -i.bak -r \
 sudo cat /etc/ssh/sshd_config | grep -e "PubkeyAuthentication" -e "PermitRootLogin" -e "PasswordAuthentication" -e "PermitEmptyPasswords" -e "X11Forwarding"
 ```
 :::
+</details>
+
+在 control 节点上创建密钥对并分发给其他 node 节点。
+```bash
+# 创建密钥对
+ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa -q && cat ~/.ssh/id_rsa.pub  
+# 分发公钥
+sshpass -p <your_passwd> ssh-copy-id -i ~/.ssh/id_rsa.pub <user@IP>
+```
+
+vagrant 默认禁止密码登录，需要登录 node 节点上手动导入 control 节点的公钥。
+```bash
+# 手动在需要免密的节点上做以下配置
+mkdir -p -m 700 ~/.ssh
+echo "<control_public_key>" >> ~/.ssh/authorized_keys
+chmod 600 .ssh/authorized_keys
+```
+
+
 
 ### 设置 sudo 权限
 Vagrant 在创建虚拟机时，会在 `/etc/sudoers.d` 目录下创建一个名为 `vagrant` 的文件，该文件包含以下内容：
 ```bash title="sudo cat /etc/sudoers.d/vagrant"
 %vagrant ALL=(ALL) NOPASSWD: ALL
 ```
-实现了 vagrant 组的用户使用 sudo 无需密码。
-## Ansible 的配置文件
+上述配置使 vagrant 组的用户使用 sudo 无需密码。
+## Ansible 配置文件
 
 :::info配置文件生效优先级
 1. `$ANSIBLE_CONFIG` 变量
@@ -148,7 +204,7 @@ Vagrant 在创建虚拟机时，会在 `/etc/sudoers.d` 目录下创建一个名
 
 通过 `ansible --version` 可以看到配置文件目录等信息
 
-可以通过 `ansible-config init --disabled -t all >ansible.cfg` 创建初始配置。通过 `cat /etc/ansible/ansible.cfg|grep -Ev "#|^$"` 查看默认配置。
+可以通过 `ansible-config init --disabled -t all >ansible.cfg` 创建初始配置，其包含了详细的参数说明。通过 `cat /etc/ansible/ansible.cfg|grep -Ev ";|#|^$"` 查看默认配置。
 :::
 
 登录 control 节点，创建工作目录 `mkdir ~/ansible && cd ~/ansible` ，然后创建如下配置
@@ -157,8 +213,8 @@ Vagrant 在创建虚拟机时，会在 `/etc/sudoers.d` 目录下创建一个名
 [defaults]
 inventory = ./inventory       
 remote_port    = 22
-roles_path = ./roles
-# host_key_checking = False
+; roles_path = ./roles
+; host_key_checking = False
 remote_user = vagrant
 log_path = ./ansible.log
 private_key_file = /home/vagrant/.ssh/id_rsa
@@ -172,7 +228,7 @@ become_ask_pass=False
 
 ## inventory 主机清单
 
-使用 inventory 以对主机进行分类 对不同类别的主机配置不同的参数，例如 ssh 登录用户名，密码信息和变量等
+使用 inventory 主机清单以对主机进行分类，对不同类别的主机配置不同的参数，例如 ssh 登录用户名，密码信息和变量等
 
 ```ini title="/home/vagrant/ansible/inventory"
 # 给服务器分组，组名只能用 [a-z A-Z 0-9_]
@@ -211,6 +267,8 @@ git ansible_host=control.lab.local ansible_port=225  ansible_ssh_private_key_fil
 # 使用指定的账号密码（危险！）
 tester ansible_host=node1.lab.local ansible_ssh_user='root' ansible_ssh_pass='redhat' ansible_ssh_port='22'
 ```
+<details style={{backgroundColor: '#e9f5e7', border: '1px solid rgb(0, 148, 0)'}}>
+<summary>sshpass 安全问题和建议</summary>
 
 :::tip
 inventory 主机清单支持 ini 和 yaml 格式。
@@ -218,39 +276,29 @@ inventory 主机清单支持 ini 和 yaml 格式。
 可以使用以下命令将 Ansible 的 inventory 文件从 ini 格式转换到 yaml 格式：
 
 ```bash
-$ ansible-inventory --list -i inventory --yaml > 222.yaml
-
-$ ansible-inventory --list -i inventory.yaml --ini --output=inventory.ini
-$ ansible-inventory --list -i 222.yaml --ini > inventory.ini
-$ ansible-inventory -i 222.yaml --list > 66.ini
-
-
--i 指定 inventory 文件路径
---list 指定输出格式为 json
---output 指定输出文件路径和文件名
+$ ansible-inventory --list -i inventory --yaml > inventory.yaml
 ```
-
-需要注意的是，从 yaml 格式转换为 ini 格式时，需要使用 --list 选项将 yaml 文件转换为 json。因为 ini 文件不支持多层嵌套的结构，所以必须将其打平转换。而从 ini 格式转换为 yaml 格式时，由于 yaml 文件支持多层嵌套的结构，所以直接输出即可。
-
-```shell
-ansible-inventory -i xxx.yml --list --yaml
-```
-
-该命令会提示出你错误的配置，并且打印出最终得到的 yaml 配置内容。
 :::
+
+</details>
+
+写完 inventory 主机清单后，输入下面命令，应成功输出节点信息。
+```bash
+ansible  all --list-hosts
+```
+
+
+## Ad-Hoc
+
 
 
 ```bash
-ansible  all --list-hosts
-
+默认模块是"command"
 ansible -u vagrant -i inventory all -a "ls -al"
 
 # 或者使用 ansible-console 交互式执行命令
 ansible-console -i inventory all -u vagrant
 ```
-
-
-## Ansible Ad-Hoc
 
 ### 1.什么是 ad-hoc 模式
 
@@ -321,60 +369,78 @@ ansible <host-pattern> [options]
 -k			#提示输入ssh密码，而不是用ssh的密钥认证
 -T			#执行命令的超时时间
 ```
-## 参考
 
-- [ansible ssh prompt known_hosts issue](https://stackoverflow.com/questions/30226113/ansible-ssh-prompt-known-hosts-issue/39083724#39083724)
-- [host-key-checking - ansible docs](https://docs.ansible.com/ansible/latest/user_guide/connection_details.html#host-key-checking)
+## Ansible-console
+在Ansible playbook中，下面是一些示例用法：
 
-## FAQ
-1. 如果各主机的 ssh 端口、密码等参数不一致，就需要在 `inventory` 中设定更详细的参数，详见 [Ansible Docs - intro_inventory](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html)
-2. 如果你使用的密钥不是默认的 ~/.ssh/id_rsa，则需要先通过 ssh-agent 手动设定私钥
-```bash
-ssh-agent bash
-ssh-add <ssh-key-path>
-# ssh-agent bash: 启动 SSH 代理并打开一个新的 shell 环境。SSH 代理是一个进程，它可以管理用户的 SSH 密钥并使得用户不需要重复地输入密码进行 SSH 认证。在使用 SSH 连接时，每次需要使用私钥进行认证操作，使用 SSH 代理可以减少重复输入密码的次数，并提高 SSH 连接的安全性。
-
-# ssh-add <ssh-key-path>：将指定路径下的 SSH 密钥加载到 SSH 代理中。在使用 SSH 代理时，需要手动将 SSH 密钥添加到代理中，才能使用代理进行 SSH 认证操作。只要 SSH 代理存活（例如使用 ssh-agent bash 命令开启的代理），则添加的 SSH 密钥会一直保存在代理中，直到代理被关闭或密钥被手动删除。
-
-# ansible [pattern] -m [module] -u [remote user] -a "[module options]"
-# -u root     # 使用 root 账户登录远程主机，这个对应前面 playbook 中的 remote_user
-# all         # [pattern]，all 表示选中 my-hosts 中的所有主机
-# -m [module] # 指定使用的 ansible 模块，默认使用 `command`，即在远程主机上执行 -a 参数中的命令
-# -a "ls -al"    # 指定 module 的参数，这里是提供给 `command` 模块的参数。
-```
-3. 批量扫描主机指纹
-
-当我们的 inventory 变得很复杂了，`ssh-keyscan` 解析不了它了，该如何去批量扫描主机指纹呢？
-
-答案是可以批量加，最简单有效的方法，是使用如下命令：
-
-```shell
-# 使用环境变量 ANSIBLE_HOST_KEY_CHECKING 临时关闭主机指纹检查
-ANSIBLE_HOST_KEY_CHECKING=false ansible -i inventory.yaml all -m ping
-```
-
-经测试，不论登录成功与否，`ping` 模块都会自动将所有主机的指纹添加到 known_hosts 中。
-但是在 ping 的文档里没有讲到这个功能，这算是未定义行为。
-
-其他方法：
-
-1. 网上有很多文档会教你修改 `/etc/ansible/ansible.cfg` 以关闭指纹的验证，但是**这是很危险的操作！你可能会连接到了黑客伪造的主机！**
-2. 参考中有个问答，里面有人提供了一个 playbook 批量添加指纹，但是该方法**不支持「主机别名」**！
-   - 该 playbook 会将别名当作 host 解析，根本不理会 `ansible_host` 参数。
-   - 另外测试发现它用到了 ansbile 的 local 连接，而这种用法在 wsl1(ubuntu) 上无法使用，会报权限错误。。
-3. 自己写个小脚本读取 `ansible-inventory -i xxx.yml --list` 输出的 json，将它转换成 `ssh-keyscan` 可读的文本。
-
-可以使用Ansible的"ssh_host_key_fingerprint"模块来批量扫描主机指纹。该模块可以通过SSH连接到目标主机，并返回其公钥指纹。以下是一个示例Ansible playbook：
-
+对于大多数Linux和Unix系统，您可以使用SSH作为连接选项：
 ```yaml
-- hosts: all
-  gather_facts: no
-  tasks:
-    - name: Get SSH fingerprint
-      ssh_host_key_fingerprint:
-      register: ssh_fingerprint
-    - debug:
-        var: ssh_fingerprint.stdout_lines
+- name: Configure web server
+  hosts: webserver
+  remote_user: root
+  vars:
+    ansible_connection: ssh
+    ansible_ssh_user: root
+    ansible_ssh_private_key_file: /path/to/private/key
 ```
-在上面的示例中，“all”是要扫描指纹的主机列表。该playbook将获取所有目标主机的SSH指纹，并将其打印到屏幕上。请注意，需要在Ansible控制节点上安装sshpass和ssh-keyscan工具。
+对于Windows系统，您可以使用WinRM作为连接选项：
+```yaml
+- name: Configure Windows server
+  hosts: windows_server
+  remote_user: Administrator
+  vars:
+    ansible_connection: winrm
+    ansible_port: 5985
+    ansible_winrm_transport: basic
+    ansible_winrm_server_cert_validation: ignore
+```
+在此示例中，我们将WinRM作为连接选项，并设置相关选项以连接到Windows服务器。
 
+对于在本地主机上执行任务的情况，您可以使用local作为连接选项：
+```yaml
+- name: Run a local command
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Run a command
+      shell: echo "Hello, World"
+```
+在此示例中，我们将连接选项设置为local，以便在本地主机上执行命令。
+
+使用SSH代理跳转到跳板机然后执行任务：
+```yaml
+- name: Run a command via ssh proxy jump
+  hosts: target
+  remote_user: ubuntu
+  become: yes
+  vars:
+    ansible_connection: ssh
+    ansible_ssh_common_args: "-o ProxyCommand='ssh -W %h:%p jumpbox'"
+  tasks:
+     - name: Run a command
+       shell: echo "Hello, World"
+```
+在此示例中，我们将“ansible_connection”设置为SSH，并在变量“ansible_ssh_common_args”中设置SSH代理跳转参数。
+
+## 命令和配置解释
+
+```bash
+Ansible-console：交互式命令行工具，用于快速测试 Ansible 模块和任务。
+Ansible-operator：用于 Kubernetes 集群中运行的一个 Ansible 控制器，可以自动管理和配置 Kubernetes 工作负载。
+Ansible-vault：用于加密敏感信息的命令行工具，如密码、证书等。
+Ansible-community：Ansible 社区维护的一组 Ansible 模块、插件和其他工具。
+Ansible-doc：用于生成和查看 Ansible 模块和插件文档的命令行工具。
+Ansible-playbook：用于编写和运行 Ansible 的任务剧本，可以在多个主机上执行一系列任务，从而实现自动化部署和配置。
+Ansible-config：用于配置和管理 Ansible 工具的命令行工具。
+Ansible-galaxy：一个 Ansible 角色和插件管理器，允许用户共享和发现 Ansible 角色、插件和集合。
+Ansible-pull：一种反向操作方式，允许在远程主机上自动拉取 Ansible 配置并应用它们。
+Ansible-connection：用于管理 Ansible 集群中远程主机之间的连接和通信的插件。
+Ansible-inventory：用于生成和管理 Ansible 主机清单的工具。
+Ansible-test：用于编写和运行 Ansible 角色和插件测试的命令行工具。
+Ansible-cmdb：一种 Ansible 插件，用于生成主机和应用程序的 inventory 来生成和显示概述信息。
+```
+
+:::tip参考文档
+- https://docs.ansible.com/ansible/latest/inventory_guide/connection_details.html#host-key-checking
+- https://stackoverflow.com/questions/30226113/ansible-ssh-prompt-known-hosts-issue/39083724#39083724
+:::
