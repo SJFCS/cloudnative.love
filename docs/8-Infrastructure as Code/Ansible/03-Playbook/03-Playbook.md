@@ -2,6 +2,7 @@
 title: Playbook
 sidebar_position: 3
 ---
+https://docs.ansible.com/ansible/latest/playbook_guide/playbooks.html
 
 https://www.devopsschool.com/blog/understanding-ansible-playbook-using-diagram/
 

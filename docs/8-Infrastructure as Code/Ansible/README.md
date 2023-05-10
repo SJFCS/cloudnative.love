@@ -63,10 +63,3 @@ import DocCardList from '@theme/DocCardList';
 :::
 
 <DocCardList />
-
-参考文章：
-- https://www.cnblogs.com/easonscx/p/10622781.html
-- https://www.cnblogs.com/woaiyunwei/p/13140429.html
-- https://www.jianshu.com/p/171578692c94
-- https://www.cnblogs.com/keme/p/11351611.html#56-fetch-%E6%A8%A1%E5%9D%97
-- https://evrard.me/group-and-host-variables-overriding-in-openstack-ansible/
