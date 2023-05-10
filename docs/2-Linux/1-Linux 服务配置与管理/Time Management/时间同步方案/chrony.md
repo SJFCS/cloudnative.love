@@ -34,7 +34,7 @@ sudo sed -i -e 's/^server/#&/' \
             -e '1a server ntp.aliyun.com iburst minpoll 4 maxpoll 4' \
             -e '1a server 127.127.1.0' \
             -e '1a local stratum 10' \
-            -e '1a allow all' \            
+            -e '1a allow all' \
             /etc/chrony.conf
 #allow 127.0.0.1/8   #新增允许本地客户端访问
 #allow x.x.0.0/16    #新增允许集群网网段访问，这里按照要求替换为集群的管理网段。
@@ -47,6 +47,8 @@ sudo systemctl enable --now chronyd
 sudo sed -i -e 's/^server/#&/' \
             -e '1a server <HostA IP> iburst minpoll 4 maxpoll 4' \
             /etc/chrony.conf
+
+sudo systemctl enable --now chronyd
 ```
 
 

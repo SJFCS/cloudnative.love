@@ -46,80 +46,9 @@ import config from '!!raw-loader!../Ansible-Playground/config.yaml';
 我们的 ansible 配置创建在 control 节点上 `/home/vagrant/ansible` 目录下。
 :::
 
-### 批量扫描主机指纹
-
-ssh 首次连接时会要求验证主机指纹，这是一种安全措施，防止在遇到 DNS 污染或 IP 冲突等异常情况时，目标主机被冒名顶替。
-
-Ansible 默认情况下也会使用这个指纹对主机进行验证，因此我们希望能够快速地扫描出所有主机的指纹。
-
-- ssh-keyscan
-
-  登录 ansible 所在节点 control 运行如下命令：
-  ```shell
-  echo "
-  control
-  node1
-  node2
-  node3
-  192.168.56.100
-  192.168.56.10
-  192.168.56.20
-  192.168.56.30
-  " > hosts-keyscan
-  ssh-keyscan -H -f hosts-keyscan >> ~/.ssh/known_hosts
-  # 添加 -H 参数，只保存主机 IP/域名的 hash 值，更安全
-  ```
-
-- ping 模块
-  ```shell
-  # 使用环境变量 ANSIBLE_HOST_KEY_CHECKING 临时关闭主机指纹检查
-  ANSIBLE_HOST_KEY_CHECKING=false ansible -i inventory.yaml all -m ping
-  ```
-
-  经测试，不论登录成功与否，`ping` 模块都会自动将所有主机的指纹添加到 known_hosts 中。
-  但是在 ping 的文档里没有讲到这个功能，这算是未定义行为。
-
-
-- 其他方法
-  - 参考中有个问答，里面有人提供了一个 playbook 批量添加指纹，但是该方法**不支持「主机别名」**！
-  - 该 playbook 会将别名当作 host 解析，根本不理会 `ansible_host` 参数。
-  - 另外测试发现它用到了 ansbile 的 local 连接，而这种用法在 wsl1(ubuntu) 上无法使用，会报权限错误。
-  ```yaml
-  ---
-  - hosts: all
-    connection: local
-    gather_facts: no
-    tasks:
-      - name: Scan host fingerprint
-        command: ssh-keyscan -H {{ inventory_hostname }},{{ ansible_host }}
-        register: fingerprint
-
-      - debug:
-          var: fingerprint.stdout_lines
-  ```
-- 自己写个小脚本读取 `ansible-inventory -i xxx.yml --list` 输出的 json，将它转换成 `ssh-keyscan` 可读的文本。
-
-- 可以使用Ansible的"ssh_host_key_fingerprint"模块来批量扫描主机指纹。该模块可以通过SSH连接到目标主机，并返回其公钥指纹。以下是一个示例Ansible playbook：
-
-  ```yaml
-  - hosts: all
-    gather_facts: no
-    tasks:
-      - name: Get SSH fingerprint
-        ssh_host_key_fingerprint:
-        register: ssh_fingerprint
-      - debug:
-          var: ssh_fingerprint.stdout_lines
-  ```
-  需要在Ansible控制节点上安装sshpass和ssh-keyscan工具。
-:::caution
-不建议修改 ansible.cfg 使 `host_key_checking = False` 或设置变量 `ANSIBLE_HOST_KEY_CHECKING=false` 跳过检查主机指纹，这可能会连接到了黑客伪造的主机。
-:::
-
 ### 设置免密登录
 
-Ansible 通过 SSH 协议连接远程主机进行操作，为了安全考虑建议通过密钥免密连接而不是密码，如果使用密码则 Ansible 会使用 
-sshpass 来实现自动登录，这被认为是不安全的。
+Ansible 通过 SSH 协议连接远程主机进行操作，为了安全考虑建议通过密钥免密连接而不是密码，如果使用密码 Ansible 则会使用 sshpass 来实现自动登录，这被认为是不安全的。
 
 <details style={{backgroundColor: 'rgb(255, 248, 230)', border: '1px solid rgb(230, 167, 0)'}}>
 <summary>sshpass 安全问题和建议</summary>
@@ -146,16 +75,16 @@ sshpass 存在以下安全问题：
 ```bash
 #!/bin/bash
 
-# 例子：sed --in-place=.bak -r 's/^#?(PermitRootLogin|PermitEmptyPasswords|PasswordAuthentication|X11Forwarding) yes/\1 no/' /etc/ssh/sshd_config
+# 根据你的需求设置 SSH 配置变量
 
-sudo cat /etc/ssh/sshd_config | grep -e "PubkeyAuthentication" -e "PermitRootLogin" -e "PasswordAuthentication" -e "PermitEmptyPasswords" -e "X11Forwarding"
-
-# 设置 SSH 配置变量
-PermitRootLogin=no        # 是否允许 root 用户通过 SSH 登录系统。
+PermitRootLogin=no         # 是否允许 root 用户通过 SSH 登录系统。
 PubkeyAuthentication=yes   # 是否允许使用密钥进行 SSH 登录。
 PasswordAuthentication=no  # 是否允许使用密码进行 SSH 登录。
-PermitEmptyPasswords=no   # 是否允许用户使用空密码登录系统。
+PermitEmptyPasswords=no    # 是否允许用户使用空密码登录系统。
 X11Forwarding=no           # 是否允许启用 X11 转发功能，开启后可在 SSH 会话中运行图形界面程序。
+
+# 例子：sed --in-place=.bak -r 's/^#?(PermitRootLogin|PermitEmptyPasswords|PasswordAuthentication|X11Forwarding) yes/\1 no/' /etc/ssh/sshd_config
+sudo cat /etc/ssh/sshd_config | grep -e "PubkeyAuthentication" -e "PermitRootLogin" -e "PasswordAuthentication" -e "PermitEmptyPasswords" -e "X11Forwarding"
 # 编辑 sshd_config 文件
 sudo sed -i.bak -r \
   -e "s/^(#)?PermitRootLogin\s+(yes|no)/PermitRootLogin $PermitRootLogin/" \
@@ -167,18 +96,22 @@ sudo sed -i.bak -r \
 
 sudo cat /etc/ssh/sshd_config | grep -e "PubkeyAuthentication" -e "PermitRootLogin" -e "PasswordAuthentication" -e "PermitEmptyPasswords" -e "X11Forwarding"
 ```
+
+然后手动重启 sshd 服务 `systemctl restart sshd`
 :::
 </details>
 
 在 control 节点上创建密钥对并分发给其他 node 节点。
 ```bash
 # 创建密钥对
-ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa -q && cat ~/.ssh/id_rsa.pub  
+ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa -q
+# 查看公钥
+cat ~/.ssh/id_rsa.pub  
 # 分发公钥
 sshpass -p <your_passwd> ssh-copy-id -i ~/.ssh/id_rsa.pub <user@IP>
 ```
 
-vagrant 默认禁止密码登录，需要登录 node 节点上手动导入 control 节点的公钥。
+若 SSH 禁止了密码登录，需要登录 node 节点上手动导入 control 节点的公钥。
 ```bash
 # 手动在需要免密的节点上做以下配置
 mkdir -p -m 700 ~/.ssh
@@ -187,6 +120,93 @@ chmod 600 .ssh/authorized_keys
 ```
 
 
+<details>
+<summary>使用脚本验证免密</summary>
+
+使用前请确保已扫描并添加主机指纹。
+
+```bash
+#!/bin/bash
+user=vagrant
+StrictHostKeyChecking=yes
+
+# 自动从 hosts 中设置 hosts 变量
+# hosts=($(awk '$0 !~ /^#/ {for(i=1;i<=NF;i++) if ($i !~ /localhost/) print $i}' /etc/hosts))
+# echo ${hosts[@]}
+hosts=(
+control
+node1
+node2
+node3
+control.lab.local
+node1.lab.local
+node2.lab.local
+node3.lab.local
+192.168.56.100
+192.168.56.10
+192.168.56.20
+192.168.56.30
+)
+
+printf "%-70s %-15s %-50s\n" "Node" "Status" "Describe"
+
+for host in "${hosts[@]}"; do
+  describe=$(ssh -o BatchMode=yes -o StrictHostKeyChecking=${StrictHostKeyChecking} ${user}@${host} "echo Logged in to $host without password" 2>&1)
+  if [ $? -eq 0 ]; then
+    printf "%-70s \033[32m%-15s\033[0m %-50s\n" "$host" "yes" "$describe"
+  else
+    printf "%-70s \033[31m%-15s\033[0m %-50s\n" "$host" "no" "$describe"
+  fi
+done
+```
+
+若失败则可能是你没有添加主机指纹，请看下一节 **'批量扫描主机指纹'**
+
+或者修改脚本使 `StrictHostKeyChecking=no` ，此时 SSH 首次连接会跳过检查主机密钥的指纹，客户端不会询问你是否信任该服务器的密钥，而是自动接受该密钥并将其保存在 ~/.ssh/known_hosts。
+
+</details>
+
+### 批量扫描主机指纹
+
+第一次连接到一个 SSH 服务器时，会提醒我们检查主机密钥的指纹。 SSH 客户端会将服务器的公钥存储在本地计算机上，并生成一个指纹，以便在将来的连接中验证服务器的身份。如果指纹与之前存储的不匹配，则可能是中间人攻击，应该中止连接。
+
+Ansible 默认情况下也会使用这个指纹对主机进行验证，因此我们希望能够快速地扫描出所有主机的指纹，下面提供了两种方法：
+
+<Tabs>
+<TabItem value="ssh-keyscan 扫描添加主机指纹">
+
+登录 Ansible 所在节点 control 运行如下命令：
+```shell
+echo "
+control
+node1
+node2
+node3
+192.168.56.100
+192.168.56.10
+192.168.56.20
+192.168.56.30
+" > hosts-keyscan
+ssh-keyscan -H -f hosts-keyscan >> ~/.ssh/known_hosts
+# 添加 -H 参数，只保存主机 IP/域名的 hash 值，更安全
+```
+
+</TabItem>
+<TabItem value="临时忽略指纹验证，实现批量添加指纹">
+
+当使用 `ssh -o StrictHostKeyChecking=no user@host` 时，SSH 首次连接会跳过检查主机密钥的指纹，客户端不会询问你是否信任该服务器的密钥，而是自动接受该密钥并将其保存在 ~/.ssh/known_hosts。设置 Ansible 临时忽略指纹验证也可以做到这一点，如下开启 `ANSIBLE_HOST_KEY_CHECKING=false` 变量，然后选中所有主机，运行任意模块即可完成主机指纹的扫描和添加：
+
+```shell
+# 使用环境变量 ANSIBLE_HOST_KEY_CHECKING 临时关闭主机指纹检查
+ANSIBLE_HOST_KEY_CHECKING=false ansible -i inventory all -m ping
+```
+
+</TabItem>
+</Tabs>
+
+:::caution
+不建议修改 ansible.cfg 使 `host_key_checking = False` 永久跳过检查主机指纹，这可能会受到中间人攻击。
+:::
 
 ### 设置 sudo 权限
 Vagrant 在创建虚拟机时，会在 `/etc/sudoers.d` 目录下创建一个名为 `vagrant` 的文件，该文件包含以下内容：
@@ -213,7 +233,6 @@ Vagrant 在创建虚拟机时，会在 `/etc/sudoers.d` 目录下创建一个名
 [defaults]
 inventory = ./inventory       
 remote_port    = 22
-; roles_path = ./roles
 ; host_key_checking = False
 remote_user = vagrant
 log_path = ./ansible.log
@@ -231,52 +250,80 @@ become_ask_pass=False
 使用 inventory 主机清单以对主机进行分类，对不同类别的主机配置不同的参数，例如 ssh 登录用户名，密码信息和变量等
 
 ```ini title="/home/vagrant/ansible/inventory"
-# 给服务器分组，组名只能用 [a-z A-Z 0-9_]
+# 给服务器分组，组名只能用 [a-z A-Z 0-9 _]
 [ansible_control]
 control
-192.168.56.100:22
+192.168.56.100:22 
 [node]
-node1.lab.local
+node1.lab.local ansible_port=22 ansible_ssh_private_key_file=/home/vagrant/.ssh/id_rsa
+; node1.lab.local ansible_ssh_port='22' ansible_ssh_user='root' ansible_ssh_pass='passwd' 
 192.168.56.[2:3]0
 
-[node:vars]
 # node 组的公用参数
-ntp_server=ntp.svc.local
-proxy=proxy.svc.local
-ansible_ssh_user='user'
-ansible_ssh_pass='pass'
-ansible_ssh_port='22'
-## 如果登陆后需要切换用户则需要以下配置
-# 切换用户
-ansible_become=true
-# 使用su切换
-ansible_become_method=su
-# 切换到root
-ansible_become_user=root
-# root密码
-ansible_become_pass=pass
+[node:vars]
+myvar='hello world'
+ansible_ssh_user='vagrant'
+; ansible_ssh_pass='vagrant'
+; ansible_ssh_port='22'
+; ## 如果登陆后需要切换用户则需要以下配置
+; # 切换用户
+; ansible_become=true
+; # 使用su切换
+; ansible_become_method=su
+; # 切换到root
+; ansible_become_user=root
+; # root密码
+; ansible_become_pass=pass
 
-[labmachine:children]
 # 子组分类变量：children
+[labmachine:children]
 ansible_control
 node
 
+# 给服务器指定别名
 [alias]
-# 给服务器指定别名（git），通过关键字参数指定其他参数
-git ansible_host=control.lab.local ansible_port=225  ansible_ssh_private_key_file=<path/to/git-server-ssh>
-# 使用指定的账号密码（危险！）
-tester ansible_host=node1.lab.local ansible_ssh_user='root' ansible_ssh_pass='redhat' ansible_ssh_port='22'
+ansible ansible_host=control.lab.local 
 ```
 <details style={{backgroundColor: '#e9f5e7', border: '1px solid rgb(0, 148, 0)'}}>
-<summary>sshpass 安全问题和建议</summary>
+<summary>inventory ini 和 yaml 格式转换</summary>
 
 :::tip
 inventory 主机清单支持 ini 和 yaml 格式。
 
-可以使用以下命令将 Ansible 的 inventory 文件从 ini 格式转换到 yaml 格式：
+可以使用以下命令将上述 inventory 从 ini 格式转换到 yaml 格式：
 
 ```bash
-$ ansible-inventory --list -i inventory --yaml > inventory.yaml
+ansible-inventory --list -i inventory --yaml > inventory.yaml
+```
+输出 inventory.yaml 内容如下
+```yaml title="inventory.yaml"
+all:
+  children:
+    alias:
+      hosts:
+        ansible:
+          ansible_host: control.lab.local
+    labmachine:
+      children:
+        ansible_control:
+          hosts:
+            192.168.56.100:
+              ansible_port: 22
+            control: {}
+        node:
+          hosts:
+            192.168.56.20:
+              ansible_ssh_user: vagrant
+              myvar: hello world
+            192.168.56.30:
+              ansible_ssh_user: vagrant
+              myvar: hello world
+            node1.lab.local:
+              ansible_port: 22
+              ansible_ssh_private_key_file: /home/vagrant/.ssh/id_rsa
+              ansible_ssh_user: vagrant
+              myvar: hello world
+    ungrouped: {}
 ```
 :::
 
@@ -285,74 +332,28 @@ $ ansible-inventory --list -i inventory --yaml > inventory.yaml
 写完 inventory 主机清单后，输入下面命令，应成功输出节点信息。
 ```bash
 ansible  all --list-hosts
+# 和下面等价
+# ansible -i inventory all --list-hosts
+# ansible -i inventory.yaml all --list-hosts
+
+# 使用 ping 模块检查网络是否互通
+ansible all -i inventory -m ping
 ```
 
+到此已成功安装和配置 ansible ，下面介绍如何使用 Ad-hoc 模式执行临时命令。
 
-## Ad-Hoc
+## Ad-hoc
+ansible 中有两种模式：
+- Ad-hoc 模式，用于执行一段 “临时命令”
+- Playbook 模式，用于执行声明性配置的一组任务。
 
+:::tipAd-hoc 命令格式
+- `ansible 主机名 -m 模块名 -a '模块参数'`
+- 默认模块是 "command"
+:::
 
-
-```bash
-默认模块是"command"
-ansible -u vagrant -i inventory all -a "ls -al"
-
-# 或者使用 ansible-console 交互式执行命令
-ansible-console -i inventory all -u vagrant
-```
-
-### 1.什么是 ad-hoc 模式
-
-> ad-hoc 简而言之，就是“临时命令”，不会保存
-> ansible 中有两种模式, 分别是 ad-hoc 模式和 playbook 模式
-
-
-### 3.ad-hoc 模式的命令使用
-
-ansible 主机名 -m 模块名 -a '模块参数'
-
-ansible-doc -l 查看模块  ansible-doc 模块名 查看模块具体用法
-
-例
-```bash
-[vagrant@control ansible]$ ansible-doc -l |grep ping
-win_ping                                                      A windows version of the classic ping module
-postgresql_ping                                               Check remote PostgreSQL server availability
-net_ping                                                      Tests reachability using ping from a network devi...  
-ping                                                          Try to connect to host, verify a usable python an...  
-
-
-[vagrant@control ansible]$ ansible-doc ping 
-EXAMPLES:
-
-# Test we can logon to 'webservers' and execute python with json lib.
-# ansible webservers -m ping
-
-# Example from an Ansible Playbook
-- ping:
-
-# Induce an exception to see what happens
-- ping:
-    data: crash
-
-
-RETURN VALUES:
-
-ping:
-    description: value provided with the data parameter
-    returned: success
-    type: str
-    sample: pong
-/EXAMPLES
-```
-### 4. Ansible 执行返回
-
-> 黄色：对远程节点进行相应修改
-> 绿色：对远程节点不进行相应修改，或者只是对远程节点信息进行查看
-> 红色：操作执行命令有异常
-> 紫色：表示对命令执行发出警告信息（可能存在的问题，给你一下建议）
-
-
-### ansible 命令参数
+<details>
+<summary>Ansible 基本命令</summary>
 
 ```bash
 ansible <host-pattern> [options]
@@ -369,78 +370,13 @@ ansible <host-pattern> [options]
 -k			#提示输入ssh密码，而不是用ssh的密钥认证
 -T			#执行命令的超时时间
 ```
+</details>
 
-## Ansible-console
-在Ansible playbook中，下面是一些示例用法：
-
-对于大多数Linux和Unix系统，您可以使用SSH作为连接选项：
-```yaml
-- name: Configure web server
-  hosts: webserver
-  remote_user: root
-  vars:
-    ansible_connection: ssh
-    ansible_ssh_user: root
-    ansible_ssh_private_key_file: /path/to/private/key
-```
-对于Windows系统，您可以使用WinRM作为连接选项：
-```yaml
-- name: Configure Windows server
-  hosts: windows_server
-  remote_user: Administrator
-  vars:
-    ansible_connection: winrm
-    ansible_port: 5985
-    ansible_winrm_transport: basic
-    ansible_winrm_server_cert_validation: ignore
-```
-在此示例中，我们将WinRM作为连接选项，并设置相关选项以连接到Windows服务器。
-
-对于在本地主机上执行任务的情况，您可以使用local作为连接选项：
-```yaml
-- name: Run a local command
-  hosts: localhost
-  connection: local
-  tasks:
-    - name: Run a command
-      shell: echo "Hello, World"
-```
-在此示例中，我们将连接选项设置为local，以便在本地主机上执行命令。
-
-使用SSH代理跳转到跳板机然后执行任务：
-```yaml
-- name: Run a command via ssh proxy jump
-  hosts: target
-  remote_user: ubuntu
-  become: yes
-  vars:
-    ansible_connection: ssh
-    ansible_ssh_common_args: "-o ProxyCommand='ssh -W %h:%p jumpbox'"
-  tasks:
-     - name: Run a command
-       shell: echo "Hello, World"
-```
-在此示例中，我们将“ansible_connection”设置为SSH，并在变量“ansible_ssh_common_args”中设置SSH代理跳转参数。
-
-## 命令和配置解释
-
+如下面两条命令使用的模块都是 command。
 ```bash
-Ansible-console：交互式命令行工具，用于快速测试 Ansible 模块和任务。
-Ansible-operator：用于 Kubernetes 集群中运行的一个 Ansible 控制器，可以自动管理和配置 Kubernetes 工作负载。
-Ansible-vault：用于加密敏感信息的命令行工具，如密码、证书等。
-Ansible-community：Ansible 社区维护的一组 Ansible 模块、插件和其他工具。
-Ansible-doc：用于生成和查看 Ansible 模块和插件文档的命令行工具。
-Ansible-playbook：用于编写和运行 Ansible 的任务剧本，可以在多个主机上执行一系列任务，从而实现自动化部署和配置。
-Ansible-config：用于配置和管理 Ansible 工具的命令行工具。
-Ansible-galaxy：一个 Ansible 角色和插件管理器，允许用户共享和发现 Ansible 角色、插件和集合。
-Ansible-pull：一种反向操作方式，允许在远程主机上自动拉取 Ansible 配置并应用它们。
-Ansible-connection：用于管理 Ansible 集群中远程主机之间的连接和通信的插件。
-Ansible-inventory：用于生成和管理 Ansible 主机清单的工具。
-Ansible-test：用于编写和运行 Ansible 角色和插件测试的命令行工具。
-Ansible-cmdb：一种 Ansible 插件，用于生成主机和应用程序的 inventory 来生成和显示概述信息。
+ansible all -i inventory -m command -a "ls -al"
+# command 为缺省模块可以省略不写。
+ansible all -i inventory -a "ls -al"
 ```
 
-:::tip参考文档
-- https://docs.ansible.com/ansible/latest/inventory_guide/connection_details.html#host-key-checking
-- https://stackoverflow.com/questions/30226113/ansible-ssh-prompt-known-hosts-issue/39083724#39083724
-:::
+Ansible 提供了海量模块，可以通过 `ansible-doc -l` 查看可用模块，使用 `ansible-doc <mode_name>` 查看模块具体用法。
