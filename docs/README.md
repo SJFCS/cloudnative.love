@@ -9,3 +9,7 @@ slug: /
 我希望在这里不断完善我的知识体系，同时锻炼自己的独立思考和写作能力。
 
 <iframe src="https://roadmap.sh/devops" scrolling="no" height="2700" width="100%" frameborder="0"></iframe>
+
+
+## 视频
+- [Cloud Native Live: Prometheus + Falco: The Swiss Army Knife for SREs](https://www.youtube.com/watch?v=AeeXSm0Zzfk)

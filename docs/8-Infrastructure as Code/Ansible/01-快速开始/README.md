@@ -74,7 +74,7 @@ sshpass 存在以下安全问题：
 
 ```bash
 #!/bin/bash
-
+#### 可能会重复，需要仔细查看改完的文件去重
 # 根据你的需求设置 SSH 配置变量
 
 PermitRootLogin=no         # 是否允许 root 用户通过 SSH 登录系统。
