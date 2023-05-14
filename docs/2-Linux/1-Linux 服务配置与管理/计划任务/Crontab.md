@@ -48,7 +48,7 @@ Crontab 用于**定时周期性**执行任务或命令。
 ```bash
 00 09-18/1 * * Mon-Fri /usr/local/bin/daily_backup
 # “/1”可以省略，表示在指定时间范围内每分钟都执行一次命令
-00 09-18 * * Mon-Fri /usr/local/bin/daily_backup
+ 00 09-18 * * Mon-Fri /usr/local/bin/daily_backup
 ```
 
 格式和变量：
