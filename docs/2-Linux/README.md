@@ -3,6 +3,11 @@ title: Linux
 sidebar_position: 2
 tags: [Linux]
 ---
+
+RH124 RH134 RH294
+
+https://github.com/konduruvijaykumar/LINUX-GUIDE/tree/master
+
 https://people.eecs.berkeley.edu/~brewer/cs262/unix.pdf
 
 http://www.penguintutor.com/linux/

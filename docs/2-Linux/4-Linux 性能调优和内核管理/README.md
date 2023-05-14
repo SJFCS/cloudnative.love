@@ -1,6 +1,17 @@
 # Linux 性能调优
-  - tuned 工具
-  - linux Performance Tuning  红帽 RH442
+
+
+
+  - 通过 tuned 守护进程管理的调优配置文件来优化系统性能
+  - 通过 nice 和 renice 命令，对特定进程进行优先排序和取消优先排序
+
+
+RHS333 企业安全：保护网络服务  
+RH401 红帽企业部署和系统管理  
+RH423 红帽企业目录服务和身份验证  
+RH436 红帽企业存储管理。  
+RH442 Linux性能调整 linux Performance Tuning  
+  - 
   - https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/performance_tuning_guide/index
   -  https://docs.oracle.com/cd/E19159-01/819-3681/abeji/index.html
   -  https://www.yugabyte.com/blog/linux-performance-tuning-memory-disk-io/

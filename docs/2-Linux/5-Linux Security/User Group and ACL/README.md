@@ -2,78 +2,9 @@
 title: User Group and ACL
 ---
 
-```bash
--rw-r--r-- 1                        admin admin  11584     3月30日 19:40    docusaurus.config.js
-文件权限类型 链接到此inode的文件名数量    owner group  体积byte   最后修改日期     文件名
-```
-## 文件权限类型
-文件权限类型的第一个字符代表文件是目录、文件或连接等
-- [d] 代表目录
-- [-] 代表文件
-- [|] 代表链接
-- [b] 代表块设备，如磁盘 
-- [c] 代表传行端口设备，如鼠标键盘 `ls -l /dev/input` ，你可以查看具体设备的输出 `cat /dev/input/by-id/DEVICE_NAME`
-- [s] 代表 socket 文件，最能体现"一切皆文件"设计哲学。如 `sudo ls -l /var/run/docker.sock`
-
-文件权限类型的剩余部分代表权限，三个为一组，均为[rwx]。分别代表读(read)、写(write)、执行(execute)
-
-:::tip
-Linux 中的目录执行权限指的是能否进入该目录并查看其中的内容。如果一个用户没有权限执行某个目录，则该用户无法进入该目录，也无法列出其内容。
-
-要查看一个目录的权限，可以使用 ls -l 命令，该命令会显示该目录的元数据信息，包括文件类型、所有者、权限等。例如：
-```bash
-❯ ls -l -d ../cloudnative.love
-drwxr-xr-x 1 admin admin 330  3月30日 19:40 ../cloudnative.love
-```
-:::
-
-
-
-工作目录是什么？，一般家目录为默认工作目录 pwdS
-```bash
-rw-      r--      r--
-110      100      100
-421      421      421
-6        4        4
-owner    group    other
-```
-:::
-[---------]
-root 不受系统权限限制
-:::
-更改后要刷新session
-
 ## 特权 lsattr chattr
 
 
-## 查看文件创建时间
-```bash
-ls -l --full-time
--rw-r--r-- 1 admin admin  11584 2023-03-30 19:40:43.082307120 +0800 docusaurus.config.js
-```
-
-```bash
-❯ stat docusaurus.config.js
-  File: docusaurus.config.js
-  Size: 11584           Blocks: 24         IO Block: 4096   regular file
-Device: 0,43    Inode: 642232      Links: 1
-Access: (0644/-rw-r--r--)  Uid: ( 1000/   admin)   Gid: ( 1000/   admin)
-Access: 2023-03-30 19:40:43.082307120 +0800  #访问时间
-Modify: 2023-03-30 19:40:43.082307120 +0800  #修改时间
-Change: 2023-03-30 19:40:43.082307120 +0800  #变更时间
- Birth: 2023-03-30 19:40:43.082307120 +0800  #创建时间
-```
-
-:::tip Modify vs Change
-Modify 是最后一次修改文件内容的时间戳。 这通常称为 mtime 。
-Change 是文件的 inode 上次更改的时间戳，例如更改权限、所有权、文件名、硬链接数。它通常被称为 ctime 。
-可以利用 touch 指令进行文件的时间修改
-:::
-## socket
-socket: https://blog.csdn.net/dog250/article/details/100998838
-## 
-https://www.cnblogs.com/llife/p/11470668.html  
-https://www.ruanyifeng.com/blog/2011/12/inode.html
 
 [root@dns01-113 ~]# chgrp named /var/named/abcdocker.com.zone 
 

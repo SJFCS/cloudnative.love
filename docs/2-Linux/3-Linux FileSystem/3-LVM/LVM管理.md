@@ -5,7 +5,9 @@ title: LVM的工作原理
 
 参考链接：https://www.cnblogs.com/diantong/p/10554831.html
 
+使用LVM进行扩容
 
+LVM（Logical Volume Manager）不是一个文件系统，它是一个分区和存储管理的工具。LVM可以将多个物理磁盘分区、逻辑卷和文件系统合并成一个大的存储池，从而增加灵活性和可用性，并提供高级的分区、快照和备份管理功能。LVM可以与不同的文件系统一起使用，如EXT2/3/4、XFS等。
 
 
 
