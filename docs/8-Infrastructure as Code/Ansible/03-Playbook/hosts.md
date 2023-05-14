@@ -1,3 +1,4 @@
+``` 
 ---
 - name: add DNS for each
   hosts: nginx
@@ -10,3 +11,4 @@
       when: item != inventory_hostname
       loop: "{{ play_hosts }}"
 
+```
