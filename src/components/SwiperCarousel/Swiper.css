@@ -8,10 +8,15 @@
     text-align: center;    
 }
 
+@media screen and (max-width: 500px) {
+    .underImg {
+      display: none;
+    }
+  }
+
 .Swiper-flex {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px;
 }
-
-/* todo：修复小屏渲染问题 git@github.com:spicetify/spicetify-docs.git */
