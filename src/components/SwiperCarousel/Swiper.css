@@ -4,8 +4,8 @@
 }
 
 .underImg {
-    padding: 0.5rem 0;
-    font-size: 1.2rem;
+    margin-top: 10px;
+    text-align: center;    
 }
 
 .Swiper-flex {
@@ -13,3 +13,5 @@
     flex-direction: column;
     align-items: center;
 }
+
+/* todo：修复小屏渲染问题 git@github.com:spicetify/spicetify-docs.git */

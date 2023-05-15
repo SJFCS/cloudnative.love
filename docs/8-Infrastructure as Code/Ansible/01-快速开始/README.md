@@ -247,7 +247,7 @@ become_ask_pass=False
 
 ## inventory 主机清单
 
-使用 inventory 主机清单以对主机进行分类，对不同类别的主机配置不同的参数，例如 ssh 登录用户名，密码信息和变量等
+使用 inventory 主机清单以对主机进行分类，对不同类别的主机配置不同的参数，例如 ssh 登录用户名，密码信息和变量等。
 
 ```ini title="/home/vagrant/ansible/inventory"
 # 给服务器分组，组名只能用 [a-z A-Z 0-9 _]
@@ -342,18 +342,13 @@ ansible all -i inventory -m ping
 
 到此已成功安装和配置 ansible ，下面介绍如何使用 Ad-hoc 模式执行临时命令。
 
-## Ad-hoc
+## Ad-hoc 临时命令
 ansible 中有两种模式：
 - Ad-hoc 模式，用于执行一段 “临时命令”
 - Playbook 模式，用于执行声明性配置的一组任务。
 
-:::tipAd-hoc 命令格式
-- `ansible 主机名 -m 模块名 -a '模块参数'`
-- 默认模块是 "command"
-:::
-
 <details>
-<summary>Ansible 基本命令</summary>
+<summary>Ansible 基本命令选项</summary>
 
 ```bash
 ansible <host-pattern> [options]
@@ -372,11 +367,16 @@ ansible <host-pattern> [options]
 ```
 </details>
 
-如下面两条命令使用的模块都是 command。
-```bash
-ansible all -i inventory -m command -a "ls -al"
-# command 为缺省模块可以省略不写。
-ansible all -i inventory -a "ls -al"
-```
+:::tipAd-hoc 命令格式
+- `ansible <pattern> -m <module_name> -a "<module options>"`
+  - 例如 `ansible webservers -m service -a "name=httpd state=restarted"`
+- 默认模块是 "command"
+  - 如下面两条命令使用的模块都是 command。
+  ```bash
+  ansible all -i inventory -m command -a "ls -al"
+  # command 为缺省模块可以省略不写。
+  ansible all -i inventory -a "ls -al"
+  ``` 
+:::
 
 Ansible 提供了海量模块，可以通过 `ansible-doc -l` 查看可用模块，使用 `ansible-doc <mode_name>` 查看模块具体用法。
