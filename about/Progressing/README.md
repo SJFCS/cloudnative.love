@@ -22,8 +22,8 @@ sidebar_position: 4
 :::note 现状分析
 一直没有系统的整理过笔记，曾经都是遇到问题就写一下，看到哪就写到哪，这导致我的知识库比较混乱，而且随着技术的增长现在的我去看以前写的笔记感觉很简陋。所以现在我要重新书写我的知识库，我会尽量避免拾人牙慧，写的更加系统一些。
 :::
-+ KR1：[Linux Book](/docs/Linux) 撰写
-+ KR2：[Kubernetes-The-Hard-Way-Translate](/docs/Kubernetes/Kubernetes-The-Hard-Way-Translate) 
++ KR1：Linux Book 撰写
++ KR2：Kubernetes-The-Hard-Way-Translate
     >翻译原文并添加 vagrant/Terraform 实验环境,集成 crowdin 翻译  
     >Kubernetes the hard way on Vagrant on Local Machine. No scripts.  
   :::tip 日常进度记录

@@ -1,4 +1,5 @@
 ---
-title: Python
+title: Python ✨
+tags: [Coding, Python]
 ---
 ## index

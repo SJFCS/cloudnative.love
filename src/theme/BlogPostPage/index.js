@@ -35,7 +35,7 @@ function BlogPostPageContent({ sidebar, children }) {
       {(nextItem || prevItem) && (
         <BlogPostPaginator nextItem={nextItem} prevItem={prevItem} />
       )}
-      <div className="giscusTop"><Comment /></div>
+      <Comment />
       <BackToTopButton />
     </BlogLayout>
   );

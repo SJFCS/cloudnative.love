@@ -19,6 +19,6 @@ export default function Comment() {
     lang,
   };
   return (
-    <Giscus {...options} />
+    <div className="giscusTop"><Giscus {...options} /></div>
   );
 }

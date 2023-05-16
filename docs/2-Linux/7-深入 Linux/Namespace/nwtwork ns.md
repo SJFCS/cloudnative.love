@@ -1,1 +1,0 @@
-https://cizixs.com/2017/02/10/network-virtualization-network-namespace/

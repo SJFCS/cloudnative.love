@@ -42,7 +42,7 @@ sidebar_position: 0
   - 移动端证书图片支持放大 [react-medium-image-zoom](https://www.npmjs.com/package/react-medium-image-zoom)
 - 本地文字索引
   - 集成本地搜索功能 [docusaurus-search-local](https://github.com/easyops-cn/docusaurus-search-local)
-
+- Markdown 规范检查 https://coding.net/help/docs/ci/practice/lint/markdown.html
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';

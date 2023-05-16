@@ -1,4 +1,0 @@
----
-title: Systemd!!
----
-- [systemd: The Good Parts](https://www.hashicorp.com/resources/systemd-the-good-parts)

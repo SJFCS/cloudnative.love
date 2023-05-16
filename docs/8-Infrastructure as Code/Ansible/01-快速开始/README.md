@@ -78,6 +78,7 @@ sshpass 存在以下安全问题：
 # 根据你的需求设置 SSH 配置变量
 
 PermitRootLogin=no         # 是否允许 root 用户通过 SSH 登录系统。
+# RSAAuthentication=yes      # 允许 RSA 秘钥认证
 PubkeyAuthentication=yes   # 是否允许使用密钥进行 SSH 登录。
 PasswordAuthentication=no  # 是否允许使用密码进行 SSH 登录。
 PermitEmptyPasswords=no    # 是否允许用户使用空密码登录系统。

@@ -1,15 +1,27 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/lunar64"
-
+  config.vm.provider "virtualbox" do |vb|
+      vb.memory = 1024
+      vb.cpus = 1
+  end
   # DHCP server configuration
   config.vm.define "dhcp" do |dhcp|
-    dhcp.vm.network "private_network", ip: "192.168.33.10"
-    dhcp.vm.provision "shell", inline: "apt-get update && apt-get -y install isc-dhcp-server && sed -i 's/INTERFACESv4=\"\"/INTERFACESv4=\"eth1\"/' /etc/default/isc-dhcp-server && cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.bak && echo 'subnet 192.168.33.0 netmask 255.255.255.0 {\n  range 192.168.33.100 192.168.33.150;\n}' > /etc/dhcp/dhcpd.conf && systemctl restart isc-dhcp-server"
+    config.vm.network "forwarded_port", host: 8897, guest: 22, id: 'ssh', auto_correct: true
+    dhcp.vm.network "private_network", ip: "192.168.10.10"
+    dhcp.vm.network "private_network", ip: "192.168.20.10"
+    # dhcp.vm.provision "shell", inline: "apt-get update && apt-get -y install isc-dhcp-server && sed -i 's/INTERFACESv4=\"\"/INTERFACESv4=\"eth1\"/' /etc/default/isc-dhcp-server && cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.bak && echo 'subnet 192.168.33.0 netmask 255.255.255.0 {\n  range 192.168.33.100 192.168.33.150;\n}' > /etc/dhcp/dhcpd.conf && systemctl restart isc-dhcp-server"
   end
 
   # DHCP client configuration
-  config.vm.define "client" do |client|
-    client.vm.network "private_network", type: "dhcp"
-    client.vm.provision "shell", inline: "apt-get update && apt-get -y install dhcp-client && dhclient"
+  config.vm.define "client1" do |client1|
+    client1.vm.network "forwarded_port", host: 8898, guest: 22, id: 'ssh', auto_correct: true
+    client1.vm.network "private_network", ip: "192.168.10.0", auto_config: false
+    # client.vm.provision "shell", inline: "apt-get update && apt-get -y install dhcp-client && dhclient"
   end
+  # DHCP client configuration
+  config.vm.define "client2" do |client2|
+    client2.vm.network "forwarded_port", host: 8899, guest: 22, id: 'ssh', auto_correct: true
+    client2.vm.network "private_network", ip: "192.168.10.0", auto_config: false
+    # client.vm.provision "shell", inline: "apt-get update && apt-get -y install dhcp-client && dhclient"
+  end  
 end

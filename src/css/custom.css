@@ -200,8 +200,6 @@ ul.menu__list>li>a.menu__link--active {
 
 .giscusTop {
   padding-top: 2rem;
-  /* 解决侧边不显示 */
-  margin-left: -1px;
 }
 
 /* github ico */
