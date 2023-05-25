@@ -17,11 +17,11 @@ tags: [Linux]
 - [Archlinux Wiki](https://wiki.archlinux.org/)  
   Arch 的维基内容十分全面，多数内容适用与所有发行版，也是我最常看的文档网站。
 - [RedHat Docs](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/)  
-  红帽的文档也很不错，可以很容易的找到企业解决方案，而且文章也非常易懂。
+  红帽的文档也很优秀，可以很容易的找到企业解决方案，而且文章也非常容易理解。
 - [在线阅读 Linux From Scratch](https://www.linuxfromscratch.org/lfs/read.html)  
-  LFS 是一个开源项目，旨在提供一份详细的指南，帮助用户从零开始构建自己的 Linux 操作系统。如果你想手搓发行版，构建一个属于自己的 Linux 不妨试试 LFS。
+  LFS 是一个开源项目，旨在提供一份详细的指南，帮助用户从零开始构建自己的 Linux 操作系统。如果你想构建自己的发行版不妨试试 LFS。
 - [The Linux Documentation Project](https://tldp.org/)  
-  提供有关 Linux 操作系统的各种文档、指南和教程。这个网站非常古老，阅读使用时要注意文档的发布日期和相关软件版本，避免一些过时的内容。比如这篇[I/O重定向](https://tldp.org/LDP/abs/html/io-redirection.html)就不错。
+  提供有关 Linux 操作系统的各种文档、指南和教程。这个网站非常古老，阅读使用时要注意文档的发布日期和相关软件版本，避免一些过时的内容。比如这篇 [I/O Redirection](https://tldp.org/LDP/abs/html/io-redirection.html) 就不错。
 
 ## 书籍和课程
 - 电子书：https://github.com/konduruvijaykumar/LINUX-GUIDE/tree/master
