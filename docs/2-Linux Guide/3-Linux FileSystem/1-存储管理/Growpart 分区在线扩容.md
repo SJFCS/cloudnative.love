@@ -2,7 +2,6 @@
 title: growpart 磁盘在线扩容
 ---
 
-- [cloud-utils-growpart扩容华为云文档](https://support.huaweicloud.com/ims_faq/ims_faq_0027.html)
 - 腾讯云：https://cloud.tencent.com/developer/article/1653394
 
 可以通过growpart工具修改硬盘的分区表，将这部分空间直接append到最后一个分区
@@ -20,6 +19,8 @@ vda    253:0    0  60G  0 disk
 growpart /dev/vda 1 -N
 growpart /dev/vda 1 
 resize2fs /dev/vda1
+#xfs_growfs（用于XFS文件系统）
+#resize2fs命令（用于ext2/ext3/ext4文件系统）
 df -Th
 
 [root@pigeon-10-0-3-18 ~]# lsblk
