@@ -235,3 +235,66 @@ sudo chattr +i /etc/resolv.conf
 ```
 
 `chattr +i` 可锁定文件，此时文件不可修改，`lsattr /etc/resolv.conf` 可以看到文件有个 `i` 属性，`chattr -i /etc/resolv.conf` 可解除锁定。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sudo apt update && sudo apt upgrade
+
+sudo apt install traceroute
+
+# 添加子接口
+sudo ip link add link enp0s9 name enp0s9.1 type vlan id 1
+sudo ip link add enp0s9.1 type macvlan mode bridge 
+sudo ip link add enp0s9.2 type dummy
+sudo ip addr add 192.168.10.254/24 dev enp0s9 label enp0s9.1
+
+
+假设您要将网段10.0.0.0/24的流量通过网关192.168.1.1转发到接口eth0上，可以使用以下命令：
+sudo ip route add 10.0.0.0/24 via 192.168.1.1 dev eth0
+
+
+    # sudo ip route del default
+    # sudo ip route add default via 192.168.10.254
+
+
+systemd-network
+
+ifupdown
+
+netplan
+
+https://developer.aliyun.com/article/744737
+
+https://ubuntu.com/server/docs/network-configuration
+
+
+Netplan：Ubuntu 18.04 版本以后的默认网络配置工具，通过 YAML 文件进行配置，支持网络接口、IP 地址、网关、DNS 等设置。
+
+NetworkManager：广泛应用于各种桌面环境和发行版中的网络管理工具，支持 WIFI、以太网、VPN 等多种网络连接，通过 GUI 界面或命令行进行配置。
+
+systemd-networkd：由 systemd 项目提供的网络配置工具，可以设置网络接口、IP 地址、网关、DNS 等，支持 DHCP、固定 IP 和静态路由等多种网络连接方式。
+
+ifupdown：Ubuntu 18.04 版本以前的默认网络配置工具，支持通过 /etc/network/interfaces 文件进行配置，适用于简单的网络设置。
+
+以上是常见的网络管理工具，不同的操作系统和发行版可能有所不同。
+
+
+ping -I xx  IP

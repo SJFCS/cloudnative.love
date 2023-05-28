@@ -11,15 +11,16 @@ import config from '!!raw-loader!../Ansible-Playground/config.yaml';
 本节带你快速入门使用 Ansible，包括 Ansible 配置、Invenytory 与 Ad-Hoc 的使用方法。
 
 ## 环境初始化
+
 :::info环境准备
 
 在开始前，我们需要准备实验所用到的主机。
 <details>
 <summary>这里为您准备了 Vagrant 环境，可以一键启动如下环境</summary>
 
-在**新建目录**中创建 `config.yaml` 和 `Vagrantfile` 文件后**在此目录中**执行 `vagrant up` 即可启动练习环境。vagrant 安装和使用详见：[Vagrant](/docs/Infrastructure%20as%20Code/Vagrant/)
+在**新建目录**中创建如下 `config.yaml` 和 `Vagrantfile` 文件，然后**在此目录中**执行 `vagrant up` 即可启动练习环境。关于 Vagrant 更多使用方法详见：[Vagrant](/docs/Infrastructure%20as%20Code/Vagrant/)
 
-启动后 `vagrant ssh <host_name>` 登录到对环境的各个节点进行初步检查：
+启动后使用 `vagrant ssh <host_name>` 登录到对环境的各个节点进行初步检查：
 
 输入 `hostname && hostname -d && hostname -f` 分别检查主机名、主机域和FQDN。
 
