@@ -1,3 +1,21 @@
+jvm 预热，通过服务网格灰度发布
+
+nacos 服务发现下沉解决方案，流量治理代替
+
+多集群联邦流量治理，服务发现
+
+多集群提高利用率 viture kubelet
+
+k8s 机器人 gpt
+
+gitlab 最佳实践，破除单库单流水线限制
+
+jvm 调优和远程dbug，在云环境下实现流量镜像，流量切分，debug中断不退出
+
+分析taken的启动顺序
+
+本地联调云环境，通过自定义cni拉平，还是通过网络方案，通过网络方案如何将configmap和secrate还有存储拉到本地，还是使用热更新的方式更新容器内的文件？
+
 kubelet linux 命名空间 网络 自己实现cni
 
 pod启动流程 https://icloudnative.io/posts/what-happens-when-k8s/

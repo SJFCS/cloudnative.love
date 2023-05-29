@@ -4,6 +4,8 @@ sidebar_position: 7
 tags: [Observability]
 ---
 
+https://grafana.com/solutions/
+
 云原生下 Telemetry（遥测）有如下三种手段去观察一个云服务：
 1. Metrics（指标）：即监控指标，主要使用 Prometheus 采集，通过 Grafana 进行可视化。
    - 集群本身也会使用一些指标进行自动伸缩、判断服务、节点是否处于异常状态等。

@@ -1,1 +1,0 @@
-[gerrit](https://www.gerritcodereview.com/)

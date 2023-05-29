@@ -1,0 +1,1 @@
+https://demo.mailcow.email/
