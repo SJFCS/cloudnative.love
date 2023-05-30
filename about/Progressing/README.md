@@ -3,10 +3,11 @@ title: 目前正在做什么
 sidebar_position: 4
 ---
 :::info todo
-- 5-6 IaC, Linux, Database, 处理临期资源 [Terraform Associate](https://www.hashicorp.com/certification/terraform-associate) [MySQL OCP](https://education.oracle.com/%E4%BA%A7%E5%93%81%E7%9B%AE%E5%BD%95-outrackpath-trackp_888/trackp_888)
+- 5-6 Linux, 处理临期资源
 - 7-8 Kubernetes, CI/CD [AWS SAP](https://aws.amazon.com/cn/certification/certified-solutions-architect-professional/?ch=sec&sec=rmg&d=1)
 - 9-10 Proxy, Observability  [ACE](https://edu.aliyun.com/certification/ace01)
 - 11-12 Storage Security
+- IaC, Database  [Terraform Associate](https://www.hashicorp.com/certification/terraform-associate) [MySQL OCP](https://education.oracle.com/%E4%BA%A7%E5%93%81%E7%9B%AE%E5%BD%95-outrackpath-trackp_888/trackp_888)
 :::
 
 ## O1：提升运维开发基础技能

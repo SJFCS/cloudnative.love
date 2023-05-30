@@ -2,14 +2,16 @@
 title: DNS
 sidebar_position: 1
 ---
-- github dns 污染指向 127.0.0.1 
+
+https://www.cnblogs.com/f-ck-need-u/p/7048359.html#blogservice
+
+https://www.cnblogs.com/f-ck-need-u/p/7367503.html
+
 - https://wiki.archlinux.org/title/Dnscrypt-proxy
 - https://www.v2ex.com/t/742709
 - https://boce.aliyun.com/detect/dns/DNS_PING-55e41bb2aff9db99decd9d9da1be445d-1652369079406
 
-本章节介绍 DNS基础概念和原理，以及诸多命令工具，涵盖以下 DNS 服务器的搭建和使用。
-- dnsmasq
-- bind
+
 
 https://www.cnblogs.com/f-ck-need-u/p/7367503.html
 
@@ -20,10 +22,18 @@ https://ns1.com/resources/dns-zones-explained
 
 
 
-在大多数情况下，动态主机配置协议 (DHCP) 会自动将您的系统配置为使用您的 ISP 域名服务器的 IP 地址。如需使用 Google 公共 DNS，您需要明确更改操作系统或设备中的 DNS 设置，以使用 Google 公共 DNS IP 地址。更改 DNS 设置的过程因操作系统和版本（Windows、Mac、Linux 或 Chrome 操作系统）或设备（计算机、手机或路由器）而异。我们在此给出了一些可能不适用于您的操作系统或设备的常规程序；如需权威信息，请参阅供应商文档。
+DNS(Domain name system)
+
+推荐阅读书籍：《DNS & bind》
 
 
- DNS over TLS 和 DNS over HTTPS
+DNS主要是用于将域名解析为IP地址的协议，有时候也用于将IP地址反向解析成域名，所以DNS可以实现双向解析。
+
+DNS可以使用TCP和UDP的53端口，基本使用UDP协议的53端口。
+
+
+
+DNS over TLS 和 DNS over HTTPS
 DNS-over-TLS
 基于 TLS 的 DNS (DoT) 和基于 HTTPS 的 DNS (DoH) 听起来它们是同一事物的可互换术语。他们实际上完成了同样的事情——加密 DNS 请求——但有一个很大的不同：他们使用的端口。
 
@@ -137,3 +147,63 @@ Dedicated DNS - fully managed DNS deployment, on premise or in the cloud, with a
 
 ### 清除DNS缓存
 ### 不同区域解析不同DNS
+
+
+
+
+
+
+
+
+
+
+
+参考文档 https://www.redhat.com/sysadmin/dns-configuration-introduction
+
+Domain Name System (DNS) 域名系统 用于将主机名解析 为IP地址  
+在本文中，您将学习 DNS 的基础知识，从 DNS 如何获取 IP 地址和主机名，到正向和反向查找区域的概念。它还将向您展示如何安装和配置 DNS，定义和编辑区域文件，并验证 DNS 是否可以通过命令帮助解析到正确的地址。如果您刚接触 DNS，本文将帮助您使用基本配置在系统上使用它。
+
+## 域名系统是如何工作的
+
+当客户端从命名服务器请求信息时，它通常连接到端口53，然后命名服务器解析所请求的名称。
+
+![1677224846192](image/DNS主从备份/1677224846192.png)
+(Ashish Bharadwaj, CC BY-SA 4.0)
+Sending a request from the DNS client to the DNS server is called a 
+从 DNS 客户机向 DNS 服务器发送请求称为 lookup request.查找请求。
+Getting a response from the DNS server to the DNS client is called a lookup response.
+从 DNS 服务器到 DNS 客户端的响应称为查找响应。
+The system on which the DNS service is configured is called a DNS server.
+配置 DNS 服务的系统称为 DNS 服务器。
+The system that accesses the DNS server is called a DNS client.
+访问 DNS 服务器的系统称为 DNS 客户端。
+
+
+
+## Where does DNS get IP addresses? DNS 从哪里获得 IP 地址？
+
+
+您可能想知道 DNS 如何获得相应主机名或域名的 IP。DNS 如何在不同的 IP 地址之间进行搜索并正确地关联您的域名？谁存储域名和 IP 地址之间的映射？  
+DNS 工作流说明了如何在 DNS 中进行通信以及如何解析地址。
+![1677225611581](image/DNS主从备份/1677225611581.png)
+(Ashish Bharadwaj, CC BY-SA 4.0)
+When the client searches for the domain www.example.com, the request will initially go to the internet service provider's (ISP) resolver. It will respond to the user's request to resolve a domain name.
+当客户机搜索域 www.example.com 时，请求最初将转到 Internet 服务提供商(ISP)的解析器。它将响应用户解析域名的请求。
+If the IP address is not found on the resolver, the request is forwarded to a root DNS server and later to the top-level domain (TLD) servers.
+如果在解析器上没有找到 IP 地址，请求就会被转发到根 DNS 服务器，然后再转发到顶级域(tLD)服务器。
+TLD servers store information for top-level domains, such as .com or .net.
+TLD 服务器存储顶级域(如.com 或.net)的信息。
+Requests are forwarded to the nameservers, which know detailed information about domains and IP addresses.
+请求被转发到名称服务器，这些服务器知道域和 IP 地址的详细信息。
+Nameservers respond to the ISP's resolver, and then the resolver responds to the client with the requested IP.
+命名服务器响应 ISP 的解析器，然后解析器用请求的 IP 响应客户机。
+When the resolver doesn't know the IP, it stores the IP and its domain in a cache to service future queries.
+当解析器不知道 IP 时，它将 IP 及其域存储在缓存中，以便为将来的查询提供服务。
+
+## Forward and reverse lookups 正向和反向查找
+
+正向查找区域使用域名搜索 IP 地址，而反向查找区域使用 IP 地址搜索域名。
+
+![1677225645788](image/DNS主从备份/1677225645788.png)
+(Ashish Bharadwaj, CC BY-SA 4.0)
+
