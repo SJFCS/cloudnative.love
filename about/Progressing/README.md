@@ -27,13 +27,7 @@ sidebar_position: 4
 + KR2：Kubernetes-The-Hard-Way-Translate
     >翻译原文并添加 vagrant/Terraform 实验环境,集成 crowdin 翻译  
     >Kubernetes the hard way on Vagrant on Local Machine. No scripts.  
-  :::tip 日常进度记录
-  todolist：
 
-  done：
-    + xx
-    + xx
-  :::
 ## O3：提高英语阅读能力
 :::note 现状分析
 因为工作需要阅读英文文档，我需要通过提高英语水平来提升我的阅读效率。
@@ -47,9 +41,6 @@ sidebar_position: 4
 :::
 + KR1：完成五本专业书籍阅读
 + KR2: 整理阅读并清理书签，将数量由5000降至2000
-  :::tip 日常进度记录
-
-  :::
 
 <!-- 
 ## O5：Kubernetes 进阶
