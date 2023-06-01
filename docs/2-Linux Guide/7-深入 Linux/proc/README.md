@@ -1,0 +1,1 @@
+cat /proc/`ps aux | grep script_hive_client.sh | grep -v grep | awk '{print $2}'`/environ | tr '\0' '\n'

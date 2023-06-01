@@ -1,3 +1,6 @@
+FQDN是Fully Qualified Domain Name的缩写，称为完全合格域名，是指包含了所有域的主机名，其中包括根域。FQDN可以说是主机名的一种完全表示形式，它从逻辑上准确地表示出主机在什么地方。
+
+
 "hostname" 命令用于显示计算机的主机名，而 "hostname -f" 命令用于显示计算机的完全限定域名（FQDN）。FQDN 包括主机名和域名，可以用来唯一地标识计算机在网络中的位置。
 
 完全限定域名的英文是 Fully Qualified Domain Name（FQDN）。

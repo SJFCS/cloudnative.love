@@ -3,66 +3,137 @@ title: DNS
 sidebar_position: 1
 ---
 
-https://www.cnblogs.com/f-ck-need-u/p/7048359.html#blogservice
-
-https://www.cnblogs.com/f-ck-need-u/p/7367503.html
-
-- https://wiki.archlinux.org/title/Dnscrypt-proxy
-- https://www.v2ex.com/t/742709
-- https://boce.aliyun.com/detect/dns/DNS_PING-55e41bb2aff9db99decd9d9da1be445d-1652369079406
-
-
-
-https://www.cnblogs.com/f-ck-need-u/p/7367503.html
-
-https://www.thesslstore.com/blog/dns-over-tls-vs-dns-over-https/
-https://developers.google.com/speed/public-dns/docs/dns-over-tls?hl=zh-cn
-https://developers.google.com/speed/public-dns/docs/using?hl=zh-cn
-https://ns1.com/resources/dns-zones-explained
-
-
-
-DNS(Domain name system)
-
+DNS(Domain Name System, 域名系统) 
+在本文中，您将学习 DNS 的基础知识，从 DNS 如何获取 IP 地址和主机名，到正向和反向查找区域的概念。它还将向您展示如何安装和配置 DNS，定义和编辑区域文件，并验证 DNS 是否可以通过命令帮助解析到正确的地址。如果您刚接触 DNS，本文将帮助您使用基本配置在系统上使用它。
 推荐阅读书籍：《DNS & bind》
-
 
 DNS主要是用于将域名解析为IP地址的协议，有时候也用于将IP地址反向解析成域名，所以DNS可以实现双向解析。
 
 DNS可以使用TCP和UDP的53端口，基本使用UDP协议的53端口。
 
 
+## 解析过程
 
-DNS over TLS 和 DNS over HTTPS
-DNS-over-TLS
-基于 TLS 的 DNS (DoT) 和基于 HTTPS 的 DNS (DoH) 听起来它们是同一事物的可互换术语。他们实际上完成了同样的事情——加密 DNS 请求——但有一个很大的不同：他们使用的端口。
+https://ns1.com/resources/dns-types-records-servers-and-queries
 
-
-## 概念原理
-
-什么是 DNS zone ？
-DNS Zone Levels
-DNS Root Zone
-TLD Zones
-Domain Zones
-Secondary DNS Zones
-All About the DNS Zone File
+当客户端搜索域时www.example.com，请求最初将转到 Internet 服务提供商 (ISP) 的解析器。它将响应用户请求解析域名。
+如果在解析器上找不到 IP 地址，请求将转发到根 DNS 服务器，然后再转发到顶级域 (TLD) 服务器。
+TLD 服务器存储顶级域的信息，例如.com或.net。
+请求被转发到名称服务器，名称服务器知道有关域和 IP 地址的详细信息。
+名称服务器响应 ISP 的解析器，然后解析器用请求的 IP 响应客户端。
+当解析器不知道 IP 时，它会将 IP 及其域存储在缓存中以服务将来的查询。
 
 
 
+1.本机查找完缓存后如果没有结果，会先查找hosts文件，如果没有找到再把查询发送给DNS服务器，但这仅仅是默认情况，这个默认顺序是可以改变的。在/etc/nsswitch.conf中有一行" hosts: files dns"就是定义先查找hosts文件还是先提交给DNS服务器的，如果修改该行为"hosts:  dns files"则先提交给DNS服务器，这种情况下hosts文件几乎就不怎么用的上了。
 
-DNS Zone Types
+## 7.2.1 递归查询和迭代查询
+
+例如A主机要查询C域中的一个主机，A所指向的DNS服务器为B，递归和迭代查询的方式是这样的：
+
+递归查询：A --> B --> C --> B --> A
+
+迭代查询：A --> B       A --> C --> A
+
+DNS递归查询是指客户端向本地DNS服务器发出请求，本地DNS服务器会向根域名服务器发出请求，再向下级域名服务器发出请求，直到找到所需的DNS记录，然后返回结果给客户端。
+
+DNS迭代查询是指客户端向本地DNS服务器发出请求，本地DNS服务器会向根域名服务器发出请求，并返回下一级域名服务器的地址给客户端。客户端会向下一级域名服务器发出请求，本地DNS服务器会重复这个过程，直到找到所需的DNS记录，然后返回结果给客户端。迭代查询是由客户端控制的，因为它负责在每个步骤中选择下一级域名服务器。
+
+
+
+也就是说，递归的意思是找了谁谁就一定要给出答案。那么允许递归的意思就是帮忙去找位置，如A对B允许递归，那么B询问A时，A就去帮忙找答案，如果A不允许对B递归，那么A就会告诉B的下一层域的地址让B自己去找。
+
+可以想象，如果整个域系统都使用递归查询，那些公共的根域和顶级域会忙到死，因此更好的方案就是把这些压力分散到每个个人定制的DNS服务器。
+
+所以DNS的解析流程才会如下图。并且在客户端到DNS服务器端的这一阶段是递归查询，从DNS服务器之后的是迭代查询。也就是说，顶级域和根域出于性能的考虑，是不允许给其他任何机器递归的。
+
+
+
+
+
+为什么客户端到DNS服务器阶段是递归查询？因为客户端本身不是DNS服务器，它自己是找不到互联网上的域名地址的，所以只能询问DNS服务器，最后一定由DNS服务器来返回答案，所以DNS服务器需要对这个客户端允许递归。因此，dns解析器(nslookup、host、dig等)所发出的查询都是递归查询。
+
+
+
+
+## 7.2.5 资源记录(Resource Record,RR)
+
+对于提供DNS服务的系统(DNS服务器)，域名相关的数据都需要存储在文件(区域数据文件)中。这些数据分为多种类别，每种类别存储在对应的资源记录(resource record,RR)中。也就是说，资源记录既用来区分域数据的类型，也用来存储对应的域数据。
+
+DNS的internet类中有非常多的资源记录类型。常用的是SOA记录、NS记录、A记录(IPV6则为AAAA记录)、PTR记录、CNAME记录、MX记录等。
+
+### (1).SOA记录：start of authority，起始授权机构。该记录存储了一系列数据，若不明白SOA记录，请结合下面的NS记录，SOA更多的信息见"子域"部分的内容。格式如下：
+
+### (2).NS记录：name server，存储的是该域内的dns服务器相关信息。即NS记录标识了哪台服务器是DNS服务器。格式如下：
+
+### (3).A记录：address，存储的是域内主机名所对应的ip地址。格式如下：
+
+### (4).PTR记录：pointer，和A记录相反，存储的是ip地址对应的主机名，该记录只存在于反向解析的区域数据文件中(并非一定)。格式如下：
+
+### (5).CNAME记录：canonical name，表示规范名的意思，其所代表的记录常称为别名记录。之所以如此称呼，就是因为为规范名起了一个别名。什么是规范名？可以简单认为是fqdn。格式如下：
+
+
+
+
+## Forward and reverse lookups 正向和反向查找
+
+正向查找区域使用域名搜索 IP 地址，而反向查找区域使用 IP 地址搜索域名。
+
+
+
+
+
+
+
+## 7.2.2 权威服务器和(非)权威应答
+权威服务器（Authoritative Server） 可以理解为直接上层域的DNS服务器。例如www.baidu.com这台主机的上层域是baidu.com，那么对www来说，它的权威服务器就是baidu.com这个域内负责解析的DNS服务器，而对于baidu.com这个主机来说，它的权威服务器是.com这个域负责解析的DNS服务器。
+
+更具体的说，某域的权威服务器是可以直接查看该域数据(即区域数据文件)的DNS服务器，主、从DNS服务器都是权威服务器。
+
+## 什么是 DNS zone ？
+DNS区域是域命名空间的一个独特部分，它被委托给一个法律实体——负责维护 DNS 区域的个人、组织或公司。DNS 区域也是一种管理功能，允许对 DNS 组件（例如权威名称服务器）进行精细控制。
+
+当 Web 浏览器或其他网络设备需要查找主机名（例如“example.com”）的 IP 地址时，它会执行 DNS 查找 - 本质上是 DNS 区域检查 - 并被带到管理 DNS 区域的 DNS 服务器那个主机名。该服务器称为域的权威名称服务器。然后，权威名称服务器通过为所请求的主机名提供 IP 地址或其他数据来解析 DNS 查找。
+### DNS Zone Levels
+域名系统 (DNS) 定义了域命名空间，它指定了顶级域（例如“.com”）、二级域（例如“acme.com”）和低级域，也称为子域（例如“support.acme.com”）。这些级别中的每一个都可以是一个 DNS 区域。
+
+例如，根域“acme.com”可以委托给 Acme Corporation。Acme 负责设置权威的 DNS 服务器，该服务器保存域的正确 DNS 记录。
+
+在 DNS 系统的每个层级，都有一个包含区域文件的名称服务器，该文件保存该区域的可信、正确的 DNS 记录。
+### DNS Root Zone
+DNS 系统的根，由域名末尾的一个点表示，例如 www.example.com. — 是主要 DNS 区域。自 2016 年以来，根区由互联网名称与数字地址分配机构 (ICANN) 监管，ICANN 将管理权委托给充当互联网号码分配机构 (IANA) 的子公司。
+
+DNS 根区由 13 台逻辑服务器运营，这些服务器由 Verisign、美国陆军研究实验室和 NASA 等组织运营。任何递归 DNS 查询（了解有关DNS 查询类型的更多信息）都从联系这些根服务器之一开始，并请求树中下一级的详细信息——顶级域 (TLD) 服务器。
+### TLD Zones
+每个顶级域都有一个 DNS 区域，例如“.com”、“.org”或国家代码，例如“.co.uk”。目前有超过 1500 个顶级域。大多数顶级域由 ICANN/IANA 管理。
+
+二级域名，如您现在查看的域名“ ns1.com ”，被定义为单独的 DNS 区域，由个人或组织运营。组织可以运行自己的 DNS 名称服务器，或将管理委托给外部提供商。
+
+
+### Domain Zones
+二级域名，如您现在查看的域名“ ns1.com ”，被定义为单独的 DNS 区域，由个人或组织运营。组织可以运行自己的 DNS 名称服务器，或将管理委托给外部提供商。
+
+![1685590784551](image/README/1685590784551.png)
+
+如果一个域有子域，它们可以是同一区域的一部分。或者，如果子域是一个独立的网站，并且需要单独的 DNS 管理，则可以将其定义为自己的 DNS 区域。在上图中，“blog.example.com”被设置为 DNS 区域，而“support.example.com”是“example.com”DNS 区域的一部分。
+
+
+### Secondary DNS Zones
+DNS 服务器可以部署在主要/次要拓扑中，其中次要 DNS服务器保存主要 DNS 服务器的 DNS 记录的只读副本。主服务器保存主区域文件，辅助服务器构成一个相同的辅助区域；DNS 请求分布在主服务器和辅助服务器之间。当主服务器区域文件全部或部分复制到辅助 DNS 服务器时，就会发生 DNS 区域传输。
+
+https://ns1.com/resources/what-exactly-is-secondary-dns
+
+### All About the DNS Zone File
+### DNS Zone Types
 区域文件有两种类型:
 
-A DNS Primary File which authoritatively describes a zone
-一个 DNS 主文件，它以权威的方式描述一个区域
-A DNS Cache File which lists the contents of a DNS cache—this is only a copy of the authoritative DNS zone
-列出 DNS 缓存内容的 DNS 缓存文件ーー这只是权威 DNS 区域的副本
+- A DNS Primary File which authoritatively describes a zone
+  一个 DNS 主文件，它以权威的方式描述一个区域
+- A DNS Cache File which lists the contents of a DNS cache—this is only a copy of the authoritative DNS zone
+  列出 DNS 缓存内容的 DNS 缓存文件ーー这只是权威 DNS 区域的副本
 
 
-
-
-DNS Zone Records
+### DNS Zone Records
 DNS 区域记录
 
 在区域文件中，每一行表示一个 DNS 资源记录(RR)。记录由以下字段组成:
@@ -81,14 +152,7 @@ Record data has one or more information elements, depending on the record type, 
 
 
 
-
-
-
-
-
-
-
-Zone File Structure
+### Zone File Structure
 区域文件结构
 DNS 区域文件以两个强制记录开始:
 
@@ -115,38 +179,9 @@ Mail exchanger record (MX)—specifies an SMTP email server for the domain.
 
 
 
-
-
-
-
-
 DNS Zone File Example
 DNS 区域文件示例
 
-```bash
-$ORIGIN example.com. ; start of the zone file$TTL 30m ; default cache expiration time for resource recordsexample.com. IN SOA ns.example.com. root.example.com. ( 1999120701 ; serial number of this zone file1d ; frequency to refresh secondary DNS (d=day)1d ; frequency to refresh secondary DNS in case of problem4w ; secondary DNS expiration time (w=week)1h ; minimum caching time if resolution failedexample.com. NS dns1.dnsprovider.com. ; there are two name server that can provide DNS services for example.comexample.com. NS dns2.dnsprovider.com.example.com. MX 10 mx1.dnsprovider.com ; mail serverexample.com. MX 10 mx2.dnsprovider.comexample.com. A 192.168.100.1 ; IP address for root domain www A 192.168.100.1 ; IP address for www subdomain
-```
-
-
-
-
-
-
-DNS Zones and Next-Generation DNS Services
-域名服务区域和下一代域名服务
-
-传统的 DNS 基础设施有其局限性。很久以前，一个 IP 地址指向一个服务器。现在，一个 IP 地址可以隐藏一个负载均衡的网络资源池，这些资源部署在全球不同的数据中心上。为了有效地向用户提供这些资源，确保高性能并允许快速传播更改，您应该考虑使用下一代 DNS 提供程序，如 NS1。
-
-NS1 Provides:
-NS1提供:
-Managed DNS - a DNS service powered by a high-performance, anycast global DNS network, with advanced traffic management features.
-管理 DNS-一个 DNS 服务的高性能，任意广播全球 DNS 网络，具有先进的流量管理功能。
-Dedicated DNS - fully managed DNS deployment, on premise or in the cloud, with advanced point-and-click traffic management
-专门的 DNS-完全管理的 DNS 部署，在前提或在云中，与先进的点击和点击流量管理
-## 常用操作
-
-### 清除DNS缓存
-### 不同区域解析不同DNS
 
 
 
@@ -155,55 +190,28 @@ Dedicated DNS - fully managed DNS deployment, on premise or in the cloud, with a
 
 
 
+## Secondary DNS 辅助 DNS 究竟是什么？
 
 
 
-参考文档 https://www.redhat.com/sysadmin/dns-configuration-introduction
-
-Domain Name System (DNS) 域名系统 用于将主机名解析 为IP地址  
-在本文中，您将学习 DNS 的基础知识，从 DNS 如何获取 IP 地址和主机名，到正向和反向查找区域的概念。它还将向您展示如何安装和配置 DNS，定义和编辑区域文件，并验证 DNS 是否可以通过命令帮助解析到正确的地址。如果您刚接触 DNS，本文将帮助您使用基本配置在系统上使用它。
-
-## 域名系统是如何工作的
-
-当客户端从命名服务器请求信息时，它通常连接到端口53，然后命名服务器解析所请求的名称。
-
-![1677224846192](image/DNS主从备份/1677224846192.png)
-(Ashish Bharadwaj, CC BY-SA 4.0)
-Sending a request from the DNS client to the DNS server is called a 
-从 DNS 客户机向 DNS 服务器发送请求称为 lookup request.查找请求。
-Getting a response from the DNS server to the DNS client is called a lookup response.
-从 DNS 服务器到 DNS 客户端的响应称为查找响应。
-The system on which the DNS service is configured is called a DNS server.
-配置 DNS 服务的系统称为 DNS 服务器。
-The system that accesses the DNS server is called a DNS client.
-访问 DNS 服务器的系统称为 DNS 客户端。
 
 
+https://www.redhat.com/sysadmin/dns-configuration-introduction
 
-## Where does DNS get IP addresses? DNS 从哪里获得 IP 地址？
+https://www.cnblogs.com/f-ck-need-u/p/7367503.html
 
+- https://wiki.archlinux.org/title/Dnscrypt-proxy
+- https://www.v2ex.com/t/742709
+- https://boce.aliyun.com/detect/dns/DNS_PING-55e41bb2aff9db99decd9d9da1be445d-1652369079406
 
-您可能想知道 DNS 如何获得相应主机名或域名的 IP。DNS 如何在不同的 IP 地址之间进行搜索并正确地关联您的域名？谁存储域名和 IP 地址之间的映射？  
-DNS 工作流说明了如何在 DNS 中进行通信以及如何解析地址。
-![1677225611581](image/DNS主从备份/1677225611581.png)
-(Ashish Bharadwaj, CC BY-SA 4.0)
-When the client searches for the domain www.example.com, the request will initially go to the internet service provider's (ISP) resolver. It will respond to the user's request to resolve a domain name.
-当客户机搜索域 www.example.com 时，请求最初将转到 Internet 服务提供商(ISP)的解析器。它将响应用户解析域名的请求。
-If the IP address is not found on the resolver, the request is forwarded to a root DNS server and later to the top-level domain (TLD) servers.
-如果在解析器上没有找到 IP 地址，请求就会被转发到根 DNS 服务器，然后再转发到顶级域(tLD)服务器。
-TLD servers store information for top-level domains, such as .com or .net.
-TLD 服务器存储顶级域(如.com 或.net)的信息。
-Requests are forwarded to the nameservers, which know detailed information about domains and IP addresses.
-请求被转发到名称服务器，这些服务器知道域和 IP 地址的详细信息。
-Nameservers respond to the ISP's resolver, and then the resolver responds to the client with the requested IP.
-命名服务器响应 ISP 的解析器，然后解析器用请求的 IP 响应客户机。
-When the resolver doesn't know the IP, it stores the IP and its domain in a cache to service future queries.
-当解析器不知道 IP 时，它将 IP 及其域存储在缓存中，以便为将来的查询提供服务。
+https://www.cnblogs.com/f-ck-need-u/p/7367503.html
 
-## Forward and reverse lookups 正向和反向查找
+https://www.thesslstore.com/blog/dns-over-tls-vs-dns-over-https/
+https://developers.google.com/speed/public-dns/docs/dns-over-tls?hl=zh-cn
+https://developers.google.com/speed/public-dns/docs/using?hl=zh-cn
+https://ns1.com/resources/dns-zones-explained
 
-正向查找区域使用域名搜索 IP 地址，而反向查找区域使用 IP 地址搜索域名。
-
-![1677225645788](image/DNS主从备份/1677225645788.png)
-(Ashish Bharadwaj, CC BY-SA 4.0)
-
+Dnscrypt-proxy
+DNS over TLS 和 DNS over HTTPS
+DNS-over-TLS
+基于 TLS 的 DNS (DoT) 和基于 HTTPS 的 DNS (DoH) 听起来它们是同一事物的可互换术语。他们实际上完成了同样的事情——加密 DNS 请求——但有一个很大的不同：他们使用的端口。
