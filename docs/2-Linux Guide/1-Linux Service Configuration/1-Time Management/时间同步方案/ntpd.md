@@ -91,7 +91,7 @@ disable monitor
 2. 权限设定
    - 格式: restrict address [mask mask] option
    - 一些 DDoS 攻击可以利用 NTP 服务器将流量放大,为了防止你的服务器被卷入这种攻击，建议你将你的服务器配置为只响应你信任的特定服务器的 NTP 请求。  
-     ntpq 和 ntpdc 查询可用于放大攻击（详见[CVE-2013-5211](https://access.redhat.com/security/cve/CVE-2013-5211)），不要在可公开访问的系统上删除限制默认命令中的noquery选项。
+     ntpq 和 ntpdc 查询可用于放大攻击（详见[CVE-2013-5211](https://access.redhat.com/security/cve/CVE-2013-5211)），不要在可公开访问的系统上删除限制默认命令中的 noquery 选项。
    - 其中地址和掩码指定要对其应用限制的 IP 地址，也可以是 default ，default 就类似 0.0.0.0。
    - restrict -6 表示 IPV6 地址的权限设置。
    - 或者省略掩码和子网掩码，指定一个单独的IP地址。

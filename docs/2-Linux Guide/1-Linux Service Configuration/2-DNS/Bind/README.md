@@ -2,9 +2,10 @@
 title: Bind
 ---
 
----
-title: 安装和配置
----
+https://ns1.com/resources/bind-dns-pros-cons-and-alternatives
+
+它还将向您展示如何安装和配置 DNS，定义和编辑区域文件，并验证 DNS 是否可以通过命令帮助解析到正确的地址。如果您刚接触 DNS，本文将帮助您使用基本配置在系统上使用它。
+
 ## 7.4.1 named.conf配置简要说明
 
 该配置文件中只能有一个options，在这里面用于配置全局项。其中下例中的directory指令定义区域数据文件的存放目录。
