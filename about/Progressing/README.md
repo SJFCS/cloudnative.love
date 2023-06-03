@@ -15,7 +15,7 @@ sidebar_position: 4
 最近在网易这边工作很清闲，我打算利用这部分时间去提升一下我的专业技能，增强我的开发能力，当然基本的运维知识也不能落下。我打算以证促学，我认为认证考试都很简单，不能依赖证书数量来作为一个人能力的体现，但考证过程中一些大纲可以帮助你快速系统的去学习一些技术，而且当完成一项认证并拿到证书和徽章时比较有成就感。
 :::
 + KR1：考取RHCE \ 阿里云ACE \ [AWS SAP](https://aws.amazon.com/cn/certification/certified-solutions-architect-professional/?ch=sec&sec=rmg&d=1) \ [MySQL OCP](https://education.oracle.com/%E4%BA%A7%E5%93%81%E7%9B%AE%E5%BD%95-outrackpath-trackp_888/trackp_888)证书
-+ KR2：完成[运维开发技能清单](/about/Progressing/运维开发技能清单.md)，并完成python和golang的学习
++ KR2：完成 运维开发技能清单 ，并完成python和golang的学习
   :::tip 日常进度记录
 
   :::
