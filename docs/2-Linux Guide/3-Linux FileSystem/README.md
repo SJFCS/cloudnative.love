@@ -5,6 +5,7 @@ title: Linux 文件系统
 本文包含 FHS 目录结构、常见文件系统类型、Inode 解释、硬链接和软链接的使用等内容。
 
 ## FHS 目录结构
+[浅谈linux中的根文件系统（rootfs的原理和介绍）](https://tldp.org/LDP/sag/html/root-fs.html)
 
 Linux 使用标准的 FHS(Filesystem Hierarchy Standard)目录结构作为其文件系统的基础。FHS的目的是为开发者、管理员和用户提供统一的文件系统结构，以便移植和交互各种软件。
 
@@ -29,7 +30,35 @@ Linux 使用标准的 FHS(Filesystem Hierarchy Standard)目录结构作为其文
 - /var目录：存放系统日志、缓存数据、邮件和数据库等动态数据。
 :::
 
+:::tip linux 系统中的 /bin,/sbin,/usr/bin,/usr/sbin,/usr/local/bin,/usr/local/sbin 目录的区别
+- /bin  
+  This directory contains executable programs which are needed in single user mode and to bring the sys‐ tem up or repair it.
+- /sbin  
+  Like /bin, this directory holds commands needed to boot the system, but which are usually not executed by normal users.
+- /usr/bin  
+  This is the primary directory for executable programs. Most programs executed by normal users which are not needed for booting or for repairing the system and which are not installed locally should be placed in this directory.
+- /usr/sbin  
+  This directory contains program binaries for system administration which are not essential for the boot process, for mounting /usr, or for system repair.
+- /usr/local/bin  
+  Binaries for programs local to the site.
+- /usr/local/sbin  
+  Locally installed programs for system administration.
+
+- /bin  存放所有用户皆可用的系统程序，系统启动或者系统修复时可用（在没有挂载 /usr 目录时就可以使用）
+- /sbin 存放超级用户才能使用的系统程序
+- /usr/bin 存放所有用户都可用的应用程序
+- /usr/sbin 存放超级用户才能使用的应用程序 
+- /usr/local/bin 存放所有用户都可用的与本地机器无关的程序
+- /usr/local/sbin 存放超级用户才能使用的与本地机器无关的程序
+:::
+
 </details>
+
+:::tip
+首先注意 usr 指 Unix System Resource，而不是 User
+然后通常 /usr/bin 下面的都是系统预装的可执行程序，会随着系统升级而改变。而 /usr/local/bin 目录是给用户放置自己的可执行程序的地方，推荐放在这里，不会因系统升级而被同名文件覆盖。
+:::
+
 
 ## Linux中常见的文件系统类型
 - **Ext文件系统**  

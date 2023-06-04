@@ -1,3 +1,5 @@
+https://github.com/wsdjeg/vim-galore-zh_cn
+
 https://effective-shell.com/
 
 https://github.com/4paradigm/k8s-vgpu-scheduler/blob/master/README_cn.md

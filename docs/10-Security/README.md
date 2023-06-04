@@ -3,6 +3,10 @@ title: Security
 sidebar_position: 9
 tags: [Security]
 ---
+https://github.com/neargle/my-re0-k8s-security
+
+https://blog.fleeto.us/post/intro-trivy-operator/
+
 - https://morioh.com/p/e487ada70ff7
 - https://developer.aliyun.com/article/777094
 - https://xujiwei.com/blog/2020/02/internal-authorize-based-on-dingtalk-virtual-ldap-keyclaok/?spm=a2c6h.12873639.article-detail.5.319e23a032NdXL

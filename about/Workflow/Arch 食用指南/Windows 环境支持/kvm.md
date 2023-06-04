@@ -1,6 +1,7 @@
 ---
 title: KVM
 ---
+https://www.cnblogs.com/tcicy/p/10193614.html
 
 Q: 虚拟机迁移如何强制停止？
 

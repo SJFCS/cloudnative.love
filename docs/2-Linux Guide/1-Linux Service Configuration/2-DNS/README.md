@@ -3,6 +3,10 @@ title: DNS
 sidebar_position: 1
 ---
 
+:::tip
+主机名和FQDN
+:::
+
 DNS(Domain Name System, 域名系统) 
 在本文中，您将学习 DNS 的基础知识，从 DNS 如何获取 IP 地址和主机名，到正向和反向查找区域的概念。它还将向您展示如何安装和配置 DNS，定义和编辑区域文件，并验证 DNS 是否可以通过命令帮助解析到正确的地址。如果您刚接触 DNS，本文将帮助您使用基本配置在系统上使用它。
 推荐阅读书籍：《DNS & bind》

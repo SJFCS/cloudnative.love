@@ -2,6 +2,8 @@
 title: SElinux
 ---
 
+https://www.bilibili.com/video/BV1WW411j7EJ/
+
 ```bash
 semanage port -a -t http_port_t -p tcp 8080
 ```

@@ -2,10 +2,10 @@
 title: Systemd
 ---
 - [systemd: The Good Parts](https://www.hashicorp.com/resources/systemd-the-good-parts)
-
 - https://en.wikipedia.org/wiki/Systemd
-
 - https://systemd.io/
+https://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html
+- 
 
 
 # systemd 和 systemctl

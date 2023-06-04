@@ -617,3 +617,18 @@ fi
 [ -f /var/ftp/pub/group ] && echo "上传文件成功"
 ```
 
+2. 找到 aaa 参数，并设置为off
+
+```bash
+sed -i '/^aaa/s/on/off/' /path/to/file
+可以配合grep使用，完成自动设置参数
+
+have_aaa=$(grep aaa /path/to/file | sed '/^#.*/d') # 寻找是否以存在aaa参数
+if [ ! -z $have_aaa ];then # 如果存在
+    sed -i '/^aaa/s/on/off/' /path/to/file # 则修改为off
+else  # 如果不存在
+    sed -i '/ccc/a aaa off' /path/to/file # 则在ccc参数下新增 aaa off
+    # sed -i '$a/aaa off' /path/to/file  # 则在最后新增 aaa off
+fi
+
+```
