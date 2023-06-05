@@ -3,6 +3,10 @@ title: DNS
 sidebar_position: 1
 ---
 
+:::tip
+主机名和FQDN
+:::
+
 DNS(Domain Name System, 域名系统)主要是用于将域名解析为IP地址的协议，有时候也用于将IP地址反向解析成域名，所以DNS可以实现双向解析。
 :::tip
 DNS可以使用TCP和UDP的53端口，基本使用UDP协议的53端口。

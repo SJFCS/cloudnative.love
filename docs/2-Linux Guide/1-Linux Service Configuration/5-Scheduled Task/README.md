@@ -1,0 +1,8 @@
+---
+title: Scheduled Task
+---
+Crontab和Anacrontab是Linux系统中两个常用的自动任务调度工具，用于定时执行系统中指定的任务。其中，Crontab适用于周期性执行较为频繁的任务，而Anacrontab则更适合执行较为不规则的任务。
+
+At是另一种Linux系统中的定时执行任务的方法，可以用于一次性执行指定任务，也可以指定任务在未来的某个特定时间执行。
+
+systemd.collect.timer是systemd管理系统中的一个定时器，可以用于在指定的时间间隔内周期性地执行指定的任务。systemd.collect.timer与其他定时任务调度工具不同，它是基于systemd的单元文件实现的，具有更高的灵活性和精度。

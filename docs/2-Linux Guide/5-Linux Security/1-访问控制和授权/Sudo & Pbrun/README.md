@@ -2,7 +2,7 @@
 title: Sudo & Pbrun
 ---
 
-
+https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file
 
 配置方式不同：pbrun需要在系统中配置，以允许特定的用户或用户组在特定的主机上运行特定的命令或程序；而sudo的配置则是由管理员在sudoers文件中进行配置。
 

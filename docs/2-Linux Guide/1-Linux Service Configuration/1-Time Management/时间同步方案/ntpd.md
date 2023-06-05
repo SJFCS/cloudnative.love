@@ -84,7 +84,8 @@ disable monitor
 </Tabs>
 
 1. 上层主机地址
-   - 格式: server [IP|HOST Name] [prefer]
+   - 格式: server [IP|HOST Name] [prefer]  
+    假设你需要让 ntpd 允许来自 192.168.1.0/24 网段的客户端进行时间同步,并且禁止这些客户端修改 ntpd 的配置，不允许使用 ntpd 的 trap 或控制台命令: `restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap`
    - 参数后面加上 perfer 表示最大优先级
    - 建议您列出至少两个可以进行同步的远程服务器,将本机也加到同步列表中。如果网络出现问题或者远程 NTP 服务器出现故障，则使用 127.0.0.1 ,直到它可以再次开始与远程服务器进行同步。
    - 要缩短初始同步所用的时间，请将 `iburst` 添加到 `server` 命令的末尾
@@ -93,8 +94,7 @@ disable monitor
    - 一些 DDoS 攻击可以利用 NTP 服务器将流量放大,为了防止你的服务器被卷入这种攻击，建议你将你的服务器配置为只响应你信任的特定服务器的 NTP 请求。  
      ntpq 和 ntpdc 查询可用于放大攻击（详见[CVE-2013-5211](https://access.redhat.com/security/cve/CVE-2013-5211)），不要在可公开访问的系统上删除限制默认命令中的 noquery 选项。
    - 其中地址和掩码指定要对其应用限制的 IP 地址，也可以是 default ，default 就类似 0.0.0.0。
-   - restrict -6 表示 IPV6 地址的权限设置。
-   - 或者省略掩码和子网掩码，指定一个单独的IP地址。
+   - restrict -6 表示 IPV6 地址的权限设置。或者省略掩码和子网掩码，指定一个单独的IP地址。
    - 更多 option 选项可以参考 [RedHat-Docs 19.17.1. Configure Access Control to an NTP Service](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-configuring_ntp_using_ntpd#s2-Configure_Access_Control_to_an_NTP_service)  
     如果 option 完全没有设定，那就表示该 IP (或网域)“没有任何限制”
 

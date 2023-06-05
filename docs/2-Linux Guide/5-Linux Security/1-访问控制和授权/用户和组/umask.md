@@ -1,0 +1,1 @@
+https://www.cyberciti.biz/tips/understanding-linux-unix-umask-value-usage.html

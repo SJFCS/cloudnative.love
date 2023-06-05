@@ -1,6 +1,9 @@
 ---
 title: 目录映射到盘符
 ---
+
+https://blog.csdn.net/dog250/article/details/100140882
+
 subst.exe 可将目录映射到盘符。用法如下：
 - `subst.exe`                     # 列出当前所有的虚拟盘符
 - `subst.exe Z: C:\DirName`       # 将 C:\DirName 映射到 Z:

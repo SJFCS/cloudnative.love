@@ -1,6 +1,9 @@
 ---
 title: Shell
 ---
+https://billie66.github.io/TLCL/book/
+
+https://www.cnblogs.com/f-ck-need-u/p/7048359.html#blogservice
 
 https://github.com/sysstat/sysstat
 

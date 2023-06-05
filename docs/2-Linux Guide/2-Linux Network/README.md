@@ -1,7 +1,16 @@
 ---
 title: Linux Network
 ---
+
+网络基本功系列.pdf
+
 如果使用 ifupdown 来管理网络接口，需要手动编写 /etc/network/interfaces 文件，并使用 ifup 和 ifdown 命令来启用或禁用网络接口。而如果使用 NetworkManager 或 systemd-networkd 等工具，
+
+
+https://cyclinder.gitbook.io/cloud-native-network/
+
+https://github.com/DaoCloud-OpenSource/network
+
 
 - [Guide to the Linux Tutorials-TCP/IP networking reference guide (Linux 教程指南-TCP/IP 网络参考指南章节)](http://www.penguintutor.com/linux/basic-network-reference)  
   这篇关于网络的文章写的很简洁易懂。

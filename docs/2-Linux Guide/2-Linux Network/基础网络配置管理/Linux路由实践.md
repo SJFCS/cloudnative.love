@@ -1,20 +1,9 @@
 ---
 title: Linux路由实践
 
-categories:
-  - Linux网络管理
-series: 
-  -
-lastmod: '2020-04-17'
-
-featuredImage: 
-authors: songjinfeng
-draft: false
-toc: true
-
 ---
-
-
+https://devconnected.com/how-to-add-route-on-linux/
+https://www.zhihu.com/question/41331151
 
 ## 路由简介
 

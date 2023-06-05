@@ -17,7 +17,7 @@ export default function Resume() {
         <section className="greeting-flex">
           <Head />
           {/* text & button */}
-          <a href="/宋锦丰_DevOps-运维开发-容器运维_18660386849.pdf" rel="noopener noreferrer" target="_blank" className="greeting-resume-button"><Translate>Download Resume</Translate></a>
+          {/* <a href="/宋锦丰_DevOps-运维开发-容器运维_18660386849.pdf" rel="noopener noreferrer" target="_blank" className="greeting-resume-button"><Translate>Download Resume</Translate></a> */}
         </section>
         {/* Cert */}
         <section className="grid md:grid-cols-3 gap-4 my-8 max-w-5xl mx-auto">

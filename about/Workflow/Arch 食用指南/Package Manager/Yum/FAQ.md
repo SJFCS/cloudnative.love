@@ -1,6 +1,11 @@
 ---
 title: FAQ
 ---
+https://developers.redhat.com/blog/2019/03/18/rpm-packaging-guide-creating-rpm
+
+sudo yum --disablerepo="*" --enablerepo="仓库名称"
+
+
 
 ## yum 安装软件包遇到`cpio:rename` 报错
 

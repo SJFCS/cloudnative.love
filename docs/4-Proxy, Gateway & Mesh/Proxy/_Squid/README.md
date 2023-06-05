@@ -1,7 +1,7 @@
 ---
 title: Squid
 ---
-
+https://www.bilibili.com/video/BV1WW411j7Eg/?spm_id_from=333.999.0.0&vd_source=bf7ca1bb2786e4fa06acbf14181b36fc
 ## squid类似于nginx , haproxy这种代理软件
 
 ### 正向代理(生产环境上不能访问互联网的服务器-->通过代理服务器-->访问互联网,下载安装软件)

@@ -1,16 +1,5 @@
 ---
 title: ethtool
-
-categories:
-  - Linux网络管理
-series: 
-  - 
-lastmod: '2020-04-17'
-
-featuredImage: 
-authors: songjinfeng
-draft: false
-toc: true
 ---
 
 

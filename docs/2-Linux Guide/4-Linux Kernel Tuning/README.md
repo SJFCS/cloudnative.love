@@ -1,6 +1,6 @@
 # Linux 性能调优
 
-
+https://github.com/sn99/Optimizing-linux
 
   - 通过 tuned 守护进程管理的调优配置文件来优化系统性能
   - 通过 nice 和 renice 命令，对特定进程进行优先排序和取消优先排序
