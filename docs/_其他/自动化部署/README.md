@@ -1,0 +1,2 @@
+- [Cobbler自动化部署](https://www.cnblogs.com/yanjieli/p/11016825.html)
+- [maas](https://maas.io/)

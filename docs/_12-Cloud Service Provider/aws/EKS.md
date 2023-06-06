@@ -2,7 +2,7 @@
 
 
 ## IAM 与 ServiceAccount 的角色绑定
-
+- [安装 aws-iam-authenticator](https://docs.aws.amazon.com/zh_cn/eks/latest/userguide/install-aws-iam-authenticator.html)
 - [Creating an IAM role and policy for your service account](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html)
 - [Associate an IAM role to a service account](https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html)
 

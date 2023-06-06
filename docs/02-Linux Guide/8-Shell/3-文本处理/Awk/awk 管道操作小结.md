@@ -1,0 +1,1 @@
+https://wiki.zthxxx.me/wiki/%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91/Linux/Shell/awk-%E7%AE%A1%E9%81%93%E6%93%8D%E4%BD%9C%E5%B0%8F%E7%BB%93/

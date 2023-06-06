@@ -2,9 +2,17 @@
 title: sersync 基于 rsync+inotify 实现数据实时同步
 ---
 
+https://github.com/wsgzao/sersync
 
+https://wsgzao.github.io/post/sersync/
+
+https://www.osyunwei.com/archives/7447.html
+
+[NFS高可用(NFS+keepalive+Sersync)](https://blog.51cto.com/shoufu/2405717)
 
 ![img](https://image-fusice.oss-cn-hangzhou.aliyuncs.com/image/https/i.v2ex.co/2021.08.19-11:01:43-27qp456L.png)
+
+
 
 ## 前言
 

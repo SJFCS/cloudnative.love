@@ -43,10 +43,3 @@ GNU核心工具组 常缩写为coreutils）是一个GNU 软件包，它包含了
 - [uutils/coreutils](https://github.com/uutils/coreutils) 使用 rust 重新实现的 GNU coreutils.
 
 
-https://toutiao.io/posts/9spc51/preview
-
-https://einverne.github.io/categories.html#%E6%AF%8F%E5%A4%A9%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%AA%E5%91%BD%E4%BB%A4
-
-https://www.geeksforgeeks.org/crontab-in-linux-with-examples/
-
-https://linuxtools-rst.readthedocs.io/zh_CN/latest/

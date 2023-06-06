@@ -3,6 +3,9 @@ title: Kubernetes-DEV-Notes
 ---
 ## faq
 
+
+[kubernetes 中的乐观并发控制](https://zjj2wry.github.io/post/kubes/optimistic_concurrency_control/)
+
 https://www.redhat.com/zh/topics/containers/what-is-a-kubernetes-operator
 
     Kubernetes中的CRD（Custom Resource Definition）是一种自定义资源类型，可以扩展Kubernetes API，使开发者可以定义自己的资源类型。CRD定义了一种新的API对象，可以在Kubernetes中使用kubectl等工具进行管理，包括创建、更新、删除等操作。CRD可以让开发者定义自己的资源类型，并将其存储在etcd中。

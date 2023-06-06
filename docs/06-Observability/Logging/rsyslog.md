@@ -1,6 +1,9 @@
 ---
 title: rsyslog
 ---
+
+https://www.cnblogs.com/sky-cheng/p/11163603.html
+
 ## 1. rsyslog介绍
 
 Rsyslog的全称是 rocket-fast system for log，它提供了高性能，高安全功能和模块化设计。rsyslog能够接受从各种各样的来源，将其输入，输出的结果到不同的目的地。rsyslog可以提供超过每秒一百万条消息给目标文件。

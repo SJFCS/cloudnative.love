@@ -1,7 +1,7 @@
 ---
 title: Jenkins
 ---
-
+https://zjj2wry.github.io/post/kubes/jenkens-pipeline/
 4、jenkins on k8s
   1，编译环境和物理服务器耦合度较高，不同编译环境需要准备大量的物理节点
   2，空闲期（如夜里）资源浪费

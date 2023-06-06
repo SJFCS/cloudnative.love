@@ -437,3 +437,5 @@ inotify_dirs "${SRC_LIST_FILE}"
 https://www.cnblogs.com/-k8s/p/11437902.html
 
 https://www.soinside.com/question/iSmB8faqyuDLRjNHPirTBS
+
+[TB级NFS数据平滑迁移方案设计与实现](https://www.cnblogs.com/xrszff/p/10960196.html)

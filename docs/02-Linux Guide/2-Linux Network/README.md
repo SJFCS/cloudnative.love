@@ -15,7 +15,16 @@ https://github.com/DaoCloud-OpenSource/network
 - [Guide to the Linux Tutorials-TCP/IP networking reference guide (Linux 教程指南-TCP/IP 网络参考指南章节)](http://www.penguintutor.com/linux/basic-network-reference)  
   这篇关于网络的文章写的很简洁易懂。
 - http://www.tcpipguide.com/
+- [Linux 虚拟网络设备详解之 Bridge 网桥](https://www.cnblogs.com/bakari/p/10529575.html) 
+- https://www.yuque.com/henryxzx/linux/arofcg
+- https://blog.csdn.net/sld880311/article/details/77840343
+- https://blog.csdn.net/sld880311/article/details/77854651
+- https://www.cnblogs.com/zmkeil/archive/2013/04/21/3034733.html
+- https://segmentfault.com/a/1190000009491002
+- https://segmentfault.com/a/1190000009249039
   
+- [用于虚拟网络的 Linux 接口简介](https://developers.redhat.com/blog/2018/10/22/introduction-to-linux-interfaces-for-virtual-networking#:~:text=A%20Linux%20bridge%20behaves%20like,VLAN%20filter%2C%20and%20multicast%20snooping.)
+
 二层mac 三层路由 内核转发
 
 https://lartc.org/

@@ -5,7 +5,10 @@ title: Systemd
 - https://en.wikipedia.org/wiki/Systemd
 - https://systemd.io/
 https://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html
-- 
+- https://www.ipcpu.com/2019/01/systemd-limitnofile-infinity-65536/
+- http://www.jinbuguo.com/systemd/systemd.exec.html
+- http://www.jinbuguo.com/systemd/systemd.service.html
+- http://www.jinbuguo.com/systemd/systemd.special.html
 
 
 # systemd 和 systemctl

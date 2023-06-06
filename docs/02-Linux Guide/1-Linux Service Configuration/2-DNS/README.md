@@ -2,6 +2,7 @@
 title: DNS
 sidebar_position: 1
 ---
+http://dns-learning.twnic.net.tw/bind/intro6.html#ba
 
 DNS(Domain Name System, 域名系统)用于正向查找（Forward Lookup）查找域名对应的IP地址和反向查找（Reverse Lookup）查找 IP 地址对应的域名。
 

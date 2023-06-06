@@ -1,6 +1,11 @@
 ---
 title: SSH
 ---
+- https://huataihuang.gitbooks.io/cloud-atlas/content/service/ssh/ssh_use_specific_key_and_ssh-keygen.html
+- https://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html
+- https://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html
+- https://www.cnblogs.com/keerya/p/7612715.html
+- https://www.cnblogs.com/f-ck-need-u/p/7129122.html#auto_id_2
 
 ```bash
 ssh -o BatchMode=yes -o StrictHostKeyChecking=yes vagrant@node2
