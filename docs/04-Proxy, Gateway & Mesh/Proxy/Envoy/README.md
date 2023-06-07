@@ -3,7 +3,11 @@ title: Envoy
 tags: [Service Proxy & Ingress Gateway,Envoy]
 ---
 
-# [Envoy](https://github.com/envoyproxy/envoy/)
+- [Envoy](https://github.com/envoyproxy/envoy/)
+- https://icloudnative.io/posts/use-envoy-proxy-access-google/
+- https://cloudnative.to/blog/thoughts-to-envoy-from-adn-perspective/
+- https://jimmysong.io/blog/envoy-archiecture-and-terminology/
+- https://cloudnative.to/blog/guidance-for-building-a-control-plane-to-manage-envoy-proxy-at-the-edge-as-a-gateway-or-in-a-mesh/
 
 官方定义：Cloud-native high-performance edge/middle/service proxy
 

@@ -1,0 +1,1 @@
+hearbeat+drbd 双击热备

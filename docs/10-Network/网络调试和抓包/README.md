@@ -1,3 +1,16 @@
+pCap工具
+
+- [tcpdump](https://www.tcpdump.org/)
+- [eCapture](https://github.com/gojue/ecapture)
+- [wireshark](https://www.wireshark.org/) 
+  ssh+wireshark+tcpdump   
+  `ssh root@192.168.1.10 -p 22 "tcpdump -i eth0 -n tcp port 8080 -s 0 -l -w -" | "wireshark.exe" -k -i -`
+- [tshark](https://www.wireshark.org/docs/wsug_html_chunked/AppToolstshark.html)
+- [portswigger](https://portswigger.net/burp)
+- [charlesproxy](https://www.charlesproxy.com/)
+- [telerik](https://www.telerik.com/fiddler)
+- [proxyman](https://proxyman.io/)
+
 在计算机网络管理中，pcap（packet capture）由捕获网络流量的应用程序编程接口（API）组成。类Unix的系统主要是在libpcap库中实现pcap，而Windows系统则是使用名为WinPcap的libpcap端口。
 
 监控软件可能会使用libpcap或WinPcap捕获通过网络传播的数据包，并在较新版本中链路层的网络上传输数据包，以及获取可能与libpcap或WinPcap一起使用的网络接口列表。pcap API是用C编写的，所以其他语言，如Java，.NET语言以及脚本语言通常需要使用封装器，libpcap或WinPcap本身并不提供封装。而C++程序则可以直接链接到C API或使用面向对象的封装器。

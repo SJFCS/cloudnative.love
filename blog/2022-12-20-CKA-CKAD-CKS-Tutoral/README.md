@@ -46,6 +46,7 @@ tags: [CKA,CKAD,CKS]
   - SCOFFER15
   - DCUBEOFFER
   - DEVOPS15DEVOPS15
+  - [更多优惠券](https://couponbarrow.com/store/linux-foundation-coupons/?coupon_type=code)
 
 - 捆绑购买
 

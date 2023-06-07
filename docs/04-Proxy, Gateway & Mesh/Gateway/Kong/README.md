@@ -2,8 +2,10 @@
 title: Kong
 tags: [Service Proxy & Ingress Gateway,Kong]
 ---
-
-[Kong Ingress Controller](https://github.com/Kong/kubernetes-ingress-controller)
+- https://aws.amazon.com/cn/blogs/china/building-a-server-free-back-end-logic-using-kong-and-aws-lambda/
+- https://www.cnblogs.com/wucy/p/14630008.html
+- [Kong Ingress Controller](https://github.com/Kong/kubernetes-ingress-controller)
+- https://konghq.com/learning-center/api-gateway/api-gateway-uses
 
 ## 使用举例
 
