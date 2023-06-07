@@ -3,6 +3,11 @@ title: ethtool
 ---
 
 
+切换网卡工作模式
+```bash
+ethtool -s eth0 autoneg off|on
+```
+如今网卡都有自适应特性，通过如上命令，可以进行自适应特性是否开启。
 
 
 http://www.voidcn.com/article/p-reuwslap-brm.html

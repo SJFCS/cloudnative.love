@@ -1,6 +1,13 @@
+
+```bash
 ls -1ldhXtr
 
 
+
+
+# ls只显示文件名
+ls -1 ./ | tr '\n' '\0' | xargs -0 -n 1 basename | less
+```
 
 
 -1：将每个项目输出到一行中（每个项目独占一行）。

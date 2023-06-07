@@ -4,6 +4,8 @@ hide_table_of_contents: true
 tags: [Linux,Security]
 ---
 
+[linux kernel cves](https://www.linuxkernelcves.com/cves)
+
 :::tip
 网络和安全是密不可分的，归类只是为了方便管理和组织知识，实际应用中两者往往是相互影响、相互支持的。因
 :::

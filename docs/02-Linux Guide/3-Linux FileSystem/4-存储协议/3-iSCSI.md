@@ -2,6 +2,10 @@
 title: 在Linux上搭建ISCS网络存储
 ---
 
+https://www.cnblogs.com/diantong/p/11362875.html
+
+https://www.cnblogs.com/pipci/p/11618676.html
+
 iSCSI是一种使用TCP/IP协议，在现有IP网络上传输SCSI协议数据的工业标准。
 而 SCSI 本来是一个计算机和外部设备之间的通用接口标准。
 

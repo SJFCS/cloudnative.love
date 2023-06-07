@@ -235,3 +235,10 @@ echo "同步hosts文件完毕"
 
 ```
 
+
+
+
+
+
+
+https://blog.csdn.net/weixin_45551608/article/details/117118827?utm_source=app&app_version=4.7.1&code=app_1562916241&uLinkId=usr1mkqgl919blen

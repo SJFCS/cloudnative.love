@@ -1,6 +1,10 @@
 ---
 title: NFS存储服务
 ---
+[NFS配置项no_root_squash和root_squash的区别](https://blog.csdn.net/angaoux03775/article/details/101710753)
+
+https://www.cnblogs.com/f-ck-need-u/p/7305755.html
+
 
 本文将介绍NFS服务搭建和使用。
 

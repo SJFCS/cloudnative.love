@@ -6,6 +6,7 @@ title: SSH
 - https://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html
 - https://www.cnblogs.com/keerya/p/7612715.html
 - https://www.cnblogs.com/f-ck-need-u/p/7129122.html#auto_id_2
+- https://www.cnblogs.com/ftl1012/p/ssh.html
 
 ```bash
 ssh -o BatchMode=yes -o StrictHostKeyChecking=yes vagrant@node2

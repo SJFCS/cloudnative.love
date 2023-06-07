@@ -1,6 +1,8 @@
 ---
 title: Shell
 ---
+https://geek-docs.com/shell/shell-examples/the-shell-uses-tr-for-the-conversion.html
+
 http://c.biancheng.net/shell/
 
 https://einverne.github.io/categories.html#%E6%AF%8F%E5%A4%A9%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%AA%E5%91%BD%E4%BB%A4

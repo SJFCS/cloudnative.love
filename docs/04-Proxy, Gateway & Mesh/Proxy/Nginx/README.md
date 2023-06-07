@@ -3,7 +3,9 @@ title: Nginx
 sidebar_position: 1
 tags: [Service Proxy & Ingress Gateway,Nginx]
 ---
-# [Nginx](https://github.com/nginx/nginx)
+- [Nginx](https://github.com/nginx/nginx)
+- [nginx 安全公告](https://nginx.org/en/security_advisories.html)
+
 
 毫无疑问，nginx 是目前最流行的网页服务器（WebServer）、负载均衡器（LoadBalancer）和反向代理（ReverseProxy）.
 
