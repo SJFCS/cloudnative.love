@@ -1,11 +1,8 @@
 ---
 title: Service Mesh
-sidebar_position: 6
 tags: [Service Mesh]
 ---
 # 服务网格
-
-目前这个领域，最流行的服务代理是 envoy，最流行或者最有前景的服务网格是：
 
 1. [istio](https://github.com/istio/istio): 目前全球最流行的服务网格，功能强大，但是相对的也更复杂。
    1. 文档非常详细
@@ -13,21 +10,9 @@ tags: [Service Mesh]
    - 但是它的数据平面可拓展性比较差，没有良好的插件机制，没有 envoy 灵活。（如果你没有强烈的扩展需求，这一点倒是可以忽略）
    - 文档感觉比较简略，不如 istio.
 
-其他还有一些名气小一点的服务网格可供参考，但是目前都不推荐选用：
-
-1. [kuma](https://github.com/kumahq/kuma): 由 Kong 基于 Envoy 开发的一个服务网格
-2. [osm](https://github.com/openservicemesh/osm): 微软开源的一个基于 Envoy 的服务网格，完全基于服务网关接口 SMI 规范开发，使用上比 istio 简单很多，但是仍然功能仍然不够完善，not production-ready.
-3. apisix 等基于 nginx/openresty 的技术，也在向这个方向发展
-   - 它们的优势大概有：nginx 的「高性能」与「可扩展性」，以及企业能沿用上企业曾经在 nginx 领域多年的历史积累（坑都踩过了）。
-
-以及一些昙花一现，不再活跃的服务网格项目，如 traefik mesh、rancher rio
-
-在选用服务网格产品时，要以自己的痛点为核心，再结合**性能**、**可拓展性**、**复杂度**几个方案来综合考量。
 
 如果选择 envoy 阵营，目前不二选择就是 istio.
 如果需要更轻量，目前最佳的选择应该也只有 linkerd2.
-如果希望呆在原来的舒适区，继续使用 openresty，那估计得选择自研.
-
 而展望未来，最有潜力的服务网格，应该是最近 cilium 推出的内核级 Service Mesh.
 
 ## 性能对比
@@ -42,11 +27,10 @@ The Istio load tests mesh consists of **1000 services and 2000 sidecars with 70,
 
 ### 2. [Linkerd2](https://linkerd.io/2021/05/27/linkerd-vs-istio-benchmarks/)
 
-Linkerd2 的测试方式看起来跟 istio 有些不同，不过得出的结论显然是: linkerd2-proxy 性能继续吊打 envoy.
 
 linkerd2-proxy 相比 envoy，只用了 1/9 的内存与 1/8 的 CPU，同时 P99 延迟只有 envoy 的 1/3 不到.
 
-性能提升还是很明显的。只要功能够用，那我觉得是有动力切换到 linkerd2 的。（但是功能可能不太够用...）
+
 
 ## 功能对比（Istio vs Linkerd2）
 
