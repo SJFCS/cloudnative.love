@@ -8,6 +8,11 @@ tags: [Database,Etcd]
 
 - [configure-upgrade-etcd](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster)
 
+https://blog.csdn.net/qq_27156945/article/details/103164683  
+https://discuss.kubernetes.io/t/etcd-backup-and-restore-management/11019  
+https://www.cnblogs.com/breezey/p/10898368.html
+https://blog.51cto.com/ygqygq2/2176492
+
 ## API 版本
 
 ETCDCTL 可以使用 2 个 API 版本,默认情况下，它设置为使用版本 2。每个版本都有不同的命令集。

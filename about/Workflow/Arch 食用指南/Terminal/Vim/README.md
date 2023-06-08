@@ -13,3 +13,5 @@ https://www.jianshu.com/p/416030952e51
 https://github.com/4paradigm/k8s-device-plugin
 
 https://www.jianshu.com/p/7d795bc226c7
+
+    :set fileformat=dos #设置文件的格式，通过这句话去掉每行结尾的^M符号

@@ -1,5 +1,10 @@
 ### 配置keepalived和nginx
 
+```
+iptables -I INPUT -i eth0 -d 224.0.0.0/8 -p vrrp -j ACCEPT
+iptables -I OUTPUT -o eth0 -d 224.0.0.0/8 -p vrrp -j ACCEPT
+service iptables save
+```
 #### 用到的知识点
 * 通过vagrant脚本批量创建虚拟机，通过vagrant脚本批量创建虚拟机是一切服务器集群搭建的根本，在博主的当前仓库的笔记有关于vagrant的知识
 * 学会keepalived的配置参数，默认配置文件路径是 /etc/keepalived/keepalived.conf

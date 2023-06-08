@@ -1,5 +1,7 @@
 # Flagger
-[Flagger](https://github.com/weaveworks/flagger)
+- [Flagger](https://github.com/weaveworks/flagger)
+- [Kubernetes + Flagger + Flux + Istio + GitOps 云原生渐进式(金丝雀)交付](https://www.infvie.com/ops-notes/micro-services-service-mesh.html)
+
 
 
 Flagger 是一个 Kubernetes 上的渐进式交付 Operator，可以根据监控指标进行自动化的金丝雀发布、A/B 测试、蓝/绿发布。

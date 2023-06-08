@@ -181,6 +181,17 @@ TiDB的HTAP架构
 - [『浅入深出』MySQL 中事务的实现](https://draveness.me/mysql-transaction)
 - [京东如何使用Vitess管理超大规模数据库](https://www.cncf.io/case-studies-cn/jd-com-vitess/)
 - [Why This MySQL Alternative Beats Vitess and CRDB in Scaling Out Our Databases on K8s](https://www.pingcap.com/case-study/choose-a-mysql-alternative-over-vitess-and-crdb-to-scale-out-our-databases-on-k8s/)
+  
+## 学习
+
+- [数据库工程师进阶 技术图谱](https://developer.aliyun.com/graph/database?spm=a2c6h.12873639.article-detail.5.187e68b8yEmKZJ)
+- https://github.com/datawhalechina/wonderful-sql
+
+## 开源工具
+- https://github.com/cookieY/Yearning
+- https://www.dolthub.com/
+- https://www.bytebase.com/
+
 
 
 >TiDB/CockroachDB/Vitess 值得关注

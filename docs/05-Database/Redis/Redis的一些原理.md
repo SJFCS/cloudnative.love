@@ -1,5 +1,7 @@
 # Redis的一些原理
 
+https://blog.csdn.net/men_wen/article/details/75668345
+
 #### 如何理解Redis集群的Slot映射
 ##### redis使用slot作为索引来管理数据
 > Redis在单机模式时，使用数据结构dict来实现数据库。

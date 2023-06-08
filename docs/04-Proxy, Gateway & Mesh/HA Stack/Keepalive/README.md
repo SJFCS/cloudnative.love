@@ -3,6 +3,9 @@ title: Keepalive
 tags: [Service Proxy & Ingress Gateway,Keepalive]
 ---
 
+- https://www.keepalived.org/pdf/UserGuide.pdf
+- https://github.com/tencentyun/qcloud-documents/blob/master/product/%E8%AE%A1%E7%AE%97%E4%B8%8E%E7%BD%91%E7%BB%9C/%E7%A7%81%E6%9C%89%E7%BD%91%E7%BB%9C2018-09-13/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/VPC%20%E5%86%85%E9%80%9A%E8%BF%87%20keepalived%20%E6%90%AD%E5%BB%BA%E9%AB%98%E5%8F%AF%E7%94%A8%E4%B8%BB%E5%A4%87%E9%9B%86%E7%BE%A4.md
+- keepalived.org/pdf/sery-lvs-cluster.pdf
 ```
 有些云厂商不支持arp 无法使用keepalived 
 

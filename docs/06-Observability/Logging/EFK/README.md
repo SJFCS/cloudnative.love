@@ -1,6 +1,8 @@
 # ElasticSearch+Fluentd+Kibana 日志分析系统
 [基于ELK的亿级实时日志分析平台实践](https://blog.csdn.net/gb4215287/article/details/80800361)
 
+https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics/?spm=a2c4e.10696291.0.0.16da19a4akOzhz#conclusion
+
 云原生日志收集器
 
 ## 部署 Fluentd

@@ -6,6 +6,11 @@ tags: [Database,Etcd]
 - https://cizixs.com/2016/08/02/intro-to-etcd/
 - https://www.cnblogs.com/doscho/p/6227351.html
 - https://blog.51cto.com/u_15127570/2710980
+- https://doczhcn.gitbook.io/etcd/
+- https://www.zhaowenyu.com/etcd-doc/ops/etcd-discovery-dns.html
+- https://www.cnblogs.com/winstom/p/11811373.html#%E6%B7%BB%E5%8A%A0srv%E8%A7%A3%E6%9E%90-1
+- https://etcd.io/docs/v3.4/demo/
+- https://zhuanlan.zhihu.com/p/111245626
 
 
 

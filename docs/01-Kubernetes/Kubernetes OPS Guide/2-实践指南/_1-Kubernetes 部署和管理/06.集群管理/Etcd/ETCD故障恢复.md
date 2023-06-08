@@ -4,6 +4,12 @@ title: ETCD故障恢复
 
 https://kubernetes.io/zh/docs/tasks/administer-cluster/configure-upgrade-etcd/
 
+https://my.oschina.net/u/2306127/blog/2990359
+
+https://blog.csdn.net/Ares_ZhangQ/article/details/109479434
+
+https://sq.sf.163.com/blog/article/197476452926455808
+
 ## 简介
 
 etcd 是兼具一致性和高可用性的键值数据库，可以作为保存 Kubernetes 所有集群数据的后台数据库。

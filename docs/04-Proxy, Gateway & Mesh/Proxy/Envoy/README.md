@@ -4,6 +4,7 @@ tags: [Service Proxy & Ingress Gateway,Envoy]
 ---
 
 - [Envoy](https://github.com/envoyproxy/envoy/)
+- https://www.zhaohuabing.com/post/2023-04-11-why-eg-is-the-gateway-in-cloud-native-era/
 - https://icloudnative.io/posts/use-envoy-proxy-access-google/
 - https://cloudnative.to/blog/thoughts-to-envoy-from-adn-perspective/
 - https://jimmysong.io/blog/envoy-archiecture-and-terminology/

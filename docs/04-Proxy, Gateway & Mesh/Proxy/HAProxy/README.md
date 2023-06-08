@@ -3,13 +3,21 @@ title: HAProxy
 tags: [Service Proxy & Ingress Gateway,HAProxy]
 ---
 
+- [Haproxy 软下线方式](https://blog.csdn.net/qq_19550657/article/details/105139854)
+- [haproxy多进程下对后端服务器进行摘除](https://blog.csdn.net/weixin_34007020/article/details/93011764)
+- https://www.cnblogs.com/happy1983/p/9265358.html
+- [一些通用性的haproxy调优tips](https://www.cnblogs.com/276815076/p/6992557.html)
+- https://blog.51cto.com/jiechao2012/1359511
+- https://www.cnblogs.com/zhanmeiliang/p/6232245.html
+- https://www.cnblogs.com/iamdoufu/p/4533063.html
+
+
+
 ## HAProxy概述：
 
-:::tip
 - https://www.haproxy.org
 - https://haproxy.com
 - https://haproxy.1wt.eu
-:::
 
 HAProxy提供高可用性、负载均衡以及基于TCP和HTTP应用的代理，支持虚拟主机，它是免费、快速并且可靠的一种解决方案。根据官方数据，其最高极限支持10G的并发。
 
