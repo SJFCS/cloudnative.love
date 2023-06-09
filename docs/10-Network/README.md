@@ -1,6 +1,12 @@
 ---
 title: Cloud Native Network
 ---
+https://mp.weixin.qq.com/s/25atTs4b-vORIx525ur_aw
+
+https://www.zhihu.com/question/21546408/answer/2120115071
+
+https://mp.weixin.qq.com/s/jiPMUk6zUdOY6eKxAjNDbQ
+
 https://cyclinder.gitbook.io/cloud-native-network/
 
 https://github.com/DaoCloud-OpenSource/network

@@ -99,8 +99,8 @@ logdir /var/log/chrony
 <TabItem value="配置举例">
 
 ```bash
-server ntp1.aliyun.com 　　　　    # server 指定上层时钟服务器
-server ntp.ntsc.ac.cn prefer 　　　# prefer 最高优先级、 iburst 加快第一次时的同步速度,前四次 NTP 请求，会发送一个八个数据包，包间隔通常为2秒,而不是以 minpoll x 指定的最小间隔，可加快初始同步速度。
+server ntp1.aliyun.com             # server 指定上层时钟服务器
+server ntp.ntsc.ac.cn prefer     　# prefer 最高优先级、 iburst 加快第一次时的同步速度,前四次 NTP 请求，会发送一个八个数据包，包间隔通常为2秒,而不是以 minpoll x 指定的最小间隔，可加快初始同步速度。
 # 默认的轮询间隔为minpoll 6 代表 64s,maxpoll 9 代表 512s。
 # 如果修改默认设定的话，为了保持时间精度，推荐设定比默认的值更小的值。
 allow 192.168.0.0/24   # allow/deny NETADD/NETMASK/all 允许/拒绝客户端来同步,allow 0.0.0.0/0代表允许所以任意设备

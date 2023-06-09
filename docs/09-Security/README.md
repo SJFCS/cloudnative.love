@@ -3,6 +3,10 @@ title: Security
 sidebar_position: 9
 tags: [Security]
 ---
+开发者也在容器领域进行着安全探索，在未来我们会看到更多的在运行时安全 (Runtime Security) 的研究。
+Istio ([https://github.com/istio/istio](https://link.zhihu.com/?target=https%3A//github.com/istio/istio)) 和 Falco ([https://github.com/falcosecurity/falco](https://link.zhihu.com/?target=https%3A//github.com/falcosecurity/falco)) 都在这些方面做了努力。同时，在容器镜像安全（Container Image Security）方面，人们也在不断地取得成绩，例如Trivy ([https://github.com/aquasecurity/trivy](https://link.zhihu.com/?target=https%3A//github.com/aquasecurity/trivy)) 和 Notary ([https://github.com/notaryproject/notary](https://link.zhihu.com/?target=https%3A//github.com/notaryproject/notary)) 等项目。
+
+
 https://github.com/neargle/my-re0-k8s-security
 
 https://blog.fleeto.us/post/intro-trivy-operator/

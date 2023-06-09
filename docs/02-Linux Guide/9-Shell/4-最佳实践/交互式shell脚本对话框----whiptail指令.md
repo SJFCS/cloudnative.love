@@ -97,7 +97,7 @@ if [ $exitstatus = 0 ]; then
     echo "The chosen distro is:" $DISTROS
 else
     echo "You chose Cancel."
-fi　　
+fi    
 ```
 
 ## 多选对话框

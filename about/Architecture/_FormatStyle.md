@@ -27,3 +27,6 @@ import Source from '!!raw-loader!./kubesphere.yaml';
 
 
 清理非引用的图片
+
+
+"　　"这个要替换成空格

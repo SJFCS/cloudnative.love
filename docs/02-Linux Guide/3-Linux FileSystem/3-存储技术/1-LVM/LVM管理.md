@@ -13,9 +13,9 @@ LVM（Logical Volume Manager）不是一个文件系统，它是一个分区和�
 
 ## LVM的工作原理
 
-　　LVM（Logical Volume Manager）逻辑卷管理，是在硬盘分区和文件系统之间添加的一个逻辑层，为文件系统屏蔽下层硬盘分区布局，并提供一个抽象的盘卷，在盘卷上建立文件系统。管理员利用LVM可以在硬盘不用重新分区的情况下动态调整文件系统的大小，并且利用LVM管理的文件系统可以跨越物理硬盘。当服务器添加了新的硬盘后，管理员不必将原有的文件移动到新的硬盘上，而是通过LVM直接扩展文件系统来跨越物理硬盘。
+    LVM（Logical Volume Manager）逻辑卷管理，是在硬盘分区和文件系统之间添加的一个逻辑层，为文件系统屏蔽下层硬盘分区布局，并提供一个抽象的盘卷，在盘卷上建立文件系统。管理员利用LVM可以在硬盘不用重新分区的情况下动态调整文件系统的大小，并且利用LVM管理的文件系统可以跨越物理硬盘。当服务器添加了新的硬盘后，管理员不必将原有的文件移动到新的硬盘上，而是通过LVM直接扩展文件系统来跨越物理硬盘。
 
-　　LVM就是通过将底层的物理硬盘封装，然后以逻辑卷的方式呈现给上层应用。当我们对底层的物理硬盘进行操作时，不再是针对分区进行操作，而是通过逻辑卷对底层硬盘进行管理操作。
+    LVM就是通过将底层的物理硬盘封装，然后以逻辑卷的方式呈现给上层应用。当我们对底层的物理硬盘进行操作时，不再是针对分区进行操作，而是通过逻辑卷对底层硬盘进行管理操作。
 
 ## 基础术语
 
@@ -147,7 +147,7 @@ Calling ioctl() to re-read partition table.
 
 ### 创建物理卷PV
 
-　　将分区sdb1~4从Linux类型改为Linux LVM，当然较新的系统不改也没事。我这里就演示修改一个sdb1分区
+    将分区sdb1~4从Linux类型改为Linux LVM，当然较新的系统不改也没事。我这里就演示修改一个sdb1分区
 
 ```bash
 [root@xuexi ~]# fdisk /dev/sdb
@@ -157,7 +157,7 @@ Calling ioctl() to re-read partition table.
 使用写入命令前请三思。
  
  
-命令(输入 m 获取帮助)：l　　//查看所有分区类型代码
+命令(输入 m 获取帮助)：l    //查看所有分区类型代码
  
  0  空              24  NEC DOS         81  Minix / 旧 Linu bf  Solaris       
  1  FAT12           27  隐藏的 NTFS Win 82  Linux 交换 / So c1  DRDOS/sec (FAT-
@@ -185,7 +185,7 @@ Calling ioctl() to re-read partition table.
 1c  隐藏的 W95 FAT3 75  PC/IX           be  Solaris 启动    ff  BBT           
 1e  隐藏的 W95 FAT1 80  旧 Minix      
  
-命令(输入 m 获取帮助)：p　　//查看分区信息
+命令(输入 m 获取帮助)：p    //查看分区信息
  
 磁盘 /dev/sdb：21.5 GB, 21474836480 字节，41943040 个扇区
 Units = 扇区 of 1 * 512 = 512 bytes
@@ -200,7 +200,7 @@ I/O 大小(最小/最佳)：512 字节 / 512 字节
 /dev/sdb3         8390656    12584959     2097152   83  Linux
 /dev/sdb4        12584960    16779263     2097152   83  Linux
  
-命令(输入 m 获取帮助)：t　　//修改分区类型代码
+命令(输入 m 获取帮助)：t    //修改分区类型代码
 分区号 (1-4，默认 4)：1
 Hex 代码(输入 L 列出所有代码)：8e
 已将分区“Linux”的类型更改为“Linux LVM”
@@ -227,7 +227,7 @@ Calling ioctl() to re-read partition table.
 正在同步磁盘。
 ```
 
-　　使用pvcreate创建物理卷PV
+    使用pvcreate创建物理卷PV
 
 ```bash
 [root@xuexi ~]# pvcreate /dev/sdb{1,2,3,4}
@@ -239,7 +239,7 @@ WARNING: xfs signature detected on /dev/sdb1 at offset 0. Wipe it? [y/n]: y
   Physical volume "/dev/sdb4" successfully created.
 ```
 
-　　创建完成后可以查看一下
+    创建完成后可以查看一下
 
 ```bash
 [root@xuexi ~]# pvs
@@ -258,13 +258,13 @@ WARNING: xfs signature detected on /dev/sdb1 at offset 0. Wipe it? [y/n]: y
   PE Size               0  
   Total PE              0
   Free PE               0
-  Allocated PE          0　　//PE使用情况
+  Allocated PE          0    //PE使用情况
   PV UUID               BKr1CG-91rH-0Dsq-vGol-UTO6-xP83-hV7FTZ
 ```
 
 ### 创建卷组VG
 
-　　使用vgcreate创建卷组VG，并且此处可以-s选项指定PE（LE）的大小，（默认PE大小4M）
+    使用vgcreate创建卷组VG，并且此处可以-s选项指定PE（LE）的大小，（默认PE大小4M）
 
 ```bash
 [root@xuexi ~]# vgcreate vg1 /dev/sdb1
@@ -273,7 +273,7 @@ WARNING: xfs signature detected on /dev/sdb1 at offset 0. Wipe it? [y/n]: y
   Volume group "vg2" successfully created
 ```
 
-　　创建完成后查看一下
+    创建完成后查看一下
 
 ```bash
 [root@xuexi ~]# vgs
@@ -296,7 +296,7 @@ WARNING: xfs signature detected on /dev/sdb1 at offset 0. Wipe it? [y/n]: y
   Cur PV                1
   Act PV                1
   VG Size               <2.00 GiB
-  PE Size               4.00 MiB　　//可以看到vg1的PE大小为4M
+  PE Size               4.00 MiB    //可以看到vg1的PE大小为4M
   Total PE              511
   Alloc PE / Size       0 / 0  
   Free  PE / Size       511 / <2.00 GiB
@@ -317,7 +317,7 @@ WARNING: xfs signature detected on /dev/sdb1 at offset 0. Wipe it? [y/n]: y
   Cur PV                1
   Act PV                1
   VG Size               1.98 GiB
-  PE Size               16.00 MiB　　//可以看到vg2的PE大小为16M
+  PE Size               16.00 MiB    //可以看到vg2的PE大小为16M
   Total PE              127
   Alloc PE / Size       0 / 0
   Free  PE / Size       127 / 1.98 GiB
@@ -326,7 +326,7 @@ WARNING: xfs signature detected on /dev/sdb1 at offset 0. Wipe it? [y/n]: y
 
 >注意：PE大，读取速度快，但浪费空间。反之，读取速度慢，但节省空间。类似于socket
 
-　　另外还可以查看pv，会列出分配情况
+    另外还可以查看pv，会列出分配情况
 
 ```bash
 [root@xuexi ~]# pvs
@@ -339,7 +339,7 @@ WARNING: xfs signature detected on /dev/sdb1 at offset 0. Wipe it? [y/n]: y
 
 ### 创建逻辑卷LV
 
-　　使用lvcreate创建LV。lvcreate -n lvname -L lvsize(M，G)|-l LEnumber vgname
+    使用lvcreate创建LV。lvcreate -n lvname -L lvsize(M，G)|-l LEnumber vgname
 
 ```bash
 [root@xuexi ~]# lvcreate -n lv1 -L 64M vg1
@@ -351,7 +351,7 @@ WARNING: xfs signature detected on /dev/sdb1 at offset 0. Wipe it? [y/n]: y
 查看 
 
 ```bash
-[root@xuexi ~]# lvs　　//因为vg1的PE大小是4M所以lv1与lv2的大小相等
+[root@xuexi ~]# lvs    //因为vg1的PE大小是4M所以lv1与lv2的大小相等
   LV   VG  Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
   lv1  vg1 -wi-a----- 64.00m
   lv2  vg1 -wi-a----- 64.00m
@@ -392,12 +392,12 @@ WARNING: xfs signature detected on /dev/sdb1 at offset 0. Wipe it? [y/n]: y
 
 ### 格式化与挂载
 
-> 　　注意：在格式化之前需要知道xfs文件系统只支持增大，不支持减小。ext2、ext3、ext4增大减小都支持。
+>     注意：在格式化之前需要知道xfs文件系统只支持增大，不支持减小。ext2、ext3、ext4增大减小都支持。
 
-　　所以这里我们先使用ext4的文件系统格式化
+    所以这里我们先使用ext4的文件系统格式化
 
 ```bash
-[root@xuexi ~]# mkfs.ext4 /dev/vg1/lv1　　//将lv1格式化成ext4
+[root@xuexi ~]# mkfs.ext4 /dev/vg1/lv1    //将lv1格式化成ext4
 mke2fs 1.42.9 (28-Dec-2013)
 文件系统标签=
 OS type: Linux
@@ -419,12 +419,12 @@ Allocating group tables: 完成
 Creating journal (4096 blocks): 完成
 Writing superblocks and filesystem accounting information: 完成
 [root@xuexi ~]# mkdir /lv1
-[root@xuexi ~]# mount /dev/vg1/lv1 /lv1　　//挂载到/lv1下
+[root@xuexi ~]# mount /dev/vg1/lv1 /lv1    //挂载到/lv1下
 [root@xuexi ~]# echo "/dev/vg1/lv1 /lv1 ext4 defaults 0 0" >> /etc/fstab    //追加到开机挂载
 
 ```
 
-　　这里的/dev/vg1/lv1实际是一个软链接，实际地址如下
+    这里的/dev/vg1/lv1实际是一个软链接，实际地址如下
 
 ```bash
 [root@xuexi ~]# ll /dev/vg1/lv1
@@ -444,17 +444,17 @@ brw-rw----. 1 root disk 253, 0 3月  31 15:48 /dev/dm-0
   vg2   1   0   0 wz--n-  1.98g 1.98g
 ```
 
-　　在确认有多余空间的情况下，使用lvextend命令的-L选项扩展逻辑卷LV的大小
+    在确认有多余空间的情况下，使用lvextend命令的-L选项扩展逻辑卷LV的大小
 
 ```bash
 [root@xuexi ~]# lvs
   LV   VG  Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
   lv1  vg1 -wi-ao---- 64.00m                                                   
   lv2  vg1 -wi-a----- 64.00m
-[root@xuexi ~]# lvextend -L +100M /dev/vg1/lv1　　// +100M是增加100M
+[root@xuexi ~]# lvextend -L +100M /dev/vg1/lv1    // +100M是增加100M
   Size of logical volume vg1/lv1 changed from 64.00 MiB (16 extents) to 164.00 MiB (41 extents).
   Logical volume vg1/lv1 successfully resized.
-[root@xuexi ~]# lvextend -L 100M /dev/vg1/lv2　　//直接使用100M是增加到100M
+[root@xuexi ~]# lvextend -L 100M /dev/vg1/lv2    //直接使用100M是增加到100M
   Size of logical volume vg1/lv2 changed from 64.00 MiB (16 extents) to 100.00 MiB (25 extents).
   Logical volume vg1/lv2 successfully resized.
 [root@xuexi ~]# lvs
@@ -463,7 +463,7 @@ brw-rw----. 1 root disk 253, 0 3月  31 15:48 /dev/dm-0
   lv2  vg1 -wi-a----- 100.00m
 ```
 
-　　但是在我们使用df命令查看时，会发现我们文件系统并没有扩展
+    但是在我们使用df命令查看时，会发现我们文件系统并没有扩展
 
 ```bash
 [root@xuexi ~]# df -h /lv1
@@ -471,14 +471,14 @@ brw-rw----. 1 root disk 253, 0 3月  31 15:48 /dev/dm-0
 /dev/mapper/vg1-lv1   58M  1.3M   53M    3% /lv1
 ```
 
-　　这是因为文件系统也需要扩容。ext4文件系统扩容使用"resize2fs [逻辑卷名称]"，xfs文件系统扩容使用"xfs_growfs 挂载点"
+    这是因为文件系统也需要扩容。ext4文件系统扩容使用"resize2fs [逻辑卷名称]"，xfs文件系统扩容使用"xfs_growfs 挂载点"
 
 ```bash
 [root@xuexi ~]# lvs    //LV已经扩容成功
   LV   VG  Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
   lv1  vg1 -wi-ao---- 164.00m                                                   
   lv2  vg1 -wi-a----- 100.00m
-[root@xuexi ~]# resize2fs /dev/vg1/lv1　　//ext4文件系统扩容
+[root@xuexi ~]# resize2fs /dev/vg1/lv1    //ext4文件系统扩容
 resize2fs 1.42.9 (28-Dec-2013)
 Filesystem at /dev/vg1/lv1 is mounted on /lv1; on-line resizing required
 old_desc_blocks = 1, new_desc_blocks = 2
@@ -488,16 +488,16 @@ The filesystem on /dev/vg1/lv1 is now 167936 blocks long.
 /dev/mapper/vg1-lv1  155M  1.6M  145M    2% /lv1
 ```
 
-　　当然来到CentOS7后，我们还可以使用lvextend命令的-r选项来使文件系统自动扩容，实例如下：
+    当然来到CentOS7后，我们还可以使用lvextend命令的-r选项来使文件系统自动扩容，实例如下：
 
 ```bash
 [root@xuexi ~]# lvs
   LV   VG  Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
   lv1  vg1 -wi-ao---- 164.00m                                                   
   lv2  vg1 -wi-a----- 100.00m
-[root@xuexi ~]# lvextend -L 200M -r /dev/vg1/lv1　　//LV扩容到200M并且文件系统自动扩容
+[root@xuexi ~]# lvextend -L 200M -r /dev/vg1/lv1    //LV扩容到200M并且文件系统自动扩容
   Size of logical volume vg1/lv1 changed from 164.00 MiB (41 extents) to 200.00 MiB (50 extents).
-  Logical volume vg1/lv1 successfully resized.　　//可以看到文件系统扩容成功
+  Logical volume vg1/lv1 successfully resized.    //可以看到文件系统扩容成功
 resize2fs 1.42.9 (28-Dec-2013)
 Filesystem at /dev/mapper/vg1-lv1 is mounted on /lv1; on-line resizing required
 old_desc_blocks = 2, new_desc_blocks = 2

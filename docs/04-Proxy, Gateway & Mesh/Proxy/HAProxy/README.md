@@ -128,14 +128,14 @@ haproxy -c -f /etc/haproxy/haproxy.cfg
 
 
 > **关于负载均衡算法**
->  　　**#source 　　 根据请求源IP**
->  　　**#static-rr 　　根据权重**
->  　　**#leastconn  最少连接者先处理**
->  　　**#uri 　　　　根据请求的uri**
->  　　**#url_param  根据请求的url参数**
->  　　**#rdp-cookie 据据cookie(name)来锁定并哈希每一次请求**
->  　　**#hdr(name) 根据HTTP请求头来锁定每一次HTTP请求**
->  　　**#roundrobin 轮询方式**
+>      **#source      根据请求源IP**
+>      **#static-rr     根据权重**
+>      **#leastconn  最少连接者先处理**
+>      **#uri         根据请求的uri**
+>      **#url_param  根据请求的url参数**
+>      **#rdp-cookie 据据cookie(name)来锁定并哈希每一次请求**
+>      **#hdr(name) 根据HTTP请求头来锁定每一次HTTP请求**
+>      **#roundrobin 轮询方式**
 
 ### 负载均衡配置示例
 

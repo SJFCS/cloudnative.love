@@ -29,10 +29,10 @@ Dockerfile 一般分为四部分：基础镜像信息、维护者信息、镜像
 
 ```
 格式：
-　　FROM <image>
-　　FROM <image>:<tag>
-　　FROM <image>@<digest>
-示例：　　
+    FROM <image>
+    FROM <image>:<tag>
+    FROM <image>@<digest>
+示例：    
     FROM mysql:5.6
     注：tag或digest是可选的，如果不使用这两个值时，会使用latest版本的基础镜像
 ```
@@ -66,7 +66,7 @@ exec执行
     RUN ["executable", "param1", "param2"]
     RUN apk update
     RUN ["/etc/execfile", "arg1", "arg1"]
-注：　　RUN指令创建的中间镜像会被缓存，并会在下次构建中使用。如果不想使用这些缓存镜像，可以在构建时指定--no-cache参数，如：docker build --no-cache
+注：    RUN指令创建的中间镜像会被缓存，并会在下次构建中使用。如果不想使用这些缓存镜像，可以在构建时指定--no-cache参数，如：docker build --no-cache
 ```
 
 ### ADD/COPY：
@@ -97,7 +97,7 @@ exec执行
 示例：
     FROM ubuntu
     ENTRYPOINT ["top", "-b"]
-    CMD ["-c"]注：　　　ENTRYPOINT与CMD非常类似，不同的是通过docker run执行的命令不会覆盖ENTRYPOINT，而docker run命令中指定的任何参数，都会被当做参数再次传递给ENTRYPOINT。Dockerfile中只允许有一个ENTRYPOINT命令，多指定时会覆盖前面的设置，而只执行最后的ENTRYPOINT指令。
+    CMD ["-c"]注：    　ENTRYPOINT与CMD非常类似，不同的是通过docker run执行的命令不会覆盖ENTRYPOINT，而docker run命令中指定的任何参数，都会被当做参数再次传递给ENTRYPOINT。Dockerfile中只允许有一个ENTRYPOINT命令，多指定时会覆盖前面的设置，而只执行最后的ENTRYPOINT指令。
 ```
 
 ### CMD：
@@ -111,7 +111,7 @@ exec执行
     CMD command param1 param2 (执行shell内部命令)
 示例：
     CMD echo "This is a test." | wc -
-    CMD ["/usr/bin/wc","--help"]注： 　　CMD不同于RUN，CMD用于指定在容器启动时所要执行的命令，而RUN用于指定镜像构建时所要执行的命令。
+    CMD ["/usr/bin/wc","--help"]注：     CMD不同于RUN，CMD用于指定在容器启动时所要执行的命令，而RUN用于指定镜像构建时所要执行的命令。
 ```
 
 >可通过命令行传参的形式`docker run <image> <command>`，参数`<command>`可覆盖镜像`Dockerfiles中`的`CMD`指令。
@@ -128,9 +128,9 @@ exec执行
 格式：
     LABEL <key>=<value> <key>=<value> <key>=<value> ...
 示例：
-　　LABEL version="1.0" description="这是一个Web服务器" by="IT笔录"
+    LABEL version="1.0" description="这是一个Web服务器" by="IT笔录"
 注：
-　　使用LABEL指定元数据时，一条LABEL指定可以指定一或多条元数据，指定多条元数据时不同元数据之间通过空格分隔。推荐将所有的元数据通过一条LABEL指令指定，以免生成过多的中间镜像。
+    使用LABEL指定元数据时，一条LABEL指定可以指定一或多条元数据，指定多条元数据时不同元数据之间通过空格分隔。推荐将所有的元数据通过一条LABEL指令指定，以免生成过多的中间镜像。
 ```
 
 ### ENV：
@@ -156,7 +156,7 @@ exec执行
     EXPOSE <port> [<port>...]
 示例：
     EXPOSE 80 443
-    EXPOSE 8080    EXPOSE 11211/tcp 11211/udp注：　　EXPOSE并不会让容器的端口访问到主机。要使其可访问，需要在docker run运行容器时通过-p来发布这些端口，或通过-P参数来发布EXPOSE导出的所有端口
+    EXPOSE 8080    EXPOSE 11211/tcp 11211/udp注：    EXPOSE并不会让容器的端口访问到主机。要使其可访问，需要在docker run运行容器时通过-p来发布这些端口，或通过-P参数来发布EXPOSE导出的所有端口
 ```
 
 ### VOLUME：
@@ -168,7 +168,7 @@ exec执行
     VOLUME ["/path/to/dir"]
 示例：
     VOLUME ["/data"]
-    VOLUME ["/var/www", "/var/log/apache2", "/etc/apache2"注：　　一个卷可以存在于一个或多个容器的指定目录，该目录可以绕过联合文件系统，并具有以下功能：
+    VOLUME ["/var/www", "/var/log/apache2", "/etc/apache2"注：    一个卷可以存在于一个或多个容器的指定目录，该目录可以绕过联合文件系统，并具有以下功能：
 1 卷可以容器间共享和重用
 2 容器并不一定要和其它容器共享卷
 3 修改卷后会立即生效
@@ -186,7 +186,7 @@ exec执行
 示例：
     WORKDIR /a  (这时工作目录为/a)
     WORKDIR b  (这时工作目录为/a/b)
-    WORKDIR c  (这时工作目录为/a/b/c)注：　　通过WORKDIR设置工作目录后，Dockerfile中其后的命令RUN、CMD、ENTRYPOINT、ADD、COPY等命令都会在该目录下执行。在使用docker run运行容器时，可以通过-w参数覆盖构建时所设置的工作目录。
+    WORKDIR c  (这时工作目录为/a/b/c)注：    通过WORKDIR设置工作目录后，Dockerfile中其后的命令RUN、CMD、ENTRYPOINT、ADD、COPY等命令都会在该目录下执行。在使用docker run运行容器时，可以通过-w参数覆盖构建时所设置的工作目录。
 ```
 
 ### USER:
@@ -197,15 +197,15 @@ exec执行
 
 ```
  格式:
-　　USER user
-　　USER user:group
-　　USER uid
-　　USER uid:gid
-　　USER user:gid
-　　USER uid:group
+    USER user
+    USER user:group
+    USER uid
+    USER uid:gid
+    USER user:gid
+    USER uid:group
 
  示例：
-    　　USER www
+        USER www
 ```
 
 ### ARG：
@@ -235,11 +235,11 @@ ONBUILD指令可以为镜像添加触发器。其参数是任意一个Dockerfile
 需要注意的是，如果是再利用B镜像构造新的镜像时，那个ONBUILD指令就无效了，也就是说只能再构建子镜像中执行，
 
 ```
-格式：　　ONBUILD [INSTRUCTION]
+格式：    ONBUILD [INSTRUCTION]
 示例：
-　　ONBUILD ADD . /app/src
-　　ONBUILD RUN /usr/local/bin/python-build --dir /app/src
-注：　　当所构建的镜像被用做其它镜像的基础镜像，该镜像中的触发器将会被触发
+    ONBUILD ADD . /app/src
+    ONBUILD RUN /usr/local/bin/python-build --dir /app/src
+注：    当所构建的镜像被用做其它镜像的基础镜像，该镜像中的触发器将会被触发
 ```
 
 ### 多阶段构建示例

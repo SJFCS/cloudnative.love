@@ -4,6 +4,8 @@ tags: [Coding, Git]
 ---
 如何脱敏
 
+https://github.com/jlord/git-it-electron
+
 gpg签名：
 - https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
 - https://timberkito.com/?p=141
@@ -14,7 +16,7 @@ gpg签名：
 - https://docs.github.com/zh/authentication/managing-commit-signature-verification/generating-a-new-gpg-key
 - https://docs.github.com/zh/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key?platform=windows
 
-
+https://www.zhihu.com/question/559902152/answer/2840027948?utm_id=0
 # Git Docs
 
 1. [git的安装]

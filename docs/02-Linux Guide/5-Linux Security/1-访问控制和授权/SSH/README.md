@@ -108,10 +108,10 @@ SSH之所以能够保证安全，原因在于它采用了公钥加密。过程�
 如果你是第一次登录对方主机，系统会出现下面的提示：
 
 ```bas
-　　$ ssh user@host
-　　The authenticity of host 'host (12.18.429.21)' can't be established.
-　　RSA key fingerprint is 98:2e:d7:e0:de:9f:ac:67:28:c2:42:2d:37:16:58:4d.
-　　Are you sure you want to continue connecting (yes/no)?
+    $ ssh user@host
+    The authenticity of host 'host (12.18.429.21)' can't be established.
+    RSA key fingerprint is 98:2e:d7:e0:de:9f:ac:67:28:c2:42:2d:37:16:58:4d.
+    Are you sure you want to continue connecting (yes/no)?
 ```
 
 这段话的意思是，无法确认host主机的真实性，只知道它的公钥指纹，问你还想继续连接吗？
@@ -178,9 +178,9 @@ Warning: Permanently added 'host,12.18.429.21' (RSA) to the list of known hosts.
 如果还是不行，就打开远程主机的/etc/ssh/sshd_config这个文件，检查下面几行前面"#"注释是否取掉。
 
 ```bash
-　　RSAAuthentication yes
-　　PubkeyAuthentication yes
-　　AuthorizedKeysFile .ssh/authorized_keys
+    RSAAuthentication yes
+    PubkeyAuthentication yes
+    AuthorizedKeysFile .ssh/authorized_keys
 ```
 
 然后，重启远程主机的ssh服务。
@@ -192,7 +192,7 @@ Warning: Permanently added 'host,12.18.429.21' (RSA) to the list of known hosts.
 这里不使用上面的ssh-copy-id命令，改用下面的命令，解释公钥的保存过程：
 
 ```bash
-　　$ ssh user@host 'mkdir -p .ssh && cat >> .ssh/authorized_keys' < ~/.ssh/id_rsa.pub
+    $ ssh user@host 'mkdir -p .ssh && cat >> .ssh/authorized_keys' < ~/.ssh/id_rsa.pub
 ```
 
 这条命令由多个语句组成，依次分解开来看：
@@ -213,7 +213,7 @@ Warning: Permanently added 'host,12.18.429.21' (RSA) to the list of known hosts.
 我们在host1执行下面的命令：
 
 ```bash
-　　$ ssh -L 2121:host2:21 host3
+    $ ssh -L 2121:host2:21 host3
 ```
 
 命令中的L参数一共接受三个值，分别是"本地端口:目标主机:目标主机端口"，它们之间用冒号分隔。这条命令的意思，就是指定SSH绑定本地端口2121，然后指定host3将所有的数据，转发到目标主机host2的21端口（假定host2运行FTP，默认端口为21）。
@@ -221,7 +221,7 @@ Warning: Permanently added 'host,12.18.429.21' (RSA) to the list of known hosts.
 这样一来，我们只要连接host1的2121端口，就等于连上了host2的21端口。
 
 ```bash
-　　$ ftp localhost:2121
+    $ ftp localhost:2121
 ```
 
 "本地端口转发"使得host1和host3之间仿佛形成一个数据传输的秘密隧道，因此又被称为"SSH隧道"。
@@ -229,7 +229,7 @@ Warning: Permanently added 'host,12.18.429.21' (RSA) to the list of known hosts.
 下面是一个比较有趣的例子。
 
 ```bash
-　　$ ssh -L 5900:localhost:5900 host3
+    $ ssh -L 5900:localhost:5900 host3
 ```
 
 它表示将本机的5900端口绑定host3的5900端口（这里的localhost指的是host3，因为目标主机是相对host3而言的）。
@@ -237,13 +237,13 @@ Warning: Permanently added 'host,12.18.429.21' (RSA) to the list of known hosts.
 另一个例子是通过host3的端口转发，ssh登录host2。
 
 ```bash
-　　$ ssh -L 9001:host2:22 host3
+    $ ssh -L 9001:host2:22 host3
 ```
 
 这时，只要ssh登录本机的9001端口，就相当于登录host2了。
 
 ```bash
-　　$ ssh -p 9001 localhost
+    $ ssh -p 9001 localhost
 ```
 
 上面的-p参数表示指定登录端口。
@@ -259,7 +259,7 @@ Warning: Permanently added 'host,12.18.429.21' (RSA) to the list of known hosts.
 我们在host3执行下面的命令：
 
 ```bash
-　　$ ssh -R 2121:host2:21 host1
+    $ ssh -R 2121:host2:21 host1
 ```
 
 R参数也是接受三个值，分别是"远程主机端口:目标主机:目标主机端口"。这条命令的意思，就是让host1监听它自己的2121端口，然后将所有数据经由host3，转发到host2的21端口。由于对于host3来说，host1是远程主机，所以这种情况就被称为"远程端口绑定"。
@@ -267,7 +267,7 @@ R参数也是接受三个值，分别是"远程主机端口:目标主机:目标�
 绑定之后，我们在host1就可以连接host2了：
 
 ```bash
-　　$ ftp localhost:2121
+    $ ftp localhost:2121
 ```
 
 这里必须指出，"远程端口转发"的前提条件是，host1和host3两台主机都有sshD和ssh客户端。

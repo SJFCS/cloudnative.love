@@ -10,19 +10,19 @@ yum groupinstall Fonts
 
 2. 中文有些会显示乱码。可能LANG为zh_CN.utf-8。
 
-　　1） 全局设置更改LANG:更改/etc/sysconfig/i18n的内容为：LANG="zh_CN.gb2312"
+    1） 全局设置更改LANG:更改/etc/sysconfig/i18n的内容为：LANG="zh_CN.gb2312"
 
-　　2） 当前会话更改LANG:export LANG=zh_CN.gb2312
+    2） 当前会话更改LANG:export LANG=zh_CN.gb2312
 
 
 1. sed 's/$/\r/' linux.txt > dos.txt　linux换行符改成dos换行符
 
 2.  大批量删除文件 find . -name "2016*" |xargs rm -rf 
 
-　　如果直接使用rm 2016*会报参数列表过长
+    如果直接使用rm 2016*会报参数列表过长
 
 17. 从根目录开始查找所有扩展名为.log的文本文件，并找出包含”ERROR”的行
-　　find / -type f -name "*.log" | xargs grep "ERROR"
+    find / -type f -name "*.log" | xargs grep "ERROR"
 ```
 
 

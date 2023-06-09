@@ -214,19 +214,19 @@ fi
 ```
 　keepalived的邮件通知配置
 
-　　notification_email {...}：该指令用于应用一段邮件接收者的一个配置段，用大括号括起来，里面可以配置多个邮件接收者；
+    notification_email {...}：该指令用于应用一段邮件接收者的一个配置段，用大括号括起来，里面可以配置多个邮件接收者；
 
-　　notification_email_from：该指令用于指定邮件发出者的邮箱；
+    notification_email_from：该指令用于指定邮件发出者的邮箱；
 
-　　smtp_server：该指令用于指定邮件服务器地址；
+    smtp_server：该指令用于指定邮件服务器地址；
 
-　　smtp_connect_timeout：该指令用于指定连接邮件服务器的超时时长，默认30秒；
+    smtp_connect_timeout：该指令用于指定连接邮件服务器的超时时长，默认30秒；
 
-　　notify_master：配置节点成为master角色的触发的动作；通常为执行一个脚本；
+    notify_master：配置节点成为master角色的触发的动作；通常为执行一个脚本；
 
-　　notify_backup：配置节点角色转换为backup触发的动作；
+    notify_backup：配置节点角色转换为backup触发的动作；
 
-　　notify_fault：配置节点为失败状态触发的动作；
+    notify_fault：配置节点为失败状态触发的动作；
 ```
 
 **部署 mailx**
