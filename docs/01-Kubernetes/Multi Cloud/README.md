@@ -57,3 +57,6 @@ title: Multi Cloud
 - [Kubernetes、集群联邦和资源分发](https://draveness.me/kuberentes-federation/)
 - [Kubernetes Everywhere: Lessons Learned From Going Multi-Cloud - Niko Smeds, Grafana Labs](https://www.youtube.com/watch?v=ZY5h8Atc14A)
 
+
+
+[基于Kubernetes的多云和混合云](https://mp.weixin.qq.com/s/uM4d3_fwLIdQ95fBWcmRjw)
