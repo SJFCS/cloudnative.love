@@ -1,0 +1,1 @@
+https://itnext.io/setting-up-https-for-jenkins-with-nginx-everything-in-docker-4a118dc29127#0fa3

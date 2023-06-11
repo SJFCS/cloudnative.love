@@ -126,6 +126,7 @@ jNetPcap适用于Linux和Windows的Java数据包捕获库。jNetPcap可以直接
 ![](http://mmbiz.qpic.cn/mmbiz_png/wpkib3J60o2icic7CT4DWMr0AicoaOpIlhOfps0k9m1TJpeAiakGM3qoNvsYMpk9AI69DJ92Y58SMzG1vSKWZm0bibHg/0?wx_fmt=png)        流量分析
 
 Wireshark
+[Wireshark如何解密IPSec报文？](https://mp.weixin.qq.com/s/eDRs5wUued7JlVlBtM_kcg)
 
 精心设计的工具套件支持数据包分析器和协议解码器。它还包括一些实用的工具和脚本从而可以使其支持大多数常见的用法。
 

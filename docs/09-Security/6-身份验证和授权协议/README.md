@@ -1,6 +1,10 @@
 ---
 title: 身份验证和授权协议
 ---
+- [Single sign-on](https://en.wikipedia.org/wiki/Single_sign-on)
+- [单点登录如何工作？](https://www.onelogin.com/learn/how-single-sign-on-works)
+- [Keycloak 开源身份和访问管理](https://www.keycloak.org/)
+- [FreeOTP](https://github.com/freeotp)
 
 Kerberos、OpenID Connect和OAuth 2.0都是用于身份验证和授权的协议，但它们的使用场景略有不同。
 

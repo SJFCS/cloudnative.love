@@ -4,13 +4,13 @@ sidebar_position: 3
 tags: [Container,Security]
 ---
 ## 容器内核隔离方案
-- Kata Containers：Kata Containers是一个轻量级的虚拟化解决方案，利用Intel Clear Containers和Hyper.sh两个开源项目提供的技术，提供了与传统虚拟机类似的隔离和安全性。它使用Intel Clear Containers技术将容器封装在一个轻量级的虚拟机中，并提供了一个高性能的容器运行时。Kata Containers具有广泛的社区支持和生态系统，可以与Docker等其他容器管理工具集成。可以与Docker等其他容器管理工具一起使用。
+- Kata Containers： Kata Containers 是一个轻量级的虚拟化解决方案，利用Intel Clear Containers和Hyper.sh两个开源项目提供的技术，提供了与传统虚拟机类似的隔离和安全性。它使用Intel Clear Containers技术将容器封装在一个轻量级的虚拟机中，并提供了一个高性能的容器运行时。Kata Containers具有广泛的社区支持和生态系统，可以与Docker等其他容器管理工具集成。可以与Docker等其他容器管理工具一起使用。
 
-- Firecracker：Firecracker是一个新兴的虚拟化解决方案，专门用于运行轻量级工作负载。它是一个基于KVM（内核虚拟机）的微型虚拟机，可以在毫秒级别内启动，提供了高性能和安全性。Firecracker可以与Docker等其他容器运行时一起使用，并已被广泛应用于AWS Lambda等云原生应用场景。
+- Firecracker： Firecracker 是一个新兴的虚拟化解决方案，专门用于运行轻量级工作负载。它是一个基于KVM（内核虚拟机）的微型虚拟机，可以在毫秒级别内启动，提供了高性能和安全性。Firecracker可以与Docker等其他容器运行时一起使用，并已被广泛应用于AWS Lambda等云原生应用场景。
 
-- gVisor：gVisor是一个用于容器隔离的轻量级沙箱，可以提供与传统虚拟化相似的隔离和安全性。它使用内核虚拟化技术来模拟Linux内核，同时提供了一个安全的容器运行时。gVisor可以与Docker等其他容器管理工具一起使用，并提供了广泛的应用程序兼容性。
+- gVisor： [gVisor](https://gvisor.dev/) 是一个用于容器隔离的轻量级沙箱，可以提供与传统虚拟化相似的隔离和安全性。它使用内核虚拟化技术来模拟Linux内核，同时提供了一个安全的容器运行时。gVisor可以与Docker等其他容器管理工具一起使用，并提供了广泛的应用程序兼容性。
 
-- rkt，它是一个由CoreOS开发的容器运行时工具，可以提供与Docker类似的功能。rkt具有更好的安全性和隔离性，能够在容器运行时提供更高的保护。它还可以轻松地与Kubernetes等容器编排工具集成，提供更灵活的容器管理。
+- rkt: 它是一个由 CoreOS 开发的容器运行时工具，可以提供与Docker类似的功能。rkt具有更好的安全性和隔离性，能够在容器运行时提供更高的保护。它还可以轻松地与Kubernetes等容器编排工具集成，提供更灵活的容器管理。
 
 - Weaveworks Ignite，它是一个轻量级的虚拟机管理工具，可与Kubernetes集成。Ignite使用Firecracker提供内核级别的隔离，并使用OCI（Open Container Initiative）容器规范来定义应用程序。Ignite的目标是提供类似于虚拟机的体验，同时保留容器的灵活性和速度。
 

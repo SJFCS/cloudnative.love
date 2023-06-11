@@ -5,6 +5,8 @@ tags: [Security,Kyverno]
 
 https://www.youtube.com/watch?v=2v0_Bj6BAt0
 
+https://betterprogramming.pub/policy-as-code-on-kubernetes-with-kyverno-b144749f144
+
 和 Open Policy Agent 相比，[kyverno](https://github.com/kyverno/kyverno) 更简单直观。
 
 ## 使用案例

@@ -1,6 +1,7 @@
 ---
 title: LDAP
 ---
+- [Time-based one-time password](https://en.wikipedia.org/wiki/Time-based_one-time_password)
 
 ```
 15.绑定到外部验证服务，配置autofs                                                                                                                          
