@@ -92,10 +92,10 @@ sudo systemctl enable --now isc-dhcp-relay
 <TabItem value="CentOS/RedHat">
 
 ```bash
-sudo yum install dhcp
+sudo yum makecache && sudo yum install dhcp
 
-yum -y install dhcp-relay
-yum -y install dhcp-server
+#yum -y install dhcp-relay
+#yum -y install dhcp-server
 
 rpm -ql dhcp
 sudo systemctl enable --now dhcpd

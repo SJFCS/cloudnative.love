@@ -1,3 +1,4 @@
+https://icyfenix.cn/immutable-infrastructure/network/linux-vnet.html
 
 虚拟化网络的技术。
 其中 tap 和 tun 是 Linux 内核中的一种虚拟网络设备

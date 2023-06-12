@@ -1,28 +1,9 @@
 ---
 title: Rsync同步shell脚本实践
 ---
-
-
-
-## Rsync基本概述
-
 [rsync](https://rsync.samba.org/)是一款开源备份工具，监听端口：873，可在不同主机间进行同步，可实现全量/增量备份，适用于架构集中式备份或异地备份。
 
-
-
-
-
-![image-20210815161709308](https://image-fusice.oss-cn-hangzhou.aliyuncs.com/image/%E4%B8%89%E5%89%91%E5%AE%A2/2021.08.18-10:40:59-image-20210815161709308.png)
-
-## Rsync命令参数
-
-![image-20210815120632206](https://image-fusice.oss-cn-hangzhou.aliyuncs.com/image/%E4%B8%89%E5%89%91%E5%AE%A2/2021.08.18-18:26:09-image-20210815120632206.png)
-
-![image-20210815144824487](https://image-fusice.oss-cn-hangzhou.aliyuncs.com/image/%E4%B8%89%E5%89%91%E5%AE%A2/2021.08.18-18:26:16-image-20210815144824487.png)
-
-![image-20210818182718324](D:\ac\rysn scp\image-20210818182718324.png)
-
-## Rsync 服务部署
+## Rsync 服务安装
 
 ```bash
 # yum install rsync -y
@@ -33,32 +14,27 @@ title: Rsync同步shell脚本实践
 /usr/lib/systemd/system/rsyncd.service
 /usr/lib/systemd/system/rsyncd@.service
 
-安装rsync会自动创建一个nobody用户，用于进程启动
-id nobody
-	uid=99(nobody) gid=99(nobody) groups=99(nobody)
-
+安装rsync会自动创建一个nobody用户，用于进程启动 `useradd rsync -M -s /sbin/nologin`
 ```
 
-### 创建rsync进程启动用户
-
-```bash
-useradd rsync -M -s /sbin/nologin
-id rsync
-	uid=1000(rsync) gid=1000(rsync) groups=1000(rsync)
-
-```
 ### 创建备份文件目录
 
 ```bash
 mkdir /backup
 chown -R rsync.rsync /backup/
+# install -d -m 0755 -o <免密账号> -g <免密账号组> ${mysqlpaas_dir}
 ```
 
 ### 创建虚拟用户密码文件
 
 ```bash
+openssl rand -base64 12
+
 echo "rsyne_backup:123456" >/etc/rsyncd.passwd
 chmod 600 /etc/rsyncd.passwd
+
+# echo "rsync_backup:123456" | install -m 600 /dev/stdin /etc/rsyncd.passwd
+
 ```
 
 ### 配置文件详解
@@ -78,7 +54,6 @@ list = true							# 允许查看模块信息
 auth users = rsync_backup			# 定义虚拟用户，作为连接认证用户
 secrets file = /etc/rsyncd.passwd	# 定义虚拟用户密码文件存放路径
 log file = /var/log/rsyncd.log		# 定义日志路径
-########################
 [backup]			# 定义模块
 comment = commit	# 模块注释信息
 path = /backup		# 定义接收备份数据目录
@@ -88,10 +63,6 @@ path = /backup		# 定义接收备份数据目录
 
 ```bash
 [root@node1 ~]# systemctl start rsyncd.service
-[root@node1 ~]# ss -lntp |grep 873
-LISTEN     0      5            *:873                      *:*                   users:(("rsync",pid=44421,fd=3))
-LISTEN     0      5         [::]:873                   [::]:*                   users:(("rsync",pid=44421,fd=5))
-[root@node1 ~]#
 ```
 
 ### 客户端测试
@@ -104,31 +75,60 @@ rsync -avz   /opt rsync_backup@10.50.1.101::backup
 
 ![image-20210815120754309](https://image-fusice.oss-cn-hangzhou.aliyuncs.com/image/%E4%B8%89%E5%89%91%E5%AE%A2/2021.08.18-18:26:40-image-20210815120754309.png)
 
-> ### 注意事项
->
-> + rsync_backup：客户端通过该虚拟用户链接rsync服务，是一个虚拟用户，由配置文件中【auth users】定义。虚拟用户密码文件由【secrets file】定义
->
-> + rsync：模块对应的目录，必须授权为配置文件中定义的UID和GID的用户
->
->   用于运行rsync服务时所需用户
->
->   以此用户身份鞋服数据到备份目录
+### 注意事项
+- rsync_backup：客户端通过该虚拟用户链接rsync服务，由配置文件中【auth users】定义。虚拟用户密码文件由【secrets file】定义
+- rsync：模块对应的目录，必须授权为配置文件中定义的UID和GID的用户
+
+用于运行rsync服务时所需用户
+以此用户身份鞋服数据到备份目录
 
 ## 无差异同步
 
-![image-20210818182700229](https://image-fusice.oss-cn-hangzhou.aliyuncs.com/image/rysn%20scp/2021.08.18-18:27:50-image-20210818182700229.png)
+```bash
+#拉取远端数据：远端与本地保特一致，远端没有本地有会被别除，造成客户端数据丢尖
+[root@nfs01]#export RSYNC_PASSWORD=123456
+[root@nfs01 ~]rsync -avz --delete rsync_backup0172.16.1.41:backup/ /data/
+#推送数据至远端：本地与远端保持一致，本地没有远端会被刑除，造成服务器端数据丢关
+[root@nfs01 ~]export RSYNC_PASSWORD=123456
+[root@nfs01 ]rsync -avz --delete /data/ rsync_backup@172.16.1.41:backup/
+```
 
-![image-20210815144302356](https://image-fusice.oss-cn-hangzhou.aliyuncs.com/image/%E4%B8%89%E5%89%91%E5%AE%A2/2021.08.18-18:29:03-image-20210815144302356.png)
+
 
 ## Limit限速
+```bash
+#企业案例：DBA使用syc拉取备份数据附，由于文件过大导致内部交换机带宽被沾满，导致用户的清求无法响应
+[root@nfs01 ~]export RSYNC_PASSWORD=123456
+[root@nfs01 ~]rsync -avz --bwlimit=1 rsync_backup@172.16.1.41:backup/ /data/
 
-![image-20210818182708812](https://image-fusice.oss-cn-hangzhou.aliyuncs.com/image/rysn%20scp/2021.08.18-18:27:52-image-20210818182708812.png)
 
-![image-20210815144701065](https://image-fusice.oss-cn-hangzhou.aliyuncs.com/image/%E4%B8%89%E5%89%91%E5%AE%A2/2021.08.18-18:29:07-image-20210815144701065.png)
+[root@nfs~]#ddif=/dev/zero of=./size.disk bs=1 M count=500生成大文件
+限制传输的速率为1MB
+[root@nfs ~]rsync -avzP --bwlimit=1 ./size.disk rsync_backup@172.16.1.41:backup
+Password:
+sending incremental file list
+size.disk
+118,358,01622%
+1.01MB/s
+0:06:33
+
+```
 
 ## 自动备份实践脚本
 
-![image-20210815145047518](https://image-fusice.oss-cn-hangzhou.aliyuncs.com/image/%E4%B8%89%E5%89%91%E5%AE%A2/2021.08.18-18:29:09-image-20210815145047518.png)
+**客户端需求**
+1,客户端提前准备存放的备份的目录，目录规则如下/backup/nfs_172.16.1.31_2818-69-02
+2.客户端在本地打包备份系统配置文件、应用配置等拷贝至/backup/nfs_172.16.1.31_2818-89-82
+3.客户端最后将备份的数据进行推送至备份服务器
+4.客户端每天凌晨1点定时执行该脚本
+5.客户端服务器本地保留最近7天的数据，避免浪费磁盘空间
+**服务端需求**
+1.服务端部署Syc,用于接收客户端推送过来的备份数据
+2.服务端需要每天校验客户端推送过来的数据是否完整
+3.服务端需要每天校验的结果通知给管理员
+6
+4.服务端仅保留6个月的备份数据其余的全部删除
+注意：所有服务器的备份目录必须都为backup
 
 ### 客户端推送脚本
 
@@ -258,9 +258,3 @@ crontab -e
 # 查看
 crontab -l
 ```
-
-> 推荐阅读：
->
-> https://blog.csdn.net/xiaoxiaoniaoge/article/details/50971453
->
-> https://www.cnblogs.com/f-ck-need-u/p/7220009.html

@@ -1,4 +1,4 @@
- ftp最早是明文传输的，有很大的安全隐患，因此出现了两种加密方式：
+ftp最早是明文传输的，有很大的安全隐患，因此出现了两种加密方式：
 
 一种是sftp，是使用ssh作为通道传输文件，因为ssh是全程加密的，所以，以ssh作为通道传输ftp也就是安全的。这种方式优点是不再占用20、21端口，只使用22端口就可以完成全部任务，缺点是传送速度慢，尤其是大量小文件的速度极慢
 
@@ -6,16 +6,9 @@
 
 
 
-
- 
-
-
-
-
-
 ## 修改配置文件
-参照下面常用参数，修改配置文件 /etc/vsftpd/vsftpd.conf
-```
+/etc/vsftpd/vsftpd.conf
+```conf
 关闭匿名访问
 anonymous_enable=NO
 
@@ -49,6 +42,7 @@ data_connection_timeout=500
 
 ## 黑名单与白名单
 黑名单与白名单由 serlist_enable 和 userlist_deny 两个参数共同设置
+```conf
 serlist_enable ： 是否启用 user_list 文件
 userlist_deny ： 配置user_list为黑名单还是白名单
 
@@ -65,4 +59,4 @@ userlist_deny=NO
 userlist_enable=YES
 userlist_deny=YES
 超级黑名单 /etc/vsftpd/ftpusers
-
+```
