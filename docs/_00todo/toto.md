@@ -2,11 +2,7 @@
 6.18  写完 3-Linux FileSystem
 6.25  写完4-Linux Kernel Tuning
 
-7月 考完 [SAP](https://aws.amazon.com/cn/certification/certified-solutions-architect-professional/)
-
-https://www.aws.training/LearningLibrary
-
-https://zhuanlan.zhihu.com/p/320358593
+7月 考完 ACE
 
 7.2  写完5-Linux Security
 7.9  写完6-Linux Process Management
@@ -21,8 +17,12 @@ https://zhuanlan.zhihu.com/p/320358593
 11 Kubernetes-The-Hard-Way
 （0.5 Multi Cloud 1 10-Network）
 
+OCP [SAP](https://aws.amazon.com/cn/certification/certified-solutions-architect-professional/)
 
-ACE OCP 
+https://www.aws.training/LearningLibrary
+
+https://zhuanlan.zhihu.com/p/320358593
+
 1 03-Integration & Delivery
 2-3 04-Proxy, Gateway & Mesh
 4-6 05-Database OCP
@@ -31,10 +31,7 @@ ACE OCP
 9 08-Storage 09-Security
 10 各种中间件
 
-
-
 11-12
-
 Python
 Golang
 Git 
