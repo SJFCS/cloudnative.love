@@ -29,3 +29,22 @@ echo "This is a test message." | mail -s "Test message" user@example.com
 
 
 这样，用户在不同的主机上使用mailx客户端发送邮件，邮件将通过SMTP协议发送给Postfix邮件服务器进行传递和投递。其他用户可以在自己的邮箱中查看和回复邮件。需要注意的是，为了保证邮件的安全性，可以使用加密协议（如TLS）来保护邮件的传输和存储。
+
+
+mail, mailx都是收发邮件用的，类似浏览器的作用，叫做mail user agent（MUA）.
+
+sendmail,postfix是做邮件服务器的，类似apache, nginx的作用，可以用作mail transport agent（MTA）
+
+扩展：
+
+邮件用户代理（MUA，Mail User Agent）；
+
+邮件传送代理（MTA，Mail Transport Agent）；
+
+邮件分发代理（MDA，Mail Deliver Agent）；
+
+mail 是用户使用客户端（类似foxmail）负责向MTA 撰写发送邮件;
+
+mailx和mail本职是一样的，只是版本不同，叫法不一样；
+
+sedmail，postfix就是负责邮件传输的MTA；

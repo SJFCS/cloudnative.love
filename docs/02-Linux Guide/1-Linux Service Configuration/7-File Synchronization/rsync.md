@@ -10,9 +10,7 @@ https://www.cnblogs.com/f-ck-need-u/p/7220009.html
 rsync是可以实现增量备份的工具。配合任务计划，rsync能实现定时或间隔同步，配合inotify或sersync，可以实现触发式的实时同步。
 
 
-rsync可以实现scp的远程拷贝(rsync不支持远程到远程的拷贝，但scp支持)、cp的本地拷贝、rm删除和"ls -l"显示文件列表等功能。 不是传输而是同步
-
-在本篇文章之后的下几篇文章中，将介绍inotify+rsync和sersync，
+(rsync不支持远程到远程的拷贝，但scp支持)
 
 
 rsync同步过程中由两部分模式组成：决定哪些文件需要同步的检查模式以及文件同步时的同步模式。
@@ -160,8 +158,83 @@ Access via rsync daemon:
 ```
 
 ### (5).指定ssh连接参数，如端口、连接的用户、ssh选项等。
-https://www.cnblogs.com/f-ck-need-u/p/7220009.html
+```
+rsync -e "ssh -p 22 -o StrictHostKeyChecking=no" /etc/fstab 172.16.10.5:/tmp
+Warning: Permanently added '172.16.10.5' (RSA) to the list of known hosts.
+root@172.16.10.5's password:
+```
 
+### (6)."--existing"和"--ignore-existing"
+
+"--existing"是只更新目标端已存在的文件。
+
+"--ignore-existing"是更新目标端不存在的文件。
+
+"--existing"和"--ignore-existing"结合使用时，有个特殊功效，当它们结合"--delete"使用的时候，文件不会传输，但会删除receiver端额外多出的文件。
+
+实际上，"--existing"和"--ingore-existing"是传输规则，只会影响receiver要求让sender传输的文件列表，在receiver决定哪些文件需要传输之前的过程，是这两个选项无法掌控的，所以各种规则、"--delete"等操作都不会被这两个选项影响。
+
+### (7)."--remove-source-files"删除源端文件。
+
+使用该选项后，源端已经更新成功的文件都会被删除，源端所有未传输或未传输成功的文件都不会被移除。未传输成功的原因有多种，如exclude排除了，"quick check"未选项该文件，传输中断等等。
+
+总之，显示在"rsync -v"被传输列表中的文件都会被移除。如下：
+
+```
+[root@xuexi ~]# rsync -r -v --remove-source-files /tmp/a/anaconda /tmp/a/audit /tmp       
+sending incremental file list
+anaconda/anaconda.log
+anaconda/ifcfg.log
+anaconda/journal.log
+anaconda/ks-script-1uLekR.log
+anaconda/ks-script-iGpl4q.log
+anaconda/packaging.log
+anaconda/program.log
+anaconda/storage.log
+anaconda/syslog
+audit/audit.log
+ 
+sent 4806915 bytes  received 204 bytes  961423
+```
+上述显示出来的文件在源端全部被删除。
+
+
+### 2.4.2 "--exclude"排除规则
+
+```
+[root@xuexi tmp]# rsync -r -v --exclude="anaconda/*.log" /var/log/anaconda /var/log/audit /tmp
+```
+
+注意，一个"--exclude"只能指定一条规则，要指定多条排除规则，需要使用多个"--exclude"选项，或者将排除规则写入到文件中，然后使用"--exclude-from"选项读取该规则文件。
+
+另外，除了"--exclude"排除规则，还有"--include"包含规则，顾名思义，它就是筛选出要进行传输的文件，所以include规则也称为传输规则。它的使用方法和"--exclude"一样。如果一个文件即能匹配排除规则，又能匹配包含规则，则先匹配到的立即生效，生效后就不再进行任何匹配。
+
+最后，关于规则，最重要的一点是它的作用时间。当发送端敲出rsync命令后，rsync将立即扫描命令行中给定的文件和目录(扫描过程中还会按照目录进行排序，将同一个目录的文件放在相邻的位置)，这称为拷贝树(copy tree)，扫描完成后将待传输的文件或目录记录到文件列表中，然后将文件列表传输给接收端。而筛选规则的作用时刻是在扫描拷贝树时，所以会根据规则来匹配并决定文件是否记录到文件列表中(严格地说是会记录到文件列表中的，只不过排除的文件会被标记为hide隐藏起来)，只有记录到了文件列表中的文件或目录才是真正需要传输的内容。换句话说，筛选规则的生效时间在rsync整个同步过程中是非常靠前的，它会影响很多选项的操作对象，最典型的如"--delete"。也许，你看完这一整篇文章都没感觉到这一点的重要性，但如果你阅读rsync的man文档或者学习rsync的原理，你一定会深有体会。
+
+实际上，排除规则和包含规则都只是"--filter"筛选规则的两种特殊规则。"--filter"比较复杂，它有自己的规则语法和匹配模式，由于篇幅有限，以及考虑到本文的难度定位，"--filter"规则不便在此多做解释，仅简单说明下规则类，帮助理解下文的"--delete"。
+
+以下是rsync中的规则种类，不解之处请结合下文的"--delete"分析：
+
+(1).exclude规则：即排除规则，只作用于发送端，被排除的文件不会进入文件列表(实际上是加上隐藏规则进行隐藏)。
+
+(2).include规则：即包含规则，也称为传输规则，只作用于发送端，被包含的文件将明确记录到文件列表中。
+
+(3).hide规则：即隐藏规则，只作用于发送端，隐藏后的文件对于接收端来说是看不见的，也就是说接收端会认为它不存在于源端。
+
+(4).show规则：即显示规则，只作用于发送端，是隐藏规则的反向规则。
+
+(5).protect规则：即保护规则，该规则只作用于接收端，被保护的文件不会被删除掉。
+
+(6).risk规则：即取消保护规则。是protect的反向规则。
+
+除此之外，还有一种规则是"clear规则"，作用是删除include/exclude规则列表。
+
+**如何一次写对exclude规则**
+我这里提供一个判断规则写法的方式，纯属我个人的经验总结：使用"-n"选项是dry run模式，也就是只测试不传输，"-i"选项是输出要传输文件的路径。"-i"只是一个便捷性选项，可以替换成其它选项来自定义输出格式，有时候通过这些信息来做一些判断是非常有用的，具体的可以翻man手册。
+
+### 2.4.3 "--delete"解释
+https://www.cnblogs.com/f-ck-need-u/p/7220009.html#auto_id_5
+## 2.5 rsync daemon模式
 
 
 ## 一、简介
