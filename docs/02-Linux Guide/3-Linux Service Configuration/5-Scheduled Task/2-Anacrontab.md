@@ -39,7 +39,3 @@ START_HOURS_RANGE=3-22
 7       25      cron.weekly             nice run-parts /etc/cron.weekly
 @monthly 45     cron.monthly            nice run-parts /etc/cron.monthly
 ```
-
-https://blog.csdn.net/JustinQin/article/details/119378255
-
-http://c.biancheng.net/view/1095.html

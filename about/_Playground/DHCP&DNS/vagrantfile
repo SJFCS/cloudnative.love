@@ -1,0 +1,172 @@
+# -*- mode: ruby -*-
+# # vi: set ft=ruby :
+
+######################################## VAGRANT YAML ###########################################
+# Project : https://github.com/SJFCS/cloudnative.love/tree/main/about/_Playground/vagrant-yaml  #
+# Author  : SongJinfeng@outlook.com                                                             #
+#################################################################################################
+# todo provision shell的名字  网络主机名参数
+# todo 禁止默认挂载 config.vm.synced_folder ".", "/vagrant", disabled: true
+
+ENV['VAGRANT_EXPERIMENTAL'] = 'disks'
+
+require 'uri'
+require 'open-uri'
+require 'yaml'
+config = YAML.load_file(File.join(File.dirname(__FILE__), 'config.yaml'))
+servers = config['servers']
+default_config = config['default_config']
+# puts servers.to_yaml
+# puts default_config.to_yaml
+
+Vagrant.configure("2") do |config|
+  config.vm.boot_timeout = default_config['boot_timeout']
+
+  # 设置公钥变量
+  puts "---------------------Public Keys---------------------"
+  ssh_pub_keys = []
+  KEY_HANDLERS = {
+    'remote_key' => ->(keys) { keys.each { |key| ssh_pub_keys << URI.open(key).read.strip } },
+    'local_key' => ->(keys) { keys.each { |key| ssh_pub_keys << File.readlines(key.gsub('#{Dir.home}', Dir.home)).first.strip } },
+    'content_key' => ->(keys) { ssh_pub_keys += keys }
+  }
+  default_config['ssh_pub_keys']&.each do |type, keys|
+    KEY_HANDLERS[type].call(keys)
+  end
+  puts ssh_pub_keys
+
+  # 设置hosts变量
+  puts "---------------------Hosts---------------------"
+  hosts_str = ""
+  servers.each do |server|
+    server['network']&.each do |network|
+      ip_address, _,add_hosts = network.split(":")
+      host_region_local = server['region']&.split || [default_config['default_region']]
+      host_name_local = "#{server['name']}"
+      host_name_fqdn_local = "#{server['name']}.#{host_region_local.join}"
+      hosts_str += add_hosts == "add_hosts" ? "#{ip_address}\t#{host_name_fqdn_local}\t#{host_name_local}\n" : ""
+    end
+  end
+  puts "#{hosts_str}"
+
+  servers.each do |server|
+    config.vm.define server['name'] do |node|
+      puts "---------------------创建 #{server['name']}---------------------"
+      ## 设置 provider
+      cpus = server['cpu'] || default_config['default_cpu']
+      memory = server['mem'] || default_config['default_mem']
+      puts "#{server['name']} CPU: #{cpus} Memory: #{memory}"
+      puts "#{server['name']} 启动顺序:  #{default_config['boot_order']}"
+      
+      node.vm.provider "virtualbox" do |vb|
+        vb.gui = server['gui'] || default_config['default_gui']
+        # 设置规格
+        vb.cpus = cpus
+        vb.memory = memory
+        # 设置启动顺序
+        vb.customize ["modifyvm", :id, "--boot1", default_config['boot_order'][0]]
+        vb.customize ["modifyvm", :id, "--boot2", default_config['boot_order'][1]]
+        vb.customize ["modifyvm", :id, "--boot3", default_config['boot_order'][2]]
+      end
+
+      ## 设置系统版本
+      os_name = server['os']&.split(":")&.[](0) || default_config['default_os']&.split(":")&.[](0)
+      os_version = server['os']&.split(":")&.[](1) || default_config['default_os']&.split(":")&.[](1)
+      puts "#{server['name']} 系统版本:  #{os_name}#{":#{os_version}" if os_version.to_s.strip != ''}"
+      node.vm.box = os_name
+      node.vm.box_version = os_version.to_s.strip != '' ? os_version : nil
+            
+      ## 设置主机名
+      host_region = server['region']&.split || [default_config['default_region']]
+      host_fqdn = "#{server['name']}.#{host_region.join}"
+      host_name = "#{server['name']}"
+      puts "#{server['name']} FQDN:   #{host_name}"
+      node.vm.hostname = host_name
+
+      ## 设置网络
+      server['network']&.each do |network|
+        ip, network_mode = network.split(':').map(&:strip)
+        network_mode = (network_mode&.to_sym || default_config['default_network_mode'])
+        puts "#{server['name']} 系统网络:  #{ip} #{network_mode}"
+        node.vm.network network_mode, ip: ip, auto_config: true
+        # node.vm.network network_mode, ip: ip, virtualbox__intnet: false, auto_config: true
+      end
+      
+      ## 端口转发
+      server['port_forward']&.each do |forward|
+        host_port, guest_port, id = forward.split(':').map(&:strip)
+        puts "#{server['name']} 端口映射:  host_port: #{host_port} guest_port: #{guest_port} #{"id: #{id}" if id.to_s.strip != ''}"
+        node.vm.network "forwarded_port", host: host_port, guest: guest_port, id: id, auto_correct: true
+      end
+
+      ## 共享目录
+      server['mount']&.each do |mount|
+        mount_point, mount_path = mount.split(':').map(&:strip)
+        puts "#{server['name']} 挂载目录:  #{mount_point} -> #{mount_path}"
+        # node.vm.synced_folder mount_point, mount_path, default_synced_folder
+        node.vm.synced_folder mount_point, mount_path, default_config['default_synced_folder']
+      end 
+
+      ## 挂载磁盘
+      server['disk']&.each do |disk|
+        name, size, primary = disk.split(':').map(&:strip)
+        puts "#{server['name']} 挂载磁盘:  #{name} #{size} #{primary ? 'primary' : '' if primary}"
+        node.vm.disk :disk, name: name, size: size, primary: !!primary && true
+      end
+
+      ## 挂载 DVD 镜像
+      server['dvd']&.each do |dvd|
+        name, file = dvd.split(':').map(&:strip)
+        puts "#{server['name']} 挂载 DVD:  #{name} #{file}"
+        node.vm.disk :dvd, name: name, file: file
+      end
+      
+      ## 自定义密钥
+      current_user = config.ssh.username.to_s == "__UNSET__VALUE__" ? "vagrant" : config.ssh.username
+      node.vm.provision "shell", name: "Add Pub_Keys...", inline: <<-SHELL
+        echo "#{ssh_pub_keys.join("\n")}" >> /home/#{current_user}/.ssh/authorized_keys
+      SHELL
+
+      # 设置hosts
+      node.vm.provision "shell", name: "Add Hosts...", 
+      inline: "echo '#{hosts_str}' >> /etc/hosts", 
+      privileged: true, 
+      run: "once"
+      # 删除 以127开头且不以localhost结尾的行
+      node.vm.provision "shell", 
+      inline: "sudo sed -i  '/^[^#].*localhost$/!{/^127/d}' /etc/hosts", 
+      privileged: true,
+      run: "once"
+
+      # provision_shell_script
+      server['provision_shell_script']&.each do |script|
+        script, *args = script.split(':')
+        puts "#{server['name']} Shell_Script: #{script} #{"#{args.join(' ')}" if args.join(' ').to_s.strip != ''}"
+        node.vm.provision "shell", name: "Run #{script} #{"#{args.join(' ')}" if args.join(' ').to_s.strip != ''}", path: script, args: args.join(' ')
+      end
+      # provision_shell_inline
+      server['provision_shell_inline']&.each do |inline|
+        inline = inline.split
+        puts "#{server['name']} Shell_Inline: #{"#{inline.join(' ')}"}"
+        node.vm.provision "shell", name: "Run #{"#{inline.join(' ')}"}", inline: inline.join(' '), privileged: true
+      end      
+      ## provision_ansible
+      # node.vm.provision "ansible" do |ansible|
+      #   ansible.playbook = "playbook.yml"
+      # end
+      # config.vm.provision "ansible" do |ansible|
+      #   ansible.playbook = "path/to/your/playbook.yml"
+      #   ansible.galaxy_role_file = "path/to/your/requirements.yml"
+      #   ansible.galaxy_roles_path = "path/to/your/roles"
+      # end
+      # Vagrant.configure(2) do |config|
+      #   config.vm.provision "ansible" do |ansible|
+      #     ansible.playbook = "path/to/your/playbook.yml"
+      #     ansible.inventory_path = "path/to/your/inventory"
+      #   end
+      # end
+
+    end
+  end
+
+end

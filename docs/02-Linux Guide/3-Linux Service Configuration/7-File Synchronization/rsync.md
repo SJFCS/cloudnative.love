@@ -573,3 +573,32 @@ ln -s "${BACKUP_PATH}" "${LATEST_LINK}"
 -   [How to create incremental backups using rsync on Linux](https://linuxconfig.org/how-to-create-incremental-backups-using-rsync-on-linux), Egidio Docile
 
 （完）
+
+## 无差异同步
+
+```bash
+#拉取远端数据：远端与本地保特一致，远端没有本地有会被别除，造成客户端数据丢尖
+[root@nfs01]#export RSYNC_PASSWORD=123456
+[root@nfs01 ~]rsync -avz --delete rsync_backup0172.16.1.41:backup/ /data/
+#推送数据至远端：本地与远端保持一致，本地没有远端会被刑除，造成服务器端数据丢关
+[root@nfs01 ~]export RSYNC_PASSWORD=123456
+[root@nfs01 ]rsync -avz --delete /data/ rsync_backup@172.16.1.41:backup/
+```
+## Limit限速
+```bash
+#企业案例：DBA使用syc拉取备份数据附，由于文件过大导致内部交换机带宽被沾满，导致用户的清求无法响应
+[root@nfs01 ~]export RSYNC_PASSWORD=123456
+[root@nfs01 ~]rsync -avz --bwlimit=1 rsync_backup@172.16.1.41:backup/ /data/
+
+
+[root@nfs~]#ddif=/dev/zero of=./size.disk bs=1 M count=500生成大文件
+限制传输的速率为1MB
+[root@nfs ~]rsync -avzP --bwlimit=1 ./size.disk rsync_backup@172.16.1.41:backup
+Password:
+sending incremental file list
+size.disk
+118,358,01622%
+1.01MB/s
+0:06:33
+
+```

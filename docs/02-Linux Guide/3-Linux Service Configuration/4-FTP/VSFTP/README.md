@@ -1,13 +1,38 @@
-ftp最早是明文传输的，有很大的安全隐患，因此出现了两种加密方式：
+---
+title: VSFTP
+---
 
-一种是sftp，是使用ssh作为通道传输文件，因为ssh是全程加密的，所以，以ssh作为通道传输ftp也就是安全的。这种方式优点是不再占用20、21端口，只使用22端口就可以完成全部任务，缺点是传送速度慢，尤其是大量小文件的速度极慢
-
-一种是ftps，是ftp协议使用ssl加密的版本，这种方式，使用的端口和ftp一样，只是建立连接后使用ssl加密传输文件，优点是可以独立控制用户密码，有各种高级功能，速度也很快，本文使用的vsftpd就是一个ftp服务器软件
-
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 
-## 修改配置文件
-/etc/vsftpd/vsftpd.conf
+## VSFTP 安装
+
+可以使用以下命令安装并启动 VSFTP 。
+
+<Tabs>
+<TabItem value="Ubuntu/Debian">
+
+```bash
+sudo apt-get install vsftpd
+dpkg -L vsftpd
+sudo systemctl enable --now vsftpd
+```
+</TabItem>
+<TabItem value="CentOS/RedHat">
+
+```bash
+sudo yum install vsftpd
+rpm -ql vsftpd
+sudo systemctl enable --now vsftpd
+```
+</TabItem>
+</Tabs>
+
+
+## 配置文件
+/etc/vsftpd/vsftpd.conf  
+http://cn.linux.vbird.org/linux_server/linux_redhat9/0410vsftpd.php#server_vsftpd.conf
 ```conf
 关闭匿名访问
 anonymous_enable=NO
@@ -38,25 +63,4 @@ idle_session_timeout=600
 
 资料传输时，超过500秒没有完成，就断开传输
 data_connection_timeout=500
-```
-
-## 黑名单与白名单
-黑名单与白名单由 serlist_enable 和 userlist_deny 两个参数共同设置
-```conf
-serlist_enable ： 是否启用 user_list 文件
-userlist_deny ： 配置user_list为黑名单还是白名单
-
-简单来说，user_list是一个用户列表，根据userlist_enable和userlist_deny两个参数的不同，有不同的作用：
-
-如果 userlist_enable=NO 则user_list文件无效
-
-设置user_list为白名单
-
-userlist_enable=YES
-userlist_deny=NO
-设置user_list为黑名单
-
-userlist_enable=YES
-userlist_deny=YES
-超级黑名单 /etc/vsftpd/ftpusers
 ```

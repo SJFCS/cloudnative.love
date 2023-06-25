@@ -1,0 +1,35 @@
+servers:
+  - name: server1
+    os: centos/7:2004.01
+    cpu: 2
+    mem: 2048
+    region: dev
+    network:
+      - 192.168.56.10:private_network:add_hosts
+    port_forward:
+      - 8121:22:ssh
+      - 8980:80:name
+  - name: server2
+    network:
+      - 192.168.56.20:private_network:add_hosts
+default_config:
+  default_region: local
+  default_cpu: 1
+  default_mem: 1024
+  default_network_mode: private_network
+  default_os: ubuntu/jammy64
+  boot_timeout: 300
+  default_gui: false
+  # 设置启动顺序
+  boot_order: ["disk", "dvd", "none"]
+  # 挂载目录选项
+  default_synced_folder:
+    create: true
+    owner: vagrant
+    group: vagrant
+    mount_options: ["dmode=755", "fmode=644"]
+    type: virtualbox # virtualbox、NFS 或 rsync
+  # 自定义密钥
+  ssh_pub_keys:
+    local_key:
+      - "#{Dir.home}/.ssh/id_rsa.pub"

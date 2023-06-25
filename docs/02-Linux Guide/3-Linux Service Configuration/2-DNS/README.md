@@ -2,18 +2,10 @@
 title: DNS
 sidebar_position: 1
 ---
-
-
-fqdn
-
-
-
 DNS(Domain Name System, 域名系统)用于正向查找（Forward Lookup）查找域名对应的IP地址和反向查找（Reverse Lookup）查找 IP 地址对应的域名。
 
 :::tip
-
 - DNS 可以使用 TCP 和 UDP 的 53 端口，基本使用 UDP 协议的 53端口。
-
 - FQDN 通常为 `主机名.DNS域`
 - Linux 中可以修改 `/etc/nsswitch.conf` 文件中 `hosts: files dns` 来定义 hosts 文件和 DNS 服务器的查找优先级
 :::
@@ -43,7 +35,7 @@ DNS(Domain Name System, 域名系统)用于正向查找（Forward Lookup）查�
 
 ## 递归查询和迭代查询
 
-假如 Host A 默认指向 DNS Server B 当查询 `demo.example.com` 的 IP 地址时查询流程应该如下所示
+假如 Host A 默认使用 DNS Server B 当查询 `demo.example.com` 的 IP 地址时查询流程应该如下所示
 
 - **递归查询**  
   Host A --> DNS Server B --> `.` --> `com.` --> `example.`--> DNS Server B --> Host A
@@ -155,23 +147,16 @@ DNS(Domain Name System, 域名系统)用于正向查找（Forward Lookup）查�
   - Minimum  
     代表这个 zone file 中所有 record 的内定的 TTL 值，也就是其它的 DNS server cache 这笔 record 时，最长不应该超过这个时间。
 
-
-
-## 更多
-
-- https://ns1.com/resources/dns-types-records-servers-and-queries
-- https://ns1.com/resources/dns-zones-explained
-- https://www.redhat.com/sysadmin/dns-configuration-introduction
-- https://www.cnblogs.com/f-ck-need-u/p/7367503.html
-
-- https://www.v2ex.com/t/742709
-- https://boce.aliyun.com/detect/dns/DNS_PING-55e41bb2aff9db99decd9d9da1be445d-1652369079406
-- https://www.cnblogs.com/f-ck-need-u/p/7367503.html
-- https://www.thesslstore.com/blog/dns-over-tls-vs-dns-over-https
-- https://developers.google.com/speed/public-dns/docs/dns-over-tls?hl=zh-cn
-- https://developers.google.com/speed/public-dns/docs/using?hl=zh-cn
+## 其他
+- https://www.thesslstore.com/blog/dns-over-tls-vs-dns-over-https/
+- https://developers.google.com/speed/public-dns/docs/doh?hl=zh-cn
+- https://adguard-dns.io/zh_cn/blog/dns-over-quic.html
+- https://www.cloudflare.com/zh-cn/learning/dns/dns-over-tls/
 - [Dnscrypt-proxy](https://wiki.archlinux.org/title/Dnscrypt-proxy)
-- DNS over TLS 和 DNS over HTTPS
-- 基于 TLS 的 DNS (DoT) 和基于 HTTPS 的 DNS (DoH) 听起来它们是同一事物的可互换术语。他们实际上完成了同样的事情——加密 DNS 请求——但有一个很大的不同：他们使用的端口。
+- DNS over TLS 和 DNS over HTTPS DNS-over-QUIC
 - ddns
-- smart dns
+- smart dns 智能dns
+- https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-securing_dns_traffic_with_dnssec
+- https://github.com/dnsviz/dnsviz
+
+

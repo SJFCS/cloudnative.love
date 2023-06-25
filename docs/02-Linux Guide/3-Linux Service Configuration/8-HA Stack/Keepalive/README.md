@@ -235,9 +235,9 @@ fi
 yum install mailx -y
 # 配置
 vim /etc/mail.rc
-set from=839646120@qq.com
+set from=0000000@qq.com
 set smtp=smtps://smtp.qq.com:465
-set smtp-auth-user=839646120@qq.com
+set smtp-auth-user=0000000@qq.com
 set smtp-auth-password=jrztcrdgmomnbddd
 set smtp-auth=login
 set ssl-verify=ignore

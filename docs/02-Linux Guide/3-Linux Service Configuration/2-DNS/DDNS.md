@@ -1,3 +1,6 @@
+---
+title: DDNS
+---
 
 ```bash
 option domain-name "example.org";
