@@ -1,8 +1,4 @@
-如果有关注过Knative社区动态的同学，可能会知道最近发生了一件比较大的新闻，三大组件之一的build项目被人提了一个很残忍的Proposal（`https://github.com/knative/build/issues/614`），并且专门在项目Readme的开头加了个NOTE：
-
-NOTE
-
-There is an open proposal to deprecate this component in favor of Tekton Pipelines. If you are a new user, consider using Tekton Pipelines, or another tool, to build and release. If you use Knative Build today, please give feedback on the deprecation proposal.
+如果有关注过Knative社区动态的同学，可能会知道最近发生了一件比较大的新闻，三大组件之一的build项目被人提了一个很残忍的Proposal（`https://github.com/knative/build/issues/614`）
 
 这个Proposal的目的是想要废弃Knative的build模块，Knative只专注做serverless，而将build模块代表的CI/CD功能全盘交出，让用户自己选择合适的CI/CD工具。Knative只负责将镜像运行，同时提供serverless相关的事件驱动等功能，不再关心镜像的构建过程。  
 虽然目前为止，该Proposal还在开放征求社区的意见，不过，从留言来看，build模块未来还是大概率会被deprecate。因为Knative build的替代者Tekton已经展露头脚，表现出更强大的基于kubernetes的CI/CD能力，Tekton的设计思路其实也是来源于Knative build的，现有用户也可以很方便的从build迁移至Tekton。
@@ -279,8 +275,4 @@ spec:
 既然Tekton是一个CI/CD工具，我们除了用它来编译和构建镜像，还可以做更多，例如，加入一些自动化测试的流程，对接其他kubernetes集群实现容器镜像的更新部署。  
 当然，这一切都放到task里的steps也未尝不可，但是这样无法抽象出各种task进行组织和复用，所以Tekton提供了更高一级的CRD描述，Pipeline和PipelineRun，Pipeline中可以引用很多task，而PipelineRun可用来运行Pipeline。Pipeline的yaml模版和task大同小异，这里暂不详述，相信你看一遍官方文档也能很快上手。
 
-虽然Tekton还很年轻，我们网易云轻舟团队已经开始在内部尝试实践，使用tekton作为内部服务的镜像构建推送平台。 ![https://ethfooblog.oss-cn-shanghai.aliyuncs.com/img/tiktok-0.png](https://ethfooblog.oss-cn-shanghai.aliyuncs.com/img/tiktok-0.png "https://ethfooblog.oss-cn-shanghai.aliyuncs.com/img/tiktok-0.png")
-
-![https://ethfooblog.oss-cn-shanghai.aliyuncs.com/img/tiktok-1.png](https://ethfooblog.oss-cn-shanghai.aliyuncs.com/img/tiktok-1.png "https://ethfooblog.oss-cn-shanghai.aliyuncs.com/img/tiktok-1.png")
-
-随着云原生浪潮的到来，Kubernetes已经成为事实上的标准，Tekton正脱胎于这股浪潮之中，基于CRD、controller设计思想从一出生就注定会更适合kubernetes。相比其他老牌的CI/CD项目，Tekton还没那么的成熟，不过套用一句现在流行的话：`一代人终将老去，但总有人正年轻`。 看着目前的趋势，未来可期。
+随着云原生浪潮的到来，Kubernetes已经成为事实上的标准，Tekton正脱胎于这股浪潮之中，基于CRD、controller设计思想从一出生就注定会更适合kubernetes。

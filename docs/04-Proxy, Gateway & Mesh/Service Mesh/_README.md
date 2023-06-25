@@ -4,6 +4,7 @@ tags: [Service Mesh]
 ---
 # 服务网格
 
+
 1. [istio](https://github.com/istio/istio): 目前全球最流行的服务网格，功能强大，但是相对的也更复杂。
    1. 文档非常详细
 2. [linkerd2](https://github.com/linkerd/linkerd2): 最初的服务网格的 rust 重构版，比 istio 简单，流控功能没那么强，但是性能更高。
@@ -14,6 +15,20 @@ tags: [Service Mesh]
 如果选择 envoy 阵营，目前不二选择就是 istio.
 如果需要更轻量，目前最佳的选择应该也只有 linkerd2.
 而展望未来，最有潜力的服务网格，应该是最近 cilium 推出的内核级 Service Mesh.
+
+
+
+
+Netflix已经宣布对Hystrix停止更新。
+[sentinel](https://github.com/alibaba/Sentinel)在18年开源了，在不断的发展，并且进入serviceMesh和云原生方向挺近。
+整体上sentinel功能更强
+参考：https://sentinelguard.io/zh-cn/blog/sentinel-vs-hystrix.html
+
+sentinel和istio中的服务限流是什么关系？
+都可以实现限流和熔断，区别是：
+sentinel和hytrix 代码有侵入性可以控制到具体的方法。
+istio则是为服务创建sidecar,主动劫持服务的入和出口流量；不侵入代码，但是粒度比较粗：只能针对整个java服务配置连接池和实例驱逐策略。
+
 
 ## 性能对比
 

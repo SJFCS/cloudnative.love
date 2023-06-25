@@ -1,7 +1,0 @@
-- [smart dns](https://www.greypanel.com/dns-resolution/) 
-- https://github.com/xiaomi-sa/smartdns
-- https://github.com/qunarcorp/open_dnsdb
-- https://github.com/pymumu/smartdns
-- https://hansedong.github.io/2019/05/13/19/
-- https://blog.skk.moe/post/i-have-my-unique-dns-setup/
-- https://github.com/abh/geodns

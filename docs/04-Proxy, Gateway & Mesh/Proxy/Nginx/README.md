@@ -8,7 +8,33 @@ tags: [Service Proxy & Ingress Gateway,Nginx]
 
 
 毫无疑问，nginx 是目前最流行的网页服务器（WebServer）、负载均衡器（LoadBalancer）和反向代理（ReverseProxy）.
+```conf
+server {
+        listen          8080; # 监听端口
+        server_name     project_name; # 网站名称
+        root            /home/work/project_name; # 静态文件地址，自己根据情况指定
+        # 如果你的项目指定了basename，那么这里需要路径重写
+        # 否则所有的静态文件请求都会返回html文件
+        location ~* ^/(basename) {
+                rewrite "^/basename/(.*)$" /$1 break;
+                try_files  $uri /index.html;
+        }
+        # 如果你的接口地址不是直接请求后端，而是和前端地址一样
+        # 那么需要设置nginx代理，可以这样设置
+        location /api {
+            pass_proxy: http://10.0.0.112.114:9000
+        }
+        # 设置允许跨域
+        proxy_set_header Access-Control-Allow-Origin *;
+        # 设置一些缓存相关的请求头
+        add_header Cache-Control no-cache;
+}
 
+作者：萌萌哒草头将军
+链接：https://juejin.cn/post/7245919919223881783
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
 
 ## 相关文档
 

@@ -1,5 +1,7 @@
 wine 
 
+winapps
+
 显卡直通+lookingglass
 
 https://github.com/DualCoder/vgpu_unlock
