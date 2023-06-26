@@ -2,6 +2,14 @@
 title: DNS
 sidebar_position: 1
 ---
+
+
+
+dns结合dhcp正确配置fqdn
+
+
+
+
 DNS(Domain Name System, 域名系统)用于正向查找（Forward Lookup）查找域名对应的IP地址和反向查找（Reverse Lookup）查找 IP 地址对应的域名。
 
 :::tip

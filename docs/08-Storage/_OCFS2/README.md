@@ -1,1 +1,0 @@
-https://www.zstack.io/docs/2.3.2/pdf2/a_print_ZStack_OCFS2_SAS_Deploy_Tutorial.pdf

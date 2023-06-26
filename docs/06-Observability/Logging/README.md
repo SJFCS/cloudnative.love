@@ -4,6 +4,8 @@ kubernetes 集群的日志收集与分析方案，目前主要有两个：
 
 [有赞百亿级日志系统架构设计](https://zhuanlan.zhihu.com/p/62438446)
 
+[持续降本：B站日志平台3.0演进之路](https://mp.weixin.qq.com/s?__biz=MzU4MjQ0MTU4Ng==&mid=2247508324&idx=1&sn=7e2fbbf9314735ca5a66b64e213899af&chksm=fdbaae79cacd276fc43cc6f14d34bc37a88d59e0b7efb654e3ffb93163be51bf1425fea1ddb3&mpshare=1&srcid=0623XWr67XiWTrsXBatcOBzU&sharer_sharetime=1687521815800&sharer_shareid=9b996575050d80b9b16b938075c280c4&from=timeline&scene=2&subscene=1&clicktime=1687677906&enterid=1687677906&sessionid=0&ascene=2&fasttmpl_type=0&fasttmpl_fullversion=6722933-zh_CN-zip&fasttmpl_flag=0&realreporttime=1687677906244&devicetype=android-33&version=2800255b&nettype=WIFI&abtest_cookie=AAACAA%3D%3D&lang=zh_CN&countrycode=CN&exportkey=n_ChQIAhIQhqnmaDHe8jwY9kQCsh1TIRLvAQIE97dBBAEAAAAAAFg6NLSXSOkAAAAOpnltbLcz9gKNyK89dVj0xfT5fnG0IVuNrMTErmlkYypy5gyprOOBVSiFGMq6WFGbO6jJAKVQEf8vaV%2B9nK2swFdC5r5rfVw0lV334R47%2F6tTmLP1Y2FSUTNvu9JcRkJdqK2blZiHBgiWDS4dX32shXgYMiCEY4o3WOl84KjAX0EfctQXV7D1mGZLiz1gnI%2F4eCdPInY6XYDEWTDmHI0puAURPHH32u%2FwNvhGk%2F3lYr2ZlVZPRSt5Xb2UL5luNOD5wnwiUoSMffTldmuST2soKd7G7i7uy0e2&pass_ticket=%2Bn0gPRt0wA4jC5%2B6pI4uyURfLZh8%2FYnci%2BHlmr5tQ1F46mxx3G0zRUX4wnWsXb0T&wx_header=3)
+
 
 1. EFK: 传统的日志收集与分析方案，用户量巨大。但是比较重，而且吃性能。
 2. loki: grafanalab 出品的新一代日志收集方案。参照 Prometheus 的思路给日志打标签，不提供全文检索。

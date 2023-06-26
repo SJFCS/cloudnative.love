@@ -17,7 +17,7 @@ https://zjj2wry.github.io/network/iptables/
 
 https://www.cnblogs.com/chenxiaomeng/p/10512798.html 
 
-
+https://www.zhihu.com/question/22677800/answer/2620870702?utm_id=0
 https://blog.csdn.net/ITlanyue/article/details/104416850
 
 https://blog.csdn.net/qq_44443986/article/details/115966274?utm_source=app&app_version=4.7.1&code=app_1562916241&uLinkId=usr1mkqgl919blen

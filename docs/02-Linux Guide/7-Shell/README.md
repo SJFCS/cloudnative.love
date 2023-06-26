@@ -4,6 +4,11 @@ sidebar_position: 7
 hide_table_of_contents: true
 tags: [Linux,Shell]
 ---
+
+https://linuxcommand.org/tlcl.php
+
+https://github.com/billie66/TLCL
+
 https://geek-docs.com/shell/shell-examples/the-shell-uses-tr-for-the-conversion.html
 
 http://c.biancheng.net/shell/
@@ -22,9 +27,7 @@ https://github.com/sysstat/sysstat
 
 https://blog.csdn.net/Adrian503/article/details/121285595
 
-https://opengers.github.io/linux/linux-shell-brace-parameter-command-pathname-expansion/
 
-https://jiangliheng.github.io/2020/03/21/shell-debug/
 
 https://geek-docs.com/shell/shell-examples/the-shell-uses-tr-for-the-conversion.html
 
@@ -40,8 +43,3 @@ shell:
 
 
 - https://github.com/google/zx
-- https://stackoverflow.com/questions/58338429/what-is-the-advantage-of-usr-bin-env-python-in-the-shebang-rather-than-just
-- https://zh.wikipedia.org/zh-hans/Shebang
-- https://www.baeldung.com/linux/bash-shebang-lines
-- https://stackoverflow.com/questions/16365130/what-is-the-difference-between-usr-bin-env-bash-and-usr-bin-bash
-- https://ubuntu.com/server/docs/security-firewall
