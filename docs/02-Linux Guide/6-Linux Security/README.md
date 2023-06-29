@@ -1,5 +1,5 @@
 ---
-title: Linux Security
+title: Linux Security✨
 sidebar_position: 6
 hide_table_of_contents: true
 tags: [Linux,Security]

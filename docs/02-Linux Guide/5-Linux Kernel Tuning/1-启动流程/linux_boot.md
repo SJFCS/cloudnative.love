@@ -1,5 +1,8 @@
 - [第十九章、開機流程、模組管理與 Loader - 鸟哥的 Linux 私房菜](https://linux.vbird.org/linux_basic/centos7/0510osloader.php)
 
+
+profile/shell rc 在什么情况下生效？
+
 # Linux 操作系统的启动过程？
 
 - 打开电源开关。

@@ -1,0 +1,3 @@
+- https://blog.palark.com/kubernetes-api-flow-control-management/
+- https://kubernetes.io/zh-cn/docs/concepts/cluster-administration/flow-control/
+- https://alexstocks.github.io/html/k8s-apf.html

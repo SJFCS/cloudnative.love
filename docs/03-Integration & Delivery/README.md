@@ -56,3 +56,6 @@ Drone 是目前 Github 上最火的 CICD 项目，它以容器为核心，每个
 2. 流水线完全没有任何分类，我们有数量众多的流水线，不分类不方便管理。
 3. 它被设计为一个简单的应用构建平台，不支持 Workflow 等功能。
    1. 也就是说，用它来实现自动化测试平台、运维平台，可能是「歪门邪道」hhh
+
+
+https://www.datarevenue.com/en-blog/airflow-vs-luigi-vs-argo-vs-mlflow-vs-kubeflow

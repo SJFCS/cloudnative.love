@@ -3,6 +3,16 @@ title: Security
 sidebar_position: 9
 tags: [Security]
 ---
+- https://zhuanlan.zhihu.com/p/639899593?utm_psn=1657168588703227904&utm_id=0
+1. Trivy, 操作系统层面漏洞检测的扫描工具
+2. Clair,容器漏洞静态扫描工具
+3. Kube-bench, 这个工具可以判断Kubernetes是否得到了最优部署
+4. kubeaudit, 一个针对常见安全控制，对Kubernetes Deplyment 进行安全审计的工具
+5. Kubescape, 一个检查Kubernetes是否按照主要的合规框架部署的工具
+6. kube-hunter, 发现并利用漏洞的渗透测试工具
+7. Sysdig Falco, Kubernetes集群风险和威胁检测的运行时安全解决方案
+
+
 [validkube](https://github.com/komodorio/validkube)
 
 [为什么 RBAC 不足以保障 Kubernetes 的安全？](https://zhuanlan.zhihu.com/p/339078684)
