@@ -30,3 +30,11 @@ import Source from '!!raw-loader!./kubesphere.yaml';
 
 
 "　　"这个要替换成空格
+
+
+添加ico
+- https://www.zhangxinxu.com/sp/svgo/
+- https://www.iconfinder.com/
+国际化命令
+- `npm run docusaurus write-translations`  
+  默认情况下，文件会被写入 `website/i18n/<defaultLocale>/...`。

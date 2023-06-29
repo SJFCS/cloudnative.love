@@ -1,5 +1,5 @@
 ---
-title: Redis
+title: Redis✨
 ---
 >注：这里使用 [bitnami/redis](https://hub.docker.com/r/bitnami/redis/) 而不是 docker 官方的 redis 镜像。因为 bitnami/redis 将很多参数封装成了环境变量，使用更方便。
 

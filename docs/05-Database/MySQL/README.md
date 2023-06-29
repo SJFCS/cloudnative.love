@@ -1,5 +1,5 @@
 ---
-title: MySQL
+title: MySQL✨
 ---
 - [Vitess](https://github.com/vitessio/vitess)
 - https://mariadb.com/kb/en/mariadb-maxscale-24-maxadmin-admin-interface/

@@ -21,7 +21,7 @@ sidebar_position: 0
 ## 本站技术栈
 
 - 构建工具迭代记录： hexo --> hugo  --> docusaurus 
-- 托管服务商迭代记录： Github Pages --> Vercel 
+- 托管服务商迭代记录： Github Pages --> Vercel + cloudflare
 - 集成 [umami](https://umami.is/) 统计访客记录，利用 [supabase](https://supabase.com/) 提供的 postgresql 作为后端存储
 - 集成 [Google Analytics](https://analytics.google.com/) 数据统计服务
 - 本站字体

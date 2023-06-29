@@ -1,3 +1,4 @@
+# Linux Logs
 /var/log/syslog：记录系统级别的事件和错误，如启动和关闭、进程启动和停止、内核消息等等。
 
 /var/log/auth.log：记录系统身份验证和授权事件，如用户登录、sudo操作、SSH连接等等。

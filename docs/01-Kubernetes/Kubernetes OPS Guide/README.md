@@ -1,5 +1,5 @@
 ---
-title: Kubernetes OPS Guide
+title: Kubernetes OPS Guide✨
 ---
   - udemy-CKS   https://www.udemy.com/course/certified-kubernetes-security-specialist/
   - udemy-CKA   https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/

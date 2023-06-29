@@ -1,7 +1,7 @@
 ---
-title: Nginx
+title: Nginx✨
 sidebar_position: 1
-tags: [Service Proxy & Ingress Gateway,Nginx]
+tags: [Proxy,Nginx]
 ---
 - [Nginx](https://github.com/nginx/nginx)
 - [nginx 安全公告](https://nginx.org/en/security_advisories.html)

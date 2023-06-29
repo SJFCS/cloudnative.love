@@ -1,5 +1,5 @@
 ---
-title: Terraform
+title: Terraform✨
 tags: [Infrastructure as Code & Automation,HashiCorp,Terraform]
 ---
 # [Terraform](https://github.com/hashicorp/terraform) - 基础设施配置化

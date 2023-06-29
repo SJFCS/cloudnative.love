@@ -1,5 +1,5 @@
 ---
-title: Vagrant
+title: Vagrant📝
 tags: [Infrastructure as Code & Automation,HashiCorp,Vagrant]
 ---
 

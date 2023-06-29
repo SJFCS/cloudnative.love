@@ -1,6 +1,6 @@
 ---
-title: Ansible
-tags: [Infrastructure as Code & Automation,Ansible]
+title: Ansible✨
+tags: [Infrastructure as Code,Ansible]
 ---
 
 import DocCardList from '@theme/DocCardList';

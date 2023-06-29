@@ -30,5 +30,33 @@
   "sidebar.defaultSidebar.category.中英等宽字体": {
     "message": "中英等宽字体",
     "description": "The label for category 中英等宽字体 in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Arch 食用指南": {
+    "message": "Arch 食用指南",
+    "description": "The label for category Arch 食用指南 in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Package Manager": {
+    "message": "Package Manager",
+    "description": "The label for category Package Manager in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Yum": {
+    "message": "Yum",
+    "description": "The label for category Yum in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Terminal": {
+    "message": "Terminal",
+    "description": "The label for category Terminal in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.Tmux & Screen": {
+    "message": "Tmux & Screen",
+    "description": "The label for category Tmux & Screen in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.README": {
+    "message": "README",
+    "description": "The label for category README in sidebar defaultSidebar"
+  },
+  "sidebar.defaultSidebar.category.安装初始化": {
+    "message": "安装初始化",
+    "description": "The label for category 安装初始化 in sidebar defaultSidebar"
   }
 }

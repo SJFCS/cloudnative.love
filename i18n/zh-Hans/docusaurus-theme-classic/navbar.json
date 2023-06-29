@@ -58,5 +58,9 @@
   "logo.alt": {
     "message": "CloudNative.love Logo",
     "description": "The alt text of navbar logo"
+  },
+  "item.label.Github Insight": {
+    "message": "Github 洞察看板",
+    "description": "Navbar item with label Github Insight"
   }
 }

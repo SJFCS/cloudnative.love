@@ -1,5 +1,5 @@
 ---
-title: VPN
+title: VPN📝
 ---
 https://www.amazon.com/dp/B0BP955T3M?linkCode=ogi
 

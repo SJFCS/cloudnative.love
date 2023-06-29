@@ -1,5 +1,5 @@
 ---
-title: Tekton
+title: Tekton📝
 ---
 Tekton Pipeline 是一个云原生流水线项目，通过 Kubernetes CRDs 来定义和运行流水线。
 
@@ -9,7 +9,6 @@ Tekton 和 Drone 更类似，它是一个基于源代码的 CI/CD 工具。
 而 Argo 是一个通用的**并行任务编排**工具，只是它的功能恰好也很契合 CI/CD 场景。
 
 >区别于 Argo 这种基于 Kubernetes 的 Workflow 工具， Tekton 在工作流控制上的支持是比较弱的。一些复杂的场景比如循环，递归等都是不支持的。更不用说 Argo 在高并发和大集群调度下的性能优化。这和 Tekton 的定位有关， Tekton 定位于实现 CICD 的框架，对于 CICD 不需要过于复杂的流程控制。大部分的研发流程可以被若干个最佳实践来覆盖。而这些最佳实践应该也必须可以在不同的组织间共享，为此 Tekton 设计了 PipelineResource 的概念。 PipelineResource 是 Task 间交互的接口，也是跨平台跨组织共享重用的组件，在 PipelineResource 上还可以有很多想象空间。
-
 国内京东、字节跳动等大厂都有将 Tekton 应用在自己的流水线中。
 
 ## 简单说明

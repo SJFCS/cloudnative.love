@@ -1,4 +1,4 @@
-# Loki
+# Loki✨
 
 [loki](https://github.com/grafana/loki/)
 

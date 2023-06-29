@@ -237,6 +237,12 @@ const config = {
                 className: "header-monitor-link",
                 "aria-label": "monitor",
               },
+              {
+                label: 'Github Insight',
+                to: 'https://ossinsight.cloudnative.love/',
+                className: "header-insight-link",
+                "aria-label": "insight",
+              },              
             ]
           },
           {

@@ -4,8 +4,9 @@
 
 [signoz](https://signoz.io/)
 
-Zipkin、Pinpoint、SkyWalking和CAT
+Zipkin、Pinpoint、SkyWalking和CAT 
 
+https://github.com/apache/skywalking/issues/7374#issuecomment-886676319 
 
 ```
 OTEL_EXPORTER_OTLP_ENDPOINT: http://signoz-otel-collector.signoz.svc.cluster.local:4317

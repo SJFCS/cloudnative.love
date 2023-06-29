@@ -398,5 +398,461 @@
   "sidebar.tutorialSidebar.category.Golang": {
     "message": "Golang",
     "description": "The label for category Golang in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Podman": {
+    "message": "Podman",
+    "description": "The label for category Podman in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SouceCodeAnalysis": {
+    "message": "SouceCodeAnalysis",
+    "description": "The label for category SouceCodeAnalysis in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kubernetes OPS Guide✨": {
+    "message": "Kubernetes OPS Guide✨",
+    "description": "The label for category Kubernetes OPS Guide✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.基础知识": {
+    "message": "基础知识",
+    "description": "The label for category 基础知识 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kubernetes-生产高可用部署": {
+    "message": "Kubernetes-生产高可用部署",
+    "description": "The label for category Kubernetes-生产高可用部署 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.环境初始化": {
+    "message": "环境初始化",
+    "description": "The label for category 环境初始化 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.HA方案介绍": {
+    "message": "HA方案介绍",
+    "description": "The label for category HA方案介绍 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.容器运行时": {
+    "message": "容器运行时",
+    "description": "The label for category 容器运行时 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.部署方式": {
+    "message": "部署方式",
+    "description": "The label for category 部署方式 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.kubeadm高可用部署": {
+    "message": "kubeadm高可用部署",
+    "description": "The label for category kubeadm高可用部署 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kubespray高可用部署": {
+    "message": "Kubespray高可用部署",
+    "description": "The label for category Kubespray高可用部署 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.集群管理": {
+    "message": "集群管理",
+    "description": "The label for category 集群管理 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.实践指南": {
+    "message": "实践指南",
+    "description": "The label for category 实践指南 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Multi Cloud": {
+    "message": "Multi Cloud",
+    "description": "The label for category Multi Cloud in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.virtual-kubelet": {
+    "message": "virtual-kubelet",
+    "description": "The label for category virtual-kubelet in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kubernetes 网络插件": {
+    "message": "Kubernetes 网络插件",
+    "description": "The label for category Kubernetes 网络插件 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.网络插件部署": {
+    "message": "网络插件部署",
+    "description": "The label for category 网络插件部署 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.网络插件CNI": {
+    "message": "网络插件CNI",
+    "description": "The label for category 网络插件CNI in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Troubleshooting": {
+    "message": "Troubleshooting",
+    "description": "The label for category Troubleshooting in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kubernetes The Hard Way✨": {
+    "message": "Kubernetes The Hard Way✨",
+    "description": "The label for category Kubernetes The Hard Way✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux Guide": {
+    "message": "Linux Guide",
+    "description": "The label for category Linux Guide in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux Network✨": {
+    "message": "Linux Network✨",
+    "description": "The label for category Linux Network✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.网卡配置": {
+    "message": "网卡配置",
+    "description": "The label for category 网卡配置 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.路由配置": {
+    "message": "路由配置",
+    "description": "The label for category 路由配置 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.网络管理器": {
+    "message": "网络管理器",
+    "description": "The label for category 网络管理器 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.虚拟网络设备": {
+    "message": "虚拟网络设备",
+    "description": "The label for category 虚拟网络设备 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Bridge": {
+    "message": "Bridge",
+    "description": "The label for category Bridge in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Open vSwitch": {
+    "message": "Open vSwitch",
+    "description": "The label for category Open vSwitch in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Netfilter": {
+    "message": "Netfilter",
+    "description": "The label for category Netfilter in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.firewalld iptables nftables netfilter ufw": {
+    "message": "firewalld iptables nftables netfilter ufw",
+    "description": "The label for category firewalld iptables nftables netfilter ufw in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux 文件系统✨": {
+    "message": "Linux 文件系统✨",
+    "description": "The label for category Linux 文件系统✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.文件系统与管理": {
+    "message": "文件系统与管理",
+    "description": "The label for category 文件系统与管理 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.EXT": {
+    "message": "EXT",
+    "description": "The label for category EXT in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.BTRFS": {
+    "message": "BTRFS",
+    "description": "The label for category BTRFS in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.挂载方式": {
+    "message": "挂载方式",
+    "description": "The label for category 挂载方式 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.手动挂载": {
+    "message": "手动挂载",
+    "description": "The label for category 手动挂载 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.自动挂载": {
+    "message": "自动挂载",
+    "description": "The label for category 自动挂载 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.存储管理技术": {
+    "message": "存储管理技术",
+    "description": "The label for category 存储管理技术 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.LVM": {
+    "message": "LVM",
+    "description": "The label for category LVM in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.DRBD": {
+    "message": "DRBD",
+    "description": "The label for category DRBD in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.排错、调优和测试": {
+    "message": "排错、调优和测试",
+    "description": "The label for category 排错、调优和测试 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux 服务配置": {
+    "message": "Linux 服务配置",
+    "description": "The label for category Linux 服务配置 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Time Management": {
+    "message": "Time Management",
+    "description": "The label for category Time Management in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Bind": {
+    "message": "Bind",
+    "description": "The label for category Bind in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ISC DHCP": {
+    "message": "ISC DHCP",
+    "description": "The label for category ISC DHCP in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.VSFTP": {
+    "message": "VSFTP",
+    "description": "The label for category VSFTP in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Scheduled Task": {
+    "message": "Scheduled Task",
+    "description": "The label for category Scheduled Task in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.HA Stack": {
+    "message": "HA Stack",
+    "description": "The label for category HA Stack in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux 进程管理": {
+    "message": "Linux 进程管理",
+    "description": "The label for category Linux 进程管理 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Systemd": {
+    "message": "Systemd",
+    "description": "The label for category Systemd in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux 内核调优": {
+    "message": "Linux 内核调优",
+    "description": "The label for category Linux 内核调优 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.启动流程": {
+    "message": "启动流程",
+    "description": "The label for category 启动流程 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.内核调优": {
+    "message": "内核调优",
+    "description": "The label for category 内核调优 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.内核管理": {
+    "message": "内核管理",
+    "description": "The label for category 内核管理 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.访问控制和授权": {
+    "message": "访问控制和授权",
+    "description": "The label for category 访问控制和授权 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SSH": {
+    "message": "SSH",
+    "description": "The label for category SSH in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.文件权限": {
+    "message": "文件权限",
+    "description": "The label for category 文件权限 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.安全增强技术": {
+    "message": "安全增强技术",
+    "description": "The label for category 安全增强技术 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.攻击和防御": {
+    "message": "攻击和防御",
+    "description": "The label for category 攻击和防御 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.POSIX": {
+    "message": "POSIX",
+    "description": "The label for category POSIX in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.shell中的扩展(Expansions)": {
+    "message": "shell中的扩展(Expansions)",
+    "description": "The label for category shell中的扩展(Expansions) in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.变量和数组": {
+    "message": "变量和数组",
+    "description": "The label for category 变量和数组 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.流程控制": {
+    "message": "流程控制",
+    "description": "The label for category 流程控制 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.2.1-条件判断": {
+    "message": "2.1-条件判断",
+    "description": "The label for category 2.1-条件判断 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.2.2-循环语句": {
+    "message": "2.2-循环语句",
+    "description": "The label for category 2.2-循环语句 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.函数和模块化编程": {
+    "message": "函数和模块化编程",
+    "description": "The label for category 函数和模块化编程 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.文本处理": {
+    "message": "文本处理",
+    "description": "The label for category 文本处理 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.3.1-Grep": {
+    "message": "3.1-Grep",
+    "description": "The label for category 3.1-Grep in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.3.2-Sed": {
+    "message": "3.2-Sed",
+    "description": "The label for category 3.2-Sed in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Sed常用命令": {
+    "message": "Sed常用命令",
+    "description": "The label for category Sed常用命令 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.3.3-Awk": {
+    "message": "3.3-Awk",
+    "description": "The label for category 3.3-Awk in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.3.4-Jq": {
+    "message": "3.4-Jq",
+    "description": "The label for category 3.4-Jq in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.3.5-XMLStarlet": {
+    "message": "3.5-XMLStarlet",
+    "description": "The label for category 3.5-XMLStarlet in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.调试技巧": {
+    "message": "调试技巧",
+    "description": "The label for category 调试技巧 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.实践案例": {
+    "message": "实践案例",
+    "description": "The label for category 实践案例 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Integration & Delivery": {
+    "message": "Integration & Delivery",
+    "description": "The label for category Integration & Delivery in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Application Definition📝": {
+    "message": "Application Definition📝",
+    "description": "The label for category Application Definition📝 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Helm📝": {
+    "message": "Helm📝",
+    "description": "The label for category Helm📝 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Image Build📝": {
+    "message": "Image Build📝",
+    "description": "The label for category Image Build📝 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Pipeline Orchestration & Workflow": {
+    "message": "Pipeline Orchestration & Workflow",
+    "description": "The label for category Pipeline Orchestration & Workflow in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Argo📝": {
+    "message": "Argo📝",
+    "description": "The label for category Argo📝 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Proxy, Gateway & Mesh": {
+    "message": "Proxy, Gateway & Mesh",
+    "description": "The label for category Proxy, Gateway & Mesh in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Gateway": {
+    "message": "Gateway",
+    "description": "The label for category Gateway in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Proxy": {
+    "message": "Proxy",
+    "description": "The label for category Proxy in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Nginx✨": {
+    "message": "Nginx✨",
+    "description": "The label for category Nginx✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Service Mesh": {
+    "message": "Service Mesh",
+    "description": "The label for category Service Mesh in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Istio✨": {
+    "message": "Istio✨",
+    "description": "The label for category Istio✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.MongoDB📝": {
+    "message": "MongoDB📝",
+    "description": "The label for category MongoDB📝 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.MySQL✨": {
+    "message": "MySQL✨",
+    "description": "The label for category MySQL✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.HA高可用": {
+    "message": "HA高可用",
+    "description": "The label for category HA高可用 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ops": {
+    "message": "ops",
+    "description": "The label for category ops in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.优化": {
+    "message": "优化",
+    "description": "The label for category 优化 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.排错": {
+    "message": "排错",
+    "description": "The label for category 排错 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Redis✨": {
+    "message": "Redis✨",
+    "description": "The label for category Redis✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.集群": {
+    "message": "集群",
+    "description": "The label for category 集群 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux Logs": {
+    "message": "Linux Logs",
+    "description": "The label for category Linux Logs in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Promethuse✨": {
+    "message": "Promethuse✨",
+    "description": "The label for category Promethuse✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Infrastructure as Code": {
+    "message": "Infrastructure as Code",
+    "description": "The label for category Infrastructure as Code in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Ansible✨": {
+    "message": "Ansible✨",
+    "description": "The label for category Ansible✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.快速开始": {
+    "message": "快速开始",
+    "description": "The label for category 快速开始 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.常用模块": {
+    "message": "常用模块",
+    "description": "The label for category 常用模块 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Playbook": {
+    "message": "Playbook",
+    "description": "The label for category Playbook in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.08-最佳实践": {
+    "message": "08-最佳实践",
+    "description": "The label for category 08-最佳实践 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.更多用法": {
+    "message": "更多用法",
+    "description": "The label for category 更多用法 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Terraform✨": {
+    "message": "Terraform✨",
+    "description": "The label for category Terraform✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Vagrant📝": {
+    "message": "Vagrant📝",
+    "description": "The label for category Vagrant📝 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.存储协议": {
+    "message": "存储协议",
+    "description": "The label for category 存储协议 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.VPN📝": {
+    "message": "VPN📝",
+    "description": "The label for category VPN📝 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.零信任": {
+    "message": "零信任",
+    "description": "The label for category 零信任 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Public Key Infrastructure (PKI)📝": {
+    "message": "Public Key Infrastructure (PKI)📝",
+    "description": "The label for category Public Key Infrastructure (PKI)📝 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.tools": {
+    "message": "tools",
+    "description": "The label for category tools in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.原理": {
+    "message": "原理",
+    "description": "The label for category 原理 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kyverno": {
+    "message": "Kyverno",
+    "description": "The label for category Kyverno in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.身份验证和授权协议": {
+    "message": "身份验证和授权协议",
+    "description": "The label for category 身份验证和授权协议 in sidebar tutorialSidebar"
   }
 }

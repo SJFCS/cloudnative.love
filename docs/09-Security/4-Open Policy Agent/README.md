@@ -1,5 +1,5 @@
 ---
-title: Open Policy Agent - 安全策略即代码
+title: Open Policy Agent - 安全策略即代码📝
 tags: [Security,Open Policy Agent]
 ---
 

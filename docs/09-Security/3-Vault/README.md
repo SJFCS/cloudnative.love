@@ -1,5 +1,5 @@
 ---
-title: Vault
+title: Vault📝
 tags: [Security,Vault]
 ---
 # [Vault](https://github.com/hashicorp/vault)
