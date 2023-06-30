@@ -2,14 +2,6 @@
 title: DNS
 sidebar_position: 1
 ---
-
-
-
-dns结合dhcp正确配置fqdn
-
-
-
-
 DNS(Domain Name System, 域名系统)用于正向查找（Forward Lookup）查找域名对应的IP地址和反向查找（Reverse Lookup）查找 IP 地址对应的域名。
 
 :::tip
@@ -90,6 +82,22 @@ DNS(Domain Name System, 域名系统)用于正向查找（Forward Lookup）查�
   ```
   IN  NS   dns.twnic.net.tw.
   ```
+  :::tip
+  NS记录，即Name Server Record，用于指定域名应该由哪些DNS服务器解析。如果要将子域名交给其他DNS服务商解析，则需要在父域名所在DNS服务器上添加NS记录，将子域名的解析权交给其他DNS服务器。
+  
+  例如，如果要将子域名 http://sub.example.com 交给DNS服务商A来解析，则需要在父域名 http://example.com 的DNS服务器上添加一条NS记录，指定DNS服务商A的Nameserver地址。这样在解析http://sub.example.com时，DNS服务器就会查询DNS服务商A的Nameserver记录来获取解析结果。
+  
+  NS记录通常被用于域名的分级管理，可以在父域名上设置NS记录，将子域名的解析权交给不同的DNS服务商，实现域名解析的分布式管理。
+
+  要设置NS记录，需要在域名注册商或DNS解析服务商提供的控制面板中进行设置。具体的步骤如下：
+  - 主机记录（Host）：如果要将整个域名交给其他DNS服务商解析，则可以填写“@”，表示根域名。如果要将子域名交给其他DNS服务商解析，则需要填写子域名的名称，例如sub.example.com。
+  - 记录类型（Record Type）：选择NS记录；
+  - 记录值（Value）：填写DNS服务商提供的Nameserver地址，通常是以“ns”开头的域名或IP地址；
+  - TTL：指定记录的生存时间，一般默认即可。
+  点击确认或保存设置，等待DNS服务器同步更新NS记录。
+
+  注意，如果要将整个域名交给其他DNS服务商解析，则需要添加多条NS记录，每个记录对应一个不同的DNS服务商提供的Nameserver地址。这样可以实现域名解析的备份和容错。
+  :::
 - A  
   address，将 DNS 网域名称对应到 IPv4 的 32 位元位址。
   ```
