@@ -270,3 +270,27 @@ Unix 命令都带有参数，有些命令可以接受"标准输入"（stdin）�
 - [8 Practical Examples of Linux Xargs Command for Beginners](https://www.howtoforge.com/tutorial/linux-xargs-command/), Himanshu Arora
 
 原文链接：https://www.ruanyifeng.com/blog/2019/08/xargs-tutorial.html
+
+
+
+```
+ $ find . -name "*.go" | xargs wc -l {} 0
+在命令中的 {} 是一个特殊的占位符，用于表示 xargs 命令传递的参数，这里用于表示文件路径。
+需要指出的是，这个命令可能存在几个问题：
+
+如果文件路径中包含空格等特殊字符，可能会导致错误。可以使用 find -print0 和 xargs -0 命令组合来解决这个问题。
+对包含大量文件的目录进行查找和处理可能会消耗大量的系统资源和时间。
+没有进行有效的错误处理和提示，可能会导致不可预知的结果。
+为了解决上述提到的三个问题，可以采用以下修改：
+
+使用 find -print0 和 xargs -0 命令组合来解决文件路径中包含特殊字符的问题。修改后的命令如下：
+
+find . -name "*.go" -print0 | xargs -0 wc -l
+对包含大量文件的目录进行查找和处理时，可以使用 -maxdepth 参数限制查找的深度，或者使用 find -type f 仅查找文件而不包括目录。例如，以下命令限制了查找的深度为 2：
+
+find . -maxdepth 2 -name "*.go" -print0 | xargs -0 wc -l
+添加一些错误处理和提示，例如在 xargs 命令中使用 -r 参数以避免在没有传递参数时执行 wc 命令。修改后的命令如下：
+
+find . -name "*.go" -print0 | xargs -0 -r wc -l
+
+```

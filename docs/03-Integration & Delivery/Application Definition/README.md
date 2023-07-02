@@ -9,4 +9,5 @@ https://cloud.google.com/anthos-config-management/docs/how-to/use-repo-kustomize
 2. jsonnet: 基于专有 DSL jsonnet 的配置。
 3. pulumi/cdk8s: 基于通用编程语言 python/go/typescript/c# 的配置。
 4. kustomize: overlay 模式的配置，把变化的配置抽出来做成补丁 patch，剩下的配置就可以复用了。
+5. [kcl](https://kcl-lang.io/) 一门面向云原生领域配置策略语言，详细资料可参考
 
