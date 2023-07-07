@@ -1,5 +1,5 @@
 ---
-title: SSH
+title: OpenSSH✨
 ---
 - https://huataihuang.gitbooks.io/cloud-atlas/content/service/ssh/ssh_use_specific_key_and_ssh-keygen.html
 - https://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html

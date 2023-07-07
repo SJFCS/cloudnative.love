@@ -1,1 +1,0 @@
-https://next-terminal.typesafe.cn/
