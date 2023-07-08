@@ -71,35 +71,7 @@ sshpass 存在以下安全问题：
 <summary>SSH 安全配置选项</summary>
 
 :::info
-大量的远程主机都使用同一个密码提供 ssh 远程登录是很不安全的，一般都建议所有主机都只开启私钥登录，禁用密码登录。相关配置在主机的 `/etc/ssh/sshd_config` 中。可使用如下脚本进行设置。
-
-```bash
-#!/bin/bash
-#### 可能会重复，需要仔细查看改完的文件去重
-# 根据你的需求设置 SSH 配置变量
-
-PermitRootLogin=no         # 是否允许 root 用户通过 SSH 登录系统。
-# RSAAuthentication=yes      # 允许 RSA 秘钥认证
-PubkeyAuthentication=yes   # 是否允许使用密钥进行 SSH 登录。
-PasswordAuthentication=no  # 是否允许使用密码进行 SSH 登录。
-PermitEmptyPasswords=no    # 是否允许用户使用空密码登录系统。
-X11Forwarding=no           # 是否允许启用 X11 转发功能，开启后可在 SSH 会话中运行图形界面程序。
-
-# 例子：sed --in-place=.bak -r 's/^#?(PermitRootLogin|PermitEmptyPasswords|PasswordAuthentication|X11Forwarding) yes/\1 no/' /etc/ssh/sshd_config
-sudo cat /etc/ssh/sshd_config | grep -e "PubkeyAuthentication" -e "PermitRootLogin" -e "PasswordAuthentication" -e "PermitEmptyPasswords" -e "X11Forwarding"
-# 编辑 sshd_config 文件
-sudo sed -i.bak -r \
-  -e "s/^(#)?PermitRootLogin\s+(yes|no)/PermitRootLogin $PermitRootLogin/" \
-  -e "s/^(#)?PubkeyAuthentication\s+(yes|no)/PubkeyAuthentication $PubkeyAuthentication/" \
-  -e "s/^(#)?PasswordAuthentication\s+(yes|no)/PasswordAuthentication $PasswordAuthentication/" \
-  -e "s/^(#)?PermitEmptyPasswords\s+(yes|no)/PermitEmptyPasswords $PermitEmptyPasswords/" \
-  -e "s/^(#)?X11Forwarding\s+(yes|no)/X11Forwarding $X11Forwarding/" \
-  /etc/ssh/sshd_config
-
-sudo cat /etc/ssh/sshd_config | grep -e "PubkeyAuthentication" -e "PermitRootLogin" -e "PasswordAuthentication" -e "PermitEmptyPasswords" -e "X11Forwarding"
-```
-
-然后手动重启 sshd 服务 `systemctl restart sshd`
+大量的远程主机都使用同一个密码提供 ssh 远程登录是很不安全的，一般都建议所有主机都只开启私钥登录，禁用密码登录。相关配置在主机的 `/etc/ssh/sshd_config` 中。
 :::
 </details>
 

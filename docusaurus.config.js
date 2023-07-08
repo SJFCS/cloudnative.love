@@ -238,11 +238,17 @@ const config = {
                 "aria-label": "monitor",
               },
               {
-                label: 'Github Insight',
+                label: 'GitHub Insight',
                 to: 'https://ossinsight.cloudnative.love/',
                 className: "header-insight-link",
                 "aria-label": "insight",
-              },              
+              },
+              {
+                label: 'ChatGPT',
+                to: 'https://Chat.cloudnative.love/',
+                className: "header-chat-link",
+                "aria-label": "chat",
+              }
             ]
           },
           {

@@ -1,5 +1,6 @@
-[](https://www.digitalocean.com/community/tutorials/how-to-set-up-multi-factor-authentication-for-ssh-on-ubuntu-20-04)
-
+https://www.digitalocean.com/community/tutorials/how-to-set-up-multi-factor-authentication-for-ssh-on-ubuntu-20-04
+https://wiki.archlinux.org/title/Google_Authenticator
+https://systemoverlord.com/2018/03/03/openssh-two-factor-authentication-but-not-service-accounts.html
 
 多重身份验证(MFA) 或双因素身份验证(2FA) 需要多个因素才能进行身份验证或登录。
 例如密码或安全问题、身份验证器应用程序或安全令牌、生物认证你的指纹或声音
@@ -80,7 +81,7 @@ Do you want to enable rate-limiting (y/n) y
 ```
 
 :::tip
-注意：完成此设置后，如果您想备份密钥，可以将文件复制~/.google-authenticator到受信任的位置。从那里，您可以将其部署到其他系统上或在备份后重新部署。
+注意：完成此设置后，如果您想备份密钥，可以将文件复制~/.google_authenticator到受信任的位置。从那里，您可以将其部署到其他系统上或在备份后重新部署。
 :::
 
 现在 Google 的 PAM 已安装并配置完毕，下一步是配置 SSH 以使用您的 TOTP 密钥。我们需要告诉 SSH 有关 PAM 的信息，然后配置 SSH 以使用它。
@@ -118,7 +119,7 @@ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
 sudo vim /etc/ssh/sshd_config
 ```
 
-查找ChallengeResponseAuthentication并将其值设置为yes：
+查找 ChallengeResponseAuthentication 并将其值设置为yes：
 
 ```
 . . .
@@ -149,14 +150,14 @@ sudo systemctl restart sshd.service
 
 在文件底部添加以下行。这告诉 SSH 需要哪些身份验证方法。我们告诉 SSH 用户需要 SSH 密钥以及密码或验证码（或三者兼有）：
 ```
-sudo nano /etc/ssh/sshd_config
+sudo vim /etc/ssh/sshd_config
 AuthenticationMethods publickey,password publickey,keyboard-interactive
 ```
 保存并关闭文件。
 
 接下来，再次打开PAMsshd配置文件：
 ```
-sudo nano /etc/pam.d/sshd
+sudo vim /etc/pam.d/sshd
 ```
 找到该行并通过添加一个字符作为该行的第一个字符@include common-auth来注释掉它。#这告诉 PAM 不要提示输入密码：
 
@@ -338,3 +339,43 @@ google-authenticator -t -d -f -r 3 -R 30 -w 3
 在本教程中，您跨两个通道（您的计算机 + 您的手机）向服务器添加了两个因素（SSH 密钥 + MFA 令牌）。您使外部代理很难通过 SSH 暴力进入您的计算机，并大大提高了您计算机的安全性。
 
 请记住，如果您正在寻求有关保护 SSH 连接安全的进一步指导，请查看有关强化[ OpenSSH和强化](https://www.digitalocean.com/community/tutorials/how-to-harden-openssh-on-ubuntu-20-04) [OpenSSH 客户端](https://www.digitalocean.com/community/tutorials/how-to-harden-openssh-client-on-ubuntu-20-04)的教程。
+
+
+
+
+
+可使用如下脚本进行设置。
+
+```bash
+#!/bin/bash
+#### 可能会重复，需要仔细查看改完的文件去重
+# 根据你的需求设置 SSH 配置变量
+
+PermitRootLogin=no         # 是否允许 root 用户通过 SSH 登录系统。
+# RSAAuthentication=yes      # 允许 RSA 秘钥认证
+PubkeyAuthentication=yes   # 是否允许使用密钥进行 SSH 登录。
+PasswordAuthentication=no  # 是否允许使用密码进行 SSH 登录。
+PermitEmptyPasswords=no    # 是否允许用户使用空密码登录系统。
+X11Forwarding=no           # 是否允许启用 X11 转发功能，开启后可在 SSH 会话中运行图形界面程序。
+
+# 例子：sed --in-place=.bak -r 's/^#?(PermitRootLogin|PermitEmptyPasswords|PasswordAuthentication|X11Forwarding) yes/\1 no/' /etc/ssh/sshd_config
+sudo cat /etc/ssh/sshd_config | grep -e "PubkeyAuthentication" -e "PermitRootLogin" -e "PasswordAuthentication" -e "PermitEmptyPasswords" -e "X11Forwarding"
+# 编辑 sshd_config 文件
+sudo sed -i.bak -r \
+  -e "s/^(#)?PermitRootLogin\s+(yes|no)/PermitRootLogin $PermitRootLogin/" \
+  -e "s/^(#)?PubkeyAuthentication\s+(yes|no)/PubkeyAuthentication $PubkeyAuthentication/" \
+  -e "s/^(#)?PasswordAuthentication\s+(yes|no)/PasswordAuthentication $PasswordAuthentication/" \
+  -e "s/^(#)?PermitEmptyPasswords\s+(yes|no)/PermitEmptyPasswords $PermitEmptyPasswords/" \
+  -e "s/^(#)?X11Forwarding\s+(yes|no)/X11Forwarding $X11Forwarding/" \
+  /etc/ssh/sshd_config
+
+sudo cat /etc/ssh/sshd_config | grep -e "PubkeyAuthentication" -e "PermitRootLogin" -e "PasswordAuthentication" -e "PermitEmptyPasswords" -e "X11Forwarding"
+```
+
+然后手动重启 sshd 服务 `systemctl restart sshd` 
+
+
+
+https://www.v2ex.com/t/928798
+
+https://unix.stackexchange.com/questions/727492/passwordauthentication-no-but-i-can-still-login-by-password?ref=vnxi.net
