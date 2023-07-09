@@ -38,4 +38,4 @@ tags: [Infrastructure as Code]
 - [如何在 Kubernetes 上使用 Crossplane 构建您的云基础设施](https://www.padok.fr/en/blog/kubernetes-infrastructure-crossplane)
 - [crossplane vs terraform](https://blog.crossplane.io/crossplane-vs-terraform/)
 - [Eating Your Vegetables: How to Manage 2.5 Million Lines of YAML - Daniel Thomson & Jesse Suen](https://www.youtube.com/watch?v=BGiCRyUDIPg)
-
+- https://www.digitalocean.com/community/tutorial-series/getting-started-with-configuration-management

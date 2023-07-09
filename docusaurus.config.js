@@ -244,8 +244,8 @@ const config = {
                 "aria-label": "insight",
               },
               {
-                label: 'ChatGPT',
-                to: 'https://Chat.cloudnative.love/',
+                label: 'ChatGPT Next',
+                to: 'https://chat.cloudnative.love/',
                 className: "header-chat-link",
                 "aria-label": "chat",
               }
