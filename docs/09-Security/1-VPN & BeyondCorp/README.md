@@ -93,3 +93,123 @@ https://github.com/novnc/noVNC
 
 
 - https://vyos.io/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```bash
+Add the official Golang PPA repository:
+sudo add-apt-repository ppa:longsleep/golang-backports
+Update the package list to include the newly added repository:
+sudo apt update
+Install the Go package:
+sudo apt install golang-go
+Verify that Go has been installed successfully by running the following command:
+go version
+
+
+
+
+go install tailscale.com/cmd/derper@main
+cd $HOME/go/bin 
+export PATH=$PATH:/root/go/bin
+
+
+curl -fsSL https://tailscale.com/install.sh | sh
+
+nohup sudo /home/ubuntu/go/bin/derper --hostname=derp.cloudnative.love --verify-clients &
+
+vim /etc/systemd/system/derp.service
+[Unit]
+Description=Tailscale DERP Server
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+User=root
+ExecStart=/root/go/bin/derper -c=/root/derper.conf -a ":<port>" -hostname "<domain>" --stun
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```
+
+
+
+
+{
+	"acls": [
+		// Allow all connections.
+		// Comment this section out if you want to define specific restrictions.
+		{"action": "accept", "src": ["*"], "dst": ["*:*"]},
+	],
+	"ssh": [
+		{
+			"action": "check",
+			"src":    ["autogroup:members"],
+			"dst":    ["autogroup:self"],
+			"users":  ["autogroup:nonroot", "root"],
+		},
+	],
+}
+
+  "derpMap": {
+    "OmitDefaultRegions": true,
+    "Regions": {
+      "900": {
+        "RegionID": 900,
+        "RegionCode": "myderp",
+        "Nodes": [
+          {
+            "Name": "1",
+            "RegionID": 900,
+            "HostName": "derp.cloudnative.love"
+          }
+        ]
+      }
+    }
+  }
+
+```
+tailscale netcheck
+sudo tailscale up --accept-routes=true
+
+https://github.com/HMBSbige/NatTypeTester
+
+https://github.com/adyanth/openwrt-tailscale-enabler
+
+https://github.com/hojulian/tailscale-relay
+
+NAT类型一般分为以下4种：
+1. Full Cone NAT (完全圆锥型)
+2. Restricted Cone NAT (地址限制圆锥型)
+3. Port Restricted Cone NAT (端口限制圆锥型)
+4. Symmetric NAT (对称型)
+5. https://cnblogs.com/lsgxeva/p/16464140.html
+
+
+
+https://v2ex.com/t/691842
+
+https://v2ex.com/t/691842
