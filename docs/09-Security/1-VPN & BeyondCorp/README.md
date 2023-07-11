@@ -115,26 +115,23 @@ https://github.com/novnc/noVNC
 
 
 ```bash
-Add the official Golang PPA repository:
+#Add the official Golang PPA repository:
 sudo add-apt-repository ppa:longsleep/golang-backports
-Update the package list to include the newly added repository:
+#Update the package list to include the newly added repository:
 sudo apt update
-Install the Go package:
+#Install the Go package:
 sudo apt install golang-go
-Verify that Go has been installed successfully by running the following command:
+#Verify that Go has been installed successfully by running the following command:
 go version
-
-
-
-
 go install tailscale.com/cmd/derper@main
 cd $HOME/go/bin 
-export PATH=$PATH:/root/go/bin
-
+# export PATH=$PATH:/root/go/bin
 
 curl -fsSL https://tailscale.com/install.sh | sh
 
-nohup sudo /home/ubuntu/go/bin/derper --hostname=derp.cloudnative.love --verify-clients &
+sudo tailscale up --accept-routes=true
+
+sudo nohup /home/ubuntu/go/bin/derper --hostname=derp.cloudnative.love --verify-clients &
 
 vim /etc/systemd/system/derp.service
 [Unit]
