@@ -126,8 +126,6 @@ gpg --armor --export 3AA5C34371567BD2
 将 GPG 密钥添加到您的 GitHub 帐户。
 
 
-
-
 签名你的提交。
 git commit 命令给我们提供了利用gpg来签名commit的选项： -S[]， --gpg-sign[=]， 我们可以在写提交代码的时候加上-S 来签名你的提交：
 
