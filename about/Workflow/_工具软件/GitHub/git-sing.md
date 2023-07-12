@@ -1,3 +1,11 @@
+ansible-conlse
+curl 后台下载安装包
+万象磁盘注意
+更新git签名
+检查环境 磁盘数量  /,/usr,/home,/tmp 空间
+
+
+
 可以通过在终端输入以下命令来临时阻止Linux休眠：
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
  systemctl status sleep.target
@@ -18,10 +26,25 @@ sec   rsa4096/8F38C82C4787ADF9 2022-09-23 [SC]
 uid                   [ 绝对 ] SJFCS (SongJinfeng) <song.jinfeng@outlook.com>
 uid                   [ 绝对 ] SongJinfeng (SongJinfeng) <song.jinfeng@outlook.com>
 ssb   rsa4096/AAAE48C5D4B4906B 2022-09-23 [E]
+ssb   rsa4096/AAAE48C5D4B4906B 2022-09-23 [E]
+
+
+gpgkey=`gpg --list-secret-keys --keyid-format=long |sed -n '3p |awk '{print $2}'|cut -d/ -f2`
+
+gpg_sub_key_arr=($(gpg --list-secret-keys --keyid-format=long |grep -E "^ssb" |awk '{print $2}' |cut -d/ -f2))
+
+
+for key in "${arr[@]}"
+do
+    gpg --batch --delete-secret-key --yes "$key" &>/dev/null
+done
+在这个例子中，-q 和 --yes 选项将禁用任何提示和交互，而 --batch 选项将确保在批处理模式下运行。&>/dev/null 将输出重定向到 /dev/null，以避免在脚本中出现任何输出。
+
+
 
 gpg --armor --export 
 gpg --delete-secret-key AAAE48C5D4B4906B
-gpg --delete-key  8F38C82C4787ADF9
+gpg --delete-key  $gpgkey
 
 
 
@@ -96,9 +119,6 @@ https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-pers
 
 ## list
 gpg --list-secret-keys --keyid-format LONG
-:::
-注意： Linux 上的某些 GPG 安装可能需要您使用gpg2 --list-keys --keyid-format LONG查看现​​有密钥列表。在这种情况下，您还需要gpg2通过运行来配置要使用的 Git git config --global gpg.program gpg2。
-:::
 
 gpg --armor --export 3AA5C34371567BD2
 复制您的 GPG 密钥，以 开头-----BEGIN PGP PUBLIC KEY BLOCK-----和结尾-----END PGP PUBLIC KEY BLOCK-----。
