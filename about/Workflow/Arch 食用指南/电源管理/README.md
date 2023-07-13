@@ -1,3 +1,10 @@
+可以通过在终端输入以下命令来临时阻止Linux休眠：
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+ systemctl status sleep.target
+这将禁用系统的睡眠、挂起、休眠和混合睡眠模式，直到你重新启用它们。如果要重新启用这些模式，可以使用以下命令：
+sudo systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target
+
+
   省电策略
   睡眠休眠
 
