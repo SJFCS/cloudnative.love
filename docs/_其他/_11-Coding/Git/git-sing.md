@@ -169,12 +169,12 @@ git config tag.gpgsign true
 git show --show-signature |head
 ```
 
-## 更新git签名
 
+## FAQ
+### 更新git签名
 
-非常抱歉给出了混乱的回答。您是正确的，如果您无法恢复之前的 GPG 私钥，但是希望对之前的提交重新签名，您可以使用新的 GPG 密钥对其进行签名。
+如果您无法恢复之前的 GPG 私钥，但是希望对之前的提交重新签名，您可以使用新的 GPG 密钥对其进行签名。
 
-以下是一个可以用新的 GPG 密钥对之前的提交进行重新签名的步骤：
 
 首先，确保您已经生成了新的 GPG 密钥对并将其添加到您的 GPG 密钥环中。您可以使用以下命令生成新的 GPG 密钥对：
 
@@ -191,11 +191,13 @@ git config --global user.signingkey [新的 GPG 密钥 ID]
 git filter-branch --commit-filter 'export GNUPGHOME="$(mktemp -d)"; gpg --import [新的密钥文件]; git commit-tree "$@"' -- --all
 将 [新的密钥文件] 替换为您生成的新 GPG 密钥对的密钥文件路径。
 
+
+find ~/.gnupg -name "*.gpg" -o -name "*.asc"
+
 这个命令将使用 git filter-branch 对所有分支的提交进行重新签名。它会创建临时的 GPG 密钥环，并将您的新 GPG 密钥导入其中，然后对每个提交进行重新签名。
 
 请注意，重新签名提交可能会导致 Git 历史记录的变动，因此在执行此操作之前，请确保对代码库进行适当的备份，并确保其他人了解并同步了这些更改。
-## FAQ
-
+git log --show-signature
 ### 删除已有密钥
 ```bash
 ❯ gpg --list-secret-keys --keyid-format=long
@@ -205,7 +207,6 @@ sec   rsa4096/8F38C82C4787ADF9 2022-09-23 [SC]
       3C4670BF228B86E0B9CA73438F38C82C4787ADF9
 uid                   [ 绝对 ] SJFCS (SongJinfeng) <song.jinfeng@outlook.com>
 uid                   [ 绝对 ] SongJinfeng (SongJinfeng) <song.jinfeng@outlook.com>
-ssb   rsa4096/AAAE48C5D4B4906B 2022-09-23 [E]
 ssb   rsa4096/AAAE48C5D4B4906B 2022-09-23 [E]
 
 
@@ -252,3 +253,16 @@ max-cache-ttl-ssh 86400
    git push
 现在，你的 Git 签名密码已经缓存在本地存储中，并可以在以后的提交中自动使用它们，而无需再次输入用户名和密码。请注意，由于你的密码存储在本地计算机上，因此请确保你的计算机安全，并不要与他人共享你的计算机或密码。
 
+
+### 到期如何续期
+在 GPG 中，如果您的密钥已经过期，您可以通过以下步骤为其续期：
+
+检查密钥：使用 gpg --list-keys 命令列出您的密钥，并找到需要续期的密钥的 ID。
+
+进入编辑模式：使用 gpg --edit-key [密钥ID] 命令进入密钥编辑模式。将 [密钥ID] 替换为您需要续期的密钥的实际 ID。
+
+设置有效期：在编辑模式下，使用 expire 命令设置新的有效期。根据提示输入新的有效期值，例如 1y 表示1年、30d 表示30天等等。
+
+保存更改：输入 save 命令保存更改并退出编辑模式。
+
+向信任库中重新导入密钥：使用 gpg --import [密钥文件] 命令重新导入密钥文件，并确保所有用户都在信任库中。
