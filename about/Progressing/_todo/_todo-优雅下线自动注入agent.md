@@ -134,3 +134,110 @@ public class NacosOperator extends AbstractOperator<Deployment> {
 ```
 在上面的代码中，我们使用Kubernetes Operator的抽象类AbstractOperator来实现Kubernetes集群中Deployment的监视。在handleEvent方法中，我们在Deployment被删除时从Nacos服务发现中删除实例。
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://nicks-playground.net/posts/2019-11-26-coredns-and-route53/
+
+kube-proxy  or ebpf
+
+https://github.com/zackzhangkai/showcase
+
+https://github.com/yangjava/yangjava.github.io/tree/a563e1f1a51774439c8845abff5e31dbda028875
+
+https://yangjava.github.io/2022/05/09/Prometheus%E5%91%8A%E8%AD%A6%E6%98%AF%E5%A6%82%E4%BD%95%E8%A7%A6%E5%8F%91%E7%9A%84/
+
+https://github.com/freesky-edward/blogclub/tree/master/tech/post
+
+https://iximiuz.com/en/posts/container-networking-is-simple/
+
+jvm 预热，通过服务网格灰度发布
+
+nacos 服务发现下沉解决方案，流量治理代替
+
+多集群联邦流量治理，服务发现
+
+多集群提高利用率 viture kubelet
+
+k8s 机器人 gpt
+
+gitlab 最佳实践，破除单库单流水线限制
+
+jvm 调优和远程dbug，在云环境下实现流量镜像，流量切分，debug中断不退出
+
+分析taken的启动顺序
+
+本地联调云环境，通过自定义cni拉平，还是通过网络方案，通过网络方案如何将configmap和secrate还有存储拉到本地，还是使用热更新的方式更新容器内的文件？
+
+kubelet linux 命名空间 网络 自己实现cni
+
+pod启动流程 https://icloudnative.io/posts/what-happens-when-k8s/
+
+sechdurel 调度器 授权过程，自定义审计控制器
+
+vagrant-yaml
+
+vagrant ceph 飞书 集成管理内部环境
+您可以使用Vagrant插件vagrant-triggers来在Vagrant命令执行时触发自定义脚本。在该脚本中，您可以使用飞书的API来发送消息。以下是大致步骤：
+
+```ruby
+config.trigger.after [:up] do
+  system("curl -X POST -H \"Content-Type: application/json\" -d '{\"text\":\"Virtual machine created.\"}' https://open.feishu.cn/open-apis/bot/v2/hook/xxxxx")
+end
+```
+
+Vagrant有自己的hooks，它们允许您在Vagrant命令执行的不同阶段运行自定义脚本。您可以使用这些hooks来执行各种操作，例如在虚拟机创建完成后安装软件或配置文件，或在虚拟机销毁之前清理资源。
+
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/focal64"
+
+  config.vm.provision "shell", inline: <<-SHELL
+    echo "Hello, world!"
+  SHELL
+
+  config.vm.post_up_message = "Virtual machine created."
+
+  config.vm.post_up_hook = Proc.new do |env|
+    system("curl -X POST -H \"Content-Type: application/json\" -d '{\"text\":\"Virtual machine created.\"}' https://open.feishu.cn/open-apis/bot/v2/hook/xxxxx")
+  end
+end
+```
+上述配置定义了一个post_up_hook，它会在虚拟机创建完成后运行。在这种情况下，它会发送一条消息到飞书。您可以根据需要定义其他hooks，例如pre-up、pre-provision、post-provision等。
+

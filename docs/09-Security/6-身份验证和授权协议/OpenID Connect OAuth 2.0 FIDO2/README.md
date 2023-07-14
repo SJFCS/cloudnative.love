@@ -1,4 +1,10 @@
 # OpenID Connect和OAuth 2.0
+
+https://editst.com/2022/canokey-guide/
+https://blog.huggy.moe/posts/2022/1-canokey-pigeon/
+https://phyng.com/2022/12/14/yubikey.html#fido-u2f-ssh
+https://blog.cubercsl.site/post/canokey-unboxing/
+
 Google的单点登录（SSO）系统不是基于Kerberos实现的。Google使用的是OpenID Connect（OIDC）和OAuth 2.0这两个协议来实现其单点登录系统。
 
 

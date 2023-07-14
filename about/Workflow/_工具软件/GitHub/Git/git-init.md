@@ -1,7 +1,7 @@
 https://insights.thoughtworks.cn/how-to-sign-git-commit/
 https://docs.github.com/en/authentication/managing-commit-signature-verification
 https://ulyc.github.io/2021/01/18/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%AD/
-
+https://juejin.cn/post/7055485446058426405
 ## 前言
 ## 加密算法对比
 ed25519与约 3000 位 RSA 相当
@@ -119,8 +119,8 @@ git commit 命令给我们提供了利用gpg来签名commit的选项： -S[]， 
 git commit -S507BB1CAC6286AF9 -m 'commit message'
 到这一步， git签名就已经完成了， 但是， 每个提交都要写-S 加 keyid 还是有些麻烦的， 我们通过修改git 的配置（配置哪个层级自己选择， 我选择的是全局）来让git自动签名每一个提交：
 
-$ git config --global user.signingkey 8212A0B5AE54CE94
-$ git config --global commit.gpgsign true
+git config --global user.signingkey 8212A0B5AE54CE94
+git config --global commit.gpgsign true
 
 ~/.gitconfig
 ~/.ssh/config
@@ -223,7 +223,7 @@ done
 在这个例子中，-q 和 --yes 选项将禁用任何提示和交互，而 --batch 选项将确保在批处理模式下运行。&>/dev/null 将输出重定向到 /dev/null，以避免在脚本中出现任何输出。
 gpg --armor --export 
 gpg --delete-secret-key AAAE48C5D4B4906B
-gpg --delete-key  $gpgkey
+gpg --delete-key  765F28EE5ABB452B
 
 ### 密码延迟
 配置gpg-agent的 default-cache-ttl， 让我们解密后的私钥在内存中存在的时间稍微长一些（默认10分钟）， 比如， 一天：

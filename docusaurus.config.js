@@ -28,6 +28,12 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          exclude: [
+            '**/_*.{js,jsx,ts,tsx,md,mdx}',
+            '**/_*/**',
+            '**/*.test.{js,jsx,ts,tsx}',
+            '**/__tests__/**',
+          ],
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
             'https://github.com/SJFCS/cloudnative.love/edit/main/',

@@ -7,7 +7,7 @@ OpenVPN及企业级搭建（通过ansible之类的自动化工具部署）
 - https://blog.vmko.cc/2018/02/22/2019-07/openvpn-login-auto/
 - https://www.aikaiyuan.com/12154.html
 - https://github.com/topics/openvpn-admin
-
+- https://github.com/alpha-si/vpnman
 ## IPSec
 - https://github.com/hwdsl2/setup-ipsec-vpn
 - https://github.com/trailofbits/algo

@@ -1,6 +1,6 @@
 ---
 title: Proxy, Gateway & Mesh
-sidebar_position: 4
+sidebar_position: 3
 ---
 ## Service Proxy
 

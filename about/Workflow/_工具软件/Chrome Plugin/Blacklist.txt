@@ -1,2 +1,0 @@
-# 自用规则 https://raw.githubusercontent.com/eallion/uBlacklist-subscription-compilation/main/uBlacklist.txt
-title/^.*(推荐|推广|注册网|手输网|输入|ek520|seetv|ezk888|xiaobi|3233|bb8808|liuhenvip|✔️).*/
