@@ -1,7 +1,8 @@
 - 7-8月 
   - 考完 阿里云ACE，MySQL OCP  
   - 打造自己的实验环境（包括k8s、存储、日志、loadbalancer等、），打通多集群网络（混合云）
-    - 本机带GPU作为一个节点，加入k8s 调度AI任务，再来俩桥接网络的虚拟机做集群。一些中间件直接使用docker部署
+    - **GPU虚拟化**
+    - **本机带GPU作为一个节点，加入k8s 调度AI任务，再来俩桥接网络的虚拟机做集群。一些中间件直接使用docker部署**
     - AI：绘画 代码提示 [搭建本地代码搜素](https://bloop.ai/) ai 本地文档助手，，k8s助手，sql助手
     - GPU调度
       - https://zhuanlan.zhihu.com/p/396660545
