@@ -5,13 +5,7 @@ https://github.com/jakogut/vgpu_unlock/blob/0675b563acdae8f6c5eb1a760fc0e5b853b1
 
 
 sudo pacman -S python python-pip
-
-python -m venv pythonenv/vgpu_unlock
 paru -S python-frid
-
-
-
-
 
 
 cd /opt && git clone https://github.com/mbilker/vgpu_unlock-rs.git
@@ -63,10 +57,34 @@ pacman -S dkms linux-headers mdevctl git patch rust
 
 
 
+## now
+降级内核
+curl -O  https://archive.archlinux.org/packages/l/linux/linux-6.2.13.arch1-1-x86_64.pkg.tar.zst
+pacman -U linux-6.2.13.arch1-1-x86_64.pkg.tar.zst
+卸载驱动和改动
+定制驱动补丁并安装
+安装vgpu_unlocked
+创建虚拟显卡
+分配虚拟机
+[License](https://cloud-atlas.readthedocs.io/zh_CN/latest/kvm/vgpu/install_vgpu_guest_driver.html#install-vgpu-guest-driver)
+https://cloud-atlas.readthedocs.io/zh_CN/latest/kvm/vgpu/vgpu_unlock.html#vgpu-unlock
+
+
+如果您要从本指南的先前版本升级，则应nvidia-uninstall先通过运行来卸载旧驱动程序。
+dkms remove -m nvidia -v 331.49 --all
+
+
+https://gitlab.com/polloloco/vgpu-proxmox/-/blob/master/535.54.06.patch
+
+./NVIDIA-Linux-x86_64-535.54.06-vgpu-kvm.run --apply-patch ~/vgpu-proxmox/535.54.06.patch
 
 
 
 
+./NVIDIA-Linux-x86_64-535.54.06-vgpu-kvm-custom.run --dkms
+nvidia-smi
+
+mdevctl types
 
 
 
