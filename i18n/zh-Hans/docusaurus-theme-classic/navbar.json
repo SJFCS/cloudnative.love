@@ -44,7 +44,7 @@
     "description": "Navbar item with label Progressing"
   },
   "item.label.Workflow": {
-    "message": "工作流",
+    "message": "Workflow",
     "description": "Navbar item with label Workflow"
   },
   "item.label.Archive": {

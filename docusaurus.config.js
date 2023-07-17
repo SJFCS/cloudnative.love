@@ -180,14 +180,14 @@ const config = {
         websiteid: "de542e6a-4a05-402e-bb9d-272558a5367b",
         src: "https://analytics.cloudnative.love/umami.js",
       },
-      announcementBar: {
-        id: 'support_us',
-        content:
-          'The main domain: cloudnative.love. The standby domain: songjinfeng.com',
-        backgroundColor: '#dbecfa',
-        textColor: '#4293e7',
-        isCloseable: false,
-      },
+      // announcementBar: {
+      //   id: 'support_us',
+      //   content:
+      //     'The main domain: cloudnative.love. The standby domain: songjinfeng.com',
+      //   backgroundColor: '#dbecfa',
+      //   textColor: '#4293e7',
+      //   isCloseable: false,
+      // },
       navbar: {
         title: 'CloudNative.love 💕',
         logo: {
