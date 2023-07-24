@@ -21,3 +21,12 @@ OpenID Connect是建立在OAuth 2.0之上的身份验证和授权协议。它主
 
 总体来说，Kerberos主要用于本地网络身份验证，OAuth 2.0和OpenID Connect主要用于Web身份验证和授权。  
 OAuth 2.0和OpenID Connect之间的区别在于它们的目的和角色的不同。OAuth 2.0主要用于授权访问Web资源，OpenID Connect主要用于身份验证和提供用户身份信息。在使用OpenID Connect时，客户端（例如一个网站）可以通过身份提供者（例如Google或Facebook）来验证用户的身份，并获取有关该用户的信息。
+
+
+
+https://www.keycloak.org/
+https://www.authelia.com/
+https://zitadel.com/
+https://goauthentik.io/
+
+https://www.reddit.com/r/selfhosted/comments/ub7dvb/comment/i6o9var/?utm_source=share&utm_medium=web2x&context=3

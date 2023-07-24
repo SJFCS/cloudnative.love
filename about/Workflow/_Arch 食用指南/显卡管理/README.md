@@ -1,3 +1,5 @@
+https://ivonblog.com/posts/archlinux-install-nvidia-drivers/
+
 Linux和Windows对于显卡的管理和切换方式不同，导致了这种差异。
 
 在Linux中，Mux-Discrete GPU（即独立显卡）和Integrated GPU（即集成显卡）是通过PCI-E设备连接到系统上的，由于存在不同的DRI驱动程序，因此在切换前需要先停止使用显卡的应用程序，卸载相应的驱动程序，然后重新加载相应的驱动程序并重新启动X窗口系统，这个过程需要重启显示器来使切换生效。
