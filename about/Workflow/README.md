@@ -2,18 +2,13 @@
 title: Workflow
 ---
 
-在这里我想整理和分享一些提升效率的工具和方法，包括不限于
-
-- 佳软分享
-- Rss 好站推荐
-- Arch Linux 食用方法
-- HomeLab 等折腾记录
+在这里我会整理和分享 Arch Linux 食用方法，HomeLab 等折腾记录。
 
 ## Linux
 
-我使用 Arch Linux 作为主力已经有段时间了，尽管初期有着陡峭的学习曲线，但仍阻挡不了我对其的喜爱。这段时间使用下来 Linux 确实能 save my life ，在学习一些技术时 Linux 的环境能帮我节省很多时间。
+我使用 Arch Linux 作为主力已经有段时间了，尽管初期有着陡峭的学习曲线，但仍阻挡不了我对其的喜爱，特别是在学习一些技术时 Linux 的环境能帮我节省很多时间。
 
-Arch Linux 最大的特色就是其包管理机制，包直接来自上游，不改名不拆包（对开发者来说这是一件好事Why are there no -dev packages in Arch Linux?），及时的滚动更新。官方源、社区源和AUR源可以覆盖常用的所有软件，在 Arch Linux 可以**非常轻松**地将所有一切全部通过包管理器来进行管理。
+Arch Linux 最大的特色就是其包管理机制，包直接来自上游，不改名不拆包（对开发者来说这是一件好事），及时的滚动更新。官方源、社区源和AUR源可以覆盖常用的所有软件，在 Arch Linux 可以**非常轻松**地将所有一切全部通过包管理器来进行管理。
 
 如果你用过 APT 系包管理器，你一定有过满世界找 PPA 源的经历，并且多数 PPA 并非官方维护质量令人担忧，有时找不到 PPA 源只能手动安装 .deb 包。如果你有这样的困扰可以切换到 Arch 系 Linux 这里有世界上最好的包管理！！
 
@@ -21,7 +16,6 @@ Arch Linux 最大的特色就是其包管理机制，包直接来自上游，不
 
 - Pop!_OS/Ubuntu/Rolling Rhino  
     Ubuntu 系列对机器学习等支持做的比较好，网络上文档也很多,任何问题都比较容易解决  
-    [Rolling Rhino](https://rollingrhino.org/)是一个基于Ubuntu的滚动发行版  
 - Arch Linux/EndeavourOS/Garuda Linux  
     如果有信心解决你所出现的任何问题的话，可以了考虑用 Arch 系的发行版，你会得到一个十分省心的包管理  
 - Fedora Workstation  
@@ -54,7 +48,5 @@ import AsciinemaPlayer from '@site/src/components/AsciinemaPlayer';
 为了避免滚挂 我使用了 BTRFS 文件系统，其快照功能十分好用，但每次都通过 Timeshift 手动创建十分麻烦，推荐安装 [timeshift-autosnap](https://gitlab.com/gobonja/timeshift-autosnap)  利用 Pacman hook 在包更新前自动使用 Timeshift 创建快照。
 
 并且建议使用 [grub-btrfs](https://github.com/Antynea/grub-btrfs) 实现在 grub 引导界面启动到快照的能力。注意要挂载 /run/timeshift/backup 为固定目录，不然每次开机 timeshift 会创建随机数字目录来存放快照，这会让 grub 找不到快照位置。
-
-这样你就获得了一个极其坚固的 Arch Linux 了，曾经我出滚挂过两次，但都是小问题修修补补也过来了，目前还没遇到非常严重的问题。
 
 后续我打算将我的 Arch Linux 配置过程和遇到的一些问题详细记录下来希望能帮到一些小伙伴们。

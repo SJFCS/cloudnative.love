@@ -276,12 +276,6 @@ const config = {
                 "aria-label": "aboutsite"
               },
               {
-                label: 'Progressing',
-                to: '/about/Progressing',
-                className: "header-progressing-link",
-                "aria-label": "progressing"
-              },
-              {
                 label: 'Workflow',
                 to: '/about/Workflow',
                 className: "header-workflow-link",

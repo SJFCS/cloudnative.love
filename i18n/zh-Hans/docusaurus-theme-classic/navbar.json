@@ -39,10 +39,6 @@
     "message": "关于本站",
     "description": "Navbar item with label Architecture"
   },
-  "item.label.Progressing": {
-    "message": "此时此刻",
-    "description": "Navbar item with label Progressing"
-  },
   "item.label.Workflow": {
     "message": "Workflow",
     "description": "Navbar item with label Workflow"
