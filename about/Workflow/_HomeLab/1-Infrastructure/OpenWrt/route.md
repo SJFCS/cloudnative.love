@@ -134,13 +134,23 @@ cd /tmp && rm -rf /tmp/packages_ci
 - https://tailscale.com/kb/1082/firewall-ports/?q=port
 - https://www.youtube.com/watch?v=mgDpJX3oNvI
 - https://openwrt.org/docs/guide-user/services/vpn/tailscale/start
-
+- https://arthurchiao.art/blog/how-nat-traversal-works-zh/
 想要实现直连，需要提升 NET Type 类型。常见的类型包括 Full Cone NAT、Restricted Cone NAT、Port Restricted Cone NAT 和 Symmetric NAT。
 - windows 获取当前网络 net 类型： https://github.com/HMBSbige/NatTypeTester
-- linux： stunclient stun.l.google.com:19302
-- https://github.com/nthack/NatTypeChecker
+- linux：[ python-pystun3 ](https://pypi.org/project/pystun/) [go-stun](https://github.com/ccding/go-stun)
+  - go install github.com/ccding/go-stun@latest
+  - go-stun -s stun.qq.com:3478
+- https://support.dh2i.com/docs/Archive/kbs/general/understanding-different-nat-types-and-hole-punching/
+- web：https://github.com/nthack/NatTypeChecker
 - https://jsfiddle.net/5ftsd5c2/17/
 
+
+```bash 
+# 更改端口
+sudo vim /etc/default/tailscaled
+sudo systemctl daemon-reload
+sudo systemctl restart tailscaled.service
+```
 现有拓扑：`光猫-路由器-设备tailscale` 通过桥接光猫，路由器直接 pppoe 拨号，后拓扑为：`路由器-设备tailscale`
 并通过端口转发（443 41641 3478 ）或者DZM主机，继续提升NET Type 类型。
 这样设置后即可直连。最终我在公司访问家里设备延迟从几百 ms 降低到 8ms 左右。
