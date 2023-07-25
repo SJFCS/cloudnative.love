@@ -128,10 +128,15 @@ curl -sL $(curl -sL https://api.github.com/repos/sbwml/luci-app-alist/releases |
 
 tar -xzvf /tmp/luci-app-alist.tar.gz -C /tmp && cd /tmp/packages_ci/ && opkg install *
 cd /tmp && rm -rf /tmp/packages_ci
+
+# UPnP  
+https://thiscute.world/posts/about-nat/#3-upnp-%E5%8A%A8%E6%80%81%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91
+opkg install miniupnpd luci-i18n-upnp-zh-cn
 ```
 
 ## tailscale 
 - https://tailscale.com/kb/1082/firewall-ports/?q=port
+- https://www.9bingyin.com/archives/why-i-choose-tailscale.html
 - https://www.youtube.com/watch?v=mgDpJX3oNvI
 - https://openwrt.org/docs/guide-user/services/vpn/tailscale/start
 - https://arthurchiao.art/blog/how-nat-traversal-works-zh/
@@ -190,9 +195,6 @@ opkg install luci-i18n-ttyd-zh-cn
 
 # SmartDNS  
 opkg install smartdns luci-i18n-smartdns-zh-cn 
-
-UPnP  https://thiscute.world/posts/about-nat/#3-upnp-%E5%8A%A8%E6%80%81%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91
-opkg install miniupnpd luci-i18n-upnp-zh-cn
 
 # wol 网络唤醒
 luci-i18n-wol-zh-cn	
