@@ -2,7 +2,7 @@
 # # vi: set ft=ruby :
 
 ######################################## VAGRANT YAML ###########################################
-# Project : https://github.com/SJFCS/cloudnative.love/tree/main/about/_Playground/vagrant-yaml  #
+# Project : https://github.com/SJFCS/cloudnative.love/tree/main/_Playground/vagrant-yaml  #
 # Author  : SongJinfeng@outlook.com                                                             #
 #################################################################################################
 # todo provision shell的名字  网络主机名参数

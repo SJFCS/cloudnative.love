@@ -1,0 +1,32 @@
+k8s GPU 方案  演进 GPU share方案 和调度平台
+
+通常K8S调度GPU最小调度单位是1卡，这样有些对GPU利用率不高而又独占GPU任务，gpu利用率不高， K8S管理GPU多了之后，为了加强GPU的使用率，可以通过GPU虚拟化的能力，能够把一卡拆成多卡进行调度，K8S 请求resouce可以零点几卡进行调度。
+深度学习kubeflow等框架的部署
+horovod 之类的进行深度学习训练，可以通过部署 kubeflow 借助其提供的能力去进行深度学习任务提交，kubeflow采用k8s operator 、crd等方案为tensorflow、pytorch、tensorflow分布式进行了支持，可以部署kubeflow然后进行深度学习建模。
+训练推理加速
+
+在Kubernetes中，默认情况下，GPU资源是以整个GPU设备作为最小调度单位进行分配和调度的。这意味着如果一个Pod请求了GPU资源，它将独占整个GPU设备，即使它实际上只使用了GPU资源的一小部分。
+
+然而，如果您希望将GPU资源拆分为更小的单位进行调度，以提高GPU利用率，您可以考虑使用一些特定的工具和技术。
+
+NVIDIA Device Plugin：Kubernetes社区提供了一个名为"NVIDIA Device Plugin"的插件，它允许将GPU资源拆分为更小的单位进行调度。使用该插件，您可以将一个GPU设备划分为多个虚拟的GPU资源，每个资源可以作为一个独立的调度单位。这样，多个Pod可以共享同一个GPU设备，从而提高GPU的利用率。您可以参考Kubernetes官方文档中关于"NVIDIA Device Plugin"的说明来了解如何安装和配置该插件。
+
+GPU分时共享：另一种提高GPU利用率的方法是使用GPU分时共享技术。这种技术可以将一个GPU设备在时间上进行划分，使多个任务按照时间片的方式共享同一个GPU设备。这样，即使每个任务的GPU利用率较低，整个GPU设备的利用率仍然可以较高。一些工具和框架，如NVIDIA的Virtual GPU Software和NVIDIA MIG（Multi-Instance GPU），提供了GPU分时共享的功能。
+
+请注意，这些方法都需要特定的硬件和软件支持，并且需要进行适当的配置和管理。具体的实施步骤和配置可能因您的环境和需求而有所不同。在尝试这些方法之前，请确保详细阅读相关文档和指南，并确保您的系统满足相应的要求。
+
+如果您希望在Kubernetes中使用虚拟GPU（vGPU）来提高GPU资源的利用率，您可以考虑使用NVIDIA的Virtual GPU（vGPU）技术。
+
+NVIDIA的vGPU技术允许将物理GPU划分为多个虚拟GPU，每个虚拟GPU可以被分配给一个独立的任务或容器。这样，多个任务可以在同一台物理GPU上并行运行，从而提高GPU资源的利用率。
+
+要在Kubernetes中使用vGPU，您可以按照以下步骤进行操作：
+
+安装NVIDIA vGPU软件：请根据NVIDIA官方文档提供的指南，安装和配置适用于您的系统的NVIDIA vGPU软件。
+
+配置NVIDIA vGPU设备插件：Kubernetes社区提供了一个名为"NVIDIA vGPU Device Plugin"的插件，用于将NVIDIA vGPU资源纳入Kubernetes调度框架。您可以按照Kubernetes官方文档中关于"NVIDIA vGPU Device Plugin"的说明，安装和配置该插件。
+
+创建vGPU资源配置：在Kubernetes中，您需要定义vGPU资源的配置。这可以通过创建适当的Kubernetes资源对象（例如，Deployment或StatefulSet）并指定vGPU资源的要求来实现。
+
+部署使用vGPU的应用程序：现在，您可以使用Kubernetes部署使用vGPU的应用程序。在应用程序的Kubernetes配置文件中，您可以指定所需的vGPU资源，并将其分配给相应的容器。
+
+请注意，使用NVIDIA vGPU技术需要满足特定的硬件和软件要求，并且需要进行适当的配置和管理。确保在尝试这些步骤之前详细阅读相关文档，并确保您的系统满足相应的要求。

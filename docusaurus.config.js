@@ -55,8 +55,7 @@ const config = {
           // postsPerPage: 15,
           postsPerPage: 'ALL',
           blogSidebarTitle: 'Recent articles',
-          blogSidebarCount: 10,
-          // blogSidebarCount: "ALL",
+          blogSidebarCount: "ALL",
           showReadingTime: true, // 如果设置为 false，「x 分钟阅读」的文字就不会显示    
           editUrl:
             'https://github.com/SJFCS/cloudnative.love/edit/main/',
@@ -214,10 +213,10 @@ const config = {
               },
               {
                 label: 'Subscribe',
-                href: '/about/Architecture/Feed',
+                to: 'https://cloudnative.love/blog/atom.xml',
                 className: "header-rss",
                 "aria-label": "rss"
-              },
+              }            
             ]
           },
           {
@@ -282,16 +281,6 @@ const config = {
                 "aria-label": "workflow"
               }
             ]
-          },
-          {
-            type: 'localeDropdown',
-            position: 'right',
-            dropdownItemsAfter: [
-              {
-                to: '/about/Architecture/Help-Us-Translate',
-                label: 'Help us translate',
-              },
-            ],
           },
           {
             position: 'right',

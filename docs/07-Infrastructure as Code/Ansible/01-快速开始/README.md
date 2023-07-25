@@ -26,7 +26,7 @@ import config from '!!raw-loader!../Ansible-Playground/config.yaml';
 
 输入 `cat /etc/hosts` 检查 Hosts 配置是否正确。
 
-  [**Vagrant 环境配置文件：**](https://github.com/SJFCS/cloudnative.love/tree/main/docs/8-Infrastructure%20as%20Code/Ansible/Ansible-Playground)
+  [**Vagrant 环境配置文件：**](https://github.com/SJFCS/cloudnative.love/tree/main/docs/07-Infrastructure%20as%20Code/Ansible/Ansible-Playground)
   <Tabs>
   <TabItem value="config.yaml">
   <CodeBlock language="yaml" title="config.yaml">{config}</CodeBlock>

@@ -46,6 +46,15 @@ Vagrant 将虚拟机镜称为为 Box
   vagrant destroy # 删除虚拟机 
   ```
 
+# vb网段配置
+```
+/etc/vbox/networks.conf
+
+* 10.0.0.0/8 192.168.0.0/8 172.0.0.0/8
+* 2001::/64
+```
+
+
 更多用法请继续阅读本文档。
 
 <DocCardList />
