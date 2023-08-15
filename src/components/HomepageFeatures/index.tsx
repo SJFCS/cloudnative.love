@@ -25,7 +25,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        <Translate>Some new features for this site by secondary development based on Docusaurus 👉</Translate>&nbsp;<Link to="/about/Architecture">Document</Link>
+        <Translate>Some new features for this site by secondary development based on Docusaurus 👉</Translate>&nbsp;<Link to="/about">Document</Link>
       </>
     ),
   },

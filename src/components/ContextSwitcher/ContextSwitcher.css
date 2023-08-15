@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+@layer base {
+  :root {
+    /* --background-color: #a4d1fe; */
+    /* --background-image: linear-gradient(62deg, #a4d1fe 0%, #e9d5fc 100%); */
+    --background-color: #8EC5FC;
+    --background-image: linear-gradient(62deg, #86c8f8 0%, #E0C3FC 100%);
+    
+
+    --docs-color-background-100: #f4fafd;
+    --docs-color-background-200: #e8edf0;
+    --border-color: #e0d9d9;
+  }
+
+  [data-theme="dark"] {
+    --background-color: #3a5770;
+    --background-image: linear-gradient(62deg, #3a5770 0%, #5d516c 100%);
+    --docs-color-background-100: #1c1c1e;
+    --docs-color-background-200: #272729;
+    --border-color: #444950;
+  }
+
+  .gradient-background {
+    background-color: var(--background-color);
+    background-image: var(--background-image);
+  }
+
+  .icon-size {
+    height: 2rem;
+    width: auto;
+  }
+
+  .ring-border-expand {
+    border: 1px solid var(--border-color);
+  }
+
+  /* Scrollbar styles */
+
+  ::-webkit-scrollbar {
+    border-radius: 8px;
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--docs-color-border);
+    border-radius: 6px;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .thin-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .thin-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+}

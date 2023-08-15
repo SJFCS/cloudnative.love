@@ -1,0 +1,62 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Gateway": {
+    "message": "Gateway",
+    "description": "The label for category Gateway in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Proxy": {
+    "message": "Proxy",
+    "description": "The label for category Proxy in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Nginx✨": {
+    "message": "Nginx✨",
+    "description": "The label for category Nginx✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.nginx-note": {
+    "message": "nginx-note",
+    "description": "The label for category nginx-note in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.openresty": {
+    "message": "openresty",
+    "description": "The label for category openresty in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.lua": {
+    "message": "lua",
+    "description": "The label for category lua in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.example-0001": {
+    "message": "example-0001",
+    "description": "The label for category example-0001 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.参数说明": {
+    "message": "参数说明",
+    "description": "The label for category 参数说明 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.流量转发": {
+    "message": "流量转发",
+    "description": "The label for category 流量转发 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.申请证书": {
+    "message": "申请证书",
+    "description": "The label for category 申请证书 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Envoy": {
+    "message": "Envoy",
+    "description": "The label for category Envoy in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.http": {
+    "message": "http",
+    "description": "The label for category http in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Service Mesh": {
+    "message": "Service Mesh",
+    "description": "The label for category Service Mesh in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Istio✨": {
+    "message": "Istio✨",
+    "description": "The label for category Istio✨ in sidebar tutorialSidebar"
+  }
+}

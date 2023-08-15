@@ -1,6 +1,6 @@
 ---
 title: Observability
-sidebar_position: 7
+sidebar_position: 0
 tags: [Observability]
 ---
 

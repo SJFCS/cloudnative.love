@@ -39,10 +39,6 @@
     "message": "关于本站",
     "description": "Navbar item with label Architecture"
   },
-  "item.label.Workflow": {
-    "message": "Workflow",
-    "description": "Navbar item with label Workflow"
-  },
   "item.label.Archive": {
     "message": "归档",
     "description": "Navbar item with label Archive"
@@ -58,5 +54,9 @@
   "item.label.GitHub Insight": {
     "message": "GitHub 洞察看板",
     "description": "Navbar item with label GitHub Insight"
+  },
+  "item.label.ChatGPT Next": {
+    "message": "ChatGPT Next",
+    "description": "Navbar item with label ChatGPT Next"
   }
 }

@@ -1,0 +1,26 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Logging": {
+    "message": "Logging",
+    "description": "The label for category Logging in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux Logs": {
+    "message": "Linux Logs",
+    "description": "The label for category Linux Logs in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Metrics": {
+    "message": "Metrics",
+    "description": "The label for category Metrics in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Promethuse✨": {
+    "message": "Promethuse✨",
+    "description": "The label for category Promethuse✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Tracing": {
+    "message": "Tracing",
+    "description": "The label for category Tracing in sidebar tutorialSidebar"
+  }
+}

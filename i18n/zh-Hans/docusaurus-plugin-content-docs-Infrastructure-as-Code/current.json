@@ -1,0 +1,58 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Ansible✨": {
+    "message": "Ansible✨",
+    "description": "The label for category Ansible✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.快速开始": {
+    "message": "快速开始",
+    "description": "The label for category 快速开始 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.常用模块": {
+    "message": "常用模块",
+    "description": "The label for category 常用模块 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Playbook": {
+    "message": "Playbook",
+    "description": "The label for category Playbook in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.调试技巧": {
+    "message": "调试技巧",
+    "description": "The label for category 调试技巧 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.08-最佳实践": {
+    "message": "08-最佳实践",
+    "description": "The label for category 08-最佳实践 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.更多用法": {
+    "message": "更多用法",
+    "description": "The label for category 更多用法 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Terraform✨": {
+    "message": "Terraform✨",
+    "description": "The label for category Terraform✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Vagrant📝": {
+    "message": "Vagrant📝",
+    "description": "The label for category Vagrant📝 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Vagrantfile 编写": {
+    "message": "Vagrantfile 编写",
+    "description": "The label for category Vagrantfile 编写 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Box 管理与制作": {
+    "message": "Box 管理与制作",
+    "description": "The label for category Box 管理与制作 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.常用命令和技巧": {
+    "message": "常用命令和技巧",
+    "description": "The label for category 常用命令和技巧 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.进阶用法": {
+    "message": "进阶用法",
+    "description": "The label for category 进阶用法 in sidebar tutorialSidebar"
+  }
+}

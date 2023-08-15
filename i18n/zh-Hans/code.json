@@ -8,9 +8,6 @@
   "🎣 Interested in Cloud Native, Linux, Networking, Blockchain, and many other stuffs.": {
     "message": "🎣 对 Cloud Native、Linux、Networking、Blockchain 等有兴趣。"
   },
-  "Download Resume": {
-    "message": "下载简历"
-  },
   "theme.ErrorPageContent.title": {
     "message": "页面已崩溃。",
     "description": "The title of the fallback page when the page crashed"
@@ -381,9 +378,6 @@
   "Cloud computing big data lecturer certification (CETC)": {
     "message": "云计算大数据讲师认证 (CETC)"
   },
-  "Outstanding Graduates of Shandong Province ( Top 5 % )": {
-    "message": "山东省优秀毕业生 (山东本届毕业生前 5%)"
-  },
   "Red Hat Certified Engineer (RHCE)": {
     "message": "红帽认证工程师 (RHCE)"
   },
@@ -397,5 +391,8 @@
   "theme.docs.sidebar.navAriaLabel": {
     "message": "文档侧边栏",
     "description": "The ARIA label for the sidebar navigation"
+  },
+  "Introduction to Continuous Delivery and GitOps using Argo CD": {
+    "message": "Introduction to Continuous Delivery and GitOps using Argo CD"
   }
 }

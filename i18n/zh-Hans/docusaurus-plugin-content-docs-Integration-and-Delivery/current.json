@@ -1,0 +1,34 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Application Definition📝": {
+    "message": "Application Definition📝",
+    "description": "The label for category Application Definition📝 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Helm📝": {
+    "message": "Helm📝",
+    "description": "The label for category Helm📝 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Image Build📝": {
+    "message": "Image Build📝",
+    "description": "The label for category Image Build📝 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Library & Registry Management": {
+    "message": "Library & Registry Management",
+    "description": "The label for category Library & Registry Management in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Harbor": {
+    "message": "Harbor",
+    "description": "The label for category Harbor in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Pipeline Orchestration & Workflow": {
+    "message": "Pipeline Orchestration & Workflow",
+    "description": "The label for category Pipeline Orchestration & Workflow in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Argo📝": {
+    "message": "Argo📝",
+    "description": "The label for category Argo📝 in sidebar tutorialSidebar"
+  }
+}

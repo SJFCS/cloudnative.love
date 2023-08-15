@@ -18,7 +18,7 @@ import config from '!!raw-loader!../Ansible-Playground/config.yaml';
 <details>
 <summary>这里为您准备了 Vagrant 环境，可以一键启动如下环境</summary>
 
-在**新建目录**中创建如下 `config.yaml` 和 `Vagrantfile` 文件，然后**在此目录中**执行 `vagrant up` 即可启动练习环境。关于 Vagrant 更多使用方法详见：[Vagrant](/docs/Infrastructure%20as%20Code/Vagrant/)
+在**新建目录**中创建如下 `config.yaml` 和 `Vagrantfile` 文件，然后**在此目录中**执行 `vagrant up` 即可启动练习环境。关于 Vagrant 更多使用方法详见：[Vagrant](/Infrastructure-as-Code/Vagrant/)
 
 启动后使用 `vagrant ssh <host_name>` 登录到对环境的各个节点进行初步检查：
 

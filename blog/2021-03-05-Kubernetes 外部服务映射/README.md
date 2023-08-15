@@ -2,6 +2,11 @@
 title: Kubernetes 外部服务映射
 tags: [Kubernetes,Service]
 ---
+<!-- 
+https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/ 
+
+https://medium.com/@chamilad/load-balancing-and-reverse-proxying-for-kubernetes-services-f03dd0efe80
+-->
 
 集群内的应用有时候需要调用外部的服务，我们知道集群内部服务调用都是通过 Service 互相访问，那么针对外部的服务是否也可以保持统一使用 Service 呢？
 

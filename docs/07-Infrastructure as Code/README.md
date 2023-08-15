@@ -1,6 +1,6 @@
 ---
 title: Infrastructure as Code
-sidebar_position: 8
+sidebar_position: 0
 tags: [Infrastructure as Code]
 ---
 在 DevOps 世界中，确保开发、测试和生产环境尽可能一致至关重要。如果环境之间出现了配置差异，那么在测试环境中运行良好的代码可能无法在生产环境中部署。在传统的基础设施管理中，管理员通常会通过手动操作和脚本来管理和维护服务器和环境。然而，这种方式会导致许多微小和临时的修改都没有被记录或跟踪，渐渐变得不再符合组织要求，形成了所谓的“配置漂移”（Configuration Drift）。这可能会导致系统出现意外行为、安全问题、不稳定或停机等问题。

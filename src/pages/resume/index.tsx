@@ -101,12 +101,13 @@ export default function Resume() {
             </div>
           </div>
 
-          {/* <div className="relative shadow-sm md:shadow-2xl">
-            <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="https://image-fusice.oss-cn-hangzhou.aliyuncs.com/image/images/2021.07.23-14:42:52-%E5%B1%B1%E4%B8%9C%20%E7%9C%81%E4%BC%98%20%E7%A7%80%E6%AF%95%20%E4%B8%9A%E7%94%9F.jpg" /></Zoom>
+          <div className="relative  shadow-sm md:shadow-2xl">
+            <Zoom><img className="rounded object-cover w-full h-full" loading="lazy" src="/img/cert/ArgoCD-AKUITY.webp" /></Zoom>
             <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
-              <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer"><Translate>Outstanding Graduates of Shandong Province ( Top 5 % )</Translate></a>
+              <a className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide" target="_blank" rel="noopener noreferrer" href="https://www.credential.net/d8d99fb8-92b1-4fee-8e71-cd6158277c19#gs.46sctu"><Translate>Introduction to Continuous Delivery and GitOps using Argo CD</Translate></a>
             </div>
-          </div> */}
+          </div>
+       
         </section>
 
         {/* <section className="my-4 max-w-5xl mx-auto">

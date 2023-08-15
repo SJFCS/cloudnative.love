@@ -1,0 +1,142 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Kubernetes The Hard Way": {
+    "message": "Kubernetes The Hard Way",
+    "description": "The label for category Kubernetes The Hard Way in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kubernetes OPS Guide": {
+    "message": "Kubernetes OPS Guide",
+    "description": "The label for category Kubernetes OPS Guide in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Pod状态与生命周期管理": {
+    "message": "Pod状态与生命周期管理",
+    "description": "The label for category Pod状态与生命周期管理 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.集群资源管理": {
+    "message": "集群资源管理",
+    "description": "The label for category 集群资源管理 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Pod 控制器": {
+    "message": "Pod 控制器",
+    "description": "The label for category Pod 控制器 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.服务发现与路由": {
+    "message": "服务发现与路由",
+    "description": "The label for category 服务发现与路由 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.身份与权限控制": {
+    "message": "身份与权限控制",
+    "description": "The label for category 身份与权限控制 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Container Runtime": {
+    "message": "Container Runtime",
+    "description": "The label for category Container Runtime in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Docker": {
+    "message": "Docker",
+    "description": "The label for category Docker in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Containerd": {
+    "message": "Containerd",
+    "description": "The label for category Containerd in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Podman": {
+    "message": "Podman",
+    "description": "The label for category Podman in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.存储": {
+    "message": "存储",
+    "description": "The label for category 存储 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.xxx-Troubleshooting": {
+    "message": "xxx-Troubleshooting",
+    "description": "The label for category xxx-Troubleshooting in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kubernetes-生产高可用部署": {
+    "message": "Kubernetes-生产高可用部署",
+    "description": "The label for category Kubernetes-生产高可用部署 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.环境初始化  作为快捷清单": {
+    "message": "环境初始化  作为快捷清单",
+    "description": "The label for category 环境初始化  作为快捷清单 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.HA方案介绍": {
+    "message": "HA方案介绍",
+    "description": "The label for category HA方案介绍 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.容器运行时": {
+    "message": "容器运行时",
+    "description": "The label for category 容器运行时 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.部署方式": {
+    "message": "部署方式",
+    "description": "The label for category 部署方式 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.kubeadm高可用部署": {
+    "message": "kubeadm高可用部署",
+    "description": "The label for category kubeadm高可用部署 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kubespray高可用部署": {
+    "message": "Kubespray高可用部署",
+    "description": "The label for category Kubespray高可用部署 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.集群管理": {
+    "message": "集群管理",
+    "description": "The label for category 集群管理 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Etcd": {
+    "message": "Etcd",
+    "description": "The label for category Etcd in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kubernetes Network Guide": {
+    "message": "Kubernetes Network Guide",
+    "description": "The label for category Kubernetes Network Guide in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.网络插件部署": {
+    "message": "网络插件部署",
+    "description": "The label for category 网络插件部署 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.网络插件CNI": {
+    "message": "网络插件CNI",
+    "description": "The label for category 网络插件CNI in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kubernetes Security Experience": {
+    "message": "Kubernetes Security Experience",
+    "description": "The label for category Kubernetes Security Experience in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Public Key Infrastructure (PKI)📝": {
+    "message": "Public Key Infrastructure (PKI)📝",
+    "description": "The label for category Public Key Infrastructure (PKI)📝 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.tools": {
+    "message": "tools",
+    "description": "The label for category tools in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.cfssl生成证书": {
+    "message": "cfssl生成证书",
+    "description": "The label for category cfssl生成证书 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.README": {
+    "message": "README",
+    "description": "The label for category README in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.原理": {
+    "message": "原理",
+    "description": "The label for category 原理 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kyverno": {
+    "message": "Kyverno",
+    "description": "The label for category Kyverno in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kubernetes-DEV-Notes": {
+    "message": "Kubernetes-DEV-Notes",
+    "description": "The label for category Kubernetes-DEV-Notes in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SouceCodeAnalysis": {
+    "message": "SouceCodeAnalysis",
+    "description": "The label for category SouceCodeAnalysis in sidebar tutorialSidebar"
+  }
+}

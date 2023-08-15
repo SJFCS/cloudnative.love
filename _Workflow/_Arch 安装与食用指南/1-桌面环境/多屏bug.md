@@ -1,0 +1,1 @@
+https://ttys3.dev/blog/switch-from-gdm-to-lightdm-due-to-wayland-session-issue

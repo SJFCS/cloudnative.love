@@ -1,0 +1,46 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.MongoDB📝": {
+    "message": "MongoDB📝",
+    "description": "The label for category MongoDB📝 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.MySQL✨": {
+    "message": "MySQL✨",
+    "description": "The label for category MySQL✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.HA高可用": {
+    "message": "HA高可用",
+    "description": "The label for category HA高可用 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Percona-XtraDB-Cluster的docker镜像的使用说明": {
+    "message": "Percona-XtraDB-Cluster的docker镜像的使用说明",
+    "description": "The label for category Percona-XtraDB-Cluster的docker镜像的使用说明 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ops": {
+    "message": "ops",
+    "description": "The label for category ops in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.优化": {
+    "message": "优化",
+    "description": "The label for category 优化 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.排错": {
+    "message": "排错",
+    "description": "The label for category 排错 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.PostgreSQL": {
+    "message": "PostgreSQL",
+    "description": "The label for category PostgreSQL in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Redis✨": {
+    "message": "Redis✨",
+    "description": "The label for category Redis✨ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.集群": {
+    "message": "集群",
+    "description": "The label for category 集群 in sidebar tutorialSidebar"
+  }
+}
