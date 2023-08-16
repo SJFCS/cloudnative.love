@@ -38,6 +38,5 @@ import GetStartedCard from '@site/src/components/GetStartedCard';
 />
 </div>
 
-
 ## Roadmaps
 <iframe src="https://roadmap.sh/devops" scrolling="no" height="2700" width="100%" frameborder="0"></iframe>

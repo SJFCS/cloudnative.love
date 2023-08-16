@@ -3,6 +3,45 @@ title: Containerd
 tags: [containerd]
 ---
 
+nerdctl 这是一个用于containerd 的，且和Docker 兼容的CLI，另外还支持Compose。
+安装 containerd-rootless-setuptool.sh
+```bash
+❯ nerdctl namespace ls
+FATA[0000] rootless containerd not running? (hint: use `containerd-rootless-setuptool.sh install` to start rootless containerd): stat /run/user/1000/containerd-rootless: no such file or directory 
+❯ sudo nerdctl namespace ls
+NAME       CONTAINERS    IMAGES    VOLUMES    LABELS
+default    0             1         0              
+k8s.io     50            84        0              
+moby       0             0         0              
+❯ containerd-rootless-setuptool.sh install
+[INFO] Checking RootlessKit functionality
+/usr/bin/containerd-rootless-setuptool.sh:行111: rootlesskit：未找到命令
+[ERROR] RootlessKit failed, see the error messages and https://rootlesscontaine.rs/getting-started/common/ .
+❯ sudo systemctl start containerd-rootless.service
+
+Failed to start containerd-rootless.service: Unit containerd-rootless.service not found.
+❯ paru -S rootlesskit slirp4netns
+正在解析依赖关系...
+正在查找软件包冲突...
+
+软件包 (1) rootlesskit-1.1.1-1
+
+## 报错 sgid范围？？
+
+[rootlesskit:parent] error: failed to setup UID/GID map: failed to compute uid/gid map: No subuid ranges found for user 1000 ("admin")
+[ERROR] RootlessKit failed, see the error messages and https://rootlesscontaine.rs/getting-started/common/ .
+这个错误提示表明您的用户没有可用的 subuid 和 subgid 范围。您可以使用以下命令为您的用户添加 subuid 和 subgid 范围：
+
+sudo usermod --add-subuids 10000-20000 --add-subgids 10000-20000 <your-username>
+该命令将为您的用户 <your-username> 添加 subuid 范围 10000-20000 和 subgid 范围 10000-20000。您可以将这些范围更改为适合您的需要的任何值。
+
+然后，您需要重新登录以使更改生效。如果您使用的是 SSH 连接，请断开并重新连接到主机。然后再次尝试运行您的命令。
+
+
+## containerd-rootless 下用普通用户运行 nerdctl namespace ls 获取不到结果 待解决
+```
+
+
 Kubernetes 从版本 v1.20 之后，弃用 Docker 容器运行时，在 v1.24 版本中，将彻底移除 Dockershim。`kubelet` 将直接对接 [containerd](https://github.com/containerd/containerd) 运行时。
 
 - [Don't Panic: Kubernetes and Docker](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/)

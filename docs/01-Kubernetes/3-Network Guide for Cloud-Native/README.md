@@ -2,7 +2,7 @@
 title: Kubernetes Network Guide
 ---
 https://www.tkng.io/
-
+https://zhuanlan.zhihu.com/p/649570348?utm_id=0
 Kubernetes 社区有众多的网络插件可供选择，其中比较著名，用的人也比较多个有如下几个：
 
 2. [Flannel](https://github.com/coreos/flannel): 基于 Linux TUN/TAP 技术，使用 UDP 封装 IP 包来创建 overlay 网络。因此性能会差一些，但是它部署起来最简单。

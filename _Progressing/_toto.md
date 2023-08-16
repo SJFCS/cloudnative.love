@@ -1,8 +1,9 @@
+什么要写：doc的要写，优先写首页三文档。
+多个工具结合的最佳实践写成blog，单个工具的使用实践就放到docs里，尽量让blog中的文章是新颖独特的，而不是拾人牙慧。
+blog多一些伸缩，oprater，多集群，等等一些实践方案
 ## 本周
-
-https://github.com/TencentBlueKing/bk-bcs
 https://iximiuz.com/en/
-https://github.com/yangpeng14/DevOps/blob/master/kubernetes/%E6%97%A0%E9%9C%80%E7%89%B9%E6%9D%83%E5%9C%A8Kubernetes%E4%B8%AD%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F%E4%B9%8BKaniko.md
+https://github.com/yangpeng14/DevOps/tree/master
 
 - 本机GPU设置  k8s容器GPU设置 部署 stabledisfution on k8s 这个作为一篇blog
   - https://ivonblog.com/posts/stable-diffusion-webui-manuals/installation/docker-installation/
@@ -13,28 +14,7 @@ https://github.com/yangpeng14/DevOps/blob/master/kubernetes/%E6%97%A0%E9%9C%80%E
     - [LoadBalancer](https://just4coding.com/2021/11/21/custom-loadbalancer/)
     - [openelb](https://www.qikqiak.com/post/openelb/) 
     - https://cloud.tencent.com/developer/article/1985814
-负载均衡浅谈补充docs https://www.zhihu.com/question/601431201/answer/3059114526
-linux 进程状态补充docs https://www.zhihu.com/question/308716947/answer/3146219927?utm_id=0
 
-- 好文章 新角度
-  - https://blog.fatedier.com/2020/04/17/pod-loopcrash-of-k8s-subpath/
-  - https://blog.fatedier.com/2018/12/10/a-connect-timeout-problem-caused-by-k8s-pod-deleting/
-  - https://blog.fatedier.com/2020/07/22/k8s-pod-directional-migration/
-  - https://blog.fatedier.com/2019/04/02/k8s-custom-controller/
-  - https://blog.fatedier.com/2019/03/20/k8s-crd/
-  - https://blog.fatedier.com/2019/03/25/k8s-crd-authorization/
-  - https://blog.fatedier.com/2018/11/21/service-mesh-traffic-hijack/
-  - https://blog.fatedier.com/2022/08/15/istio-pods-crash-cause-full-push/
-  - https://blog.fatedier.com/2018/12/01/service-mesh-explore-local-node-lb/
-
-  - pod生命周期和优雅下线 
-    - https://zhuanlan.zhihu.com/p/158141567
-    - https://imroc.cc/kubernetes/best-practices/graceful-shutdown/persistent-connection.html
-    - 不仅仅是 PreStop hook https://aleiwu.com/post/tidb-opeartor-webhook/
-  - dns解析 https://www.hi-linux.com/posts/51040.html
-  - api鉴权
-    - https://zhuanlan.zhihu.com/p/624378284?utm_id=0
-    - https://developer.aliyun.com/article/706210
 
 ## 下周
 k8s 部署：
@@ -312,3 +292,26 @@ sechdurel 调度器 授权过程，自定义审计控制器
 
 
 
+## 这些文章暂时不写
+负载均衡浅谈补充docs https://www.zhihu.com/question/601431201/answer/3059114526
+linux 进程状态补充docs https://www.zhihu.com/question/308716947/answer/3146219927?utm_id=0
+
+- 好文章 新角度
+  - https://blog.fatedier.com/2020/04/17/pod-loopcrash-of-k8s-subpath/
+  - https://blog.fatedier.com/2018/12/10/a-connect-timeout-problem-caused-by-k8s-pod-deleting/
+  - https://blog.fatedier.com/2020/07/22/k8s-pod-directional-migration/
+  - https://blog.fatedier.com/2019/04/02/k8s-custom-controller/
+  - https://blog.fatedier.com/2019/03/20/k8s-crd/
+  - https://blog.fatedier.com/2019/03/25/k8s-crd-authorization/
+  - https://blog.fatedier.com/2018/11/21/service-mesh-traffic-hijack/
+  - https://blog.fatedier.com/2022/08/15/istio-pods-crash-cause-full-push/
+  - https://blog.fatedier.com/2018/12/01/service-mesh-explore-local-node-lb/
+
+  - pod生命周期和优雅下线 
+    - https://zhuanlan.zhihu.com/p/158141567
+    - https://imroc.cc/kubernetes/best-practices/graceful-shutdown/persistent-connection.html
+    - 不仅仅是 PreStop hook https://aleiwu.com/post/tidb-opeartor-webhook/
+  - dns解析 https://www.hi-linux.com/posts/51040.html
+  - api鉴权
+    - https://zhuanlan.zhihu.com/p/624378284?utm_id=0
+    - https://developer.aliyun.com/article/706210
