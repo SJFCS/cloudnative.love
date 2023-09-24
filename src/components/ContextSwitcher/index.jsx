@@ -35,7 +35,7 @@ const CONTEXTS = [
   },
   {
     id: 'Service-Mesh',
-    name: 'Service Mesh',
+    name: 'Proxy, Gateway & Mesh',
     icon: 'simple-icons:istio',
     type: 'iconify', 
   },

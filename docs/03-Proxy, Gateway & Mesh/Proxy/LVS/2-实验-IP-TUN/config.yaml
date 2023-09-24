@@ -1,0 +1,57 @@
+servers:
+  - name: server1
+    os: centos/7:2004.01
+    cpu: 2
+    mem: 2048
+    region: dev
+    provision_shell_script:
+      - "./init.sh:arg1 arg2 arg3"
+    provision_shell_inline:
+      - "sudo timedatectl set-timezone Asia/Shanghai"
+      - "sudo sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+        -e 's|^#baseurl=http://mirror.centos.org/centos|baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos|g' \
+        -i.bak \
+        /etc/yum.repos.d/CentOS-*.repo && sudo sed -i 's/nameserver .*/nameserver 8.8.8.8/' /etc/resolv.conf && sudo yum install epel-release -y && sudo yum install ansible -y"      
+    network:
+      - 192.168.56.10:private_network:add_hosts
+      - 192.168.63.20:public_network
+    port_forward:
+      - 8121:22:ssh
+      - 8980:80:name
+    # mount:
+    #   - ./shareDir1:/mountPath1
+    #   - ./shareDir2:/mountPath2
+    disk:
+      - disk1:100GB:primary
+      - disk2:10GB
+    dvd:
+      - dvd1:/home/admin/Storage/6.ISO/WePE64_V2.2.iso
+  - name: server2
+    network:
+      - 192.168.56.20:private_network:add_hosts
+default_config:
+  default_region: local
+  default_cpu: 1
+  default_mem: 1024
+  default_network_mode: private_network
+  default_os: ubuntu/jammy64
+  boot_timeout: 300
+  default_gui: false
+  # 设置启动顺序
+  boot_order: ["disk", "dvd", "none"]
+  # 挂载目录选项
+  default_synced_folder:
+    create: true
+    owner: vagrant
+    group: vagrant
+    mount_options: ["dmode=755", "fmode=644"]
+    type: virtualbox # virtualbox、NFS 或 rsync
+  # 自定义密钥
+  ssh_pub_keys:
+    remote_key:
+      - "https://raw.githubusercontent.com/hashicorp/vagrant/main/keys/vagrant.pub"
+    local_key:
+      - "#{Dir.home}/.ssh/id_rsa.pub"
+    content_key:
+      - "Public_Key1"
+      - "Public_Key2"

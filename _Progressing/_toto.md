@@ -1,23 +1,12 @@
-什么要写：doc的要写，优先写首页三文档。
-多个工具结合的最佳实践写成blog，单个工具的使用实践就放到docs里，尽量让blog中的文章是新颖独特的，而不是拾人牙慧。
-blog多一些伸缩，oprater，多集群，等等一些实践方案
-## 本周
 https://iximiuz.com/en/
 https://github.com/yangpeng14/DevOps/tree/master
 
-- 本机GPU设置  k8s容器GPU设置 部署 stabledisfution on k8s 这个作为一篇blog
-  - https://ivonblog.com/posts/stable-diffusion-webui-manuals/installation/docker-installation/
-  - https://sygil-dev.github.io/sygil-webui/docs/Installation/docker-guide/
-  - 参考这个看看能不能 展示更多用例 https://www.replicated.com/blog/how-to-run-gpu-workloads-on-a-k8s-cluster-with-kurl
-- kata容器 介绍容器安全和常见方案 在k8s上使用kata  这个写一篇blog和一篇doc简介页面
-- k8s kind loadbalancer  部署合适的lb，且整理合适的临时k8s kind和vagrant配置文件，以及输出lb博客。
-    - [LoadBalancer](https://just4coding.com/2021/11/21/custom-loadbalancer/)
-    - [openelb](https://www.qikqiak.com/post/openelb/) 
-    - https://cloud.tencent.com/developer/article/1985814
 
-
-## 下周
-k8s 部署：
+## k8s 部署：  
+新的部署工具
+  https://www.padok.fr/en/blog/k0s-kubernetes-gpu
+  https://k0sproject.io/
+  kURL 
 https://zhuanlan.zhihu.com/p/87771259
 https://bbs.huaweicloud.com/blogs/205532
 https://www.cnblogs.com/dukuan/p/13524622.html
@@ -46,6 +35,8 @@ https://www.coderdocument.com/docs/kubernetes/v1.14/started/production_environme
   - kubespray
     - https://zhuanlan.zhihu.com/p/367564005
     - 升级 https://www.cnblogs.com/EthanSun/p/13652336.html
+
+
 - LVS：https://www.bilibili.com/video/BV1WY4y167ZG 
 - lvs：https://www.bilibili.com/video/BV15a4y1i7Dw/
 - lvs扫盲 https://blog.csdn.net/wzj_110/article/details/92680979  
@@ -58,30 +49,45 @@ kubernetes 更改iptables模式为ipvs:
 - https://github.com/gardener/gardener/issues/4599
 - https://github.com/cortexlabs/cortex/issues/1834
 - iptables和ipvs 规则下发探究
-# 8
-## 负载均衡
-- haproxy：https://www.bilibili.com/video/BV1gz4y1y7Nx
-- udemy-HAProxy https://www.udemy.com/course/haproxy-a/
-  
-- 腾讯课堂-Nginx https://ke.qq.com/user/index/index.html#/plan/cid=2292484&term_id=103595308
-  
-- kong apisix OpenResty
-# 9-10
-考完 阿里云ACE
 
+## ci/cd
+- https://developer.aliyun.com/article/984673
+- https://ansible.leops.cn/ 
+- https://www.xuliangwei.com/oldxu/1249.html
+- udemy-DevOps https://www.udemy.com/course/devops-catalog/
+- udemy-**Ansible** https://www.udemy.com/course/learn-ansible/
+- udemy-**Helm** https://www.udemy.com/course/helm-kubernetes-packaging-manager-for-developers-and-devops/
+- 优点知识-**GitLabCI** 实践课 https://youdianzhishi.com/web/course/1016/1390
+- 优点知识-**Jenkins** 实践 https://youdianzhishi.com/web/course/1013/1242
+- 腾讯课堂-Jenkins   https://ke.qq.com/user/index/index.html#/plan/cid=2202770&term_id=103587528
+- udemy-**Argo Workflows** https://www.udemy.com/course/hands-on-guide-to-argo-workflows-on-kubernetes/
+
+- [Jenkins](https://akomljen.com/set-up-a-jenkins-ci-cd-pipeline-with-kubernetes/)
+- groovy 
+- http://docs.idevops.site/jenkins/
+- http://docs.idevops.site/gitlabci/
+- https://www.qikqiak.com/post/gitlab-ci-k8s-cluster-feature/
+- Nexus,Artifactory,Harbor,maven-pom 配置私服权限管理 tekton
+- argo rollout https://atbug.com/canary-release-via-argo-rollouts-and-service-mesh/
+
+
+# 9
+## 负载均衡
+lvs + keepalived 
+- udemy-HAProxy https://www.udemy.com/course/haproxy-a/
+- 腾讯课堂-Nginx https://ke.qq.com/user/index/index.html#/plan/cid=2292484&term_id=103595308
+- kong **apisix** OpenResty
+
+//考完 阿里云ACE
+# 10
 ## 服务网格等
 istio vs consul vs linkerd
 - udemy-Istio https://www.udemy.com/course/istio-hands-on-for-kubernetes/
 - 优点知识-Kubernetes 网络训练营第1期 https://youdianzhishi.com/web/course/1021/1793
 - 优点知识-Kubernetes 网络训练营第2期 https://youdianzhishi.com/web/course/1029/2020
 - 优点知识-Kubernetes 网络训练营第3期 https://youdianzhishi.com/web/course/1031/2270
-## 存储
-- 优点知识-云原生存储 Rook 实战 https://youdianzhishi.com/web/course/1025/1850
-- 优点知识-Ceph 入门到实战  https://youdianzhishi.com/web/course/1019
-https://longhorn.io/
-- minio，nfs
-- https://nbailey.ca/post/cephfs-kvm-virtual-san/
-- https://docs.ceph.com/en/latest/rbd/libvirt/
+
+# 11
 
 ## 观测性
 - chao mesh https://litmuschaos.io/
@@ -92,8 +98,8 @@ https://longhorn.io/
 - udemy-Elasticsearch https://www.udemy.com/course/elasticsearch-complete-guide/
 
 - 腾讯课堂-prometheus+grafana https://ke.qq.com/user/index/index.html#/plan/cid=2803292&term_id=102912757
-- 腾讯课堂-zabbix5.0          https://ke.qq.com/user/index/index.html#/plan/cid=2767948&term_id=102875976
-# 11-12
+##- 腾讯课堂-zabbix5.0          https://ke.qq.com/user/index/index.html#/plan/cid=2767948&term_id=102875976
+# 12
 ## 数据库
 mysql ocp?
 PostgreSQL基于Pacemaker+Corosync+pcs的高可用
@@ -131,24 +137,87 @@ redis
 - react
 - node
 
-## ci/cd
-- https://developer.aliyun.com/article/984673
-- https://ansible.leops.cn/ https://www.xuliangwei.com/oldxu/1249.html
-- udemy-DevOps https://www.udemy.com/course/devops-catalog/
-- udemy-Ansible https://www.udemy.com/course/learn-ansible/
-- udemy-Helm https://www.udemy.com/course/helm-kubernetes-packaging-manager-for-developers-and-devops/
-- 优点知识-GitLabCI 实践课 https://youdianzhishi.com/web/course/1016/1390
-- 优点知识-Jenkins 实践 https://youdianzhishi.com/web/course/1013/1242
-- 腾讯课堂-Jenkins   https://ke.qq.com/user/index/index.html#/plan/cid=2202770&term_id=103587528
-- udemy-Argo Workflows https://www.udemy.com/course/hands-on-guide-to-argo-workflows-on-kubernetes/
 
-- [Jenkins](https://akomljen.com/set-up-a-jenkins-ci-cd-pipeline-with-kubernetes/)
-- groovy 
-- http://docs.idevops.site/jenkins/
-- http://docs.idevops.site/gitlabci/
-- https://www.qikqiak.com/post/gitlab-ci-k8s-cluster-feature/
-- Nexus,Artifactory,Harbor,maven-pom 配置私服权限管理 tekton
-- argo rollout https://atbug.com/canary-release-via-argo-rollouts-and-service-mesh/
+## 中间件
+这些中间件写成ansible，参考easyops
+hadoop(hdfs yarn)
+- https://zhuanlan.zhihu.com/p/524144786
+- https://www.cnblogs.com/zhangyinhua/p/7657937.html
+//kerberos  ranger  hive impala spark2 hbase
+
+ldap
+redis mysql mongodb
+kafka nacos rocketmq
+zookeeper [5小时]
+- https://www.bilibili.com/video/BV1Ph411n7Ep/
+- https://www.bilibili.com/video/BV1to4y1C7gw/
+
+- [etcd](https://www.bilibili.com/video/BV1eY4y1p774/),
+- [tomcat](https://www.bilibili.com/video/BV1WP41157ns/)
+- udemy-OpenVPN  https://www.udemy.com/course/openvpn-verstehen-und-einrichten-sicher-im-netzwerk/
+- lua https://wiki.luatos.com/luaGuide/introduction.html
+
+
+
+## 开发
+Python Django/flask sqlalchemy【了解就行，写几个demo，看看别人的CMDB，脚本要写的溜】
+Golang gin gorm【熟练CURD】
+React、TailwindCSS 【daisyui Bootstrap bulma sass shadcn-ui】【熟练写UI】 
+//Prisma/typeorm/sequelize Next.js、Socket.io、Node.js、Express.js
+Java nacos openfeign maven/gradle jvm native-image remote-debug arthas
+
+Dynamic Admission Control(动态准入控制器),自定义kube-scheduler，Operator，CRD
+
+### 开发待做
+- 环境效能平台+发布平台（istio智能路由，集成gitlab和argocd自动创建cicd流程）混部多集群管理 虚拟集群
+- 飞书机器人开发 gitlab 支持和告警拉群支持，+gpt分析k8s事件 https://github.com/justjavac/deno_feishu_bot_echo
+- 飞书审批demo
+## blog
+-1.本机GPU设置  k8s容器GPU共享
+- 2.k8s kind loadbalancer  部署合适的lb，且整理合适的临时k8s kind和
+- 3.vagrant2yaml配置文件，以及输出lb博客。
+- 4.terrform+istio打通多集群网络（混合云）multicloud https://www.kubecost.com/kubernetes-multi-cloud/kubernetes-load-balancer/
+- 5.云环境下的开发效率提升思考：jvm 调优和远程dbug，在云环境下实现流量镜像，流量切分，debug中断不退出
+- 6.runtime class
+  - kata容器 介绍容器安全和常见方案 在k8s上使用kata  这个写一篇blog和一篇doc简介页面(多网卡)
+  - https://github.com/weaveworks/ignite
+- 7.1-Argo rollout jvm预热
+- 8.基于k8s Ingress Nginx+OAuth2+Gitlab无代码侵入实现自定义服务的外部验证 www.pomerium.com
+- 9.多集群提高利用率 viture kubelet  2vcluster 集群多租户 
+- 10.-从HPA到KPA Pod 原地垂直伸缩 knative
+- 11.Sidecar 启动顺序分析 istio taken
+- 12.promethuse 告警机制
+- openTelemetry
+- argo workflow
+- [ETCD Cluster and Non-voting Learners](https://dev.to/simplytunde/etcd-cluster-and-non-voting-learners-4l0b) https://etcd.io/docs/v3.3/learning/learner/
+
+## 这些文章暂时不写
+- _深入kubelet创建容器流程
+负载均衡浅谈补充docs https://www.zhihu.com/question/601431201/answer/3059114526
+linux 进程状态补充docs https://www.zhihu.com/question/308716947/answer/3146219927?utm_id=0
+
+- 好文章 新角度
+  - https://blog.fatedier.com/2020/04/17/pod-loopcrash-of-k8s-subpath/
+  - https://blog.fatedier.com/2018/12/10/a-connect-timeout-problem-caused-by-k8s-pod-deleting/
+  - https://blog.fatedier.com/2020/07/22/k8s-pod-directional-migration/
+  - https://blog.fatedier.com/2019/04/02/k8s-custom-controller/
+  - https://blog.fatedier.com/2019/03/20/k8s-crd/
+  - https://blog.fatedier.com/2019/03/25/k8s-crd-authorization/
+  - https://blog.fatedier.com/2018/11/21/service-mesh-traffic-hijack/
+  - https://blog.fatedier.com/2022/08/15/istio-pods-crash-cause-full-push/
+  - https://blog.fatedier.com/2018/12/01/service-mesh-explore-local-node-lb/
+
+  - pod生命周期和优雅下线 
+    - https://zhuanlan.zhihu.com/p/158141567
+    - https://imroc.cc/kubernetes/best-practices/graceful-shutdown/persistent-connection.html
+    - 不仅仅是 PreStop hook https://aleiwu.com/post/tidb-opeartor-webhook/
+  - dns解析 https://www.hi-linux.com/posts/51040.html
+  - api鉴权
+    - https://zhuanlan.zhihu.com/p/624378284?utm_id=0
+    - https://developer.aliyun.com/article/706210
+
+# 暂时不看
+
 ## hashicorp
 
 - udemy-Consul 2023 (Hands-On Labs) https://www.udemy.com/course/hashicorp-consul/
@@ -157,87 +226,23 @@ redis
 - udemy-Vault Associate - Practice Exam - 2023 https://www.udemy.com/course/hashicorp-certified-vault-associate-practice-exam/
 - udemy-Terraform Associate Practice Exam 2023 https://www.udemy.com/course/terraform-associate-practice-exam/
 - udemy-Terraform Associate 2023 https://www.udemy.com/course/terraform-beginner-to-advanced/
-
-## 网络
-- 腾讯课堂-CCIE               https://ke.qq.com/user/index/index.html#/plan/cid=300249&term_id=104217633
-- 腾讯课堂-思科SDN/网络编程/DC https://ke.qq.com/user/index/index.html#/plan/cid=472811&term_id=100566186
-- 腾讯课堂-CCNP               https://ke.qq.com/user/index/index.html#/plan/cid=205745&term_id=103423596
-- 腾讯课堂-CCNA               https://ke.qq.com/user/index/index.html#/plan/cid=210374&term_id=103258927
-- 极客时间-网络协议集训班-陶辉 https://time.geekbang.org/course/detail/100102201-472901
-
-
-## 中间件
-这些中间件写成ansible，参考easyops
-kerberos
-hdfs
-ranger
-yarn
-hive
-impala
-spark2
-hbase
-
-nacos
-rocketmq
-
-redis
-grafana
-logstash
-ldap
-kafka
-zookeeper [5小时]
-- https://www.bilibili.com/video/BV1Ph411n7Ep/
-- https://www.bilibili.com/video/BV1to4y1C7gw/
-
-- [etcd](https://www.bilibili.com/video/BV1eY4y1p774/),
-- [tomcat](https://www.bilibili.com/video/BV1WP41157ns/)
-- udemy-OpenVPN  https://www.udemy.com/course/openvpn-verstehen-und-einrichten-sicher-im-netzwerk/
-- 优点知识-打造云原生大型分布式监控系统 https://youdianzhishi.com/web/course/1015/1389
-- 优点知识-Webpack3.x 快速入门https://youdianzhishi.com/web/course/1003/1009
-- 优点知识-云原生免费公开课 https://youdianzhishi.com/web/course/1014/1475
-- lua https://wiki.luatos.com/luaGuide/introduction.html
-
-
-
-
-
-
-
-## 写作
-terrform打通多集群网络（混合云）
-Kubernetes-The-Hard-Way-Translate
-  翻译原文并添加 vagrant/Terraform 实验环境,集成 crowdin 翻译  
-  Kubernetes the hard way on Vagrant on Local Machine. No scripts.  
-各种中间件 
-  hadoop+kerberos+flink+zookeeper+kafka+HBase
-  nacos ElasticSearch Kong RocketMQ
-## 开发
-Python Django/flask sqlalchemy【了解就行，写几个demo，看看别人的CMDB，脚本要写的溜】
-Golang gin gorm【熟练CURD】
-React、TailwindCSS 【熟练写UI】 //Prisma/typeorm/sequelize Next.js、Socket.io、Node.js、Express.js
-Java nacos openfeign maven/gradle jvm native-image remote-debug arthas
-
-我对 multicloud,Dynamic Admission Control(动态准入控制器),自定义kube-scheduler，Operator，CRD ，Kubernetes的实现方法感兴趣，想进一步深入了解 Kubernetes 。
-
-### 开发待做
-- k8s 运维平台 https://github.com/erda-project/erda
-- 环境效能平台（istio智能路由，集成gitlab和argocd自动创建cicd流程）混部多集群管理 虚拟集群
-- 飞书机器人开发 gitlab 支持和告警拉群支持，+gpt分析k8s事件 https://github.com/justjavac/deno_feishu_bot_echo
-- 飞书审批demo
-- openvpn otp 管理平台 集成飞书 ldap auth2等 动态身份验证器 环境代理 VPN。openldap管理 http://ldapdoc.eryajf.net
-
-- nacos 优雅下线工具 配置管理gitops工具
-- jvm 调优和远程dbug，在云环境下实现流量镜像，流量切分，debug中断不退出
 - 熟悉主流云平台，如 AWS,阿里云等的管理工具，精通 InfrastructureasCode 理念，熟练掌握 Terraform，CloudFormaction。
 
+## 存储
+- 优点知识-云原生存储 Rook 实战 https://youdianzhishi.com/web/course/1025/1850
+- 优点知识-Ceph 入门到实战  https://youdianzhishi.com/web/course/1019
+https://longhorn.io/
+- minio，nfs
+- https://nbailey.ca/post/cephfs-kvm-virtual-san/
+- https://docs.ceph.com/en/latest/rbd/libvirt/
+- openvpn otp 管理平台 集成飞书 ldap auth2 https://www.pomerium.com/ 等 动态身份验证器 环境代理 VPN。openldap管理 http://ldapdoc.eryajf.net
+- k8s 运维平台 https://github.com/erda-project/erda
+- nacos 优雅下线工具 配置管理gitops工具
 - 这个高可用概念类似k8s service，能否搞一个脱离k8s的services
   - ebpf ipvs？https://www.ebpf.top/post/xdp_lb_demo/
   - https://juejin.cn/post/7086751522008072206
   - https://github.com/labring/lvscare
 
-
-
-# 暂时不看
   - AI：
     - 绘画
     - 代码提示 
@@ -246,6 +251,15 @@ Java nacos openfeign maven/gradle jvm native-image remote-debug arthas
     - k8s助手
     - sql助手
   - https://github.com/localstack/localstack
+
+
+## 网络
+- 腾讯课堂-CCIE               https://ke.qq.com/user/index/index.html#/plan/cid=300249&term_id=104217633
+- 腾讯课堂-思科SDN/网络编程/DC https://ke.qq.com/user/index/index.html#/plan/cid=472811&term_id=100566186
+- 腾讯课堂-CCNP               https://ke.qq.com/user/index/index.html#/plan/cid=205745&term_id=103423596
+- 腾讯课堂-CCNA               https://ke.qq.com/user/index/index.html#/plan/cid=210374&term_id=103258927
+- 极客时间-网络协议集训班-陶辉 https://time.geekbang.org/course/detail/100102201-472901
+
 ## 高等数学
 - 腾讯课堂-高等数学（上）      https://ke.qq.com/user/index/index.html#/plan/cid=425893&term_id=100508320
 - 腾讯课堂-高等数学（下）      https://ke.qq.com/user/index/index.html#/plan/cid=425895&term_id=100508328
@@ -292,26 +306,3 @@ sechdurel 调度器 授权过程，自定义审计控制器
 
 
 
-## 这些文章暂时不写
-负载均衡浅谈补充docs https://www.zhihu.com/question/601431201/answer/3059114526
-linux 进程状态补充docs https://www.zhihu.com/question/308716947/answer/3146219927?utm_id=0
-
-- 好文章 新角度
-  - https://blog.fatedier.com/2020/04/17/pod-loopcrash-of-k8s-subpath/
-  - https://blog.fatedier.com/2018/12/10/a-connect-timeout-problem-caused-by-k8s-pod-deleting/
-  - https://blog.fatedier.com/2020/07/22/k8s-pod-directional-migration/
-  - https://blog.fatedier.com/2019/04/02/k8s-custom-controller/
-  - https://blog.fatedier.com/2019/03/20/k8s-crd/
-  - https://blog.fatedier.com/2019/03/25/k8s-crd-authorization/
-  - https://blog.fatedier.com/2018/11/21/service-mesh-traffic-hijack/
-  - https://blog.fatedier.com/2022/08/15/istio-pods-crash-cause-full-push/
-  - https://blog.fatedier.com/2018/12/01/service-mesh-explore-local-node-lb/
-
-  - pod生命周期和优雅下线 
-    - https://zhuanlan.zhihu.com/p/158141567
-    - https://imroc.cc/kubernetes/best-practices/graceful-shutdown/persistent-connection.html
-    - 不仅仅是 PreStop hook https://aleiwu.com/post/tidb-opeartor-webhook/
-  - dns解析 https://www.hi-linux.com/posts/51040.html
-  - api鉴权
-    - https://zhuanlan.zhihu.com/p/624378284?utm_id=0
-    - https://developer.aliyun.com/article/706210

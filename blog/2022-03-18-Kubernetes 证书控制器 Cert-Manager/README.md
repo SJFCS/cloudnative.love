@@ -3,7 +3,9 @@ title: Kubernetes 证书控制器 Cert-Manager
 tags: [Kubernetes,Cert-Manager]
 ---
 
-<!-- 之前用过一个基于Cert-Manager的一个闭源证书管理工具，橙黄色的界面，集成了证书状态安全扫描等等  忘记叫啥名字了以后想起来了再说 -->
+<!-- 之前用过一个基于Cert-Manager的一个闭源证书管理工具，橙黄色的界面，集成了证书状态安全扫描等等  忘记叫啥名字了以后想起来了再说
+https://web.yueh.dev/tutorial/how-to-setup-ambassador-edge-stack-s-automatic-tls-with-acme
+ -->
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

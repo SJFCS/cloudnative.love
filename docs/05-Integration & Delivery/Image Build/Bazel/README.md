@@ -1,6 +1,7 @@
 ---
 title: Bazel📝
 ---
+https://static.googleusercontent.com/media/research.google.com/en/us/pubs/archive/37755.pdf
 
 https://developer.aliyun.com/article/1150284
 
