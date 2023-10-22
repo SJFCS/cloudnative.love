@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: test-nginx
+  template:
+    metadata:
+      labels:
+        run: test-nginx
+    spec:
+      containers:
+      - name: test-nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-nginx
+  labels:
+    app: test-nginx
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    name: http
+  selector:
+    run: test-nginx
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-nginx
+  annotations:
+    cert-manager.io/issuer: cloudflare-issuer
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: test-nginx.cloudnative.love
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: test-nginx
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - test-nginx.cloudnative.love
+    secretName: test-nginx
+
+# kubectl get secret <secret-name> -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -text
+# kubectl get secret <secret-name> -o jsonpath='{.data.tls\.key}' | base64 -d | openssl rsa -text

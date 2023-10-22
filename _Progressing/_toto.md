@@ -2,7 +2,7 @@ https://iximiuz.com/en/
 https://github.com/yangpeng14/DevOps/tree/master
 
 
-## k8s 部署：  
+## k8s 复习：  
 新的部署工具
   https://www.padok.fr/en/blog/k0s-kubernetes-gpu
   https://k0sproject.io/
@@ -36,6 +36,12 @@ https://www.coderdocument.com/docs/kubernetes/v1.14/started/production_environme
     - https://zhuanlan.zhihu.com/p/367564005
     - 升级 https://www.cnblogs.com/EthanSun/p/13652336.html
 
+# 9
+## 负载均衡
+lvs + keepalived 
+- udemy-HAProxy https://www.udemy.com/course/haproxy-a/
+- 腾讯课堂-Nginx https://ke.qq.com/user/index/index.html#/plan/cid=2292484&term_id=103595308
+- kong **apisix** OpenResty
 
 - LVS：https://www.bilibili.com/video/BV1WY4y167ZG 
 - lvs：https://www.bilibili.com/video/BV15a4y1i7Dw/
@@ -71,23 +77,18 @@ kubernetes 更改iptables模式为ipvs:
 - argo rollout https://atbug.com/canary-release-via-argo-rollouts-and-service-mesh/
 
 
-# 9
-## 负载均衡
-lvs + keepalived 
-- udemy-HAProxy https://www.udemy.com/course/haproxy-a/
-- 腾讯课堂-Nginx https://ke.qq.com/user/index/index.html#/plan/cid=2292484&term_id=103595308
-- kong **apisix** OpenResty
+
 
 //考完 阿里云ACE
-# 10
+# ========================= 10 =======================
+
+# 11
 ## 服务网格等
 istio vs consul vs linkerd
 - udemy-Istio https://www.udemy.com/course/istio-hands-on-for-kubernetes/
 - 优点知识-Kubernetes 网络训练营第1期 https://youdianzhishi.com/web/course/1021/1793
 - 优点知识-Kubernetes 网络训练营第2期 https://youdianzhishi.com/web/course/1029/2020
 - 优点知识-Kubernetes 网络训练营第3期 https://youdianzhishi.com/web/course/1031/2270
-
-# 11
 
 ## 观测性
 - chao mesh https://litmuschaos.io/
@@ -99,25 +100,7 @@ istio vs consul vs linkerd
 
 - 腾讯课堂-prometheus+grafana https://ke.qq.com/user/index/index.html#/plan/cid=2803292&term_id=102912757
 ##- 腾讯课堂-zabbix5.0          https://ke.qq.com/user/index/index.html#/plan/cid=2767948&term_id=102875976
-# 12
-## 数据库
-mysql ocp?
-PostgreSQL基于Pacemaker+Corosync+pcs的高可用
-MySQL mgr+mysqlrouter高可用架构及配置
-
-- https://www.bilibili.com/video/BV1Kr4y1i7ru/
-- https://www.udemy.com/course/mysql-high-performance-tuning-guide/
-- 一天学会mysql：https://www.bilibili.com/video/BV1Vt411z7wy/
-- https://www.bilibili.com/video/BV12J411Q7gV/
-- udemy- MySQL High Performance Tuning Guide https://www.udemy.com/course/mysql-high-performance-tuning-guide/
-MongoDB 性能排查。指标监控。主从复制。数据备份。冷数据分析 预计2天
-- https://www.bilibili.com/video/BV1WS4y1p7jK/
-redis 
-- https://www.bilibili.com/video/BV1AP411w75B
-- https://www.bilibili.com/video/BV1ZK411M7ov
-- https://www.bilibili.com/video/BV1zN4y1A7fA
-
-# 1 2 3
+# 12 
 ## golang
 - udemy-Golang https://www.udemy.com/course/go-the-complete-developers-guide/
 - 优点知识-Go 运维开发训练营第1期 https://youdianzhishi.com/web/course/1035/2530
@@ -156,8 +139,23 @@ zookeeper [5小时]
 - [tomcat](https://www.bilibili.com/video/BV1WP41157ns/)
 - udemy-OpenVPN  https://www.udemy.com/course/openvpn-verstehen-und-einrichten-sicher-im-netzwerk/
 - lua https://wiki.luatos.com/luaGuide/introduction.html
+# 1 2 3
+## 数据库
+mysql ocp?
+PostgreSQL基于Pacemaker+Corosync+pcs的高可用
+MySQL mgr+mysqlrouter高可用架构及配置
 
-
+- https://www.bilibili.com/video/BV1Kr4y1i7ru/
+- https://www.udemy.com/course/mysql-high-performance-tuning-guide/
+- 一天学会mysql：https://www.bilibili.com/video/BV1Vt411z7wy/
+- https://www.bilibili.com/video/BV12J411Q7gV/
+- udemy- MySQL High Performance Tuning Guide https://www.udemy.com/course/mysql-high-performance-tuning-guide/
+MongoDB 性能排查。指标监控。主从复制。数据备份。冷数据分析 预计2天
+- https://www.bilibili.com/video/BV1WS4y1p7jK/
+redis 
+- https://www.bilibili.com/video/BV1AP411w75B
+- https://www.bilibili.com/video/BV1ZK411M7ov
+- https://www.bilibili.com/video/BV1zN4y1A7fA
 
 ## 开发
 Python Django/flask sqlalchemy【了解就行，写几个demo，看看别人的CMDB，脚本要写的溜】
@@ -173,12 +171,12 @@ Dynamic Admission Control(动态准入控制器),自定义kube-scheduler，Opera
 - 飞书机器人开发 gitlab 支持和告警拉群支持，+gpt分析k8s事件 https://github.com/justjavac/deno_feishu_bot_echo
 - 飞书审批demo
 ## blog
--1.本机GPU设置  k8s容器GPU共享
-- 2.k8s kind loadbalancer  部署合适的lb，且整理合适的临时k8s kind和
+- 1.本机GPU设置  k8s容器GPU共享
+#- 2.k8s kind loadbalancer  部署合适的lb，且整理合适的临时k8s kind和
 - 3.vagrant2yaml配置文件，以及输出lb博客。
 - 4.terrform+istio打通多集群网络（混合云）multicloud https://www.kubecost.com/kubernetes-multi-cloud/kubernetes-load-balancer/
 - 5.云环境下的开发效率提升思考：jvm 调优和远程dbug，在云环境下实现流量镜像，流量切分，debug中断不退出
-- 6.runtime class
+#- 6.runtime class
   - kata容器 介绍容器安全和常见方案 在k8s上使用kata  这个写一篇blog和一篇doc简介页面(多网卡)
   - https://github.com/weaveworks/ignite
 - 7.1-Argo rollout jvm预热
@@ -235,6 +233,8 @@ https://longhorn.io/
 - minio，nfs
 - https://nbailey.ca/post/cephfs-kvm-virtual-san/
 - https://docs.ceph.com/en/latest/rbd/libvirt/
+
+
 - openvpn otp 管理平台 集成飞书 ldap auth2 https://www.pomerium.com/ 等 动态身份验证器 环境代理 VPN。openldap管理 http://ldapdoc.eryajf.net
 - k8s 运维平台 https://github.com/erda-project/erda
 - nacos 优雅下线工具 配置管理gitops工具

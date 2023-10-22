@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: nginxdemo.cloudnative.love
+
+    # target 是cname ，hostname默认会用service的lb地址做a记录
+
+    # external-dns.alpha.kubernetes.io/target: nginx-ingress.cloudnative.love
+    # 注意服务上的注释；使用与上面创建的 Cloudflare DNS 区域相同的主机名。注释也可以是 DNS 区域的子域（例如“ www.example.com ”）。
+    external-dns.alpha.kubernetes.io/ttl: "120" #optional
+    # 通过在服务上设置 TTL 注释，您必须传递有效的 TTL，该 TTL 必须为 120 或以上。此注释是可选的，如果您不设置它，它将是 1（自动），即 300。对于 Cloudflare 代理条目，请将 TTL 注释设置为 1（自动），或者不设置它。
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+    # 您可以指定是否应为该记录启用 Cloudflare 的代理功能。该设置将覆盖全局--cloudflare-proxied设置。
+
+spec:
+  selector:
+    app: nginx
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: example
+  spec:
+    ingressClassName: nginx
+    rules:
+      - host: nginxdemo.cloudnative.love
+        http:
+          paths:
+            - pathType: Prefix
+              backend:
+                service:
+                  name: nginx
+                  port:
+                    number: 80
+              path: /

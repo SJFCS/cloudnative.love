@@ -62,6 +62,9 @@ fileal.txt filea2.txt fileb.txt filec.txt
 [user@host glob]$mkdir ../RHEL[6,7,8}
 [user@host glob]$ls ../RHEL*
 RHEL6 RHEL7 RHEL8
+
+mkdir -pv /demo/test{1，2，3}
+mv demoxx{,.back}
 ```
 ## 变量扩展
 变量的作用类似于可以在内存中存储值的命名容器。通过变量，可以从命令行或在 shl 脚本内轻松

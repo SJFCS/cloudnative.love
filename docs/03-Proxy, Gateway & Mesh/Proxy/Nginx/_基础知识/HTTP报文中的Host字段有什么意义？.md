@@ -1,0 +1,1 @@
+VirtualHost，又叫虚拟主机，是十几年前主流的中小站建站方式。对服务商来说，一台 Linux 服务器，装上 Apache，启用 VirtualHost 功能，映射到不同的目录，然后设好权限就能卖了。对用户来说，买到了虚拟主机，只能通过 ftp 上传 php 脚本到自己的空间。这就是所谓的 LAMP 架构（Linux + Apache + MySQL + PHP）。在这个模式下，一台 Apache 服务器可能有好多的网站，这些网站的域名都绑定到了这个 IP。而 Apache 就是通过 Host 这个字段来判断应该返回哪个网站的内容的。

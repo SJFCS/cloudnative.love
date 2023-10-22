@@ -1,5 +1,8 @@
 cicd 退出状态码
 
+cat /etc/resolv.conf |grep -oP '(?<=nameserver\ ).*'
+
+
 # grep 与正则表达式
 
 grep 是一款非常流行的文本搜索工具，它根据正则表达式对文本进行搜索，并输出匹配的行或文本。

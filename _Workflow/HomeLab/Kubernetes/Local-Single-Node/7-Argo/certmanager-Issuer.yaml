@@ -12,9 +12,27 @@ spec:
     email: "song.jinfeng@outlook.com"
     # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
-      name: letsencrypt-argocd
+      name: letsencrypt-argocd-account-key
     # Enable the HTTP-01 challenge provider
+    # solvers:
+    #   - http01:
+    #       ingress:
+    #         ingressClassName: nginx
     solvers:
-      - http01:
-          ingress:
-            ingressClassName: nginx
+    - dns01:
+        cloudflare:
+          # email: my-cloudflare-acc@example.com # 替换成你的 cloudflare 邮箱账号，API Token 方式认证非必需，API Keys 认证是必需
+          apiTokenSecretRef:
+            key: api-token
+            name: cloudflare-api-token-secret # 引用保存 cloudflare 认证信息的 Secret
+
+
+# kubectl create secret generic cloudflare-api-token-secret -n cert-manager --from-literal=api-token=
+
+
+#     solvers:
+#     - dns01:
+#         cloudflare:
+#           apiTokenSecretRef:
+#             name: cloudflare-api-token
+#             key: api-token
