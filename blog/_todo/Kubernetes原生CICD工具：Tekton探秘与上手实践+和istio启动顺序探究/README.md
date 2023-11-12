@@ -163,7 +163,7 @@ spec:
 ```
 
 由于Tekton会给每个构建的容器都挂载/workspace这个目录，所以每一个steps步骤里都可以在/workspace中找到上一步执行的产物。  
-git拉取代码可以认为是一个默认的steps，这个steps的逻辑里Tekton会把代码放到/workspace/{resources.name}中。上面我们定义的PipelineResource名为ncs-git-resource，所以ncs这个工程的代码会被放在/workspace/ncs-git-resource目录中。  
+git拉取代码可以认为是一个默认的steps，这个steps的逻辑里Tekton会把代码放到/workspace/`{resources.name}`中。上面我们定义的PipelineResource名为ncs-git-resource，所以ncs这个工程的代码会被放在/workspace/ncs-git-resource目录中。  
 所以在maven-install这个steps中，我们需要在/workspace/ncs-git-resource中执行mvn命令，这里我们可以使用workingDir字段表示将该目录设置为当前的工作目录。同时为了避免写死，这里我们定义为一个input的变量params，在workingDir中使用`${}`的方式引用即可。
 
 实际的使用中，由于每次构建都是新起容器，在容器中执行maven命令，一般都是需要将maven的m2目录挂载出来，避免每次编译打包都需要重新下载jar包。

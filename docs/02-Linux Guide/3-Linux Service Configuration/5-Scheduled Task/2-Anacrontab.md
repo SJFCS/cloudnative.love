@@ -6,7 +6,7 @@ title: Anacrontab
 
 如果系统上同时运行了 crond 和 anacron，则可能会出现计划任务的冲突。为了避免这种情况，我们使用 crond 来解释 `/etc/anacrontab` 文件。
 
-:::caution
+:::warning
 /etc/anacrontab 支持使用 NAME=value 的环境变量声明，但要注意 `START_HOURS_RANGE` 变量，它制定了任务运行的时间间隔，若超出此范围则任务将不会启动。如果某一天任务在此时间间隔内未运行，则必须等到第二天才能执行。
 :::
 ## 常用命令

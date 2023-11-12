@@ -19,7 +19,7 @@ Kubernetes 已经成为云原生应用编排和管理的事实标准。在 v1.26
 - Nvidia Container Runtime 的配置
 - Kubernetes 通过 GPU plugin 实现 GPU 调度支持
 - Kubernetes 开启共享 Nvidia GPU 资源配置
-<!--truncate-->
+<!-- truncate -->
 
 尽管本文以 Arch Linux 作为基本环境，但同样适用于其他发行版。
 

@@ -6,7 +6,7 @@ PXE（Preboot Execution Environment）是一种计算机启动方式，常用于
 使用 ISC DHCP 和 PXELINUX 实现 PXE 启动的流程如下：
 
 安装并配置 ISC DHCP 服务器。在 DHCP 配置文件 dhcpd.conf 中添加如下代码：
-
+```
 subnet 192.168.1.0 netmask 255.255.255.0 {
     range 192.168.1.10 192.168.1.20;
     option routers 192.168.1.1;
@@ -14,6 +14,7 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
     filename "pxelinux.0";
     next-server 192.168.1.100;
 }
+```
 其中，filename 指定了 PXELINUX 启动程序的名称（可以根据具体情况进行修改），next-server 指定了 TFTP 服务器（本例中使用 192.168.1.100）。还可以在需要静态分配 IP 地址的主机中使用 host 命令添加条目。
 
 安装 PXELINUX。首先需要安装 TFTP 服务器并将 PXELINUX 的启动文件和操作系统镜像（如 Linux 或 Windows）复制到服务器上的 TFTP 根目录中。

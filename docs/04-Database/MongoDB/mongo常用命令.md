@@ -68,9 +68,11 @@ db.person.insert({ _id:1, name:"zs" })  // 失败
 
 
 #### 测试例子和数据
+```
 * find(${where条件}，${0和1控制返回字段})   如果没有查询，那就用{}表示，不能省略。而显示与否的{}可以省略的
 - db.student.find({name:"name1"},{name:1,age:1})
 - db.student.find({},{name:1,age:1})
+```
 ```
 db.student.save({_id:1,classid:1,age:18,name:"name1",love:["football","swing","cmpgame"]});
 db.student.save({_id:2,classid:2,age:19,name:"name2",love:["play"]});

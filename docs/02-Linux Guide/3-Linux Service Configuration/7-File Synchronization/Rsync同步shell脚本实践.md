@@ -73,7 +73,7 @@ rsync -avz   /opt rsync_backup@10.50.1.101::backup
 
 ### 流程图
 ![1687493780300](image/Rsync同步shell脚本实践/1687493780300.png)
-:::caution 注意事项
+:::warning 注意事项
 - rsync_backup：客户端通过该虚拟用户链接rsync服务，由配置文件中【auth users】定义。虚拟用户密码文件由【secrets file】定义
 - rsync：模块对应的目录，必须授权为配置文件中定义的UID和GID的用户
 :::

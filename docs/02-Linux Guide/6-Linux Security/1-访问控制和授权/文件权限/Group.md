@@ -19,7 +19,7 @@ newgrp docker
 -  `sg webdev -c "command"` 使用某个组 id 启动命令(并在 shell 中保持当前特权) 
 (sg 与 su 类似，但适用于组，如果您在系统数据中被列为组的成员，则不需要组密码即可工作)
 
-您可以使用 getent group { name }命令检查组成员资格:
+您可以使用 getent group \{ name \}命令检查组成员资格:
 ```bash
 $ getent group webdev
 webdev:x:1008:webdev,takpar

@@ -27,7 +27,7 @@ sudo systemctl enable --now ntpd
 ```
 然后使用 `ntpq -p` 命令观察是否同步。`*` 代表当前同步的源
 
-:::caution
+:::warning
 如果本机与上源时间相差太大, ntpd 可能不会运行。  
 - 可在启动 ntpd 前使用 `sudo ntpdate ntp.aliyun.com` 或 `sudo ntpd -qg` 从上源取得时间初值。(-g 允许第一次调整很大, -q 设置时间后退出进程)  
 - 在此处 `cat /etc/sysconfig/ntpd` 加入 `OPTIONS="-g"` 也是有效的

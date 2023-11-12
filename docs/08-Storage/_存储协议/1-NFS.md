@@ -212,14 +212,14 @@ showmount -e [IP]
  告诉挂载命令将要挂载的文件系统类型。这个选项并不是必须的，因为mount会自动识别大多数的文件系统。
  **-r** 或 **-o ro**
  以只读形式挂载卷。挂载操作默认以可读写形式挂载卷。除非指明，否则驱动将会以只读形式自动挂载文件系统。
- **-o umask={VALUE}**
+ **`-o umask={VALUE}`**
  因为安全的原因，默认给予已挂载的NTFS卷的权限为rwx------。参数umask控制这些文件和路径的权限。详细的资料和例子请参见[4.9节](https://flatcap.org/linux-ntfs/info/ntfs-zh.html#4.9)。
 
 ```
 mount /dev/hda1 /mnt/windows -t ntfs -r -o umask=0222
 ```
 
-**-o uid={USERID}**
+**`-o uid={USERID}`**
  已挂载的NTFS卷上所有文件默认都是root所有的。如果提供uid参数就可以设置文件的所有者。这些参数可以是/etc/passwd中的任何用户名，或者任何表示用户id的数字
 
 ```
@@ -227,7 +227,7 @@ mount /dev/hda1 /mnt/windows -t ntfs -r -o uid=flatcap
 mount /dev/hda1 /mnt/windows -t ntfs -r -o uid=500
 ```
 
-**-o gid={GROUPID}**
+**`-o gid={GROUPID}`**
  已挂载的NTFS卷上所有的文件默认都是root组所有的。如果提供gid参数就可以设置文件的组。这些参数可以是/etc/group中的组名，或者任何表示组id的数字。
 
 ```

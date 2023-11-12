@@ -18,7 +18,7 @@ log-facility local7;
 这通常用于在动态 IP 地址环境中自动更新 DNS 记录，以使 DNS 始终反映客户端的当前 IP 地址  
 当 DHCP 客户端获取到IP地址并进行续租时，它会自动将自己的主机名和IP地址信息提交给DHCP服务器，然后DHCP服务器会相应地更新 DNS 服务器上的记录。这种自动更新 DNS 记录的方式称为"动态DNS"（Dynamic DNS，DDNS）。  
 如果您使用动态 IP 地址，建议开启 `ddns-update-style` 参数，如果您使用的是静态 IP 地址，则不需要开启此参数。
-:::caution
+:::warning
 - 如果禁用动态 DNS 更新，则需要手动更新 DNS 记录，否则可能会导致 DNS 解析错误。
 - 启用 `ddns-update-style` 可能会导致安全风险，因为它允许客户端动态更新 DNS 记录。
 - 结合ldap分配固定IP？
@@ -58,7 +58,7 @@ ignore client-updates;
 
 ```
 通常，如果 DHCP 客户端发现它的 IP 地址和 DNS 服务器地址已经发生了变化，它会向 DHCP 服务器发送一个更新请求，以便让 DHCP 服务器更新 DNS 记录。但是，如果 DHCP 服务器已经配置了静态 DNS 记录，并且不允许客户端更新 DNS 记录，那么可以使用`ignore client-updates`选项来禁止 DHCP 服务器接受客户端的 DNS 更新请求。  
-:::caution
+:::warning
 需要注意的是，如果忽略客户端更新，则需要手动更新 DNS 记录，否则可能会导致 DNS 解析错误。
 :::
 
@@ -79,7 +79,7 @@ authoritative
 # 用于指定DHCP服务器是否应该作为"权威"服务器。
 ```
 如果将该选项设置为 "authoritative"，那么 DHCP 服务器将被认为是"权威"的，这意味着它可以为所有 DHCP 客户端提供 IP 地址和其他配置参数，而不需要与其他DHCP 服务器协调。  
-:::caution
+:::warning
 需要注意的是，如果在一个网络中有多个 DHCP 服务器，那么只能有一个 DHCP 服务器被配置为 "authoritative"，以避免 IP 地址冲突。
 :::
 ```bash
@@ -87,7 +87,7 @@ next-server marvin.redhat.com;
 # 用于指定 PXE 网络引导中 TFTP 服务器的 IP 地址或主机名。
 ```
 当PXE客户端成功获取到这些配置信息后，它会继续向DHCP服务器发送一个TFTP服务请求，以获取引导程序所需的文件。
-:::caution
+:::warning
 需要注意的是，如果PXE客户端无法获取到next-server选项的值，那么它将无法进行网络引导。因此，在PXE网络引导中，正确配置next-server选项非常重要。
 :::
 
@@ -112,7 +112,7 @@ next-server marvin.redhat.com;
 确保 DHCP 服务器和 DNS 服务器运行正常，并打开了对应的服务。此外，还需要安装与配置管理 ISC DHCP 和得益于 DHCP 动态 DNS 绑定的 DNS 服务器。
 
 打开 ISC DHCP 配置文件，找到要添加 ddns 设置的子网，加入以下代码：
-
+```
 zone example.com.
 primary 192.0.2.1;
 key "mykey" {
@@ -131,6 +131,7 @@ ddns-updates on;
 ddns-update-style none;
 allow client-updates;
 ddns-domainname-servers ns1.example.com., ns2.example.com.;
+```
 这里主要设置：
 
 key：密钥用于提供身份验证和安全性。
@@ -139,12 +140,13 @@ ignore client-updates：忽略客户端发起的 DDNS 更新请求，这是一�
 allow client-updates：允许客户端发起的 DDNS 更新请求，这是一个可选项。
 ddns-domainname-servers：指定 DNS 服务器列表。
 在每个 DHCP 客户端配置中，使用 ddns-hostname 属性指定主机名和域名，例如：
-
+```
 host test {
   hardware ethernet 08:00:07:26:c0:a5;
   fixed-address 192.0.2.10;
   ddns-hostname "test.example.com";
 }
+```
 这里 ddns-hostname 属性指定了客户端的主机名和域名。 客户端在向 DHCP 服务器请求新的 IP 地址时，DHCP 服务器将使用这些信息来动态地为客户端在 DNS 上创建相应的 A/AAAA 记录 。
 
 至此，ISC DHCP 就配置完成了 DDNS 设置。当某个客户端在 DHCP 服务器上启用并绑定了 DDNS 功能时，它就可以自动地为其动态 IP 地址创建或更新 DNS A/AAAA 记录。 请注意，对于 DDNS 的使用要求网络与 DNS 系统的完美配合，只有这样该功能才能正常工作。

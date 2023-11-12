@@ -31,7 +31,7 @@ title: rsync + inotify 实现数据实时同步
 
 此时尝试将源端上面的一个文件同步到目标端的`/tmp`目录下：
 
-:::caution
+:::warning
 不仅源端主机需要安装 rsync，而且目标端服务器也需要安装 rsync
 
 否则会提示 `rsync error: remote command not found (code 127) at io.c(226)`

@@ -92,7 +92,7 @@ zone "0.0.127.in-addr.arpa" IN {
 };
 ```
 
-:::caution
+:::warning
 /etc/named*的属组都是named，且权限要为640。
 
 ```bash

@@ -19,7 +19,7 @@ Cert-Manager 是 Kubernetes 上的全能证书管理工具，本文利用 Cert-M
 Let's Encrypt 利用 ACME 协议校验域名的归属，校验成功后可以自动颁发免费证书。免费证书有效期只有90天，需在到期前再校验一次实现续期。使用 Cert-Manager 可以自动续期，即实现永久使用免费证书。
 :::
 
-<!--truncate-->
+<!-- truncate -->
 
 ## Cert-Manager 工作原理
 

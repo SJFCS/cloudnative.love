@@ -59,7 +59,7 @@ progress 命令常用的选项：
 -   \-c / --command  监控指定命令的名称 (ex: firefox)。
 -   \-p / --pid id               监控指定进程的 PID (ex: `pidof firefox`)。
 -   \-i / --ignore-file file        忽略指定文件。
--   \-o / --open-mode {r|w}       报告文件的打开模式。
+-   \-o / --open-mode \{r|w\}       报告文件的打开模式。
 -   \-v / --version                 打印命令的版本。
 -   \-h / --help                    打印帮助信息。
 

@@ -79,7 +79,7 @@ service sshd restart
 
 在安装过程中我遇到过多个不同的错误，在总结这篇短文时，才发现那些都是弯路。
 
-ssh连接时出错：error Could not get shadow information for <user>
+ssh连接时出错：error Could not get shadow information for `<user>`
 服务启动成功，用户密码也都对，就是无法建立连接，可能是UsePAM和SELinux的问题。
 
 客户端登录时，即便输入了正确的密码，仍然提示：

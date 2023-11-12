@@ -9,7 +9,7 @@ This Wiki is used to organize and record various technical knowledge and practic
 
 Either start reading the notes, by clicking the button below, or contribute and help improve the notes!
 
-<!--truncate-->
+<!-- truncate -->
 
 import GetStartedCard from '@site/src/components/GetStartedCard';
 

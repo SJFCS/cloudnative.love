@@ -26,7 +26,7 @@ WantedBy=sysstat.service
 
 可以使用参数（如OnUnitActiveSec）来指定相对定时器，如 OnUnitActiveSec=5min 选项将使用定时器单元再改定时器单元最后一次激活其相应单元15分钟后触发相应单元
 
-:::caution
+:::warning
 请勿修改 /usr/lib/systemd/system 目录下的任何单元配置文件，其会被软件包更新所覆盖。
 请在 /etc/systemd/system 目录下复制您要更改带的单元配置文件
 如果 存在两个同名的文件，则/etc/systemd/system目录下的文件生效

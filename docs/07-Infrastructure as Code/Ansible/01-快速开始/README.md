@@ -54,7 +54,7 @@ Ansible 通过 SSH 协议连接远程主机进行操作，为了安全考虑建�
 <details style={{backgroundColor: 'rgb(255, 248, 230)', border: '1px solid rgb(230, 167, 0)'}}>
 <summary>sshpass 安全问题和建议</summary>
 
-:::caution
+:::warning
 sshpass 存在以下安全问题：
 - 密码以明文形式传递，在查看 sshpass 进程时，可能会获取到密码。这是因为在某些系统中，命令行参数会被保存在进程的环境变量中，因此密码可能会被保存在 sshpass 进程的环境变量中。
 - 当手动运行 sshpass 时密码存储在命令行历史记录中，可能会被其他用户（如管理员）查看。
@@ -178,7 +178,7 @@ ANSIBLE_HOST_KEY_CHECKING=false ansible -i inventory all -m ping
 </TabItem>
 </Tabs>
 
-:::caution
+:::warning
 不建议修改 ansible.cfg 使 `host_key_checking = False` 永久跳过检查主机指纹，这可能会受到中间人攻击。
 :::
 

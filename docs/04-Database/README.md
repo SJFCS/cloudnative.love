@@ -17,7 +17,7 @@ ACID 是数据库管理系统（DBMS）中事务处理的四个基本特性的�
 
 - **原子性（Atomicity）**  
   事务是一个不可分割的操作单元，要么全部执行，要么全部不执行。如果事务执行失败，则所有操作都被回滚到事务开始前的状态，保证数据的一致性。
-  :::caution
+  :::warning
   **注意事务失败并不会自动`ROLLBACK`**需要手动检测 `SQLEXCEPTION`，然后将事务 `ROLLBACK` 到某个 `SAVEPOINT` 或者直接 `ROLLBACK` 整个事务
   :::
 - **一致性（Consistency）**  

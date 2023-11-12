@@ -2,8 +2,6 @@
 title: 特性示例
 ---
 本站各种组件功能演示
-
-
 ## 终端播放器
 
 [AsciinemaPlayer](https://github.com/asciinema/asciinema-player) 可将 [asciinema](https://github.com/asciinema/asciinema) 录制的终端文件嵌入到 web 进行播放。
@@ -46,6 +44,12 @@ import AsciinemaPlayer from '@site/src/components/AsciinemaPlayer';
 | `poster` | Poster (a preview frame) to display until the playback is started. |
 | `fit` | Controls the player's fitting (sizing) behaviour inside its container element. |
 | `fontSize` | Size of the terminal font. |
+
+
+
+
+
+
 
 ## 文档切换栏
 
@@ -119,6 +123,7 @@ import GetStartedCard from '@site/src/components/GetStartedCard';
 </div>
 ```
 
+
 ## 代码块
 
 ```go title="src/components/demo.go"
@@ -185,8 +190,6 @@ import Source from '!!raw-loader!./kubesphere.yaml';
 <CodeBlock language="yaml" title="kubesphere.yaml">{Source}</CodeBlock>
 
 
-
-
 ## 提示和标注
 Docusaurus 有一个特殊的语法来创建警告和标注：
 
@@ -215,7 +218,7 @@ Docusaurus 有一个特殊的语法来创建警告和标注：
     This action is dangerous
     :::
 
-    :::caution
+    :::warning
     This action is caution
     :::
 
@@ -244,7 +247,7 @@ This action is dangerous
 :::
 
 
-:::caution
+:::warning
 This action is caution
 :::
 
@@ -482,9 +485,9 @@ module.exports = {
 
 在官方基础上为右侧按钮添加了打开指定连接参数
 
+```mdx-code-block
 import BrowserWindow from '@site/src/components/BrowserWindow';
 
-```mdx-code-block
 <BrowserWindow url="https://www.baidu.com">
 
 <h3>My Doc Section</h3>
@@ -515,11 +518,6 @@ Hello world message with some **bold** text, some _italic_ text and a [link](/)
 
 </BrowserWindow>
 ```
-## MDX
-
-    ```mdx-code-block
-    something...
-    ```
 
 
 ## 交互式代码
@@ -575,18 +573,8 @@ Use the component as below:
 </code>
 ```
 
-## 文档列表
 
-    ```mdx-code-block
-    import DocCardList from '@theme/DocCardList';
 
-    <DocCardList />
-    ```
-
-```mdx-code-block
-
-<DocCardList />
-```
 
 ## 博客模板
 
@@ -614,12 +602,20 @@ authors:
 
 Welcome to this blog. This blog is created with
 
-<!--truncate-->
+<!-- truncate -->
 
 This is my first post on Docusaurus 2.
 
 A whole bunch of exploration to follow.
 ```
+## 文档列表
+```
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList />
+```
+
+
 
 ## 文档模板
 
@@ -661,7 +657,8 @@ authors:
 - [多文档导航栏](https://stackoverflow.com/questions/60783595/is-there-a-way-to-have-two-docs-in-docusaurus-2)
 - https://markdown.com.cn/
 
-<!-- ## 书写规范
+<!-- 
+## 书写规范
 
 以安全分类来举例:
 
@@ -717,7 +714,7 @@ import Source from '!!raw-loader!./kubesphere.yaml';
 2. 图片全部转换为svg https://vectorizer.ai/
 3. 添加ico
 - https://www.zhangxinxu.com/sp/svgo/
-- <https://www.iconfinder.com/>
+- https://www.iconfinder.com/
 4. 国际化命令
 - `npm run docusaurus write-translations`  
   默认情况下，文件会被写入 `website/i18n/<defaultLocale>/...`。

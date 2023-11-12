@@ -15,7 +15,7 @@ import DocCardList from '@theme/DocCardList';
 ### Hardware clock
 Hardware clock (硬件时钟) 又称 **Real Time Clock (RTC 实时时钟)**，硬件时钟通常嵌入在计算机主板的 CMOS 芯片中，并由小型电池供电。它可以在计算机关闭时继续运行，并保持准确的时间，以便在下次开机时重新启动计算机时使用。
 
-:::caution
+:::warning
 系统开机时要读取 Hardware clock (硬件时钟)，然后根据时区/夏令时换算为 System clock (系统时钟)，然后系统时钟就会独立于硬件运行。
 
 不同系统的 Hardware clock 的设置标准不同，详见: [Time standard 时间标准](#time-standard-时间标准)

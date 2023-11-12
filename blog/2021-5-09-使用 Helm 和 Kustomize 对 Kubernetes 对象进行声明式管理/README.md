@@ -15,7 +15,7 @@ Kubernetes 于 2014 年夏季登陆 GitHub ，2015 年夏季推出 Kubernetes �
 
 本文将介绍如何使用 Heml 和 Kustomize 来对 Kubernetes 生态系统内的对象进行声明式配置和包管理。
 
-<!--truncate-->
+<!-- truncate -->
 
 ## 什么是 Helm ？
 
@@ -289,13 +289,13 @@ Go templates 为我们提供了很多好用的函数，详见[文档](https://ma
 3. 常用的关系运算符 `>`、 `>=`、 `<`、`!=`、与或非在 helm 模版中都以函数的形式实现。
 
   关系运算函数定义：
-    - eq  相当于 =
-    - ne  相当于 !=
-    - lt  相当于 <=
-    - gt  相当于 >=
-    - and  相当于 &&
-    - or   相当于 ||
-    - not  相当于 !
+    - eq  相当于`=`
+    - ne  相当于 `!=`
+    - lt  相当于 `<=`
+    - gt  相当于 `>=`
+    - and  相当于 `&&`
+    - or   相当于 `||`
+    - not  相当于 `!`
 
   ```go title="例子"
   {{ if and .Values.fooString (eq .Values.fooString "foo") }}
@@ -350,7 +350,7 @@ Go templates 为我们提供了很多好用的函数，详见[文档](https://ma
   ```
   :::tip 
   如果需要在 with 作用域内引用全局对象，可以使用 `$` 指向根的上下文，当在一个范围内循环时会很有用。
-  例如：{{ $.Chart.Name }}
+  例如：`{{ $.Chart.Name }}`
   <!-- 也可以先在with外面将全局对象复制给一个变量，然后在with内部使用这个变量引用全局对象。
   ```go title="例子"
   {{- $release:= .Release.Name -}}   //先将值保存起来

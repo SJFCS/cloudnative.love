@@ -6,7 +6,7 @@ Crontab 用于**定时周期性**执行任务或命令。
 
 使用时请确保 crond 守护进程已运行，使用 crontab 命令进行管理。
 
-:::caution
+:::warning
 - crontab 依赖系统时间，修改时间或者时区后需要重启 crond 服务。
 - 在 crontab 中 % 是有特殊含义的，表示换行的意思。如果要用的话必须进行转义 \%，如经常用的 date '+%Y%m%d' 在 crontab 里是不会执行的，应该换成 date '+\%Y\%m\%d'。 
 - 如果计划任务产生**未被重定向的输出或错误**，则 crond 守护进程会尝试使用配置的邮件服务器将该信息通过电子邮件发送给作业所有者。
@@ -63,7 +63,7 @@ Crontab 用于**定时周期性**执行任务或命令。
 ## 系统任务
 
 系统任务以 root 身份运行。系统级别的 crontab 文件通常保存在 `/etc/crontab` 文件和 `/etc/cron.d` 目录中。
-:::caution建议
+:::warning建议
 创建系统任务时应始终在 `/etc/cron.d` 目录下创建 crontab 文件, 防止在更新软件包时将 `/etc/crontab` 覆盖。  
 :::
 
@@ -76,7 +76,7 @@ Crontab 用于**定时周期性**执行任务或命令。
 - /etc/-cron.weekly
 
 
-:::caution
+:::warning
 注意: 这些目录应放置可执行文件，而不是 crontab 文件
 :::
 ## 用户任务

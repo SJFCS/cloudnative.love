@@ -9,7 +9,7 @@ tags: [Kind,KubeSphere,Docker,Kubernetes]
 本文将介绍 [Kind](https://kind.sigs.k8s.io/) 中 extra-port-mappings，kubernetes-version，image-registry，api-server-acl 等基本配置。
 并带有一个 [kubesphere](https://kubesphere.io/) 部署示例，还演示了在不删除 Kind 集群的情况下的暂停和重启，以及 Kind 开启 IPVS 导致相关错误的排查记录。
 
-<!--truncate-->
+<!-- truncate -->
 
 ## RTFM
 在开始之前我们需要读一下相关文档。
@@ -141,7 +141,7 @@ docker inspect $(docker ps -q --filter "label=io.x-k8s.kind.cluster=${KIND_CLUST
 --format='{{ printf "%-50s" .Name}} {{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}'
 ```
 :::tip
-注意本文 Kind 创建的集群名字为 `kubesphere` 请视情况更改变量 ${KIND_CLUSTER} 。
+注意本文 Kind 创建的集群名字为 `kubesphere` 请视情况更改变量 `${KIND_CLUSTER}` 。
 可以通过 `kind get clusters` 和 `kubectl config get-clusters` 获取你正在使用的集群名字
 ```bash
 ❯ kind get clusters

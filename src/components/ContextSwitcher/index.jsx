@@ -5,7 +5,7 @@ import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import { useHistory } from 'react-router-dom';
 import { useAllDocsData } from '@docusaurus/plugin-content-docs/client';
 import { string } from 'prop-types';
-
+// https://dyte.io/blog/open-sourcing-dyte-docs/
 import {
   FcAcceptDatabase,
 } from 'react-icons/fc';

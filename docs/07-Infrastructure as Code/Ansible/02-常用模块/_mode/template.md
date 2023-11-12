@@ -28,7 +28,7 @@
 | `attributes`             |        |        | `string`，文件最终的属性 |
 | `backup`             | `true`、`false`       |  `false`      | `boolean`，是否创建文件备份 |
 | `block_end_string`             |       |  "%}"     | `string`，块结束标志 |
-| `block_start_string`             |       |  "{%"     | `string`，块开始标志 |
+| `block_start_string`             |       |  "\{%"     | `string`，块开始标志 |
 | `comment_end_string`             |       |       | `string`，备注声明结束标志 |
 | `comment_start_string`             |       |       | `string`，备注声明开始标志 |
 | `dest`             |        |      | `path`，必须字段，模板在远程主机上渲染的路径 |
@@ -44,7 +44,7 @@
 | `trim_blocks`             | `true`、`false`       |  `false`      | `boolean`，是否删除块后面的第一个换行符 |
 | `validate`             |       |       | `string`，在实际执行生效前执行校验的命令 |
 | `variable_end_string`             |       | "}}"      | `string`，模板中变量结束标记|
-| `variable_start_string`             |       |  "{{"     | `string`，模板中变量开始标记 |
+| `variable_start_string`             |       |  "\{\{"     | `string`，模板中变量开始标记 |
 
 ## 3. 官方示例
 

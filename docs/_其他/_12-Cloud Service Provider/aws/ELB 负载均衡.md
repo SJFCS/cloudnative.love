@@ -107,8 +107,8 @@ NLB 取消注册（Deregistering）target 的逻辑跟 ALB 不太一样。
 
 - 官方文档：[Deregistration delay - AWS NLB](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#deregistration-delay)
 - 相关 issue: 
-  - <https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/2131>
-  - <https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/2366>
+  - https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/2131
+  - https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/2366
 
 根据上述资料，NLB target 被取消注册后，大概需要 60s-180s 的时间进行 drain 操作，这之前都持续会有请求被转发到该 targets！
 因此对 k8s 而言，建议在 pod 上设置 180s - 240s 的 preStop 以及对应的 terminationGracePeriodSeconds，确保所有请求都能被正常处理！

@@ -2,13 +2,13 @@
 # IAM 账号与权限管理
 
 1. Policy 编写测试工具：有一个权限测试模拟器
-
+```
 Policy <- Role <- Person/Resources
 
 Role 具有信任策略，表示谁可以使用这个 Role
 
 Asume Role - STS 临时凭证
-
+```
 ## OIDC 身份验证
 
 OIDC 身份验证：客户端会先查看 jwt body 内容，从中获取到 provider URL，通过它来认证身份获取到 APIKey SecretKey，然后再用 AK SK 来调用 aws api

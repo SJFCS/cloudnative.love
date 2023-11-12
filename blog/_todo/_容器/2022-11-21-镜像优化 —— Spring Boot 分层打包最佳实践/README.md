@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 Java 容器镜像通常会有一个体积巨大的 JAR 包（fat-JAR）独占一个文件系统层，我们对应用程序代码所做的每一次更改都会更改该层。这是非常糟糕的，事实上这个 JAR 包含外部依赖和内部依赖，我们可以进一步通过分层来优化，充分利用分层缓存机制使其共享依赖层。
 
 本文将通过 `解压 JAR 分层优化` 和 `Spring Boot 2.3 引入的分层索引特性` 将 JAR 分成多个层来改进这一点。
-<!--truncate-->
+<!-- truncate -->
 
 ## 先复习一下基本操作
 从 Docker 1.10 开始，COPY、ADD 和 RUN 语句会向镜像中添加新层，为了缩小最终制品体积常用 Docker 的多阶段构建来进行优化。
@@ -97,7 +97,7 @@ exec java -jar /app.jar
 </TabItem>
 </Tabs>
 
-:::caution ENTRYPOINT 注意事项: 
+:::warning ENTRYPOINT 注意事项: 
 <Tabs>
 <TabItem value="exec 格式与 shell 格式">
 

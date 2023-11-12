@@ -5,7 +5,7 @@ sidebar_position: 2
 ## Time synchronization
 为了避免主机时间因为长期运作下产生的 [Time skew (时间偏移)](#什么是-time-skew)，进行 Time synchronize (时间同步) 是非常必要的。 Network Time Protocol (NTP 网络时间协议) 是一种通过分组交换、可变延迟数据网络来同步计算机系统时钟的协议。
 
-:::caution
+:::warning
 常见的 NTP 时间服务器:
 1. [ntp.aliyun.com](https://help.aliyun.com/document_detail/92704.html)  
   阿里云 NTP 服务器，提供了阿里云内网和公网 NTP 服务器，用于同步各网络中 ECS 实例的本地时间。
@@ -35,7 +35,7 @@ firewall-cmd --reload
 
 ```
 :::
-:::caution
+:::warning
 ESX VM 上的 VMware Tools 软件负责同步时间，因此不要在带有 VMware Tools 的 VM 上使用 ntpd/chrony。改为在主机上设置 NTPD/chrony，让 VMware Tools 完成剩下的工作。
 :::
 

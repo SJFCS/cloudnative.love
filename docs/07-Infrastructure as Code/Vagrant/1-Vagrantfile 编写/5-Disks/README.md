@@ -16,7 +16,7 @@ config.vm.disk :dvd, name: "installer", file: "./installer.iso"
 config.vm.disk :floppy, name: "cool_files"
 ```
 
-:::caution注意
+:::warning注意
 指定 `primary: true` Vagrant 将扩展来宾系统盘容量。如果没有此选项，Vagrant 将改为将新磁盘附加到来宾。
 
 VirtualBox 不可缩小磁盘的大小。

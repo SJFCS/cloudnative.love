@@ -168,9 +168,9 @@ LS_COLORS 环境变量可以改变颜色设置。可以使用 dircolors(1) 命�
  1  表示小问题（例如：无法访问子目录），
  2  表示严重问题（例如：无法使用命令行参数）。
 
-GNU coreutils 在线帮助：<https://www.gnu.org/software/coreutils/>
-请向 <http://translationproject.org/team/zh_CN.html> 报告任何翻译错误
-完整文档 <https://www.gnu.org/software/coreutils/ls>
+GNU coreutils 在线帮助：https://www.gnu.org/software/coreutils/
+请向 http://translationproject.org/team/zh_CN.html 报告任何翻译错误
+完整文档 https://www.gnu.org/software/coreutils/ls
 或者在本地使用：info '(coreutils) ls invocation'
 ```
 

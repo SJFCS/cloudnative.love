@@ -1937,7 +1937,7 @@ Git计算散列值的方法：
  Commit Hash (SHA1) = SHA1("blob " + <size_of_file> + "\0" + <contents_of_file>)
 ```
 
-文本 "blob "是一个常量前缀，"\0" 也是一个常量并且是 NULL 字符。 <size_of_file>是文件长度 和 <contents_of_file>是文件内容， 因文件而异。
+文本 "blob "是一个常量前缀，"\0" 也是一个常量并且是 NULL 字符。 `<size_of_file>`是文件长度 和 `<contents_of_file>`是文件内容， 因文件而异。
 
 - 即Git会在文件内容前面添加一些字符，包含`blob `前缀，文件长度，"\0" ，以及文件内容。
 

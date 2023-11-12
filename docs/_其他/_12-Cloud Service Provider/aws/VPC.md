@@ -268,7 +268,7 @@ Repair: Added partition to metastore default.vpc_flow_logs_xxx:aws-account-id=12
 
 Flow Logs 的主要成本在于 CloudWatch，即使数据是存到 S3 也是需要经过 CloudWatch 的，仅保留近期数据（如一周）的话 S3 的存储费用很低，而 CloudWatch 费用却不可小觑，通常还是应该在测试完成后关闭，临时启用即可。
 
-<https://aws.amazon.com/cloudwatch/pricing/> 中给出了一个 Flow Logs 传输到 S3 的费用计算示例：
+https://aws.amazon.com/cloudwatch/pricing/ 中给出了一个 Flow Logs 传输到 S3 的费用计算示例：
 
 ```
 如果您监控的 VPC 每月以可选的 Apache Parquet 格式向 S3 直接发送 72TB 提取的 VPC 流日志，并且您存档一个月的数据，您的费用将如下所示：

@@ -20,7 +20,7 @@ tags: [CKA,CKAD,CKS]
 
 哦对了，点击上面徽章就可以对我的证书进行验证哦~
 
-<!--truncate-->
+<!-- truncate -->
 
 ## 关于购买考试券
 

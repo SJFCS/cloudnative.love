@@ -18,7 +18,7 @@ https://awesome-prometheus-alerts.grep.to/ -->
 随着时间的推移，Prometheus 中存储的指标数量越来越多，查询的频率也越来越高。随着越来越多的仪表板被添加到 Grafana，我开始遇到 Grafana 无法按时呈现图形和 Prometheus 查询超时的情况。这非常烦人。我需要一种更好的方法来修复 Prometheus 查询超时，尤其是在长时间聚合大量指标时。
 
 本文用到了 Prometheus Recording Rule 实现对高维度指标查询的 PromQL 语句的性能优化，提高查询效率。
-<!--truncate-->
+<!-- truncate -->
 ## 规则的语法检查
 要在不启动 Prometheus 服务器的情况下快速检查规则文件的语法是否正确，请安装并运行 promtool 。
 

@@ -1,7 +1,7 @@
 cicd 退出状态码
-
+```
 cat /etc/resolv.conf |grep -oP '(?<=nameserver\ ).*'
-
+```
 
 # grep 与正则表达式
 

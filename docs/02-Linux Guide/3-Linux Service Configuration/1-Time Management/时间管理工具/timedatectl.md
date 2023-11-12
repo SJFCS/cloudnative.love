@@ -4,7 +4,7 @@ sidebar_position: 1
 ---
 timedatectl 用于查看和修改系统时钟和时区设置
 
-:::caution
+:::warning
 - Timedatectl 的使用需要一个活动的 D-Bus。因此，可能无法在 chroot 下使用此命令(例如在安装期间)。在这些情况下，您可以使用 hwlock 命令，或者使用 [systemd-nspawn](https://wiki.archlinux.org/title/Systemd-nspawn) 代替 chroot。
 - 如果 /etc/adjtime 不存在，Systemd 假设硬件时钟设置为 UTC。
 :::
@@ -116,7 +116,7 @@ FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
 
 可以使用 `timedatectl show-timesync --all` 查看你的配置 
 
-:::caution
+:::warning
 注意：如果您的系统没有 chrony/ntp ，那么运行 set-ntp 子命令尝试激活 timesyncd 组件时将会遇到如下错误:
 ```bash
 # timedatectl set-ntp true

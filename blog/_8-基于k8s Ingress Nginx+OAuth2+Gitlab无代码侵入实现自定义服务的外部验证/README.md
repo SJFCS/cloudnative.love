@@ -57,7 +57,7 @@ oauth2 proxy是一个反向代理和静态文件服务器，使用提供程序�
 
 参数：
 
--   回调URL：指GitLab在用户通过身份验证后应将其发送到的端点，对于oauth2-proxy应该是https://<应用域名>/oauth2/callback
+-   回调URL：指GitLab在用户通过身份验证后应将其发送到的端点，对于oauth2-proxy应该是`https://<应用域名>/oauth2/callback`
 -   范围：应用程序对GitLab用户配置文件的访问级别。对于大多数应用程序，选择openid，profile和email即可。
 
 创建完应用后，会生成一对ID和密钥，这个在后面会用到。

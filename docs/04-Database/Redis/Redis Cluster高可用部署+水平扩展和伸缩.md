@@ -38,7 +38,7 @@ redis集群是一个由**多个主从节点群组成的分布式服务器群**,�
 
 ### redis一键安装脚本
 
-~~~bash
+```bash
 #!/bin/bash
 #########################################################
 # Author        : SongJinfeng
@@ -121,8 +121,8 @@ echo "注意：Redis Cluster最低要求是3个主节点，如果需要集群需
 echo "旧版本使用redis-trib.rb create --replicas 1 IP:Port"
 echo "--replicas 计算方法为master数量÷slave数量"
 echo "ip:port 顺序为 主1 主2 主3 从1 从2 从3"
-~~~
-
+```
+```
 >**本脚本自动修改了如下参数**
 >
 >~~~bash
@@ -195,10 +195,10 @@ echo "ip:port 顺序为 主1 主2 主3 从1 从2 从3"
 > Port=9006
 > install_redis
 > /usr/local/redis/bin/redis-server ${Products_Dir}/redis.conf
-
+```
 ### redis服务管理脚本
 
-~~~bash
+```bash
 #!/bin/bash
 #########################################################
 # Author        : SongJinfeng
@@ -281,7 +281,7 @@ case "$1" in
         echo $"Usage: $0 {start|stop|status|restart|log|config|pid}"
         exit 2
 esac
-~~~
+```
 
 ### 创建集群
 
@@ -300,7 +300,7 @@ ${Products_Dir}/bin/redis-cli --cluster-replicas 1 --cluster create 10.0.0.10:90
 
 ### 集群验证
 
-~~~
+```
 集群验证
 ps -ef | grep redis
 ./redis-cli -c -h -p (-c表示集群模式，指定IP和端口)
@@ -321,7 +321,7 @@ netstat -lunpl |grep 6379
 /usr/local/redis/bin/redis-cli
 pkill redis-server
 /usr/local/redis/bin/redis-cli shutdown
-~~~
+```
 
 ## 水平扩展与伸缩
 
@@ -330,7 +330,7 @@ pkill redis-server
 ![image-20210926191417089](https://image-fusice.oss-cn-hangzhou.aliyuncs.com/image/Untitled/2021.09.26-19:14:18-image-20210926191417089.png)
 
 #### **我们继续创建2个节点**
-
+```
 >Products_Dir=/usr/local/redis9007
 >Port=9007
 >install_redis
@@ -340,7 +340,7 @@ pkill redis-server
 >Port=9008
 >install_redis
 >/usr/local/redis/bin/redis-server ${Products_Dir}/redis.conf
-
+```
 #### **添加主节点9007**
 
 使用 add-node 命令新增一个主节点9007(master)，10.0.0.10:9007 新增节点，10.0.0.10:9001已存在节点

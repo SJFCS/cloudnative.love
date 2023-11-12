@@ -12,3 +12,4 @@
 - 对于Prometheus具有良好的兼容性，能够支持Prometheus的配置文件、PromQL、各类API、数据格式，并有一些自己的增强API。
 
 https://cloudnative.to/blog/victoriametrics/
+https://blog.cong.moe/post/2021-08-23-use-victoria-metrics-replace-prometheus/

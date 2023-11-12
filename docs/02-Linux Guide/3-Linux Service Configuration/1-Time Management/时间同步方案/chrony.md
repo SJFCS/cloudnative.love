@@ -2,6 +2,9 @@
 title: chrony
 sidebar_position: 3
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Chrony 时间同步和配置解析
 
 [Chrony](https://chrony.tuxfamily.org) 有两个核心组件：一个是 `chronyd` 守护进程，主要用于调整内核中运行的系统时间和时间服务器同步。它确定计算机增减时间的比率，并对此进行调整补偿。另一个是 `chronyc`，它提供一个用户界面，用于监控性能并进行多样化的配置。`chronyc` 可以在 `chronyd` 实例控制的计算机上工作，也可以在一台不同的远程计算机上工作。
@@ -20,7 +23,7 @@ Chrony 时间同步和配置解析
 - HostA Server 以本地时间对外提供时间服务，且同步外部 NTP Server: **ntp.aliyun.com**
 - HostB Client 节点同步 **HostA**
 
-:::caution
+:::warning
 先确保停止所有节点的 NTPD 服务
 ```bash
 sudo systemctl disable --now ntpd
@@ -108,7 +111,7 @@ rtcsync #RTC 时间同步,系统时间每11分钟会拷贝到实时时钟（RTC�
 local stratum 10 # 远程 server 不可用时，允许将本地时间作为标准时间授时给其它客户端，层级为 10
 driftfile /var/lib/chrony/drift # 记录系统时钟获得/丢失时间的速率，根据实际时间计算出计算机增减时间的比率，将它记录到至drift文件中，会在重启后为系统时钟作出补偿
 # makestep # 根据需要通过加速或减慢时钟来逐渐校正任何时间偏移。
-makestep 10 3 # 如果系统时钟的偏移量大于10秒，则允许在前三次更新中直接调整系统时钟,通常chronyd将根据需求通过减慢或加速时钟，使得系统逐步纠正所有时间偏差。当时间差过大时,或系统时间漂移过快时，会导致该调整过程消耗很长的时间来纠正系统时钟。该指令会像ntpdate那样直接调整时钟。
+makestep 10 3 # 如果系统时钟的偏移量大于10秒，则允许在前三次更新中直接调整系统时钟,通常chronyd将根据需求通过减慢或加速时钟，使得系统逐步纠正所有时间偏差。当时间差过大时,或系统时间漂移过快时，会导致该调整过程消耗很长的时间来纠正系统时钟。该指令会像ntpdate那样直接调整时钟。（建议时间敏感服务应注释掉此配置，如存储数据库，避免时间跳跃）
 keyfile /etc/chrony.keys # 指定包含NTP验证密钥的文件
 logdir /var/log/chrony 指定存放日志文件的目录
 # stratumweight # 该参数用于设置当 chronyd 从可用源中选择同步源时，每个层应该添加多少距离到同步距离。默认情况下设置为 0，让 chronyd 在选择源时忽略源的层级。

@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
   config.ssh.password = "password"
 end
 ```
-:::caution
+:::warning
 注意，您需要确保这些用户存在于来宾操作系统上
 :::
 

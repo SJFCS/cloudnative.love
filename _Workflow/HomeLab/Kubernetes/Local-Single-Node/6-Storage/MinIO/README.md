@@ -1,1 +1,0 @@
-https://min.io/

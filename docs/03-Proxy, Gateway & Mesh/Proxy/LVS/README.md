@@ -195,15 +195,15 @@ Define different modes for sending replies in response to received ARP requests 
 3 - do not reply for local addresses configured with scope host, only resolutions for global and link addresses are replied
 
 4-7 - reserved
-
+```
 8 - do not reply for all local addresses The max value from conf/{all,interface}/arp_ignore is used when ARP request is received on the {interface}
-
+```
 arp_ignore设置为0时，无论收到的ARP请求的IP是否是eth上面的IP，只要在宿主机上有网卡有对应的IP，就会发送ARP应答。
 
 arp_ignore设置为1即意味着对应的网卡在收到了目标IP不是自己的网卡的IP的数据包的ARP请求时不会进行回应，而在DR模式中，对应的VIP是绑定在lo接口上的，而lo接口并不是物理网卡，实际上数据包都是从物理网卡eth上进来，因此这时就不会对目标IP是VIP的数据包进行ARP回应。使得访问能够顺利地到达LB上面，再从LB上面进行负载均衡。
 
 arp_annouce的意义
-
+```
 arp_announce - INTEGER
 
 Define different restriction levels for announcing the local source IP address from IP packets in ARP requests sent on interface:
@@ -211,6 +211,7 @@ Define different restriction levels for announcing the local source IP address f
 0 - (default) Use any local address, configured on any interface
 1 - Try to avoid local addresses that are not in the target’s subnet for this interface. This mode is useful when target hosts reachable via this interface require the source IP address in ARP requests to be part of their logical network configured on the receiving interface. When we generate the request we will check all our subnets that include the target IP and will preserve the source address if it is from such subnet. If there is no such subnet we select source address according to the rules for level 2.
 2 - Always use the best local address for this target. In this mode we ignore the source address in the IP packet and try to select local address that we prefer for talks with the target host. Such local address is selected by looking for primary IP addresses on all our subnets on the outgoing interface that include the target IP address. If no suitable local address is found we select the first local address we have on the outgoing interface or on all other interfaces, with the hope we will receive reply for our request and even sometimes no matter the source IP address we announce. The max value from conf/{all,interface}/arp_announce is used.
+```
 每个机器或者交换机中都有一张ARP表，ARP表的作用就是用于记录IP地址和MAC地址的对应关系。当收到一个ARP表中没有记录的IP地址的ARP请求，就会在本机的ARP表中新增对应的IP和MAC记录；当收到一个已知IP地址（arp表中已有记录的地址）的arp请求，则会根据arp请求中的源MAC刷新自己的arp表。
 
 如果arp_announce参数配置为0，则网卡在发送arp请求时，可能选择的源IP地址并不是该网卡自身的IP地址，这时候收到该arp请求的其他节点或者交换机上的arp表中记录的该网卡IP和MAC的对应关系就不正确。
