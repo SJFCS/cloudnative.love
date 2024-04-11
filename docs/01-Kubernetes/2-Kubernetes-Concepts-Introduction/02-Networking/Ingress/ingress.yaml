@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+  name: notice
+spec:
+  rules:
+    - host: devops.myrightone.com
+      http:
+        paths:
+          - backend:
+              serviceName: notice
+              servicePort: 5000
+            path: /
+  tls:
+    - hosts:
+        - devops.myrightone.com
+      secretName: myrightone-com-tls

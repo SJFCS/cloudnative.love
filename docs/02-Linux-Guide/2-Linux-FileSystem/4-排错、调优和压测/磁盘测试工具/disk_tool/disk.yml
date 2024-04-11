@@ -1,0 +1,62 @@
+#顺序写测试吞吐队列深度 
+write_swallow_iodepth: '32'
+#顺序写测试吞吐块大小
+write_swallow_bs: '6024k'
+#顺序写测试吞吐并发数
+write_swallow_numjobs: '17'
+#顺序写测试吞吐文件大小
+write_swallow_size: '30G'
+#顺序读测试吞吐队列深度
+read_swallow_iodepth: '128'
+#顺序读测试吞吐块大小
+read_swallow_bs: '128k'
+#顺序读测试吞吐并发数
+read_swallow_numjobs: '1'
+#顺序读测试吞吐文件大小
+read_swallow_size: '30G'
+#随机写测试吞吐队列深度
+randwrite_swallow_iodepth: '64'
+#随机写测试吞吐块大小
+randwrite_swallow_bs: '4k'
+#随机写测试吞吐并发数
+randwrite_swallow_numjobs: '75'
+#随机写测试吞吐文件大小
+randwrite_swallow_size: '10M'
+#随机读写测试吞吐队列深度
+randread_swallow_iodepth: '64'
+#随机读写测试吞吐块大小
+randread_swallow_bs: '2k'
+#随机读写测试吞吐文件大小
+randread_swallow_size: '1G'
+#顺序读测试iops队列深度
+read_iops_iodepth: '128'
+#顺序读测试iops块大小
+read_iops_bs: '4k'
+#顺序读测试iops并发数
+read_iops_numjobs: '1'
+#顺序读测试iops文件大小
+read_iops_size: '10G'
+#顺序写测试iops队列深度
+write_iops_iodepth: '128'
+#顺序写测试iops块大小
+write_iops_bs: '4k'
+#顺序写测试iops并发数
+write_iops_numjobs: '1'
+#顺序写测试iops文件大小
+write_iops_size: '10G'
+#随机写测试iops队列深度
+randwrite_iops_iodepth: '128'
+#随机写测试iops块大小
+randwrite_iops_bs: '4k'
+#随机写测试iops并发数
+randwrite_iops_numjobs: '40'
+#随机写测试iops文件大小
+randwrite_iops_size: '50M'
+#随机读测试iops队列深度
+randread_iops_iodepth: '128'
+#随机读测试iops块大小
+randread_iops_bs: '4k'
+#随机读测试iops并发数
+randread_iops_numjobs: '30'
+#随机读测试iops文件大小
+randread_iops_size: '10M'

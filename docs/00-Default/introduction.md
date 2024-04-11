@@ -25,15 +25,15 @@ import GetStartedCard from '@site/src/components/GetStartedCard';
   bgClassName="h-480 rotate-[-28deg] right-[-48px] bottom-[-6rem]"
 />
 <GetStartedCard
-  title="Istio"
+  title="Infrastructure-as-Code"
   className="xl:col-span-2 from-[#0093E9] to-[#80D0C7]"
-  getStartedLink="/Service-Mesh/Service%20Mesh/Istio/"
+  getStartedLink="/Infrastructure-as-Code"
   bgClassName="h-48 rotate-[-28deg] right-[-48px] bottom-[-6rem]"
 />
 <GetStartedCard
-  title="Nginx"
+  title="GitOps"
   className="xl:col-span-2 from-[#FF2525] to-[#FFE53B]"
-  getStartedLink="/Service-Mesh/Proxy/Nginx/"
+  getStartedLink="/GitOps"
   bgClassName="h-48 rotate-[-28deg] right-[-48px] bottom-[-6rem]"
 />
 </div>

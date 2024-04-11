@@ -1,4 +1,0 @@
-ospf
-bgp
-vxlan
-nat

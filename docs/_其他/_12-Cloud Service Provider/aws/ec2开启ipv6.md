@@ -1,1 +1,0 @@
-https://lxnchan.cn/aws-ipv6.html

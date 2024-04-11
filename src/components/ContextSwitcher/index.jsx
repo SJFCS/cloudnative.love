@@ -35,7 +35,7 @@ const CONTEXTS = [
   },
   {
     id: 'Service-Mesh',
-    name: 'Proxy, Gateway & Mesh',
+    name: 'Service Mesh',
     icon: 'simple-icons:istio',
     type: 'iconify', 
   },
@@ -46,9 +46,9 @@ const CONTEXTS = [
     type: 'react-icons',
   },
   {
-    id: 'Integration-and-Delivery',
-    name: 'Integration & Delivery',
-    icon: 'devicon:azuredevops',
+    id: 'GitOps',
+    name: 'GitOps',
+    icon: 'devicon:githubactions',
     type: 'iconify',
   },
   {

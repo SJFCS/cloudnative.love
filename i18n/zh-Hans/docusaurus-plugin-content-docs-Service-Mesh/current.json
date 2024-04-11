@@ -11,9 +11,9 @@
     "message": "Proxy",
     "description": "The label for category Proxy in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Nginx✨": {
-    "message": "Nginx✨",
-    "description": "The label for category Nginx✨ in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.Nginx": {
+    "message": "Nginx",
+    "description": "The label for category Nginx in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.nginx-note": {
     "message": "nginx-note",
@@ -55,8 +55,12 @@
     "message": "Service Mesh",
     "description": "The label for category Service Mesh in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Istio✨": {
-    "message": "Istio✨",
-    "description": "The label for category Istio✨ in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.Istio": {
+    "message": "Istio",
+    "description": "The label for category Istio in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.link.Back Home": {
+    "message": "Back Home",
+    "description": "The label for link Back Home in sidebar tutorialSidebar, linking to /Default"
   }
 }

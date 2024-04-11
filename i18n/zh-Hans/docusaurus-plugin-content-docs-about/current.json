@@ -2,5 +2,29 @@
   "version.label": {
     "message": "Next",
     "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Workflow": {
+    "message": "Workflow",
+    "description": "The label for category Workflow in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Arch 食用指南": {
+    "message": "Arch 食用指南",
+    "description": "The label for category Arch 食用指南 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Mac": {
+    "message": "Mac",
+    "description": "The label for category Mac in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Windows": {
+    "message": "Windows",
+    "description": "The label for category Windows in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.WSL": {
+    "message": "WSL",
+    "description": "The label for category WSL in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.link.Back Home": {
+    "message": "Back Home",
+    "description": "The label for link Back Home in sidebar tutorialSidebar, linking to /Default"
   }
 }

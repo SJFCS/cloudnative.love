@@ -1,6 +1,7 @@
 ---
-title: MongoDB📝
+title: MongoDB
 tags: [Database,MongoDB]
+sidebar_position: 3
 ---
 
 [bitnami/mongodb](https://github.com/bitnami/bitnami-docker-mongodb) 把一些参数和副本集的功能封装到了环境变量里面，使用起来比 Docker 官方提供的 Mongo 镜像更方便。

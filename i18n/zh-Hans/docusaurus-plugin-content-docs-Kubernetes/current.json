@@ -107,9 +107,9 @@
     "message": "Kubernetes Security Experience",
     "description": "The label for category Kubernetes Security Experience in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Public Key Infrastructure (PKI)📝": {
-    "message": "Public Key Infrastructure (PKI)📝",
-    "description": "The label for category Public Key Infrastructure (PKI)📝 in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.Public Key Infrastructure (PKI)": {
+    "message": "Public Key Infrastructure (PKI)",
+    "description": "The label for category Public Key Infrastructure (PKI) in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.tools": {
     "message": "tools",
@@ -138,5 +138,61 @@
   "sidebar.tutorialSidebar.category.SouceCodeAnalysis": {
     "message": "SouceCodeAnalysis",
     "description": "The label for category SouceCodeAnalysis in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.概念介绍": {
+    "message": "概念介绍",
+    "description": "The label for category 概念介绍 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Workloads": {
+    "message": "Workloads",
+    "description": "The label for category Workloads in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Workload Management": {
+    "message": "Workload Management",
+    "description": "The label for category Workload Management in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Networking": {
+    "message": "Networking",
+    "description": "The label for category Networking in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Ingress": {
+    "message": "Ingress",
+    "description": "The label for category Ingress in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Service": {
+    "message": "Service",
+    "description": "The label for category Service in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Storage": {
+    "message": "Storage",
+    "description": "The label for category Storage in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Scheduling, Preemption and Eviction": {
+    "message": "Scheduling, Preemption and Eviction",
+    "description": "The label for category Scheduling, Preemption and Eviction in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.实践案例": {
+    "message": "实践案例",
+    "description": "The label for category 实践案例 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Multi Cloud": {
+    "message": "Multi Cloud",
+    "description": "The label for category Multi Cloud in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.virtual-kubelet": {
+    "message": "virtual-kubelet",
+    "description": "The label for category virtual-kubelet in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.网络指南": {
+    "message": "网络指南",
+    "description": "The label for category 网络指南 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.故障排除": {
+    "message": "故障排除",
+    "description": "The label for category 故障排除 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.link.Back Home": {
+    "message": "Back Home",
+    "description": "The label for link Back Home in sidebar tutorialSidebar, linking to /Default"
   }
 }

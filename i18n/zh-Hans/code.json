@@ -5,8 +5,8 @@
   "DevOps Engineer": {
     "message": "DevOps 工程师"
   },
-  "🎣 Interested in Cloud Native, Linux, Networking, Blockchain, and many other stuffs.": {
-    "message": "🎣 对 Cloud Native、Linux、Networking、Blockchain 等有兴趣。"
+  "🎣 Interested in Cloud Native, Linux, Networking, LLM, Blockchain, and many other stuffs.": {
+    "message": "🎣 对 Cloud Native、Linux、Networking、LLM、Blockchain 等有兴趣。"
   },
   "theme.ErrorPageContent.title": {
     "message": "页面已崩溃。",
@@ -46,7 +46,7 @@
   },
   "theme.admonition.caution": {
     "message": "警告",
-    "description": "The default label used for the Caution admonition (:::warning)"
+    "description": "The default label used for the Caution admonition (:::caution)"
   },
   "theme.BackToTopButton.buttonAriaLabel": {
     "message": "回到顶部",
@@ -312,7 +312,7 @@
     "message": "专业证书展示"
   },
   "Resume": {
-    "message": "我的证书"
+    "message": "关于我"
   },
   "theme.PwaReloadPopup.info": {
     "message": "有可用的新版本",
@@ -394,5 +394,38 @@
   },
   "Introduction to Continuous Delivery and GitOps using Argo CD": {
     "message": "Introduction to Continuous Delivery and GitOps using Argo CD"
+  },
+  "theme.docs.DocCard.categoryDescription.plurals": {
+    "message": "{count} 个项目",
+    "description": "The default description for a category card in the generated index about how many items this category includes"
+  },
+  "theme.admonition.warning": {
+    "message": "注意",
+    "description": "The default label used for the Warning admonition (:::warning)"
+  },
+  "theme.DocSidebarItem.expandCategoryAriaLabel": {
+    "message": "展开侧边栏分类 '{label}'",
+    "description": "The ARIA label to expand the sidebar category"
+  },
+  "theme.DocSidebarItem.collapseCategoryAriaLabel": {
+    "message": "折叠侧边栏分类 '{label}'",
+    "description": "The ARIA label to collapse the sidebar category"
+  },
+  "theme.SearchPage.searchContext.everywhere": {
+    "message": "everywhere"
+  },
+  "theme.SearchBar.seeAllOutsideContext": {
+    "message": "See results outside {context}"
+  },
+  "theme.SearchBar.searchInContext": {
+    "message": "See all results in {context}"
+  },
+  "theme.unlistedContent.title": {
+    "message": "未列出页",
+    "description": "The unlisted content banner title"
+  },
+  "theme.unlistedContent.message": {
+    "message": "此页面未列出。搜索引擎不会对其索引，只有拥有直接链接的用户才能访问。",
+    "description": "The unlisted content banner message"
   }
 }

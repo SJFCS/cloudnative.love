@@ -1,1 +1,0 @@
-[Source-to-Image (S2I)](https://github.com/openshift/source-to-image) 和 Binary-to-Image (B2I) 

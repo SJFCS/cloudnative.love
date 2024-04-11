@@ -1,3 +1,0 @@
-# Linkerd
-
-https://linkerd.io/)

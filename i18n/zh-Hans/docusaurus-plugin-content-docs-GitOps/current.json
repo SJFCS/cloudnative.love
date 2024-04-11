@@ -1,0 +1,58 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Application Definition": {
+    "message": "Application Definition",
+    "description": "The label for category Application Definition in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Helm": {
+    "message": "Helm",
+    "description": "The label for category Helm in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Kustomize Tutorial": {
+    "message": "Kustomize Tutorial",
+    "description": "The label for category Kustomize Tutorial in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.CI/CD": {
+    "message": "CI/CD",
+    "description": "The label for category CI/CD in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Argo": {
+    "message": "Argo",
+    "description": "The label for category Argo in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Argo CD": {
+    "message": "Argo CD",
+    "description": "The label for category Argo CD in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.README": {
+    "message": "README",
+    "description": "The label for category README in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.常用速查": {
+    "message": "常用速查",
+    "description": "The label for category 常用速查 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Argo-Rollouts": {
+    "message": "Argo-Rollouts",
+    "description": "The label for category Argo-Rollouts in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Gitlab Runner": {
+    "message": "Gitlab Runner",
+    "description": "The label for category Gitlab Runner in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Tekton": {
+    "message": "Tekton",
+    "description": "The label for category Tekton in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Image Build": {
+    "message": "Image Build",
+    "description": "The label for category Image Build in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.link.Back Home": {
+    "message": "Back Home",
+    "description": "The label for link Back Home in sidebar tutorialSidebar, linking to /Default"
+  }
+}

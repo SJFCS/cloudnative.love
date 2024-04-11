@@ -1,0 +1,1 @@
+https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/

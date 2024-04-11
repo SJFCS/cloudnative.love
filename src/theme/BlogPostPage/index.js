@@ -9,7 +9,6 @@ import BlogPostPageMetadata from '@theme/BlogPostPage/Metadata';
 import TOC from '@theme/TOC';
 import Comment from '@site/src/components/Comment';
 import BackToTopButton from '@theme/BackToTopButton';
-
 function BlogPostPageContent({ sidebar, children }) {
   const { metadata, toc } = useBlogPost();
   const { nextItem, prevItem, frontMatter } = metadata;

@@ -1,4 +1,4 @@
 ---
-title: GlusterFS📝
+title: GlusterFS
 tags: [Storage,GlusterFS]
 ---

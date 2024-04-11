@@ -2,7 +2,6 @@
 title: 使用 Kind 部署 KubeSphere 实验环境
 tags: [Kind,KubeSphere,Docker,Kubernetes]
 ---
-![1673347219220](image/README/1673347219220.png )
 
 现在安装 Kubernetes 集群已经变得越来越简单了，Kubernetes in Docker（KinD）这个工具就可以通过创建容器来作为 Kubernetes 的节点，我们只需要在机器上安装 Docker 就可以使用，它允许我们在很短的时间内就启动一个多节点的集群，而不依赖任何其他工具或云服务商。
 

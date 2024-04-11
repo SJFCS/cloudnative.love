@@ -28,22 +28,22 @@ import AsciinemaPlayer from '@site/src/components/AsciinemaPlayer';
 
 组件参数 [`asciinema-player`](https://github.com/asciinema/asciinema-player) 
 
-| Property         | Usage                                                                             |
-| ---------------- | --------------------------------------------------------------------------------- |
-| `src` | The location of the cast file, must be available from the browser. |
-| `style` | Any additional CSS styles to apply. |
-| `cols` | The number of columns in the player's terminal. |
-| `rows` | The number of rows in the player's terminal. |
-| `autoPlay` |  Set this option to `true` if playback should start automatically. |
-| `preload` | Set this option to `true` if the recording should be preloaded on player's initialization. |
-| `loop` | Set this option to either true or a number if playback should be looped. When set to a number (e.g. 3) then the recording will be re-played given number of times and stopped after that. |
-| `startAt` |  Start playback at a given time. |
-| `speed` |  Playback speed. The value of 2 means 2x faster. |
-| `idleTimeLimit` | Limit terminal inactivity to a given number of seconds. |
-| `theme` | Terminal color theme. |
-| `poster` | Poster (a preview frame) to display until the playback is started. |
-| `fit` | Controls the player's fitting (sizing) behaviour inside its container element. |
-| `fontSize` | Size of the terminal font. |
+| Property        | Usage                                                                                                                                                                                     |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src`           | The location of the cast file, must be available from the browser.                                                                                                                        |
+| `style`         | Any additional CSS styles to apply.                                                                                                                                                       |
+| `cols`          | The number of columns in the player's terminal.                                                                                                                                           |
+| `rows`          | The number of rows in the player's terminal.                                                                                                                                              |
+| `autoPlay`      | Set this option to `true` if playback should start automatically.                                                                                                                         |
+| `preload`       | Set this option to `true` if the recording should be preloaded on player's initialization.                                                                                                |
+| `loop`          | Set this option to either true or a number if playback should be looped. When set to a number (e.g. 3) then the recording will be re-played given number of times and stopped after that. |
+| `startAt`       | Start playback at a given time.                                                                                                                                                           |
+| `speed`         | Playback speed. The value of 2 means 2x faster.                                                                                                                                           |
+| `idleTimeLimit` | Limit terminal inactivity to a given number of seconds.                                                                                                                                   |
+| `theme`         | Terminal color theme.                                                                                                                                                                     |
+| `poster`        | Poster (a preview frame) to display until the playback is started.                                                                                                                        |
+| `fit`           | Controls the player's fitting (sizing) behaviour inside its container element.                                                                                                            |
+| `fontSize`      | Size of the terminal font.                                                                                                                                                                |
 
 
 
@@ -85,7 +85,7 @@ import ContextSwitcher from '@site/src/components/ContextSwitcher';
     <GetStartedCard
       title="Istio"
       className="xl:col-span-2 from-[#0093E9] to-[#80D0C7]"
-      getStartedLink="/Service-Mesh/Service%20Mesh/Istio/"
+      getStartedLink="/Service-Mesh/Istio/"
       bgClassName="h-48 rotate-[-28deg] right-[-48px] bottom-[-6rem]"
     />
     <GetStartedCard
@@ -111,7 +111,7 @@ import GetStartedCard from '@site/src/components/GetStartedCard';
 <GetStartedCard
   title="Istio"
   className="xl:col-span-2 from-[#0093E9] to-[#80D0C7]"
-  getStartedLink="/Service-Mesh/Service%20Mesh/Istio/"
+  getStartedLink="/Service-Mesh/Istio/"
   bgClassName="h-48 rotate-[-28deg] right-[-48px] bottom-[-6rem]"
 />
 <GetStartedCard
@@ -734,6 +734,9 @@ cloc --vcs git .
 https://docusaurus.io/docs/api/themes/configuration#hooks
 Generate i18n npm run docusaurus write-translations
 npm run docusaurus swizzle
+
+本站分支参考：https://thewang.net/blog/github-action-create-pr-and-merge-into-main
+https://github.com/wifecooky/thewang-blog/commits/main/
 -->
 
 

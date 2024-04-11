@@ -3,9 +3,9 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.category.Ansible✨": {
-    "message": "Ansible✨",
-    "description": "The label for category Ansible✨ in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.Ansible": {
+    "message": "Ansible",
+    "description": "The label for category Ansible in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.快速开始": {
     "message": "快速开始",
@@ -31,13 +31,13 @@
     "message": "更多用法",
     "description": "The label for category 更多用法 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Terraform✨": {
-    "message": "Terraform✨",
-    "description": "The label for category Terraform✨ in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.Terraform": {
+    "message": "Terraform",
+    "description": "The label for category Terraform in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Vagrant📝": {
-    "message": "Vagrant📝",
-    "description": "The label for category Vagrant📝 in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.Vagrant": {
+    "message": "Vagrant",
+    "description": "The label for category Vagrant in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Vagrantfile 编写": {
     "message": "Vagrantfile 编写",
@@ -54,5 +54,9 @@
   "sidebar.tutorialSidebar.category.进阶用法": {
     "message": "进阶用法",
     "description": "The label for category 进阶用法 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.link.Back Home": {
+    "message": "Back Home",
+    "description": "The label for link Back Home in sidebar tutorialSidebar, linking to /Default"
   }
 }

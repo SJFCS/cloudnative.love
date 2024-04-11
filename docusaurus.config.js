@@ -1,79 +1,81 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-const {themes} = require('prism-react-renderer');
+const { themes } = require("prism-react-renderer");
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
 //docs options
 const pageOptions = {
   sidebarCollapsible: true,
-  editUrl: 'https://github.com/SJFCS/cloudnative.love/edit/main/',
+  editUrl: "https://github.com/SJFCS/cloudnative.love/edit/main/",
   showLastUpdateAuthor: true,
   showLastUpdateTime: true,
   exclude: [
-    '**/_*.{js,jsx,ts,tsx,md,mdx}',
-    '**/_*/**',
-    '**/*.test.{js,jsx,ts,tsx}',
-    '**/__tests__/**',
+    "**/_*.{js,jsx,ts,tsx,md,mdx}",
+    "**/_*/**",
+    "**/*.test.{js,jsx,ts,tsx}",
+    "**/__tests__/**",
   ],
 };
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'CloudNative.love 💕',
-  tagline: '脚下虽有万水千山，但行者必至！',
-  url: 'https://cloudnative.love',
-  baseUrl: '/',
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.png',
+  title: "CloudNative.love 💕",
+  tagline: "脚下虽有万水千山，但行者必至！",
+  url: "https://cloudnative.love",
+  baseUrl: "/",
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
+  favicon: "img/favicon.png",
   i18n: {
-    defaultLocale: 'zh-Hans',
-    locales: ['zh-Hans', 'en'],
+    defaultLocale: "zh-Hans",
+    locales: ["zh-Hans", "en"],
     localeConfigs: {
       zh: {
-        htmlLang: 'zh-cmn-Hans',
+        htmlLang: "zh-cmn-Hans",
       },
     },
   },
   presets: [
     [
-      'classic',
+      "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
           ...pageOptions,
-          path: 'docs/00-Default',
-          id: 'default',
-          routeBasePath: 'Default',
-          sidebarPath: require.resolve('./sidebars/sidebars-docs.js'),
+          path: "docs/00-Default",
+          id: "default",
+          routeBasePath: "Default",
+          sidebarPath: require.resolve("./sidebars/sidebars-docs.js"),
           sidebarCollapsible: false,
         },
         // googleAnalytics
         gtag: {
-          trackingID: 'G-VFQFZ1LQGW',
+          trackingID: "G-VFQFZ1LQGW",
           anonymizeIP: true,
         },
         sitemap: {
-          changefreq: 'weekly',
+          changefreq: "weekly",
           priority: 0.5,
-          ignorePatterns: ['/tags/**'],
-          filename: 'sitemap.xml',
+          ignorePatterns: ["/tags/**"],
+          filename: "sitemap.xml",
         },
         blog: {
-          blogTitle: 'Blog',
-          blogDescription: 'The content of this blog is based on CloudNative technologies such as kubernetes, istio, devops, prometheus and golang.',
+          blogTitle: "Blog",
+          blogDescription:
+            "The content of this blog is based on CloudNative technologies such as kubernetes, istio, devops, prometheus and golang.",
           // postsPerPage: 15,
-          postsPerPage: 'ALL',
-          blogSidebarTitle: 'Recent articles',
+          postsPerPage: "ALL",
+          blogSidebarTitle: "Recent articles",
           blogSidebarCount: "ALL",
-          showReadingTime: true, // 如果设置为 false，「x 分钟阅读」的文字就不会显示    
-          editUrl:
-            'https://github.com/SJFCS/cloudnative.love/edit/main/',
+          showReadingTime: true, // 如果设置为 false，「x 分钟阅读」的文字就不会显示
+          editUrl: "https://github.com/SJFCS/cloudnative.love/edit/main/",
         },
         theme: {
           customCss: [
-            require.resolve('./src/css/custom.css'),
-            require.resolve('asciinema-player/dist/bundle/asciinema-player.css'),
-            require.resolve('./src/css/asciinema-player-patch.css'),
+            require.resolve("./src/css/custom.css"),
+            require.resolve(
+              "asciinema-player/dist/bundle/asciinema-player.css"
+            ),
+            require.resolve("./src/css/asciinema-player-patch.css"),
             // 确保顺序 否则 css: asciinema-terminal 会被覆盖，缩放会出现问题
             //  It looks like Docosaurus doesn't yet support directly importing
             //  this style in the EmailSignupForm component, so as a workaround
@@ -86,92 +88,92 @@ const config = {
   plugins: [
     // docs
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
-        id: 'about',
-        path: 'about',
-        routeBasePath: 'about',
-        sidebarPath: require.resolve('./sidebars/autogen.js'),
+        id: "about",
+        path: "about",
+        routeBasePath: "about",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
         ...pageOptions,
       },
     ],
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
-        id: 'Kubernetes',
-        path: 'docs/01-Kubernetes',
-        routeBasePath: 'Kubernetes',
-        sidebarPath: require.resolve('./sidebars/autogen.js'),
+        id: "Kubernetes",
+        path: "docs/01-Kubernetes",
+        routeBasePath: "Kubernetes",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
         ...pageOptions,
       },
     ],
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
-        id: 'Linux-Guide',
-        path: 'docs/02-Linux Guide',
-        routeBasePath: 'Linux-Guide',
-        sidebarPath: require.resolve('./sidebars/autogen.js'),
+        id: "Linux-Guide",
+        path: "docs/02-Linux-Guide",
+        routeBasePath: "Linux-Guide",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
         ...pageOptions,
       },
     ],
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
-        id: 'Service-Mesh',
-        path: 'docs/03-Proxy, Gateway & Mesh',
-        routeBasePath: 'Service-Mesh',
-        sidebarPath: require.resolve('./sidebars/autogen.js'),
+        id: "Service-Mesh",
+        path: "docs/03-Service-Mesh",
+        routeBasePath: "Service-Mesh",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
         ...pageOptions,
       },
     ],
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
-        id: 'Database',
-        path: 'docs/04-Database',
-        routeBasePath: 'Database',
-        sidebarPath: require.resolve('./sidebars/autogen.js'),
+        id: "Database",
+        path: "docs/04-Database",
+        routeBasePath: "Database",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
         ...pageOptions,
       },
     ],
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
-        id: 'Integration-and-Delivery',
-        path: 'docs/05-Integration & Delivery',
-        routeBasePath: 'Integration-and-Delivery',
-        sidebarPath: require.resolve('./sidebars/autogen.js'),
+        id: "GitOps",
+        path: "docs/06-GitOps",
+        routeBasePath: "GitOps",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
         ...pageOptions,
       },
     ],
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
-        id: 'Observability',
-        path: 'docs/06-Observability',
-        routeBasePath: 'Observability',
-        sidebarPath: require.resolve('./sidebars/autogen.js'),
+        id: "Observability",
+        path: "docs/05-Observability",
+        routeBasePath: "Observability",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
         ...pageOptions,
       },
     ],
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
-        id: 'Infrastructure-as-Code',
-        path: 'docs/07-Infrastructure as Code',
-        routeBasePath: 'Infrastructure-as-Code',
-        sidebarPath: require.resolve('./sidebars/autogen.js'),
+        id: "Infrastructure-as-Code",
+        path: "docs/07-Infrastructure-as-Code",
+        routeBasePath: "Infrastructure-as-Code",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
         ...pageOptions,
       },
     ],
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
-        id: 'Storage',
-        path: 'docs/08-Storage',
-        routeBasePath: 'Storage',
-        sidebarPath: require.resolve('./sidebars/autogen.js'),
+        id: "Storage",
+        path: "docs/08-Storage",
+        routeBasePath: "Storage",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
         ...pageOptions,
       },
     ],
@@ -187,33 +189,33 @@ const config = {
         },
       };
     },
-    '@docusaurus/theme-live-codeblock',
+    "@docusaurus/theme-live-codeblock",
     "docusaurus-plugin-umami",
     [
-      '@docusaurus/plugin-pwa',
+      "@docusaurus/plugin-pwa",
       {
         debug: true,
         offlineModeActivationStrategies: [
-          'appInstalled',
-          'mobile',
-          'standalone',
-          'queryString',
+          "appInstalled",
+          "mobile",
+          "standalone",
+          "queryString",
         ],
         pwaHead: [
           {
-            tagName: 'link',
-            rel: 'icon',
-            href: '/img/docusaurus.png',
+            tagName: "link",
+            rel: "icon",
+            href: "/img/docusaurus.png",
           },
           {
-            tagName: 'link',
-            rel: 'manifest',
-            href: '/manifest.json',
+            tagName: "link",
+            rel: "manifest",
+            href: "/manifest.json",
           },
           {
-            tagName: 'meta',
-            name: 'theme-color',
-            content: 'rgb(245, 251, 254)',
+            tagName: "meta",
+            name: "theme-color",
+            content: "rgb(245, 251, 254)",
           },
         ],
       },
@@ -238,201 +240,201 @@ const config = {
         },
       },
       liveCodeBlock: {
-        playgroundPosition: 'top',
+        playgroundPosition: "top",
       },
       giscus: {
-        id: 'comments',
-        repo: 'SJFCS/cloudnative.love',
-        repoId: 'R_kgDOIG1UNg',
-        category: 'Announcements',
-        categoryId: 'DIC_kwDOIG1UNs4CRyF9',
-        mapping: 'title',
-        reactionsEnabled: '1',
-        emitMetadata: '0',
-        inputPosition: 'top',
-        loading: 'lazy',
+        id: "comments",
+        repo: "SJFCS/cloudnative.love",
+        repoId: "R_kgDOIG1UNg",
+        category: "Announcements",
+        categoryId: "DIC_kwDOIG1UNs4CRyF9",
+        mapping: "title",
+        reactionsEnabled: "1",
+        emitMetadata: "0",
+        inputPosition: "top",
+        loading: "lazy",
       },
       umami: {
-        websiteid: "de542e6a-4a05-402e-bb9d-272558a5367b",
-        src: "https://analytics.cloudnative.love/umami.js",
+        websiteid: "290979fe-8b4a-4dfd-87bf-0d5bb5856f4b",
+        src: "https://us.umami.is/script.js",
       },
       announcementBar: {
-        id: 'support_us',
+        id: "support_us",
         content:
-          'Welcome to my website focused on DevOps technologies, where I share my knowledge and expertise in the field.          ',
-        backgroundColor: '#dbecfa',
-        textColor: '#4293e7',
+          "Welcome to my website focused on DevOps technologies, where I share my knowledge and expertise in the field.          ",
+        backgroundColor: "#dbecfa",
+        textColor: "#4293e7",
         isCloseable: false,
       },
       navbar: {
-        title: 'CloudNative.love 💕',
+        title: "CloudNative.love 💕",
         logo: {
-          alt: 'CloudNative.love Logo',
-          src: 'img/logo.png',
+          alt: "CloudNative.love Logo",
+          src: "img/logo.png",
         },
         items: [
-          { to: '/Default', label: 'Docs' },
+          { to: "/Default", label: "Docs" },
           {
-            type: 'dropdown',
-            label: 'Blog',
-            to: '/blog',
-            position: 'left',
+            type: "dropdown",
+            label: "Blog",
+            to: "/blog",
+            position: "left",
             items: [
               {
-                label: 'Archive',
-                to: '/blog/archive',
+                label: "Archive",
+                to: "/blog/archive",
                 className: "header-archive",
-                "aria-label": "archive"
+                "aria-label": "archive",
               },
               {
-                label: 'Subscribe',
-                to: 'https://cloudnative.love/blog/atom.xml',
+                label: "Subscribe",
+                to: "https://cloudnative.love/blog/atom.xml",
                 className: "header-rss",
-                "aria-label": "rss"
-              }
-            ]
+                "aria-label": "rss",
+              },
+            ],
           },
           {
-            type: 'dropdown',
-            label: 'laboratory',
-            position: 'right',
+            type: "dropdown",
+            label: "laboratory",
+            position: "right",
             items: [
               {
-                label: 'Google Mirror',
-                to: 'https://google.cloudnative.love/',
+                label: "Google Mirror",
+                to: "https://google.cloudnative.love/",
                 className: "header-google-link",
-                "aria-label": "google"
+                "aria-label": "google",
               },
               {
-                label: 'Real-time visitors',
-                to: 'https://analytics.cloudnative.love/share/9eC39SmU/cloudnative.love',
+                label: "Real-time visitors",
+                to: "https://analytics.cloudnative.love/",
                 className: "header-analytics-link",
                 "aria-label": "Analytics",
               },
               {
-                label: 'Site monitoring',
-                to: 'https://monitor.cloudnative.love/',
+                label: "Site monitoring",
+                to: "https://monitor.cloudnative.love/",
                 className: "header-monitor-link",
                 "aria-label": "monitor",
               },
               {
-                label: 'GitHub Insight',
-                to: 'https://ossinsight.cloudnative.love/',
+                label: "GitHub Insight",
+                to: "https://ossinsight.cloudnative.love/",
                 className: "header-insight-link",
                 "aria-label": "insight",
               },
               {
-                label: 'ChatGPT Next',
-                to: 'https://chat.cloudnative.love/',
+                label: "ChatGPT Next",
+                to: "https://chat.cloudnative.love/",
                 className: "header-chat-link",
                 "aria-label": "chat",
-              }
-            ]
+              },
+            ],
           },
           {
-            type: 'dropdown',
-            label: 'About',
-            to: '/about',
-            position: 'right',
+            type: "dropdown",
+            label: "About",
+            to: "/about",
+            position: "right",
             items: [
               {
-                label: 'Architecture',
-                to: '/about',
+                label: "Architecture",
+                to: "/about",
                 className: "header-aboutsite-link",
-                "aria-label": "aboutsite"
+                "aria-label": "aboutsite",
               },
               {
-                label: 'Resume',
-                to: '/resume',
+                label: "Resume",
+                to: "/resume",
                 className: "header-aboutme-link",
-                "aria-label": "aboutme"
-              }
-            ]
+                "aria-label": "aboutme",
+              },
+            ],
           },
-          {type: 'localeDropdown',position: 'right',},
+          { type: "localeDropdown", position: "right" },
           {
-            position: 'right',
-            to: 'https://github.com/SJFCS/cloudnative.love',
+            position: "right",
+            to: "https://github.com/SJFCS/cloudnative.love",
             className: "header-github-link",
             "aria-label": "GitHub repository",
           },
           {
-            position: 'right',
-            to: 'mailto:song.jinfeng@outlook.com',
+            position: "right",
+            to: "mailto:song.jinfeng@outlook.com",
             className: "header-email-link",
             "aria-label": "Email",
           },
         ],
       },
       footer: {
-        style: 'dark',
+        style: "dark",
         links: [
-          // {
-          //   title: 'classification',
-          //   items: [
-          //     {
-          //       label: 'Docs',
-          //       to: '/docs',
-          //     },
-          //     {
-          //       label: 'Blog',
-          //       to: '/blog',
-          //     },
-          //   ],
-          // },
-          // {
-          //   title: 'More',
-          //   items: [
-          //     {
-          //       label: 'Document Tags',
-          //       to: '/docs/tags/',
-          //     },
-          //     {
-          //       label: 'Blog Tags',
-          //       to: '/blog/tags/',
-          //     },
-          //   ],
-          // },
           {
-            title: 'Blog',
+            title: 'Document',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
+                label: "Document",
+                to: "/Default",
               },
               {
-                label: 'Blog Tags',
-                to: '/blog/tags/',
+                label: 'Kubernetes',
+                to: '/Kubernetes',
+              },
+              {
+                label: 'Linux-Guide',
+                to: '/Linux-Guide',
+              },
+              {
+                label: 'Infrastructure-as-Code',
+                to: '/Infrastructure-as-Code',
               },
             ],
           },
           {
-            title: 'Connect',
+            title: "Blog",
             items: [
               {
-                label: 'Email',
-                href: 'mailto:song.jinfeng@outlook.com',
+                label: "Blog",
+                to: "/blog",
               },
               {
-                label: 'GitHub',
-                href: 'https://github.com/SJFCS',
+                label: "Blog Tags",
+                to: "/blog/tags",
               },
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/users/19731914/',
-              },
-              {
-                label: 'Reddit',
-                href: 'https://www.reddit.com/user/SongJinfeng',
+                label: "Blog Archive",
+                to: "blog/archive",
               },
             ],
           },
           {
-            title: 'Legal',
+            title: "Connect",
             items: [
               {
-                label: 'Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)',
-                href: 'https://creativecommons.org/licenses/by-nc-nd/4.0/',
+                label: "Email",
+                href: "mailto:song.jinfeng@outlook.com",
+              },
+              {
+                label: "GitHub",
+                href: "https://github.com/SJFCS",
+              },
+              {
+                label: "Stack Overflow",
+                href: "https://stackoverflow.com/users/19731914/",
+              },
+              {
+                label: "Reddit",
+                href: "https://www.reddit.com/user/SongJinfeng",
+              },
+            ],
+          },
+          {
+            title: "Legal",
+            items: [
+              {
+                label:
+                  "Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)",
+                href: "https://creativecommons.org/licenses/by-nc-nd/4.0/",
               },
             ],
           },
@@ -443,22 +445,36 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ["bash", "docker", "javascript", "java", "ruby", "powershell", "ini"],
+        additionalLanguages: [
+          "bash",
+          "docker",
+          "javascript",
+          "java",
+          "ruby",
+          "powershell",
+          "ini",
+        ],
         magicComments: [
           {
-            className: 'theme-code-block-highlighted-line',
-            line: 'highlight-next-line',
-            block: { start: 'highlight-start', end: 'highlight-end' },
+            className: "theme-code-block-highlighted-line",
+            line: "highlight-next-line",
+            block: { start: "highlight-start", end: "highlight-end" },
           },
           {
-            className: 'code-block-error-line',
-            line: 'This will error',
-            block: { start: 'highlight-error-start', end: 'highlight-error-end' },
+            className: "code-block-error-line",
+            line: "This will error",
+            block: {
+              start: "highlight-error-start",
+              end: "highlight-error-end",
+            },
           },
           {
-            className: 'code-block-success-line',
-            line: 'This will success',
-            block: { start: 'highlight-success-start', end: 'highlight-success-end' },
+            className: "code-block-success-line",
+            line: "This will success",
+            block: {
+              start: "highlight-success-start",
+              end: "highlight-success-end",
+            },
           },
         ],
       },

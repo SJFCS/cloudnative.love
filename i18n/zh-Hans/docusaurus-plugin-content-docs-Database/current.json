@@ -3,13 +3,13 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.category.MongoDB📝": {
-    "message": "MongoDB📝",
-    "description": "The label for category MongoDB📝 in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.MongoDB": {
+    "message": "MongoDB",
+    "description": "The label for category MongoDB in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.MySQL✨": {
-    "message": "MySQL✨",
-    "description": "The label for category MySQL✨ in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.MySQL": {
+    "message": "MySQL",
+    "description": "The label for category MySQL in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.HA高可用": {
     "message": "HA高可用",
@@ -35,12 +35,20 @@
     "message": "PostgreSQL",
     "description": "The label for category PostgreSQL in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Redis✨": {
-    "message": "Redis✨",
-    "description": "The label for category Redis✨ in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.Redis": {
+    "message": "Redis",
+    "description": "The label for category Redis in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.集群": {
     "message": "集群",
     "description": "The label for category 集群 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Etcd": {
+    "message": "Etcd",
+    "description": "The label for category Etcd in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.link.Back Home": {
+    "message": "Back Home",
+    "description": "The label for link Back Home in sidebar tutorialSidebar, linking to /Default"
   }
 }

@@ -19,9 +19,9 @@
     "message": "Linux Guide",
     "description": "The label for link Linux Guide in sidebar mySidebar, linking to /Linux-Guide"
   },
-  "sidebar.mySidebar.link.Proxy, Gateway & Mesh": {
-    "message": "Proxy, Gateway & Mesh",
-    "description": "The label for link Proxy, Gateway & Mesh in sidebar mySidebar, linking to /Service-Mesh"
+  "sidebar.mySidebar.link.Service Mesh": {
+    "message": "Service Mesh",
+    "description": "The label for link Service Mesh in sidebar mySidebar, linking to /Service-Mesh"
   },
   "sidebar.mySidebar.link.Database": {
     "message": "Database",
@@ -31,9 +31,9 @@
     "message": "Observability",
     "description": "The label for link Observability in sidebar mySidebar, linking to /Observability"
   },
-  "sidebar.mySidebar.link.Integration & Delivery": {
-    "message": "Integration & Delivery",
-    "description": "The label for link Integration & Delivery in sidebar mySidebar, linking to /Continuous-Integration-and-Delivery"
+  "sidebar.mySidebar.link.GitOps": {
+    "message": "GitOps",
+    "description": "The label for link GitOps in sidebar mySidebar, linking to /GitOps"
   },
   "sidebar.mySidebar.link.Infrastructure as Code": {
     "message": "Infrastructure as Code",

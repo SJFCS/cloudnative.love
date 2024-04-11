@@ -32,7 +32,7 @@
     "description": "Navbar item with label Site monitoring"
   },
   "item.label.Resume": {
-    "message": "我的证书",
+    "message": "关于我",
     "description": "Navbar item with label Resume"
   },
   "item.label.Architecture": {

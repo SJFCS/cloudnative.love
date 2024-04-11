@@ -1,5 +1,6 @@
 ---
-title: Rook📝
+title: Rook
+sidebar_position: 1
 tags: [Storage,Rook]
 ---
 

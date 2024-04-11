@@ -3,9 +3,9 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.category.Linux Network✨": {
-    "message": "Linux Network✨",
-    "description": "The label for category Linux Network✨ in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.Linux Network": {
+    "message": "Linux Network",
+    "description": "The label for category Linux Network in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.基础网络配置管理": {
     "message": "基础网络配置管理",
@@ -43,9 +43,9 @@
     "message": "TCPdump",
     "description": "The label for category TCPdump in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Linux 文件系统✨": {
-    "message": "Linux 文件系统✨",
-    "description": "The label for category Linux 文件系统✨ in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.Linux 文件系统": {
+    "message": "Linux 文件系统",
+    "description": "The label for category Linux 文件系统 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.文件系统与管理": {
     "message": "文件系统与管理",
@@ -175,17 +175,17 @@
     "message": "内核管理",
     "description": "The label for category 内核管理 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Linux Security✨": {
-    "message": "Linux Security✨",
-    "description": "The label for category Linux Security✨ in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.Linux Security": {
+    "message": "Linux Security",
+    "description": "The label for category Linux Security in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.访问控制和授权": {
     "message": "访问控制和授权",
     "description": "The label for category 访问控制和授权 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.OpenSSH✨": {
-    "message": "OpenSSH✨",
-    "description": "The label for category OpenSSH✨ in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.OpenSSH": {
+    "message": "OpenSSH",
+    "description": "The label for category OpenSSH in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.ssh内网穿透": {
     "message": "ssh内网穿透",
@@ -294,5 +294,17 @@
   "sidebar.tutorialSidebar.category.命令速查": {
     "message": "命令速查",
     "description": "The label for category 命令速查 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux 网络配置": {
+    "message": "Linux 网络配置",
+    "description": "The label for category Linux 网络配置 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.RAID": {
+    "message": "RAID",
+    "description": "The label for category RAID in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.link.Back Home": {
+    "message": "Back Home",
+    "description": "The label for link Back Home in sidebar tutorialSidebar, linking to /Default"
   }
 }

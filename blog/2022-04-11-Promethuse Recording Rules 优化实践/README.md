@@ -13,12 +13,13 @@ https://gurumee92.tistory.com/256
 https://faun.pub/how-to-drop-and-delete-metrics-in-prometheus-7f5e6911fb33
 
 https://awesome-prometheus-alerts.grep.to/ -->
-![1673346836560](image/README/1673346836560.png)
 
-随着时间的推移，Prometheus 中存储的指标数量越来越多，查询的频率也越来越高。随着越来越多的仪表板被添加到 Grafana，我开始遇到 Grafana 无法按时呈现图形和 Prometheus 查询超时的情况。这非常烦人。我需要一种更好的方法来修复 Prometheus 查询超时，尤其是在长时间聚合大量指标时。
+
+随着时间的推移，Prometheus 中存储的指标数量越来越多，查询的频率也越来越高。随着越来越多的仪表板被添加到 Grafana，我开始遇到 Grafana 无法按时呈现图形和 Prometheus 查询超时的情况，尤其在长时间聚合大量指标时这种现象更为严重。
 
 本文用到了 Prometheus Recording Rule 实现对高维度指标查询的 PromQL 语句的性能优化，提高查询效率。
 <!-- truncate -->
+
 ## 规则的语法检查
 要在不启动 Prometheus 服务器的情况下快速检查规则文件的语法是否正确，请安装并运行 promtool 。
 
@@ -95,7 +96,7 @@ Load time: 18656ms
 
 ## 优化方案
 
-[Prometheus Recording Rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/)允 许您基于其他时间序列创建自定义的元时间序列。如果您是 Prometheus Operator 用户——您可能已经在 Prometheus 中运行了大量此类规则。
+[Prometheus Recording Rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) 允许您基于其他时间序列创建自定义的元时间序列。如果您是 Prometheus Operator 用户——您可能已经在 Prometheus 中运行了大量此类规则。
 
 ```yaml
 groups:

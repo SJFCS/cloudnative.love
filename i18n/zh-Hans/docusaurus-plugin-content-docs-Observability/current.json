@@ -15,12 +15,24 @@
     "message": "Metrics",
     "description": "The label for category Metrics in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Promethuse✨": {
-    "message": "Promethuse✨",
-    "description": "The label for category Promethuse✨ in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.Promethuse": {
+    "message": "Promethuse",
+    "description": "The label for category Promethuse in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Tracing": {
     "message": "Tracing",
     "description": "The label for category Tracing in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ELK": {
+    "message": "ELK",
+    "description": "The label for category ELK in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.README": {
+    "message": "README",
+    "description": "The label for category README in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.link.Back Home": {
+    "message": "Back Home",
+    "description": "The label for link Back Home in sidebar tutorialSidebar, linking to /Default"
   }
 }
