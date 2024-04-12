@@ -6,6 +6,8 @@ import FooterCopyright from '@theme/Footer/Copyright';
 import FooterLayout from '@theme/Footer/Layout';
 import footerStyles from '@site/src/css/footer.module.css';
 
+import DifyChatbot from "@site/src/components/DifyChatbot";
+
 const Clouds = require('@site/static/img/footer-clouds.svg').default;
 const Wave = require('@site/static/img/footer-wave.svg').default;
 
@@ -28,6 +30,7 @@ function Footer() {
         logo={logo && <FooterLogo logo={logo} />}
         copyright={copyright && <FooterCopyright copyright={copyright} />}
       />
+      <DifyChatbot />
     </div>
 
   );

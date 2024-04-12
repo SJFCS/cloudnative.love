@@ -11,7 +11,6 @@ import footerStyles from "@site/src/css/footer.module.css";
 const Clouds = require("@site/static/img/footer-clouds.svg").default;
 const Wave = require("@site/static/img/footer-wave.svg").default;
 import Translate, { translate } from "@docusaurus/Translate";
-import DifyChatbot from "@site/src/components/DifyChatbot";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -59,7 +58,6 @@ export default function Home(): JSX.Element {
       // title={`Hello from ${siteConfig.title}`}
       description={DESCRIPTION}
     >
-      <DifyChatbot />
       <Greeting />
       <HomepageHeader />
       <HomepageFeatures />
