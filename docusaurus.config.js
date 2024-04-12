@@ -254,6 +254,11 @@ const config = {
         inputPosition: "top",
         loading: "lazy",
       },
+      dify: {
+        token: "h8yGoAkqwiVB4yXc",
+        isDev: false,
+        baseUrl: "",
+      },
       umami: {
         websiteid: "290979fe-8b4a-4dfd-87bf-0d5bb5856f4b",
         src: "https://us.umami.is/script.js",

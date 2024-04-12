@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 
+import { useThemeConfig } from "@docusaurus/theme-common";
+
 const DifyChatbot = () => {
-  const config = {
-    token: "h8yGoAkqwiVB4yXc",
-    isDev: false,
-    baseUrl: "",
-  };
-
+  const themeConfig = useThemeConfig() as any;
+  const config = themeConfig.dify;
   const [isChatOpen, setIsChatOpen] = useState(false);
-
   const toggleChat = () => setIsChatOpen((prev) => !prev);
-
   const renderChatIcon = () => (
     <div
       id="dify-chatbot-bubble-button"
