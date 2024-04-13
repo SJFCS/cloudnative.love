@@ -22,8 +22,9 @@ const data = [
   { cover: require('@site/static/img/cert/2018年山东省职业院校 云计算大数据行业技能大赛 一等奖.webp').default, title: <Translate>2018 Shandong vocational colleges cloud computing big data industry skills competition first prize</Translate> },
   { cover: require('@site/static/img/cert/云计算大数据讲师认证证书.webp').default, title: <Translate>Cloud computing big data lecturer certification (CETC)</Translate> },
   { cover: require('@site/static/img/cert/ArgoCD-AKUITY.webp').default, title: <Translate>Introduction to Continuous Delivery and GitOps using Argo CD</Translate> },
+  { cover: require('@site/static/img/cert/HCNA-AI.webp').default, title: <Translate>Huawei Certified Artificial Intelligence(HCNA-AI)</Translate> },
+  // { cover: require('@site/static/img/cert/大学生网络安全知识竞赛证书.webp').default, title: <Translate>Certificate of University Student Network Security Knowledge Contest</Translate> },
   { cover: require('@site/static/img/cert/CKAD.webp').default, title: <Translate>Certified Kubernetes Application Developer (CKAD)</Translate> },
-
 ];
 
 // eslint-disable-next-line react/display-name

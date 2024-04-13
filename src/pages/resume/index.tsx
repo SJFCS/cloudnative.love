@@ -291,6 +291,49 @@ export default function Resume() {
               </a>
             </div>
           </div>
+
+          <div className="relative  shadow-sm md:shadow-2xl">
+            <Zoom>
+              <img
+                className="rounded object-cover w-full h-full"
+                loading="lazy"
+                src="/img/cert/HCNA-AI.webp"
+              />
+            </Zoom>
+            <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
+              <a
+                className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Translate>
+                  Huawei Certified Artificial Intelligence(HCNA-AI)
+                </Translate>
+              </a>
+            </div>
+          </div>
+
+          <div className="relative  shadow-sm md:shadow-2xl">
+            <Zoom>
+              <img
+                className="rounded object-cover w-full h-full"
+                loading="lazy"
+                src="/img/cert/大学生网络安全知识竞赛证书.webp"
+              />
+            </Zoom>
+            <div className="noclick bg-black absolute top-0 left-0 rounded w-full h-full  bg-opacity-30 grid place-items-center opacity-0 hover:opacity-100 transition-opacity duration-200">
+              <a
+                className="bg-black Dbutton px-6 py-2 rounded-full  text-white resume-hide"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Translate>
+                  Certificate of University Student Network Security Knowledge
+                  Contest
+                </Translate>
+              </a>
+            </div>
+          </div>
         </section>
 
         {/* <section className="my-4 max-w-5xl mx-auto">
