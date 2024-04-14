@@ -44,7 +44,7 @@ EOF
 
 先来看man中的说明：
 
-**If the redirection operator is `<<-`, then all leading tab characters are stripped from input lines and  the  line  containing  delimiter.**
+**If the redirection operator is `<<-`, then all leading tab characters are stripped from input lines and  the  line  containing  delimiter.**
 
 翻译过来的意思就是：如果重定向的操作符是`<<-`，那么分界符（EOF）所在行的开头部分的制表符（Tab）都将被去除。
 

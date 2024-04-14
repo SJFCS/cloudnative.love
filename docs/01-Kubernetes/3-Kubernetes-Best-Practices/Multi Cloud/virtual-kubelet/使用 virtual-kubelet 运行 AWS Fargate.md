@@ -1,1 +1,0 @@
-https://aws.amazon.com/cn/blogs/china/aws-fargate-virtual-kubelet/

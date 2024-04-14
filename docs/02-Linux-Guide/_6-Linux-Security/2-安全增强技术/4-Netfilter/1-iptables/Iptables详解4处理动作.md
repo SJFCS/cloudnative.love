@@ -21,9 +21,9 @@ DROP      丢弃封包不予处理，进行完此处理动作后，将不再比�
 
 REDIRECT    将封包重新导向到另一个端口（PNAT），进行完此处理动作后，将会继续比对其它规则。 
 
-​            这个功能可以用来实作通透式porxy 或用来保护 web 服务器。
+            这个功能可以用来实作通透式porxy 或用来保护 web 服务器。
 
-​        例如：iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
+        例如：iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
 
 MASQUERADE       改写封包来源 IP 为防火墙 NIC IP，可以指定 port 对应的范围，进行完此处理动作后，直接跳往下一个规则（mangleostrouting）。这个功能与 SNAT 略有不同，当进行 IP 伪装时，不需指定要伪装成哪个 IP，IP 会从网卡直接读，当使用拨接连线时，IP 通常是由 ISP 公司的 DHCP 服务器指派的，这个时候 MASQUERADE 特别有用。
 
@@ -150,11 +150,11 @@ REDIRECT规则只能定义在PREROUTING链或者OUTPUT链中。
 
 SNAT       改写封包来源 IP 为某特定 IP 或 IP 范围，可以指定 port 对应的范围，进行完此处理动作后，将直接跳往下一个规则（mangleostrouting）。
 
-​        例如：iptables -t nat -A POSTROUTING -p tcp-o eth0 -j SNAT --to-source 194.236.50.155-194.236.50.160:1024-32000
+        例如：iptables -t nat -A POSTROUTING -p tcp-o eth0 -j SNAT --to-source 194.236.50.155-194.236.50.160:1024-32000
 
 DNAT      改写封包目的地 IP 为某特定 IP 或 IP 范围，可以指定 port 对应的范围，进行完此处理动作后，将会直接跳往下一个规炼（filter:input 或 filter:forward）。
 
-​        例如：iptables -t nat -A PREROUTING -p tcp -d 15.45.23.67 --dport 80 -j DNAT --to-destination 192.168.1.1-192.168.1.10:80-100
+        例如：iptables -t nat -A PREROUTING -p tcp -d 15.45.23.67 --dport 80 -j DNAT --to-destination 192.168.1.1-192.168.1.10:80-100
 
 
 
@@ -162,13 +162,13 @@ MIRROR    镜射封包，也就是将来源 IP 与目的地 IP 对调后，将�
 
 QUEUE     中断过滤程序，将封包放入队列，交给其它程序处理。透过自行开发的处理程序，可以进行其它应用，
 
-​           例如：计算联机费......等。
+           例如：计算联机费......等。
 
 RETURN    结束在目前规则炼中的过滤程序，返回主规则炼继续过滤，如果把自订规则炼看成是一个子程序，那么这个动作，就相当提早结束子程序并返回到主程序中。
 
 MARK     将封包标上某个代号，以便提供作为后续过滤的条件判断依据，进行完此处理动作后，将会继续比对其它规则。
 
-​        例如：iptables -t mangle -A PREROUTING -p tcp --dport 22 -j MARK --set-mark 2
+        例如：iptables -t mangle -A PREROUTING -p tcp --dport 22 -j MARK --set-mark 2
 
 
 

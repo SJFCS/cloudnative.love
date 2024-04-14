@@ -5,10 +5,10 @@ tags: [Kubernetes]
 ---
 
 ## 推荐阅读
+- [KubeCon + CloudNativeCon North America 2020 - Virtua](https://www.youtube.com/playlist?list=PLj6h78yzYM2Pn8RxfLh2qrXBDftr6Qjut)
 - [KubeCon + CloudNativeCon Europe 2022](https://www.youtube.com/playlist?list=PLj6h78yzYM2MCEgkd8zH0vJWF7jdQ-GRR)
 
 ## 值得关注的云原生项目
-
 - openkruise  
   阿里开源的一套增强 Kubernetes 功能的系统，对 k8s 的 Deployment/StatefulSet/Job/DaemonSet 均提供了对应的增强版，而且增强的特性很吸引人。
 - karmada  
@@ -38,4 +38,6 @@ Kubernetes 有很多的 Web UI 或者本地 UI 组件可供选择：
 1. [K9s](https://github.com/derailed/k9s): 本地命令行工具，最好用的命令行 UI 界面，没有之一！
 2. [lens](https://github.com/lensapp/lens): 本地工具，UI 设计非常直观，信息也非常丰富，非常受欢迎。
 3. [kubesphere](https://github.com/kubesphere/kubesphere): 青云推出的 k8s 集群全家桶，自带 Web UI。值得一试。
+4. 其他 rancher/openshift 等 k8s 发行版自带的 UI
+
 

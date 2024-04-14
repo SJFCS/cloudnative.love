@@ -4,7 +4,7 @@ sidebar_position: 1
 tags: [Storage,Rook]
 ---
 
->[rook](https://github.com/rook/rook)部署非常简单，但是维护实际上会比 ceph 本身更复杂，引入了比传统的 ceph 更多的概念与组件。
+[rook](https://github.com/rook/rook) 部署非常简单，但是维护实际上会比 ceph 本身更复杂，引入了比传统的 ceph 更多的概念与组件。
 
 ## 一、使用 rook 在集群内部署 ceph 分布式存储
 
@@ -31,21 +31,6 @@ In order to configure the Ceph storage cluster, at least one of these local stor
 2. Raw partitions (no formatted filesystem)
 1. PVs available from a storage class in block mode
 
-我特意为所有 worker 节点分别添加了一个 20G 的硬盘:
-
-```shell
-$ lsblk
-NAME                                                MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
-sr0                                                 11:0  1 1024M 0 rom 
-vda                                                 252:0  0  20G 0 disk 
-├─vda1                                             252:1  0  1G 0 part /boot
-└─vda2                                             252:2  0  19G 0 part 
- ├─centos-root                                     253:0  0  17G 0 lvm /
- └─centos-swap                                     253:1  0  2G 0 lvm 
-vdb                                                 252:16  0  20G 0 disk 
-```
-
-上面的 vdb 就是我新加的裸硬盘。
 
 ### 2. 部署 ceph-operator
 
@@ -69,7 +54,6 @@ kubectl create ns rook-ceph
 helm install --namespace rook-ceph rook-release/rook-ceph -f custom-values.yaml
 ```
 
-> 注意：ceph 和 kubernetes 存储组件的很多镜像都托管在 quay.io 中，因此在安装 chart 前，可以考虑先使用  container/sync_images.py 通过代理下载 quay 镜像，导入到所有 worker 节点。
 
 ### 3. 创建 ceph cluster
 
@@ -152,23 +136,6 @@ kubectl create -f wordpress.yaml
 创建完成后，可以通过 k9s/kubectl 查看 default 名字空间中的 PVC 和 Pod 内容。
 
 
-## 三、注意事项
-
-和状态有关的东西，都比较娇贵。因此服务器的关机、重启、异常宕机，都可能导致 ceph 集群出现问题。
-另外 Pod 自身的异常，也可能导致数据损坏。
-
-我测试 rook-ceph 遇到的问题有：
-
-1. [node-hangs-after-reboot](https://rook.io/docs/rook/v1.4/ceph-common-issues.html#node-hangs-after-reboot): 先 drain 掉异常节点，重启节点，最后 uncordon 节点。
-  1. 文档说这个 bug 早就解决了，可能还是我内核版本太低导致的问题。
-
-可能和我使用的是 centos7(内核版本 3.10) 有关，内核版本太低，导致 rook-ceph 很不稳定，仅测试就出了一堆问题。rook-ceph 写明推荐的内核版本为 `4.17+`
-
-
-
 ## 相关资料
-
-视频:
-
 - [Rook: Intro and Ceph Deep Dive - Blaine Gardner, Alexander Trost, & Travis Nielsen, Sébastien Han](https://www.youtube.com/watch?v=aO-n4FuOU2w&list=PLj6h78yzYM2Pn8RxfLh2qrXBDftr6Qjut&index=25)
 - [Ceph容器化部署一时爽，运维火葬场~](https://mp.weixin.qq.com/s/wIQVkf4XCtNUE0XpLLI_tQ)

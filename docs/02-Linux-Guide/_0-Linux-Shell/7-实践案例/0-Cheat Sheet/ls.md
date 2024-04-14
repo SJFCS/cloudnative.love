@@ -202,7 +202,7 @@ lrwxrwxrwx 1 user user 13 Oct 12 22:33 link -> /home/user/fil
 ## 列出当前目录文件名
 
 ```
-ls   #列出当前目录文件名，不包括隐藏文件，且无法看到符号链接链向的文件# -a   ALLls -a #列出当前目录下所有文件，包括隐藏文件，当前目录.以及上一级目录..ls -A #列出当前目录下所有文件，包括隐藏文件，不包括前目录.以及上一级目录..ls -al  # 列出当前目录所有文件，并且使用长格式显示所有信息，包括权限，大小，用户，时间等，与ll作用相同
+ls   #列出当前目录文件名，不包括隐藏文件，且无法看到符号链接链向的文件# -a   ALLls -a #列出当前目录下所有文件，包括隐藏文件，当前目录.以及上一级目录..ls -A #列出当前目录下所有文件，包括隐藏文件，不包括前目录.以及上一级目录..ls -al  # 列出当前目录所有文件，并且使用长格式显示所有信息，包括权限，大小，用户，时间等，与ll作用相同
 ```
 
 ## 以易读方式列出当前目录文件大小
@@ -210,7 +210,7 @@ ls   #列出当前目录文件名，不包括隐藏文件，且无法看到�
 相关参数-h（human-readable）,如下所示，文件大小不以初始字节显示，而是以k或者M为单位显示。
 
 ```
-ls -lh   总用量 1.4Mdrwxrwxr-x 3 hyb  hyb  4.0K 10月 19  2017 Area3drwxrwxr-x 3 hyb  hyb  4.0K 10月 19  2017 home-rw-r--r-- 1 root root 1.3K 10月 19  2017 home.ziplrwxrwxrwx 1 hyb  hyb     8 9月  13 21:19 test -> home.zip-rw-rw-r-- 1 hyb  hyb  1.3M 9月  16 15:30 test.zipdrwxrwxr-x 2 hyb  hyb  4.0K 10月 19  2017 user
+ls -lh   总用量 1.4Mdrwxrwxr-x 3 hyb  hyb  4.0K 10月 19  2017 Area3drwxrwxr-x 3 hyb  hyb  4.0K 10月 19  2017 home-rw-r--r-- 1 root root 1.3K 10月 19  2017 home.ziplrwxrwxrwx 1 hyb  hyb     8 9月  13 21:19 test -> home.zip-rw-rw-r-- 1 hyb  hyb  1.3M 9月  16 15:30 test.zipdrwxrwxr-x 2 hyb  hyb  4.0K 10月 19  2017 user
 ```
 
 ## 递归列出当前目录以及子目录的文件
@@ -218,7 +218,7 @@ ls -lh   总用量 1.4Mdrwxrwxr-x 3 hyb  hyb  4.0K 10月 19  2017
 相关参数-R（recursive）。
 
 ```
-ls -lR
+ls -lR
 ```
 
 但是这样列出来的内容可读性较差，可参考后面的使用。
@@ -228,7 +228,7 @@ ls -lR
 参数与前面类似，最后再跟上目录名，例如：
 
 ```
-ls -a testlrwxrwxrwx 1 hyb hyb 8 9月  13 21:19 test -> home.zip
+ls -a testlrwxrwxrwx 1 hyb hyb 8 9月  13 21:19 test -> home.zip
 ```
 
 ## 列出符合条件的文件
@@ -236,7 +236,7 @@ ls -a testlrwxrwxrwx 1 hyb hyb 8 9月  13 21:19 test -> home.zip
 参数与前面类似，最后跟上条件，例如列出所有以te开头的文件:
 
 ```
-ls -al te*lrwxrwxrwx 1 hyb hyb       8 9月  13 21:19 test -> home.zip-rw-rw-r-- 1 hyb hyb 1345047 9月  16 15:30 test.zip
+ls -al te*lrwxrwxrwx 1 hyb hyb       8 9月  13 21:19 test -> home.zip-rw-rw-r-- 1 hyb hyb 1345047 9月  16 15:30 test.zip
 ```
 
 ## 按指定顺序列出文件
@@ -244,7 +244,7 @@ ls -al te*lrwxrwxrwx 1 hyb hyb       8 9月  13 21:19 test ->�
 列出时，也可以按照指定字段排序列出，同样还可以配合前面的参数一起使用，例如:
 
 ```
-ls -lt  #按文件修改时间排序ls -alS  #按文件大小排序ls  -X   #按扩展名排序
+ls -lt  #按文件修改时间排序ls -alS  #按文件大小排序ls  -X   #按扩展名排序
 ```
 
 ## 计算目录下的文件或目录数量
@@ -260,7 +260,7 @@ ls -lt  #按文件修改时间排序ls -alS  #按文件大小排序ls  -
     
 
 ```
-ls -l | grep "^-" | wc -l  #计算当前目录下文件数量ls -lR | grep "^-" | wc -l #包括子目录ls -lR | grep "^d" | wc -l #计算当前目录下的目录数量，且不包括.和..ls -lR | grep "^l" | wc -l  #计算当前目录下的链接数量
+ls -l | grep "^-" | wc -l  #计算当前目录下文件数量ls -lR | grep "^-" | wc -l #包括子目录ls -lR | grep "^d" | wc -l #计算当前目录下的目录数量，且不包括.和..ls -lR | grep "^l" | wc -l  #计算当前目录下的链接数量
 ```
 
 ## 列出目录下部分文件
@@ -268,7 +268,7 @@ ls -l | grep "^-" | wc -l  #计算当前目录下文件数量ls -lR |
 当目录下文件较多时，可以结合more命令，只显示部分，例如:
 
 ```
-ls -al|more
+ls -al|more
 ```
 
 ## 列出目录下所有文件的完整路径
@@ -276,7 +276,7 @@ ls -al|more
 例如，列出LTE目录下所有文件完整路径，$9代表第9列，即文件名，-R，递归子目录。
 
 ```
-ls -lR |grep '^-' |awk '{print "/LTE/" $9}'/LTE/1.txt/LTE/home.zip/LTE/test.zip/LTE/qqq.txt/LTE/test.txt/LTE/qqq.txtls -lR |grep '^-' |awk '{print "/LTE/" $1 " " $9 }' ##打印第一列和第九列
+ls -lR |grep '^-' |awk '{print "/LTE/" $9}'/LTE/1.txt/LTE/home.zip/LTE/test.zip/LTE/qqq.txt/LTE/test.txt/LTE/qqq.txtls -lR |grep '^-' |awk '{print "/LTE/" $1 " " $9 }' ##打印第一列和第九列
 ```
 
 ^-也可以改为以下几种：

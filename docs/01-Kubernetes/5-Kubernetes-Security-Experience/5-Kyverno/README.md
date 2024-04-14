@@ -3,11 +3,7 @@ title: Kyverno
 tags: [Security,Kyverno]
 ---
 
-https://www.youtube.com/watch?v=2v0_Bj6BAt0
-
-https://betterprogramming.pub/policy-as-code-on-kubernetes-with-kyverno-b144749f144
-
-和 Open Policy Agent 相比，[kyverno](https://github.com/kyverno/kyverno) 更简单直观。
+相比 Open Policy Agent 而言 [kyverno](https://github.com/kyverno/kyverno) 更简单直观。
 
 ## 使用案例
 
@@ -22,3 +18,5 @@ https://betterprogramming.pub/policy-as-code-on-kubernetes-with-kyverno-b144749f
 ## 参考
 
 - [Kyverno: The Swiss Army Knife of Kubernetes](https://neonmirrors.net/post/2021-01/kyverno-the-swiss-army-knife-of-kubernetes/)
+- https://www.youtube.com/watch?v=2v0_Bj6BAt0
+- https://betterprogramming.pub/policy-as-code-on-kubernetes-with-kyverno-b144749f144

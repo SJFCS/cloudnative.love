@@ -1,1 +1,0 @@
-https://www.junmajinlong.com/ansible/9_power_of_jinja2/

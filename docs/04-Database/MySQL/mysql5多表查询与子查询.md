@@ -1,5 +1,5 @@
 ---
-title: 05.MySQL数据查询2
+title: MySQL数据查询2
 sidebar_position: 5
 ---
 

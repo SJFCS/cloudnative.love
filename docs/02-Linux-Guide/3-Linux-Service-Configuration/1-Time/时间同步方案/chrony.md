@@ -39,9 +39,9 @@ sudo sed -i -e 's/^server/#&/' \
             -e '1a local stratum 10' \
             -e '1a allow all' \
             /etc/chrony.conf
-#allow 127.0.0.1/8   #新增允许本地客户端访问
-#allow x.x.0.0/16    #新增允许集群网网段访问，这里按照要求替换为集群的管理网段。
-#local stratum 10  #取消注释，允许同步本地时间
+#allow 127.0.0.1/8   #新增允许本地客户端访问
+#allow x.x.0.0/16    #新增允许集群网网段访问，这里按照要求替换为集群的管理网段。
+#local stratum 10  #取消注释，允许同步本地时间
 sudo systemctl enable --now chronyd
 ```
 

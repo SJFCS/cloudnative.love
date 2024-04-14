@@ -2,16 +2,6 @@
 title: Etcd 的备份与恢复
 tags: [Database,Etcd]
 ---
-- [disaster recovery](https://github.com/etcd-io/website/blob/main/content/en/docs/v3.5/op-guide/recovery.md) 
-
-- [Disaster Recovery for your Kubernetes Clusters [I] - Andy Goldstein & Steve Kriss, Heptio](https://www.youtube.com/watch?v=qRPNuT080Hk)
-
-- [configure-upgrade-etcd](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster)
-
-https://blog.csdn.net/qq_27156945/article/details/103164683  
-https://discuss.kubernetes.io/t/etcd-backup-and-restore-management/11019  
-https://www.cnblogs.com/breezey/p/10898368.html
-https://blog.51cto.com/ygqygq2/2176492
 
 ## API 版本
 
@@ -92,13 +82,13 @@ etcdctl --write-out=table snapshot status ${TIME}_snapshot.d
 
 因为 etcd 采用 raft 协议，所以整个集群能够容忍的故障节点数为（n-1)/2，大多数情况下故障节点会从失败中恢复，如果故障节点无法从失败中恢复，那么请按下面情况进行恢复。
 
-- 在集群下线节点数**不超过 (N-1)/2 **的情况下，集群仍能正常读写。
+- 在集群下线节点数 **不超过 (N-1)/2** 的情况下，集群仍能正常读写。
   - 从集群中剔除故障节点：使用 `member remove` 命令剔除错误节点。保证当前集群的健康状况
   - 清除故障节点的脏数据：错误节点必须停止，然后删除data dir。保证 `member` 信息被清理干净，清空 `member` 目录
   - 将故障节点节点以新的 member 身份重新加入集群：使用 `member add` 命令添加
   - 启动 etcd 服务：确保节点的 `/data/etcd.env` `/data/etcd.service` 以及 etcd/etcdctl 均配置完成，并添加启动参数`--initial-cluster-state existing` 这样其启动后会自动从正常节点自动同步数据
 
-- 在集群下线节点数**超过 (N-1)/2 **的情况下，集群变为只读。
+- 在集群下线节点数 **超过 (N-1)/2** 的情况下，集群变为只读。
 
   此时则需要启用 灾难恢复（disaster recovery）来恢复集群。
 
@@ -187,47 +177,15 @@ drwx------ 3 etcd etcd 4096 Nov 11 01:48 /var/lib/etcd-data-new/
 
 
 
-
-
-
-
-
-
-
-
-
-<!-- ## 备忘
-
-<Tabs groupId="ETCD部署方式">
-  <TabItem value="systemd">
-
-  `vi /etc/systemd/system/etcd.service` 来更新 etcd 的 systemd 服务单元文件，或者 `sudo EDITOR=vim systemctl edit etcd.service`
-
-  然后重启服务
-
-  ```bash
-  systemctl daemon-reload 
-  systemctl restart etcd
-  ```
-
-  </TabItem>
-  <TabItem value="kubeadm">
-
-  位于 `/etc/kubernetes/manifests` 目录下的静态 pod。
-
-  `watch "crictl ps | grep etcd"` 来查看 ETCD pod 何时重启。
-
-  `kubectl delete pod -n kube-system etcd-controlplane` 重启它并等待 1 分钟。
-
-  如果您在 ETCD YAML 文件中将 --data-dir 更改为 `/var/lib/etcd-from-backup`，请确保 etcd-data 的 volumeMounts 也已更新，mountPath 指向 `/var/lib/ etcd-from-backup` ，并且`--data-dir`目录的权限正确
-
-  ```yaml title="/etc/kubernetes/manifests/etcd.yaml"
-    volumes:
-    - hostPath:
-        path: /var/lib/etcd-from-backup
-        type: DirectoryOrCreate
-      name: etcd-data
-        With this change, /var/lib/etcd on the container points to /var/lib/etcd-from-backup on the controlplane (which is what we want).
-  ```
-  </TabItem>
-</Tabs> -->
+## 阅读参考
+- [disaster recovery](https://github.com/etcd-io/website/blob/main/content/en/docs/v3.5/op-guide/recovery.md) 
+- [Disaster Recovery for your Kubernetes Clusters [I] - Andy Goldstein & Steve Kriss, Heptio](https://www.youtube.com/watch?v=qRPNuT080Hk)
+- [configure-upgrade-etcd](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster)
+- https://blog.csdn.net/qq_27156945/article/details/103164683  
+- https://discuss.kubernetes.io/t/etcd-backup-and-restore-management/11019  
+- https://www.cnblogs.com/breezey/p/10898368.html
+- https://blog.51cto.com/ygqygq2/2176492
+- https://kubernetes.io/zh/docs/tasks/administer-cluster/configure-upgrade-etcd/
+- https://my.oschina.net/u/2306127/blog/2990359
+- https://blog.csdn.net/Ares_ZhangQ/article/details/109479434
+- https://sq.sf.163.com/blog/article/197476452926455808

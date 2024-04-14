@@ -63,3 +63,6 @@ Vagrant 将虚拟机镜称为为 Box
 
 ## FQA
 - https://serverfault.com/questions/453185/vagrant-virtualbox-dns-10-0-2-3-not-working
+
+## 推荐阅读
+- https://yanbin.blog/vagrant-intro-config-commands/

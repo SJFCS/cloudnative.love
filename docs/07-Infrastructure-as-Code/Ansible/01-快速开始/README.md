@@ -26,7 +26,7 @@ import config from '!!raw-loader!../Ansible-Playground/config.yaml';
 
 输入 `cat /etc/hosts` 检查 Hosts 配置是否正确。
 
-  [**Vagrant 环境配置文件：**](https://github.com/SJFCS/cloudnative.love/tree/main/docs/07-Infrastructure%20as%20Code/Ansible/Ansible-Playground)
+  [**Vagrant 环境配置文件：**](https://github.com/SJFCS/cloudnative.love/tree/main/docs/07-Infrastructure-as-Code/Ansible/Ansible-Playground)
   <Tabs>
   <TabItem value="config.yaml">
   <CodeBlock language="yaml" title="config.yaml">{config}</CodeBlock>
@@ -190,7 +190,8 @@ Vagrant 在创建虚拟机时，会在 `/etc/sudoers.d` 目录下创建一个名
 上述配置使 vagrant 组的用户使用 sudo 无需密码。
 ## Ansible 配置文件
 
-:::info配置文件生效优先级
+配置文件生效优先级:
+
 1. `$ANSIBLE_CONFIG` 变量
 2. 当前目录下 `ansible.cfg`
 3. 用户家目录下 `ansible.cfg`
@@ -199,7 +200,6 @@ Vagrant 在创建虚拟机时，会在 `/etc/sudoers.d` 目录下创建一个名
 通过 `ansible --version` 可以看到配置文件目录等信息
 
 可以通过 `ansible-config init --disabled -t all >ansible.cfg` 创建初始配置，其包含了详细的参数说明。通过 `cat /etc/ansible/ansible.cfg|grep -Ev ";|#|^$"` 查看默认配置。
-:::
 
 登录 control 节点，创建工作目录 `mkdir ~/ansible && cd ~/ansible` ，然后创建如下配置
 
@@ -256,12 +256,11 @@ node
 
 # 给服务器指定别名
 [alias]
-ansible ansible_host=control.lab.local 
+ansible ansible_host=control.lab.local ansible_become=yes ansible_become_pass=vagrant
 ```
-<details style={{backgroundColor: '#e9f5e7', border: '1px solid rgb(0, 148, 0)'}}>
+<details>
 <summary>inventory ini 和 yaml 格式转换</summary>
 
-:::tip
 inventory 主机清单支持 ini 和 yaml 格式。
 
 可以使用以下命令将上述 inventory 从 ini 格式转换到 yaml 格式：
@@ -299,13 +298,12 @@ all:
               myvar: hello world
     ungrouped: {}
 ```
-:::
 
 </details>
 
 写完 inventory 主机清单后，输入下面命令，应成功输出节点信息。
 ```bash
-ansible  all --list-hosts
+ansible all --list-hosts
 # 和下面等价
 # ansible -i inventory all --list-hosts
 # ansible -i inventory.yaml all --list-hosts
@@ -316,13 +314,16 @@ ansible all -i inventory -m ping
 
 到此已成功安装和配置 ansible ，下面介绍如何使用 Ad-hoc 模式执行临时命令。
 
-## Ad-hoc 临时命令
-ansible 中有两种模式：
+## 命令模式
+Ansible 中有两种模式：
 - Ad-hoc 模式，用于执行一段 “临时命令”
 - Playbook 模式，用于执行声明性配置的一组任务。
 
+### Ad-hoc 模式
 <details>
 <summary>Ansible 基本命令选项</summary>
+
+Ansible 提供了海量模块，可以通过 `ansible-doc -l` 查看可用模块，使用 `ansible-doc <mode_name>` 查看模块具体用法。
 
 ```bash
 ansible <host-pattern> [options]
@@ -341,7 +342,6 @@ ansible <host-pattern> [options]
 ```
 </details>
 
-:::tipAd-hoc 命令格式
 - `ansible <pattern> -m <module_name> -a "<module options>"`
   - 例如 `ansible webservers -m service -a "name=httpd state=restarted"`
 - 默认模块是 "command"
@@ -351,6 +351,5 @@ ansible <host-pattern> [options]
   # command 为缺省模块可以省略不写。
   ansible all -i inventory -a "ls -al"
   ``` 
-:::
-
-Ansible 提供了海量模块，可以通过 `ansible-doc -l` 查看可用模块，使用 `ansible-doc <mode_name>` 查看模块具体用法。
+### Playbook 模式
+请阅读后续 Playbook 章节

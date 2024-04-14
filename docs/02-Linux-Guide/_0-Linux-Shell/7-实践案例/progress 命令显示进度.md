@@ -52,16 +52,16 @@ cp mv dd tar cat rsync grep fgrep egrep cut sort md5sum sha1sum sha224sum sha256
 
 progress 命令常用的选项：
 
--   \-q / --quiet                 隐藏所有打印的消息。  
--   \-w / --wait                 显示IO的吞吐量和剩余时间。
--   \-m / --monitor            持续监控进程直到要监控进程的退出或者手动按 Ctrl+C 退出。
--   \-a / --additional-command  添加命令到默认监控命令列表。
--   \-c / --command  监控指定命令的名称 (ex: firefox)。
--   \-p / --pid id               监控指定进程的 PID (ex: `pidof firefox`)。
--   \-i / --ignore-file file        忽略指定文件。
--   \-o / --open-mode \{r|w\}       报告文件的打开模式。
--   \-v / --version                 打印命令的版本。
--   \-h / --help                    打印帮助信息。
+-   \-q / --quiet                 隐藏所有打印的消息。  
+-   \-w / --wait                 显示IO的吞吐量和剩余时间。
+-   \-m / --monitor            持续监控进程直到要监控进程的退出或者手动按 Ctrl+C 退出。
+-   \-a / --additional-command  添加命令到默认监控命令列表。
+-   \-c / --command  监控指定命令的名称 (ex: firefox)。
+-   \-p / --pid id               监控指定进程的 PID (ex: `pidof firefox`)。
+-   \-i / --ignore-file file        忽略指定文件。
+-   \-o / --open-mode \{r|w\}       报告文件的打开模式。
+-   \-v / --version                 打印命令的版本。
+-   \-h / --help                    打印帮助信息。
 
 ## 查看 cp 命令复制进度
 

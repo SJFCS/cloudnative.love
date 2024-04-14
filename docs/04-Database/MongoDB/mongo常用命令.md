@@ -1,36 +1,16 @@
-## mongo常用操作
 
-#### 数据类型
-数据类型 | 描述
-:---:|:---:
-String | 字符串。存储数据常用的数据类型。在 MongoDB 中，UTF-8 编码的字符串才是合法的。
-Integer | 整型数值。用于存储数值。根据你所采用的服务器，可分为 32 位或 64 位。
-Boolean | 布尔值。用于存储布尔值（真/假）。
-Double | 双精度浮点值。用于存储浮点值。
-Min/Max keys | 将一个值与 BSON（二进制的 JSON）元素的最低值和最高值相对比。
-Array | 用于将数组或列表或多个值存储为一个键。
-Timestamp | 时间戳。记录文档修改或添加的具体时间。
-Object | 用于内嵌文档。
-Null | 用于创建空值。
-Symbol | 符号。该数据类型基本上等同于字符串类型，但不同的是，它一般用于采用特殊符号类型的语言。
-Date | 日期时间。用 UNIX 时间格式来存储当前日期或时间。你可以指定自己的日期时间：创建 Date 对象，传入年月日信息。
-Object ID | 对象 ID。用于创建文档的 ID。
-Binary Data | 二进制数据。用于存储二进制数据。
-Code | 代码类型。用于在文档中存储 JavaScript 代码。
-Regular expression | 正则表达式类型。用于存储正则表达式。
-
-#### 启动mongo
+## 启动mongo
 ```
 docker run -itd --restart always -e TZ=Asia/Shanghai -v /etc/localtime:/etc/localtime:ro --name mongo -v /opt/data/mongo/data:/data/db -p 27017:27017 -d mongo:4.4.0-bionic
 ```
-#### 命令行终端进入mongo
+## 命令行终端进入mongo
 ```
 docker exec -it mongo sh
 mongo --help # 查看mongo命令的帮助文档
 mongo # 缺省参数进入
 mongo --host localhost --port 27017 # 指定参数进入
 ```
-#### 常用mongo命令，双斜杠是mogno的注释
+## 常用mongo命令
 ```
 db                                          // 查看当前的数据库
 show dbs                                    // 显示所有数据库列表
@@ -58,7 +38,7 @@ db.${collection}.help()                     // 查询对相应表的一些操作
 db.mycoll.find().help()                     // 查询的方法，排序，最大最小等等
 ```
 
-#### insert()和save()方法的区别
+## insert()和save()方法的区别
 * insert: 若新增数据的主键已经存在，会抛错
 * save:   若新增数据的主键已经存在，会更新数据
 ```
@@ -67,7 +47,7 @@ db.person.insert({ _id:1, name:"zs" })  // 失败
 ```
 
 
-#### 测试例子和数据
+## 测试例子和数据
 ```
 * find(${where条件}，${0和1控制返回字段})   如果没有查询，那就用{}表示，不能省略。而显示与否的{}可以省略的
 - db.student.find({name:"name1"},{name:1,age:1})
@@ -115,7 +95,7 @@ db.student.find({"title":{$type:'string'}})
 
 
 ### 更新操作
-###### 更新命令格式
+#### 更新命令格式
 ```
 db.collection.update(
     <query>,                        // 必填，update的查询条件，类似sql update查询内where后面的。
@@ -143,7 +123,7 @@ db.person.update({"name":"zhang"},{$inc:{"age":-10}},{upsert:true})        // �
 db.person.update({"name":"zhang"},{$unset:{"age":1}})
 ```
 
-#### 索引
+## 索引
 * 使用createIndex创建索引。创建索引，需要传递两个参数 (1)建立索引的字段名称 (2)排序参数，1升序，-1降序。
 ```
 // 1) 建立单索引。

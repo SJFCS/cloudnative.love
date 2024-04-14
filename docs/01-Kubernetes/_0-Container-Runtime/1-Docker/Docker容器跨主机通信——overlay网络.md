@@ -32,13 +32,13 @@ toc: true
 
 　　　　-- Flannel: 支持UDP和VLAN封装传输方式
 
-​        -- Weave: 支持UDP（sleeve模式）和 VXLAN（优先fastdb模式）
+        -- Weave: 支持UDP（sleeve模式）和 VXLAN（优先fastdb模式）
 
-​        -- OpenvSwitch: 支持VXLAN和GRE协议
+        -- OpenvSwitch: 支持VXLAN和GRE协议
 
-​       路由方案
+       路由方案
 
-​        Calico: 支持BGP协议和IPIP隧道。每台宿主机作为虚拟路由，通过BGP协议实现不同主机容器间通信　
+        Calico: 支持BGP协议和IPIP隧道。每台宿主机作为虚拟路由，通过BGP协议实现不同主机容器间通信　
 
 ## 二、Docker Overlay Network
 
@@ -87,7 +87,7 @@ nohup consul agent -server -bootstrap -ui -data-dir /data/docker/consul \
 
 　　在两台机器上都要修改
 
-​    docker2
+    docker2
 
 ```
 # vim /lib/systemd/system/docker.service

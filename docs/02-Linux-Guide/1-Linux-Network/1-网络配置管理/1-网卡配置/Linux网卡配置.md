@@ -349,7 +349,7 @@ GRUB_CMDLINE_LINUX="crashkernel=auto net.ifnames=0 biosdevname=0 后面默认配
 #重新生成配置
 grub2-mkconfig -o /boot/grub2/grub.cfg
 #重命名原网卡配置文件,如cp -p /etc/sysconfig/network-scripts/ifcfg-ens192 /etc/sysconfig/network-scripts/ifcfg-eth0
-cp -p /etc/sysconfig/network-scripts/ifcfg-<ifname> /etc/sysconfig/network-scripts/ifcfg-<new-ifname>
+cp -p /etc/sysconfig/network-scripts/ifcfg-<ifname> /etc/sysconfig/network-scripts/ifcfg-<new-ifname>
 #修改原配置文件中的NAME及DEVICE属性,改为新值
 vi /etc/sysconfig/network-scripts/ifcfg-eth0
 NAME=eth0

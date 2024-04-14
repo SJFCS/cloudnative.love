@@ -2,29 +2,17 @@
 title: Etcd
 tags: [Database,Etcd]
 ---
-- https://github.com/kubernetes-sigs/etcdadm
+Etcd 是兼具一致性和高可用性的键值数据库，可以作为保存 Kubernetes 所有集群数据的后台数据库。
 
-- https://cizixs.com/2016/08/02/intro-to-etcd/
-- https://www.cnblogs.com/doscho/p/6227351.html
-- https://blog.51cto.com/u_15127570/2710980
-- https://doczhcn.gitbook.io/etcd/
-- https://www.zhaowenyu.com/etcd-doc/ops/etcd-discovery-dns.html
-- https://www.cnblogs.com/winstom/p/11811373.html#%E6%B7%BB%E5%8A%A0srv%E8%A7%A3%E6%9E%90-1
-- https://etcd.io/docs/v3.4/demo/
-- https://zhuanlan.zhihu.com/p/111245626
+要了解 Etcd 更深层次的信息，请参考 [Etcd 文档](https://etcd.io/docs/)。
 
-
-
-
-
-
-可以使用本文件夹中的 [docker-compose.yml](./docker-compose.yml) 启动一个多节点的 etcd 集群，或者也可以根据 [使用 systemd 部署三节点的 Etcd 集群]这篇文档使用二进制文件部署 Etcd 集群。
+保持 Etcd 集群的稳定对 Kubernetes 集群的稳定性至关重要。 因此，请在专用机器或隔离环境上运行 Etcd 集群，以满足 [所需资源需求](https://etcd.io/docs/current/op-guide/hardware/)。
 
 ## 使用 etcdctl 直接修改/查看 kubernetes 数据
 
->官方文档：[Interacting with etcd](https://etcd.io/docs/v3.4.0/dev-guide/interacting_v3/)
+>官方文档：[Interacting with Etcd](https://etcd.io/docs/v3.4.0/dev-guide/interacting_v3/)
 
-以容器方式部署的 etcd，可以直接通过 `kubectl exec` 进入 etcd 容器执行命令：
+以容器方式部署的 Etcd ，可以直接通过 `kubectl exec` 进入 Etcd 容器执行命令：
 
 ```shell
 $ kubectl -n kube-system exec -it etcd-<node-name> -- sh
@@ -71,5 +59,13 @@ $ etcdctl del /registry/namespaces/monitoring \
 2. 如果超过 (N-1)/2 个成员节点断开连接，则etcd 集群因为无法进行仲裁而无法继续正常运行，这个时候所有的etcd 实例都将变成**只读状态**。
 
 ## 推荐阅读
-[故障模式](https://etcd.io/docs/v3.4/op-guide/failures/)
-
+- [故障模式](https://etcd.io/docs/v3.4/op-guide/failures/)
+- https://github.com/kubernetes-sigs/etcdadm
+- https://cizixs.com/2016/08/02/intro-to-etcd/
+- https://www.cnblogs.com/doscho/p/6227351.html
+- https://blog.51cto.com/u_15127570/2710980
+- https://doczhcn.gitbook.io/etcd/
+- https://www.zhaowenyu.com/etcd-doc/ops/etcd-discovery-dns.html
+- https://www.cnblogs.com/winstom/p/11811373.html#%E6%B7%BB%E5%8A%A0srv%E8%A7%A3%E6%9E%90-1
+- https://etcd.io/docs/v3.4/demo/
+- https://zhuanlan.zhihu.com/p/111245626

@@ -1055,7 +1055,7 @@ Dependency Installed:
 Complete!
 ```
 
-​    
+    
 查看nginx版本信息:
 
 ```sh

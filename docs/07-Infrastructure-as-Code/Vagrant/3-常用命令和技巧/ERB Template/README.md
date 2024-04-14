@@ -12,7 +12,7 @@ title: ERB Template
 `vagrant init --template FILE` 可指定 ERB 模板来生成 Vagrantfile
 
 
-:::warning注意事项
+:::warning 注意事项
 - ERB 模板中的 Ruby 代码必须使用 `<%= %>` 或 `<% %>`标签包裹。
 - ERB 模板中的 Ruby 代码可以访问当前环境中的变量和方法。
 - ERB 模板中的 Ruby 代码可以使用条件语句和循环语句。

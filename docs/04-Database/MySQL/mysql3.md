@@ -1,5 +1,5 @@
 ---
-title: 03.MySQL建表约束和设计模式
+title: MySQL建表约束和设计模式
 sidebar_position: 3
 ---
 

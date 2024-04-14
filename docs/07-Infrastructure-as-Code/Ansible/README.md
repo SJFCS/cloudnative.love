@@ -47,7 +47,7 @@ import DocCardList from '@theme/DocCardList';
 - **Ansible-galaxy：**  
   一个 Ansible 角色和插件管理器，允许用户共享和发现 Ansible 角色、插件和集合。
 - **Ansible-pull：**  
-  一种反向操作方式，允许在远程主机上自动拉取 Ansible 配置并应用它们。
+  从仓库中拉取 Playbook 。
 - **Ansible-connection：**  
   用于管理 Ansible 集群中远程主机之间的连接和通信的插件。
 - **Ansible-inventory：**  
@@ -57,10 +57,11 @@ import DocCardList from '@theme/DocCardList';
 - **Ansible-cmdb：**  
   一个 Ansible 插件，用于生成主机和应用程序的 inventory 来生成和显示概述信息。
 
-:::tip 文档和社区
+:::tip 推荐阅读
 - [Ansible 官方文档](https://docs.ansible.com/ansible/latest/)
 - [Jinja2 模板引擎官方 API 文档](https://jinja.palletsprojects.com/en/3.1.x/api/#basics)
 - [Ansible Galaxy](https://galaxy.ansible.com/) 用于查找和分享 Ansible 资源如 Ansible 角色、集合、插件和复杂的 Playbook。
+- [一步到位玩透Ansible](https://www.junmajinlong.com/ansible/index/)
 :::
 
 <DocCardList />

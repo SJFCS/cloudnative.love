@@ -1,1 +1,0 @@
-https://www.junmajinlong.com/ansible/10_make_service_0_downtime/

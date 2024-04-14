@@ -22,7 +22,7 @@ libpcap和WinPcap提供了许多开源和商业网络工具的数据包捕获和
 
 libpcap和WinPcap创建和读取的文件格式的MIME类型为application / vnd.tcpdump.pcap。典型的文件扩展名是.pcap，除此之外.cap和.dmp也是常用的。
 
-![](http://mmbiz.qpic.cn/mmbiz_png/wpkib3J60o2icic7CT4DWMr0AicoaOpIlhOfps0k9m1TJpeAiakGM3qoNvsYMpk9AI69DJ92Y58SMzG1vSKWZm0bibHg/0?wx_fmt=png)        流量监控
+![](http://mmbiz.qpic.cn/mmbiz_png/wpkib3J60o2icic7CT4DWMr0AicoaOpIlhOfps0k9m1TJpeAiakGM3qoNvsYMpk9AI69DJ92Y58SMzG1vSKWZm0bibHg/0?wx_fmt=png)        流量监控
 
 Nload
 
@@ -34,7 +34,7 @@ Iftop可以测量通过单个套接字连接流动的数据，它的工作方式
 
 Jnettop
 
- Jnettop是一个流量显示器，它可以捕获通过其正在运行的主机的流量，并显示按带宽排序的流量。
+ Jnettop是一个流量显示器，它可以捕获通过其正在运行的主机的流量，并显示按带宽排序的流量。
 
 Iptraf
 
@@ -100,7 +100,7 @@ Collectl
 
 Collectl以类似于dstat的风格报告系统统计信息，像dstat一样，它收集了有关各种不同系统资源（如cpu，内存，网络等）的统计信息。以下简单介绍如何使用它来报告网络使用/带宽。
 
-![](http://mmbiz.qpic.cn/mmbiz_png/wpkib3J60o2icic7CT4DWMr0AicoaOpIlhOfps0k9m1TJpeAiakGM3qoNvsYMpk9AI69DJ92Y58SMzG1vSKWZm0bibHg/0?wx_fmt=png)        流量捕获
+![](http://mmbiz.qpic.cn/mmbiz_png/wpkib3J60o2icic7CT4DWMr0AicoaOpIlhOfps0k9m1TJpeAiakGM3qoNvsYMpk9AI69DJ92Y58SMzG1vSKWZm0bibHg/0?wx_fmt=png)        流量捕获
 
 Libpcap / Tcpdump
 
@@ -126,7 +126,7 @@ jNetPcap
 
 jNetPcap适用于Linux和Windows的Java数据包捕获库。jNetPcap可以直接使用libpcap WinPcap，也可以利用Java Native Interface（JNI）来使用libpcap / WinPcap提供的功能。
 
-![](http://mmbiz.qpic.cn/mmbiz_png/wpkib3J60o2icic7CT4DWMr0AicoaOpIlhOfps0k9m1TJpeAiakGM3qoNvsYMpk9AI69DJ92Y58SMzG1vSKWZm0bibHg/0?wx_fmt=png)        流量分析
+![](http://mmbiz.qpic.cn/mmbiz_png/wpkib3J60o2icic7CT4DWMr0AicoaOpIlhOfps0k9m1TJpeAiakGM3qoNvsYMpk9AI69DJ92Y58SMzG1vSKWZm0bibHg/0?wx_fmt=png)        流量分析
 
 Wireshark
 [Wireshark如何解密IPSec报文？](https://mp.weixin.qq.com/s/eDRs5wUued7JlVlBtM_kcg)
@@ -247,7 +247,7 @@ xplot是在20世纪80年代末写的，支持对TCP数据包追踪的分析。
 
 Multitail
 
-MultiTail 与 tail 程序比较相似，但其功能更为强大。MultiTail 支持通过在控制台创建多个窗格的形式来同时监视多个文件。不仅如此，MultiTail 还能截获其他程序的输出，并对日志文件进行合并以便更有效地被查看。另外，在使用 MultiTail 查看文件时，你也可以运用它的着色和过滤功能。
+MultiTail 与 tail 程序比较相似，但其功能更为强大。MultiTail 支持通过在控制台创建多个窗格的形式来同时监视多个文件。不仅如此，MultiTail 还能截获其他程序的输出，并对日志文件进行合并以便更有效地被查看。另外，在使用 MultiTail 查看文件时，你也可以运用它的着色和过滤功能。
 
 Netsniff-ng
 
@@ -279,9 +279,9 @@ ipsumdump程序将TCP / IP转储文件归结为易于由人类和程序读取的
 
 Ntopng
 
-Ntopng是原始ntop的下一代版本，一个显示网络使用情况的网络流量探测器，类似于受欢迎的顶级Unix命令。ntop基于libpcap，它以便携式方式编写，以便在每个Unix平台，MacOSX和Win32上虚拟运行。 
+Ntopng是原始ntop的下一代版本，一个显示网络使用情况的网络流量探测器，类似于受欢迎的顶级Unix命令。ntop基于libpcap，它以便携式方式编写，以便在每个Unix平台，MacOSX和Win32上虚拟运行。 
 
-![](http://mmbiz.qpic.cn/mmbiz_png/wpkib3J60o2icic7CT4DWMr0AicoaOpIlhOfps0k9m1TJpeAiakGM3qoNvsYMpk9AI69DJ92Y58SMzG1vSKWZm0bibHg/0?wx_fmt=png)        文件提取
+![](http://mmbiz.qpic.cn/mmbiz_png/wpkib3J60o2icic7CT4DWMr0AicoaOpIlhOfps0k9m1TJpeAiakGM3qoNvsYMpk9AI69DJ92Y58SMzG1vSKWZm0bibHg/0?wx_fmt=png)        文件提取
 
 Xplico
 

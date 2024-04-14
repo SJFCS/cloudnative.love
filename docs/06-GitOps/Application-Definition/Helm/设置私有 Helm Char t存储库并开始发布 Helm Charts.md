@@ -18,7 +18,7 @@ https://artifacthub.io/packages/helm/cloudnative-love/
 
 ### 第三步
 
-让我们按照[Chart 存储库指南](https://helm.sh/docs/topics/chart_repository/)来确保我们的存储库已准备好托管 Helm Chart 存储库。您需要确保您的 **gh-pages 分支** 设置为 GitHub Pages。单击您的存储库 **设置**，向下滚动到 **GitHub 页面** 部分，然后按如下所示进行设置：
+让我们按照[Chart 存储库指南](https://helm.sh/docs/topics/chart_repository/)来确保我们的存储库已准备好托管 Helm Chart 存储库。您需要确保您的 **gh-pages 分支** 设置为 GitHub Pages。单击您的存储库 **设置**，向下滚动到 **GitHub 页面** 部分，然后按如下所示进行设置：
 
 ![GitHub 页面](https://assets-global.website-files.com/622642781cd7e96ac1f66807/6231555b0c506caf75642150_97dbe96d430da4a7d2a9cf9170fdca1b37a0f9a6_2_690x454.png)
 
@@ -74,18 +74,18 @@ I’ll take a look at the GitHub Action tab. Looks solid to me:
 
 ![GitHub 行动](https://assets-global.website-files.com/622642781cd7e96ac1f66807/6231555d4e767757d4641b41_72355ccaebfcf86f08b6e22f9d4f54f754321fed_2_690x194.png)
 
-I don’t believe in it. I’ll test it again; version #14 now!  
+I don’t believe in it. I’ll test it again; version #14 now!  
 我不相信它。我再测试一次;现在是第14版！
 
 ![Helm 图表版本](https://assets-global.website-files.com/622642781cd7e96ac1f66807/6231555c0bc311713fe6fc18_6acdc2a2a85e66243778a2efea73fd1be64a01e2.png)
 
 ![舵图](https://assets-global.website-files.com/622642781cd7e96ac1f66807/6231555dc3899d435eaa2aad_720033158eee0ee0c453b8072237bf63384cc1ca_2_690x233.png)
 
-It works! 真的有用！
+It works! 真的有用！
 
 ![舵图](https://assets-global.website-files.com/622642781cd7e96ac1f66807/6231555e1b5de410dd62a7ba_efa59523a7c7fa3f6afd299efe41f03e7ba5b506_2_690x381.png)
 
-**Important:** you can also check that the Action is handling well our index.yaml, in the **gh-pages** branch. This file is super important to any HTTP Repo, right?  
+**Important:** you can also check that the Action is handling well our index.yaml, in the **gh-pages** branch. This file is super important to any HTTP Repo, right?  
 重要提示：你也可以在gh-pages分支中检查Action是否处理好了index.yaml。这个文件对任何HTTP Repo都非常重要，对吗？
 
 ![GitHub 操作测试](https://assets-global.website-files.com/622642781cd7e96ac1f66807/6231555ec3899d2304aa2bb9_f53e3c1c9a472a2fde05994648573e0f33d44be6_2_690x152.png)
