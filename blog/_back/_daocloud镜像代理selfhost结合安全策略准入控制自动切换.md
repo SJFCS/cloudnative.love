@@ -1,0 +1,3 @@
+https://mp.weixin.qq.com/s?__biz=MzU4MjQ0MTU4Ng==&mid=2247511895&idx=1&sn=cc1d56758d02045f34e90a578064de20&chksm=fdbaa04acacd295c9b085a3249a54c874aa8ca1f0c6cb35dca9f6176ed6aea80827e5b9435d8&mpshare=1&srcid=06127jLJhvL7V8J2nSsDBxgJ&sharer_shareinfo=e295dc1ee1dd183e021f2ddfbb61011e&sharer_shareinfo_first=e295dc1ee1dd183e021f2ddfbb61011e&from=timeline&scene=2&subscene=1&clicktime=1718284611&enterid=1718284611&sessionid=0&ascene=2&fasttmpl_type=0&fasttmpl_fullversion=7247692-zh_CN-zip&fasttmpl_flag=0&realreporttime=1718284611073#rd
+
+https://github.com/DaoCloud/public-image-mirror/issues/new?labels=sync+image&template=sync-image.yml
