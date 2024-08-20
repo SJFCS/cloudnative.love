@@ -1,0 +1,233 @@
+mode: rule # 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）
+log-level: info # silent / info / warning / error / debug
+allow-lan: true # 允许局域网的连接（共享代理）
+bind-address: "*" # 监听IP白名单，可绑定单个IPv4和v6地址，"*" 为绑定所有IP地址，仅在将allow-lan设置为true时适用
+ipv6: true # 开启 IPv6 总开关，关闭阻断所有 IPv6 链接和屏蔽 DNS 请求 AAAA 记录
+udp: true # 是否允许 UDP 通过代理，默认为 false
+
+unified-delay: true # 开启统一延迟时，会进行两次延迟测试，以消除连接握手等带来的不同类型节点的延迟差异，可选值 true/false
+tcp-concurrent: true # TCP 并发
+find-process-mode: "off" # 路由器推荐 off 关闭进程匹配
+global-client-fingerprint: random # 随机全局客户端指纹
+profile:
+  store-selected: true # 储存 API 对策略组的选择，以供下次启动时使用
+  store-fake-ip: true # 储存 fakeip 映射表，域名再次发生连接时，使用原有映射地址
+
+external-controller: :9090 # clash 的 RESTful API 监听地址
+# external-controller-tls: :9443
+# tls:
+#   certificate: string # 证书 PEM 格式，或者 证书的路径
+#   private-key: string # 证书对应的私钥 PEM 格式，或者私钥路径
+external-ui: ui
+external-ui-url: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+secret: hkvmQ7ZPgdbnheJVs45e
+
+mixed-port: 7890 # HTTP(S) and SOCKS5 共用端口
+port: 7891 # HTTP 代理端口
+socks-port: 7892 # SOCKS5 代理端口
+authentication:
+  - vkmJQ7:hheZVs45ePgdbn
+# skip-auth-prefixes:
+#   - 192.168.8.0/24
+redir-port: 7893 # Linux 和 macOS 的 redir 透明代理端口 (重定向 TCP 和 TProxy UDP 流量)
+tproxy-port: 7894 # Linux 的透明代理端口（适用于 TProxy TCP 和 TProxy UDP 流量)
+
+geodata-mode: false # 默认值 false
+geodata-loader: memconservative # GEO 文件加载模式，standard：标准加载器 memconservative：专为内存受限 (小内存) 设备优化的加载器 (默认值)
+geo-auto-update: true # 自动更新 GEO
+geo-update-interval: 24 # 更新间隔，单位为小时
+geox-url:
+  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+  asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+# https://github.com/misakaio/chnroutes2/tree/master
+# routing-mark: 6666
+# tun:
+#   enable: true
+#   stack: gvisor # tun 模式堆栈,可用值：system/gvisor/mixed
+#   device: Mihomo
+#   mtu: 1500
+#   dns-hijack:
+#     - "any:53"
+#   auto-route: true # 自动设置全局路由，可以自动将全局流量路由进入 tun 网卡
+#   auto-detect-interface: true # 自动选择流量出口接口，多出口网卡同时连接的设备建议手动指定出口网卡
+#   strict-route: true
+
+# DNS 服务器和建立连接时的 静态 Hosts, 仅在 dns.enhanced-mode 模式为 redir-host 生效
+# 支持通配符域名 (例如: *.clash.dev, *.foo.*.example.com )
+# 不使用通配符的域名优先级高于使用通配符的域名 (例如: foo.example.com > *.example.com > .example.com )
+# hosts:
+# '*.clash.dev': 127.0.0.1
+# '.dev': 127.0.0.1
+# 'alpha.clash.dev': '::1'
+# 'dnslog.cn: 47.244.138.18'
+# unified-delay: true
+# dnslog.cn: 47.244.138.18
+# DNS 服务器配置(可选；若不配置，程序内置的 DNS 服务会被关闭)
+dns:
+  enable: true
+  prefer-h3: true
+  # 对于支持 http3 的 Doh 会启动并发查询，如果对方支持，速度更快，那就起飞
+  # dns over HTTP3 会比 doH 要快。
+  ipv6: false # 当此选项为 false 时, AAAA 请求将返回空
+  listen: :1053
+  enhanced-mode: redir-host
+  use-hosts: true
+  use-system-hosts: true
+  # 以下填写的 DNS 服务器将会被用来解析 DNS 服务的域名
+  # 仅填写 DNS 服务器的 IP 地址
+  default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+  # 所有 DNS 请求将会直接发送到服务器，不经过任何代理。
+  # 并发查询获取最先返回的结果
+  nameserver:
+    - https://dns.google/dns-query
+    - https://cloudflare-dns.com/dns-query
+  nameserver-policy:
+    "geosite:category-ads-all":
+      - rcode://success
+    "geosite:microsoft@cn,apple-cn,google-cn,category-games@cn,cn,private":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+# 域名嗅探
+sniffer:
+  enable: true
+  force-dns-mapping: true # 对 redir-host 类型识别的流量进行强制嗅探
+  parse-pure-ip: true # 对所有未获取到域名的流量进行强制嗅探
+  override-destination: true # 是否使用嗅探结果作为实际访问，默认为 true
+  # force-domain: #需要强制嗅探的域名，默认只对IP嗅探
+  #   - "+" #去掉注释后等于全局嗅探
+  #   - "google.com"
+  skip-domain:
+    - "Mijia Cloud"
+    - "dlg.io.mi.com"
+    - "+.apple.com"
+  sniff:
+    HTTP:
+      ports:
+        - 80
+        - 8080-8880
+    TLS:
+      ports:
+        - 443
+        - 8443
+    QUIC:
+      ports:
+        - 443
+        - 8443
+
+proxy-providers:
+  wow.dogss-host.bond:
+    type: http
+    url: https://converter.cloudnative.love/api/convert?url=https%3A%2F%2Fwow.dogss-host.bond%2Fapi%2Fv1%2Fclient%2Fsubscribe%3Ftoken%3Db985c9ac1605357a4527da9dd0f92d76&target=clash
+    path: ./proxy-providers/wow.dogss-host.bond.yaml
+    proxy: DIRECT #经过指定代理进行下载/更新
+    interval: 3600
+    health-check:
+      enable: true
+      interval: 600
+      lazy: true
+      url: http://www.gstatic.com/generate_204
+  mojie.app:
+    type: http
+    url: https://converter.cloudnative.love/api/convert?url=https%3A%2F%2Fmojie.app%2Fapi%2Fv1%2Fclient%2Fsubscribe%3Ftoken%3D8395e62ecd858a83ee36f3e1e687b70a&target=clash
+    path: ./proxy-providers/mojie.app.yaml
+    proxy: DIRECT #经过指定代理进行下载/更新
+    interval: 3600
+    health-check:
+      enable: true
+      interval: 600
+      lazy: true
+      url: http://www.gstatic.com/generate_204
+
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies:
+      - 自动回退
+      - 自动选择
+      - 🇭🇰 Hong Kong
+      - 🇨🇳 Taiwan
+      - 🇯🇵 Japan
+      - 🇸🇬 Singapore
+      - 🇺🇸 United States
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+
+  - name: 自动回退
+    type: fallback
+    include-all: true
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+  - name: 自动选择
+    type: url-test
+    include-all: true
+    tolerance: 10
+    udp: true
+  - name: AI
+    type: select
+    include-all: true
+    filter: "(?i)港|hk|hongkong|hong kong"
+  - name: 🇭🇰 Hong Kong
+    type: select
+    include-all: true
+    filter: "(?i)港|hk|hongkong|hong kong"
+  - name: 🇨🇳 Taiwan
+    type: select
+    include-all: true
+    filter: "(?i)台|tw|taiwan"
+  - name: 🇯🇵 Japan
+    type: select
+    include-all: true
+    filter: "(?i)日|jp|japan"
+  - name: 🇺🇸 United States
+    type: select
+    include-all: true
+    filter: (?i)美|us|unitedstates|united states
+  - name: 🇸🇬 Singapore
+    type: select
+    include-all: true
+    filter: (?i)(新|sg|singapore)
+  - name: 其它地区
+    type: select
+    include-all: true
+    filter: (?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*
+
+rule-providers:
+  Bahamut:
+    type: http
+    behavior: classical
+    url: https://http.wwwgovcomr.shop/nus74f89st1/Ba.yml
+    interval: 86400
+    path: ./ruleset/Bahamut.yml
+  ChatGPT:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/G4free/clash-ruleset/main/ruleset/ChatGPT.yaml"
+    path: ./ruleset/ChatGPT.yaml
+    interval: 86400
+rules:
+  - GEOSITE,openai,AI
+  - RULE-SET,ChatGPT,AI
+  - DOMAIN,google.com,PROXY
+  - GEOSITE,google,PROXY
+  - GEOSITE,github,PROXY
+  - GEOSITE,youtube,PROXY
+  - GEOSITE,geolocation-!cn,PROXY
+  - IP-CIDR,127.0.0.0/8,DIRECT
+  - IP-CIDR,172.16.0.0/12,DIRECT
+  - IP-CIDR,192.168.0.0/16,DIRECT
+  - IP-CIDR,10.0.0.0/8,DIRECT
+  - IP-CIDR,17.0.0.0/8,DIRECT
+  - IP-CIDR,100.64.0.0/10,DIRECT
+  - IP-CIDR,224.0.0.0/4,DIRECT
+  - IP-CIDR,203.0.113.0/24,DIRECT
+  - IP-CIDR,192.0.2.0/24,DIRECT
+  - IP-CIDR6,fe80::/10,DIRECT
+  - GEOSITE,bilibili,DIRECT
+  - GEOSITE,CN,DIRECT,no-resolve
+  - GEOIP,LAN,DIRECT,no-resolve
+  - GEOIP,CN,DIRECT,no-resolve
+  - MATCH,PROXY

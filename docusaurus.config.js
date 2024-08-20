@@ -68,6 +68,9 @@ const config = {
           blogSidebarCount: "ALL",
           showReadingTime: true, // 如果设置为 false，「x 分钟阅读」的文字就不会显示
           editUrl: "https://github.com/SJFCS/cloudnative.love/edit/main/",
+          feedOptions: {
+            xslt: true, // Easily turn the option on
+          }
         },
         theme: {
           customCss: [
@@ -140,9 +143,9 @@ const config = {
     [
       "@docusaurus/plugin-content-docs",
       {
-        id: "GitOps",
-        path: "docs/06-GitOps",
-        routeBasePath: "GitOps",
+        id: "Observability",
+        path: "docs/05-Observability",
+        routeBasePath: "Observability",
         sidebarPath: require.resolve("./sidebars/autogen.js"),
         ...pageOptions,
       },
@@ -150,9 +153,9 @@ const config = {
     [
       "@docusaurus/plugin-content-docs",
       {
-        id: "Observability",
-        path: "docs/05-Observability",
-        routeBasePath: "Observability",
+        id: "GitOps",
+        path: "docs/06-GitOps",
+        routeBasePath: "GitOps",
         sidebarPath: require.resolve("./sidebars/autogen.js"),
         ...pageOptions,
       },
@@ -173,6 +176,16 @@ const config = {
         id: "Storage",
         path: "docs/08-Storage",
         routeBasePath: "Storage",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
+        ...pageOptions,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "Proxy",
+        path: "docs/09-Proxy",
+        routeBasePath: "Proxy",
         sidebarPath: require.resolve("./sidebars/autogen.js"),
         ...pageOptions,
       },
