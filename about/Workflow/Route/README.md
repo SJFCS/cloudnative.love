@@ -2,29 +2,25 @@
 title: OpenWrt
 ---
 ## 扩容
-官方剩余空间太小，有必要查如 SD 卡进行扩容。
-
 ```bash
+ssh root@192.168.8.1
 # 建分区并格式化 opkg install cfdisk
 umount /tmp/mountd/disk1_part1
-mkfs.ext4 /dev/mmcblk0p1
-
-mount -t ext4 /dev/mmcblk0p1 /mnt/
-cp -a /overlay/* /mnt
-umount /mnt/
-
-# 打开 luci 界面：
-# 系统-挂载点-新增（先删除无效的）-已启用-作为外部 overlay 使用（/overlay）-高级设置-文件系统-ext4-保存-保存并应用
+yes|mkfs.ext4 /dev/mmcblk0p1
+# 打开 luci 界面： http://192.168.8.1/cgi-bin/luci/#
+# 系统-挂载点-新增（先删除无效的）-已启用-作为外部 overlay 使用（/overlay）-高级设置-文件系统-ext4-保存
+# 注意点保存并应用
 reboot
 df -h
 ```
 ## init
 进行简单初始化
 ```bash
-opkg update && opkg list-upgradable | cut -f 1 -d ' ' | xargs opkg upgrade
-
-opkg install openssh-sftp-server
-opkg install bash 
+# 打开 luci 界面设置ssh配置： http://192.168.8.1/cgi-bin/luci/#
+sed -i s/fw.gl-inet.cn/fw.gl-inet.com/g /etc/opkg/distfeeds.conf
+opkg update 
+opkg list-upgradable | cut -f 1 -d ' ' | xargs opkg upgrade
+opkg install openssh-sftp-server bash vim tar wget curl   procps-ng-ps	 coreutils-printenv	
 sed -i 's|/bin/ash|/bin/bash|' /etc/passwd
 bash
 ```
@@ -35,36 +31,120 @@ uci set board_special.hardware.country_code=US
 uci commit board_special
 uci -q get board_special.hardware.country_code
 ```
-## 更换国际化文件
-解除web页面对简体中文部分功能选项的屏蔽
+更换国际化文件 解除web页面对简体中文部分功能选项的屏蔽
 ```bash
 cd /www/i18n/
-
 mkdir back
-
 mv $(ls | grep zh-tw) back/
-
 for file in $(ls | grep zh-cn); do cp "$file" "${file/zh-cn/zh-tw}"; done
-
+sed -i s/繁體中文/简体中文\(解锁\)/g    /www/js/langs-label.json
 ## 还原
 ## rm -rf $(ls | grep zh-tw) && cp back/* .
+# sed -i s/简体中文\(解锁\)/繁體中文/g    /www/js/langs-label.json
 ```
-然后登录后选择繁体中文即可看到简体中文，并且被屏蔽的功能也会出现
-## v2ray
-这里参照这两个仓库
-- https://github.com/v2raya/v2raya-openwrt
-- https://github.com/v2rayA/v2rayA/wiki/openwrt
-
-## argon theme
-安装主题
+## 安装主题 argon theme 
 ```bash
 opkg install luci-compat luci-lib-ipkg jq
 curl -sL $(curl -s https://api.github.com/repos/jerrykuku/luci-theme-argon/releases | jq -r '[.[] | select(.tag_name | startswith("v2."))] | sort_by(.created_at) | last | .assets[0].browser_download_url') -o /tmp/luci-theme-argon.ipk
 curl -sL $(curl -sL https://api.github.com/repos/jerrykuku/luci-app-argon-config/releases/latest | jq -r '.assets[0].browser_download_url') -o /tmp/luci-app-argon-config.ipk
 curl -sL $(curl -sL https://api.github.com/repos/jerrykuku/luci-app-argon-config/releases/latest | jq -r '.assets[].browser_download_url' |grep zh-cn) -o /tmp/luci-i18n-argon-config-zh-cn.ipk
 
-cd /tmp/ && opkg install luci-theme-argon.ipk luci-app-argon-config.ipk luci-i18n-argon-config-zh-cn.ipk
-rm -rf  luci-theme-argon.ipk luci-app-argon-config.ipk luci-i18n-argon-config-zh-cn.ipk
+opkg install /tmp/luci-theme-argon.ipk /tmp/luci-app-argon-config.ipk /tmp/luci-i18n-argon-config-zh-cn.ipk
+rm -f  /tmp/luci-theme-argon.ipk /tmp/luci-app-argon-config.ipk /tmp/luci-i18n-argon-config-zh-cn.ipk
+```
+## clash
+/usr/bin/mihomo
+/root/.config/mihomo/config.yaml
+unzip metacubexd-gh-pages.zip && mv metacubexd-gh-pages ui
+## api init
+ssh
+mount 
+dhcp
+```bash
+# 添加静态dhcp
+http://192.168.8.1/cgi-bin/luci/admin/network/dhcp
+# 客户端释放租期 
+sudo dhclient -r
+# 重新连接wifi
+```
+## Clash
+```bash
+#iptables
+opkg update
+opkg install coreutils-nohup bash iptables dnsmasq-full curl ca-certificates ipset ip-full iptables-mod-tproxy iptables-mod-extra libcap libcap-bin  kmod-tun kmod-inet-diag unzip luci-compat luci luci-base
+opkg install iptables-mod-conntrack-extra \
+  iptables-mod-extra \
+  iptables-mod-filter \
+  iptables-mod-tproxy \
+  kmod-ipt-nat6
+```
+
+## [luci-app-adguardhome](https://github.com/rufengsuixing/luci-app-adguardhome/releases)
+```bash
+wget https://github.com/rufengsuixing/luci-app-adguardhome/releases/download/1.8-11/luci-app-adguardhome_1.8-11_all.ipk
+opkg install luci-app-adguardhome_1.8-11_all.ipk
+```
+
+###################################################################################################################
+## [luci-app-autoipsetadder](https://github.com/rufengsuixing/luci-app-autoipsetadder)
+
+## adg
+```
+iptables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 5353
+iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 5353
+ip6tables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 5353
+ip6tables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 5353  
+
+
+```
+```
+AdGuard Home被GL.iNet预先配置为监听端口3053的DNS请求，因为端口53已经被路由器上的dnsmasq占用。
+
+当您在路由器的管理面板中启用AdGuardHome时，您基本上告诉它您不想再使用dnsmasq进行DNS，但您希望使用AdGuard Home提供DNS服务（与使用dnsmasq相比，添加了广告拦截）。但是，您的私人家庭网络中的所有设备都已将其DNS请求发送到端口53（dnsmasq）。
+
+因此，当您启用AdGuardHome时，GL.iNet将其配置为添加DNS转发规则，以告诉dnsmasq将DNS请求转发到127.0.0.1（又名此路由器）端口3053（AdGuard Home使用的端口）。您可以通过进入高级管理面板>网络> DHCP和DNS > DNS转发127.0.0.1#3053来查看该转发规则。当您禁用AdGuardHome时，DNS转发规则将消失。
+
+因此，如果您希望每个设备的IP地址都显示在AdGuard Home中，则需要切断中间人（具有DNS转发规则的dnsmasq），而不禁用dnsmasq，因为默认情况下它仍然提供DHCP服务。因此，您希望DNS请求直接从我们的设备发送到AdGuard Home，在这种情况下，不使用dnsmasq的DNS部分。
+
+
+vi /etc/dnsmasq.conf
+port=5300 
+
+vi /etc/AdGuardHome/config.yaml
+port: 53 端口：53
+
+
+```
+## 地址加速cdn
+```
+https://fastly.jsdelivr.net/
+https://testingcf.jsdelivr.net/
+https://cdn.jsdelivr.net/
+https://raw.fastgit.org/
+```
+## v2raya
+- https://github.com/v2raya/v2raya-openwrt
+- https://github.com/v2rayA/v2rayA/wiki/openwrt
+- https://blog.lzc256.com/post/openwrt-an-zhuang-ruan-jian-bu-xian-shi-zai-fu-wu-li-de-wen-ti
+```bash
+wget https://liquidtelecom.dl.sourceforge.net/project/v2raya/openwrt/v2raya.pub -O /etc/opkg/keys/94cc2a834fb0aa03
+echo "src/gz v2raya https://liquidtelecom.dl.sourceforge.net/project/v2raya/openwrt/$(. /etc/openwrt_release && echo "$DISTRIB_ARCH")" | tee -a "/etc/opkg/customfeeds.conf"
+opkg update
+opkg install iptables-mod-conntrack-extra \
+  iptables-mod-extra \
+  iptables-mod-filter \
+  iptables-mod-tproxy \
+  kmod-ipt-nat6
+opkg install v2raya xray-core v2fly-geoip v2fly-geosite luci-app-v2raya
+uci set v2raya.config.enabled='1'
+uci commit v2raya
+/etc/init.d/v2raya start
+# 打开 v2raya 界面： http://192.168.8.1:2017
+# 打开 luci-v2raya 界面：  http://192.168.8.1/cgi-bin/luci/admin/services/v2raya 
+# 没有菜单就执行下面的
+# rm /tmp/luci-indexcache
+# rm -rf /tmp/luci-*
+# reboot 重启
 ```
 ## ddns
 这里我是用 Cloudflare DDNS
@@ -201,8 +281,63 @@ uci commit board_special
 uci -q get board_special.hardware.country_code
 ```
 验证后发现一样可以。 `uci set board_special.hardware.country_code=US` 更加方便，如果有一天官方镜像更新为只能通过驱动判断国家代码，则可以参考上面修改驱动。
-
+过了一年分析社区有人折腾的新方法
+https://forum.openwrt.org/t/converting-gl-inet-mt3000-beryl-ax-from-cn-to-global/165159/6
+```bash
+修改/dev/mtdblock8 
+或者覆盖挂载
+echo US > /tmp/country_code
+mount --bind /tmp/country_code /proc/gl-hw-info/country_code
+cat /proc/gl-hw-info/country_code
+要设置开机脚本
+cat /etc/rc.local
+sed -i '1i\echo US > /tmp/country_code\nmount --bind /tmp/country_code /proc/gl-hw-info/country_code' /etc/rc.local
+cat /etc/rc.local
+```
 
 https://openwrt.ai/?target=x86%2F64&id=generic
-
 https://dl.openwrt.ai/
+
+## glider
+```yaml  title="/etc/glider/glider.conf"
+# Verbose mode, print logs
+verbose=True
+# listen on 8443, serve as http/socks5 proxy on the same port.
+listen=:8443
+```
+## frr
+```bash
+luci-app-bird1-ipv4	
+
+
+opkg install frr frr-ospf frr-rip frr-bgp
+
+opkg install \
+frr	\
+frr-babeld \
+frr-bfdd	\
+frr-bgpd	\
+frr-eigrpd \
+frr-isisd	\
+frr-ldpd	\
+frr-libfrr \
+frr-nhrpd	\
+frr-ospf6d \
+frr-ospfd	\
+frr-pbrd	\
+frr-pimd	\
+frr-ripd	\
+frr-ripngd \
+frr-vrrpd	\
+frr-vtysh	\
+frr-zebra	\
+frr-watchfrr \
+frr-fabricd	 \
+frr-staticd	 
+
+
+/etc/init.d/frr start
+/etc/init.d/frr start
+/etc/init.d/frr enable
+vtysh
+```

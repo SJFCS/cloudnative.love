@@ -91,7 +91,7 @@ import ContextSwitcher from '@site/src/components/ContextSwitcher';
     <GetStartedCard
       title="Nginx"
       className="xl:col-span-2 from-[#FF2525] to-[#FFE53B]"
-      getStartedLink="/Service-Mesh/Proxy/Nginx/"
+      getStartedLink="/Proxy/Nginx/"
       bgClassName="h-48 rotate-[-28deg] right-[-48px] bottom-[-6rem]"
     />
     </div>
@@ -117,7 +117,7 @@ import GetStartedCard from '@site/src/components/GetStartedCard';
 <GetStartedCard
   title="Nginx"
   className="xl:col-span-2 from-[#FF2525] to-[#FFE53B]"
-  getStartedLink="/Service-Mesh/Proxy/Nginx/"
+  getStartedLink="/Proxy/Nginx/"
   bgClassName="h-48 rotate-[-28deg] right-[-48px] bottom-[-6rem]"
 />
 </div>
@@ -737,6 +737,8 @@ npm run docusaurus swizzle
 
 本站分支参考：https://thewang.net/blog/github-action-create-pr-and-merge-into-main
 https://github.com/wifecooky/thewang-blog/commits/main/
+
+https://github.com/facebook/docusaurus/issues/9715
 -->
 
 
