@@ -13,8 +13,7 @@ Either start reading the notes, by clicking the button below, or contribute and 
 
 import GetStartedCard from '@site/src/components/GetStartedCard';
 
-<!-- 关闭docs -->
-<!-- ## Quickstart
+## Quickstart
 
 <div className="grid xl:grid-cols-6 gap-4">
 
@@ -39,4 +38,4 @@ import GetStartedCard from '@site/src/components/GetStartedCard';
 </div> -->
 
 <!-- ## [Roadmaps](https://roadmap.sh/devops) -->
-<!-- <iframe src="https://roadmap.sh/devops" scrolling="no" height="2700" width="100%" frameborder="0"></iframe> -->
+<!-- <iframe src="https://roadmap.sh/devops" scrolling="no" height="2700" width="100%" frameborder="0"></iframe>
