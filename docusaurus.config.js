@@ -3,7 +3,7 @@
 const { themes } = require("prism-react-renderer");
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
-//docs options
+// docs options
 const pageOptions = {
   sidebarCollapsible: true,
   editUrl: "https://github.com/SJFCS/cloudnative.love/edit/main/",
@@ -16,6 +16,10 @@ const pageOptions = {
     "**/__tests__/**",
   ],
 };
+// svgr options
+// https://github.com/facebook/docusaurus/issues/10679
+// https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-svgr
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   future: {

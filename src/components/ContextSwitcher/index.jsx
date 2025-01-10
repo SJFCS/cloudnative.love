@@ -1,80 +1,77 @@
-import React, { useState, useEffect, Fragment, memo } from 'react';
-import clsx from 'clsx';
-import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import { useHistory } from 'react-router-dom';
-import { useAllDocsData } from '@docusaurus/plugin-content-docs/client';
-import { string } from 'prop-types';
+import React, { useState, useEffect, Fragment, memo } from "react";
+import clsx from "clsx";
+import { Listbox, Transition } from "@headlessui/react";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/24/solid";
+import { useHistory } from "react-router-dom";
+import { useAllDocsData } from "@docusaurus/plugin-content-docs/client";
+import { string } from "prop-types";
 // https://dyte.io/blog/open-sourcing-dyte-docs/
-import {
-  FcAcceptDatabase,
-} from 'react-icons/fc';
-import { Icon } from '@iconify/react';
-import './ContextSwitcher.css';
-
+import { FcAcceptDatabase } from "react-icons/fc";
+import { Icon } from "@iconify/react";
+import "./ContextSwitcher.css";
 
 const CONTEXTS = [
   // id is base_path
   {
-    id: 'Default',
-    name: 'Home',
-    icon: 'ic:baseline-home',
-    type: 'iconify',
+    id: "Default",
+    name: "Home",
+    icon: "ic:baseline-home",
+    type: "iconify",
   },
   {
-    id: 'Kubernetes',
-    name: 'Kubernetes',
-    icon: 'logos:kubernetes',
-    type: 'iconify',
+    id: "Kubernetes",
+    name: "Kubernetes",
+    icon: "logos:kubernetes",
+    type: "iconify",
   },
   {
-    id: 'Linux-Guide',
-    name: 'Linux Guide',
-    icon: 'flat-color-icons:linux',
-    type: 'iconify',
+    id: "Linux-Guide",
+    name: "Linux Guide",
+    icon: "flat-color-icons:linux",
+    type: "iconify",
   },
   {
-    id: 'Service-Mesh',
-    name: 'Service Mesh',
-    icon: 'simple-icons:istio',
-    type: 'iconify', 
+    id: "Service-Mesh",
+    name: "Service Mesh",
+    icon: "simple-icons:istio",
+    type: "iconify",
   },
   {
-    id: 'Database',
-    name: 'Database',
+    id: "Database",
+    name: "Database",
     icon: FcAcceptDatabase,
-    type: 'react-icons',
+    type: "react-icons",
   },
   {
-    id: 'GitOps',
-    name: 'GitOps',
-    icon: 'devicon:githubactions',
-    type: 'iconify',
+    id: "GitOps",
+    name: "GitOps",
+    icon: "devicon:githubactions",
+    type: "iconify",
   },
   {
-    id: 'Observability',
-    name: 'Observability',
-    icon: 'devicon:opentelemetry',
-    type: 'iconify',
+    id: "Observability",
+    name: "Observability",
+    icon: "devicon:opentelemetry",
+    type: "iconify",
   },
   {
-    id: 'Infrastructure-as-Code',
-    name: 'Infrastructure as Code',
-    icon: 'logos:terraform-icon',
-    type: 'iconify',
+    id: "Infrastructure-as-Code",
+    name: "Infrastructure as Code",
+    icon: "logos:terraform-icon",
+    type: "iconify",
   },
   {
-    id: 'Storage',
-    name: 'Storage',
-    icon: 'icon-park:cloud-storage',
-    type: 'iconify',
+    id: "Storage",
+    name: "Storage",
+    icon: "icon-park:cloud-storage",
+    type: "iconify",
   },
 ];
 
 const getContext = (id) => CONTEXTS.find((context) => context.id === id);
 
 export const getCurrentPageInfo = () => {
-  return window.location.pathname.split('/').slice(1);
+  return window.location.pathname.split("/").slice(1);
 };
 
 const pathExists = (path, data) => {
@@ -106,23 +103,32 @@ const ContextSwitcher = ({ className }) => {
     <Listbox
       value={context}
       onChange={handleChange}
-      className={clsx('relative', className)}
+      className={clsx("relative", className)}
     >
       <div className="relative mt-1">
         <Listbox.Button className="relative flex h-12 w-full cursor-pointer items-center rounded-lg border-none gradient-background py-2 pl-3 pr-10 text-left outline-none focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
           {/* ICONS */}
           <div key={context.id} className="flex items-center">
-            {context.type === 'iconify' ? (
-              <Icon icon={context.icon} className="icon-size mr-2 h-8" aria-hidden="true" alt={context.name} />
+            {context.type === "iconify" ? (
+              <Icon
+                icon={context.icon}
+                className="icon-size mr-2 h-8"
+                aria-hidden="true"
+                alt={context.name}
+              />
             ) : (
-              <context.icon className="icon-size mr-2 h-8" aria-hidden="true" alt={context.name} />
+              <context.icon
+                className="icon-size mr-2 h-8"
+                aria-hidden="true"
+                alt={context.name}
+              />
             )}
           </div>
           <span className="lv0_link block truncate text-text">
             {context.name}
           </span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-            <SelectorIcon
+            <ChevronUpDownIcon
               className="h-5 w-5 text-gray-400"
               aria-hidden="true"
             />
@@ -141,8 +147,8 @@ const ContextSwitcher = ({ className }) => {
                   key={context.id}
                   className={({ active }) =>
                     clsx(
-                      'relative cursor-pointer select-none py-2 px-4',
-                      active && 'bg-background-200'
+                      "relative cursor-pointer select-none py-2 px-4",
+                      active && "bg-background-200"
                     )
                   }
                   value={context}
@@ -152,16 +158,25 @@ const ContextSwitcher = ({ className }) => {
                       <div className="flex items-center">
                         {/* ICONS */}
                         <div key={context.id} className="flex items-center">
-                          {context.type === 'iconify' ? (
-                            <Icon icon={context.icon} className="icon-size mr-2 h-8" aria-hidden="true" alt={context.name} />
+                          {context.type === "iconify" ? (
+                            <Icon
+                              icon={context.icon}
+                              className="icon-size mr-2 h-8"
+                              aria-hidden="true"
+                              alt={context.name}
+                            />
                           ) : (
-                            <context.icon className="icon-size mr-2 h-8" aria-hidden="true" alt={context.name} />
+                            <context.icon
+                              className="icon-size mr-2 h-8"
+                              aria-hidden="true"
+                              alt={context.name}
+                            />
                           )}
                         </div>
                         <span
                           className={clsx(
-                            'block truncate',
-                            selected ? 'font-medium' : 'font-normal'
+                            "block truncate",
+                            selected ? "font-medium" : "font-normal"
                           )}
                         >
                           {context.name}
