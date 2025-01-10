@@ -1,0 +1,206 @@
+paru -S docker
+# sudo groupadd docker
+sudo usermod -aG docker $USER 
+newgrp docker
+
+paru -S blackbox-terminal
+
+paru -Rns gnome-maps gnome-console gnome-tour gnome-weather gnome-contacts gnome-user-docs yelp epiphany nano # gnome-software gnome-text-editor
+# gnome 官方 app: https://apps.gnome.org/zh-CN/
+# gnome-terminal 是旧的“官方”终端，gnome-console (kgx) 是新的
+# Gnome terminal vs. Console (aka. kgx) vs. BlackBox（内存泄漏 https://github.com/flatpak/xdg-dbus-proxy/issues/51 https://gitlab.gnome.org/raggesilver/blackbox/-/issues/322）
+# 关注blackbox进展 https://gitlab.gnome.org/raggesilver/blackbox/-/milestones/11#tab-issues
+# 查看硬件信息
+paru -S inxi # inxi -b
+paru -S neofetch
+# nautilus 插件
+paru -S nautilus-open-any-terminal
+glib-compile-schemas /usr/share/glib-2.0/schemas
+
+
+bloop-desktop-bin cursor-bin anythingllm-desktop-bin-1.2.4-1
+
+dnsutils
+
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal alacritty
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal keybindings '<Ctrl><Alt>t'
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal new-tab true
+gsettings set com.github.stunkymonkey.nautilus-open-any-terminal flatpak system
+
+paru -S nautilus-open-in-code 
+nautilus -q
+
+# java 开发环境
+jdk11-openjdk  jdk17-openjdk  jdk21-openjdk  jdk8-openjdk 
+切换环境 archlinux-java
+
+#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装
+tabby-bin  stretchly-bin koodo-reader-bin looking-glass
+keyviz # 按键记录
+grub-customizer
+yakuza-bin rubick-bin
+gvim  xclip xsel :set clipboard=unnamedplus
+vim --version | grep clipboard
+dconf-editor gnome-sound-recorder easyeffects  easyeffects-bundy01-presets deepfilternet-demos-git 
+# https://discuss.getsol.us/d/10034-using-deepfilternet-with-easy-effects
+
+charles-bin 破解
+- https://www.zzzmode.com/mytools/charles/
+- https://go.dev/play/p/Qtt2CmHbTzU
+Registered Name:	Archlinux
+License Key:	c9271ae905457805a5
+
+https://starship.rs/
+
+## 虚拟降噪麦克风
+1 aur/pacmixer 0.6.4-1 [+52 ~0.12] [已安装]
+    alsamixer alike for PulseAudio.
+2 aur/alsamixergui 0.9.0rc2-7 [+14 ~0.00]
+
+https://discuss.getsol.us/d/10034-using-deepfilternet-with-easy-effects
+https://github.com/Rikorose/DeepFilterNet/blob/main/ladspa/README.md
+https://wiki.archlinuxcn.org/wiki/PipeWire
+
+  229  git clone https://github.com/Rikorose/DeepFilterNet.git
+  230  cd DeepFilterNet/
+  231  cargo build --release -p deep-filter-ladspa
+  233  ls target/release/libdeep_filter_ladspa* 
+
+  https://github.com/Rikorose/DeepFilterNet/blob/main/ladspa/filter-chain-configs/deepfilter-mono-source.conf
+  237  mkdir -p     ~/.config/pipewire/filter-chain.conf.d/
+  238  cp deepfilter-mono-source.conf     ~/.config/pipewire/filter-chain.conf.d/
+    cp target/release/libdeep_filter_ladspa.so ~/.ladspa/libdeep_filter_ladspa.so
+#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装#未安装
+
+google-chrome mihomo-party-bin visual-studio-code-bin jetbrains-toolbox 
+seahorse # 密码管理 密钥环概念https://itsfoss.com/ubuntu-keyring/  
+ventoy-bin remmina utools 
+thunderbird motrix-bin abdownloadmanager-bin 
+
+localsend syncthing  # systemctl start syncthing@用户名.service http://127.0.0.1:8384/#
+filezilla 
+inetutils 是一个包含一组网络工具的软件包
+less
+bat 代替cat
+fd 查找工具
+fzf
+ncdu 磁盘空间查看
+duf
+https://maimai.cn/article/detail?fid=1739677329&efid=n3trYFME1YouKsGO7ZtDng&share_channel=5&share_uid=201066306&operation_id=36ac8cc5-89fa-4180-8aa1-f52cdc4f3363&use_rn=1
+
+# nmtui: 一个用于配置网络连接和防火墙的 TUI 工具，适用于使用 NetworkManager 的系统。
+# nft: 一个用于配置 nftables 防火墙的 TUI 工具。
+# htop: 用于显示系统进程和资源使用情况的 TUI 工具，比系统自带的 top 命令更加直观易用。
+# xorg-xwininfo # 获取窗口进程 xwininfo -all
+# tldr
+
+lazygit
+lazydocker
+dive
+nethogs 网络查看
+virtualbox https://linuxhint.com/install-virtualbox-arch-linux/
+  paru -S virtualbox virtualbox-ext-oracle virtualbox-guest-iso
+  sudo modprobe vboxdrv
+  sudo lsmod | grep vboxdrv
+
+
+paru -S tcping-go-bin httping stunclient  nvtop n-m3u8dl-re-bin lrzsz hping  chezmoi  powerstat #功耗查看
+
+helm jq go-yq k9s kind-bin krew kube-capacity docker
+
+yazi
+
+
+paru -S \
+switchhosts-bin  obs-studio monokle-bin localsend-bin newsflash-git flameshot etcher-bin everdo \
+linuxqq wechat-bin wemeet-wayland-screenshare-git  onlyoffice-bin motrix-bin dingtalk-bin feishu-bin \
+unzip-natspec p7zip-natspec #inux下zip文件解压乱码的问题 
+# wechat-universal-privileged 
+# wemeet-bin
+sunloginclient # systemctl start runsunloginclient.service  
+
+pot-translation-bin
+EcoPaste
+Atuin
+
+paru -S electron26-bin rubick-bin
+
+paru -S zsh grml-zsh-config zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-theme-powerlevel10k-git ttf-meslo-nerd-font-powerlevel10k conda-zsh-completion
+
+echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+https://github.com/romkatv/powerlevel10k/blob/master/font.md
+
+echo 'source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >>~/.zshrc
+echo 'source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh' >>~/.zshrc
+echo 'fpath=(/usr/local/share/zsh-completions $fpath)' >>~/.zshrc
+
+chsh -s $(which zsh)
+验证当前默认 Shell
+$ echo $SHELL
+
+; p10k已死 https://www.youtube.com/watch?v=9U8LCjuQzdc
+
+; [有没有办法在 tty/控制台屏幕上使用 powerlevel10k 或者在这些屏幕上使用不同的 zsh 提示符？](https://github.com/romkatv/powerlevel10k/issues/325)
+
+;   [[ "$(tty)" != "/dev/tty"* ]] && [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+; Transient prompt 使得从终端回滚复制粘贴一系列命令变得更加容易。
+
+; 提示：如果启用瞬时提示，请充分利用两行提示。您将获得额外的空间来输入命令，而不会出现回滚密度降低的常见缺点。稀疏提示（提示前有一个空行）与瞬时提示结合使用效果也很好。Transient prompt 
+
+; 两行提示。您将获得额外的空间用于键入命令的好处，而不会降低回滚密度
+
+
+
+
+
+eudic goldendict
+
+## 解压乱码
+unzip-natspec p7zip-natspec file-roller # ark
+
+通过unzip行命令解压，指定字符集,unzip -O CP936 xxx.zip (用GBK, GB18030也可以)
+
+https://forum.ubuntu.org.cn/viewtopic.php?t=492038#p3225663
+
+
+❯ cat ~/.local/share/nautilus/scripts/unzip.sh
+
+#!/bin/bash
+
+for file in $NAUTILUS_SCRIPT_SELECTED_FILE_PATHS
+do
+	if [[ -f "$file" ]];
+	then
+		rename 's/ //g' $file
+		filetype=$(file -bi "$file"|awk '{print $1}')
+		case $filetype in
+		"application/zip;")
+			unzip -O cp936 $file
+			;;
+		"application/x-rar;")
+			unar $file
+			;;
+		"application/x-tar;")
+			tar xvf $file
+			;;
+		"application/gzip;")
+			tar xzvf $file
+			;;
+		esac
+	fi
+done
+
+chmod +x  ~/.local/share/nautilus/scripts/unzip.sh
+右键文件，选择script->unzip.sh，可以批量解压文件。
+
+
+
+
+
+
+
+
+
+dev:
+terraform

@@ -1,7 +1,9 @@
 ---
 title: 特性示例
 ---
+
 本站各种组件功能演示
+
 ## 终端播放器
 
 [AsciinemaPlayer](https://github.com/asciinema/asciinema-player) 可将 [asciinema](https://github.com/asciinema/asciinema) 录制的终端文件嵌入到 web 进行播放。
@@ -11,22 +13,22 @@ title: 特性示例
 import AsciinemaPlayer from '@site/src/components/AsciinemaPlayer';
 
 ```jsx
-import AsciinemaPlayer from '@site/src/components/AsciinemaPlayer';
+import AsciinemaPlayer from "@site/src/components/AsciinemaPlayer";
 ```
 
 示例
 
 ```jsx live
 <AsciinemaPlayer
-    src="/casts/neofetch.cast"
-    poster="npt:0:5"
-    preload={true}
-    autoPlay={true}
-    idleTimeLimit="2"
+  src="/casts/neofetch.cast"
+  poster="npt:0:5"
+  preload={true}
+  autoPlay={true}
+  idleTimeLimit="2"
 />
 ```
 
-组件参数 [`asciinema-player`](https://github.com/asciinema/asciinema-player) 
+组件参数 [`asciinema-player`](https://github.com/asciinema/asciinema-player)
 
 | Property        | Usage                                                                                                                                                                                     |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -44,12 +46,6 @@ import AsciinemaPlayer from '@site/src/components/AsciinemaPlayer';
 | `poster`        | Poster (a preview frame) to display until the playback is started.                                                                                                                        |
 | `fit`           | Controls the player's fitting (sizing) behaviour inside its container element.                                                                                                            |
 | `fontSize`      | Size of the terminal font.                                                                                                                                                                |
-
-
-
-
-
-
 
 ## 文档切换栏
 
@@ -123,7 +119,6 @@ import GetStartedCard from '@site/src/components/GetStartedCard';
 </div>
 ```
 
-
 ## 代码块
 
 ```go title="src/components/demo.go"
@@ -175,13 +170,16 @@ func main() {
   // highlight-success-end
 }
 ```
+
 ## 引入外部文档
 
 ```js
-import CodeBlock from '@theme/CodeBlock';
-import Source from '!!raw-loader!./kubesphere.yaml';
+import CodeBlock from "@theme/CodeBlock";
+import Source from "!!raw-loader!./kubesphere.yaml";
 
-<CodeBlock language="yaml" title="kubesphere.yaml">{Source}</CodeBlock>
+<CodeBlock language="yaml" title="kubesphere.yaml">
+  {Source}
+</CodeBlock>;
 ```
 
 import CodeBlock from '@theme/CodeBlock';
@@ -189,10 +187,9 @@ import Source from '!!raw-loader!./kubesphere.yaml';
 
 <CodeBlock language="yaml" title="kubesphere.yaml">{Source}</CodeBlock>
 
-
 ## 提示和标注
-Docusaurus 有一个特殊的语法来创建警告和标注：
 
+Docusaurus 有一个特殊的语法来创建警告和标注：
 
     :::tip My tip
     Use this awesome feature option
@@ -232,6 +229,7 @@ In practice, those are not really HTML elements, but React JSX elements, which w
 
 :::info
 This action is dangerous
+
 ```md title="my-blog-post.md"
 ---
 author: Joel Marcey
@@ -240,12 +238,12 @@ author_url: https://github.com/JoelMarcey
 author_image_url: https://github.com/JoelMarcey.png
 ---
 ```
+
 :::
 
 :::danger Take care
 This action is dangerous
 :::
-
 
 :::warning
 This action is caution
@@ -256,18 +254,18 @@ This action is caution
 <details>
 <summary>下拉框示例</summary>
 
-处展开内容
+{'展开内容'}
 
 </details>
 
 <details style={{backgroundColor: 'rgb(255, 248, 230)', border: '1px solid rgb(230, 167, 0)'}}>
   <summary>点击此处展开内容</summary>
-  处展开内容
+  {'展开内容'}
 </details>
 
 <details style={{backgroundColor: '#e9f5e7', border: '1px solid rgb(20 163 111)'}}>
   <summary>点击此处展开内容</summary>
-  处展开内容
+  {'展开内容'}
 </details>
 
 ## 卡片组
@@ -277,15 +275,15 @@ import TabItem from '@theme/TabItem';
 
 ```html
 <Tabs>
-<!-- <Tabs groupId="卡片组"> -->
-<TabItem value="卡片1">
-<!-- <TabItem value="卡片1" label="卡片1标题"> -->
-卡片1内容...
-</TabItem>
-<TabItem value="卡片2">
-<!-- <TabItem value="卡片2" label="卡片2标题"> -->
-卡片2内容...
-</TabItem>
+  <!-- <Tabs groupId="卡片组"> -->
+  <TabItem value="卡片1">
+    <!-- <TabItem value="卡片1" label="卡片1标题"> -->
+    {'卡片1内容...'}
+  </TabItem>
+  <TabItem value="卡片2">
+    <!-- <TabItem value="卡片2" label="卡片2标题"> -->
+    {'卡片2内容...'}
+  </TabItem>
 </Tabs>
 ```
 
@@ -381,6 +379,7 @@ website/i18n/[locale]/docusaurus-plugin-content-blog/authors.yml
 :::
 
 ## 组合嵌套 卡片+提示
+
 :::tip
 
 Use the callback for all your customization needs:
@@ -396,15 +395,15 @@ Use the callback for all your customization needs:
 module.exports = {
   presets: [
     [
-      '@docusaurus/preset-classic',
+      "@docusaurus/preset-classic",
       {
         blog: {
           showReadingTime: true,
           // highlight-start
-          readingTime: ({content, frontMatter, defaultReadingTime}) =>
+          readingTime: ({ content, frontMatter, defaultReadingTime }) =>
             frontMatter.hide_reading_time
               ? undefined
-              : defaultReadingTime({content}),
+              : defaultReadingTime({ content }),
           // highlight-end
         },
       },
@@ -434,12 +433,12 @@ This page will no longer display the reading time stats!
 module.exports = {
   presets: [
     [
-      '@docusaurus/preset-classic',
+      "@docusaurus/preset-classic",
       {
         blog: {
           // highlight-start
-          readingTime: ({content, defaultReadingTime}) =>
-            defaultReadingTime({content, options: {wordsPerMinute: 100}}),
+          readingTime: ({ content, defaultReadingTime }) =>
+            defaultReadingTime({ content, options: { wordsPerMinute: 100 } }),
           // highlight-end
         },
       },
@@ -456,16 +455,16 @@ module.exports = {
 **Use a custom implementation of reading time:**
 
 ```js title="docusaurus.config.js"
-const myReadingTime = require('./myReadingTime');
+const myReadingTime = require("./myReadingTime");
 
 module.exports = {
   presets: [
     [
-      '@docusaurus/preset-classic',
+      "@docusaurus/preset-classic",
       {
         blog: {
           // highlight-next-line
-          readingTime: ({content}) => myReadingTime(content),
+          readingTime: ({ content }) => myReadingTime(content),
         },
       },
     ],
@@ -479,7 +478,6 @@ module.exports = {
 ```
 
 :::
-
 
 ## 浏览器外壳
 
@@ -519,7 +517,6 @@ Hello world message with some **bold** text, some _italic_ text and a [link](/)
 </BrowserWindow>
 ```
 
-
 ## 交互式代码
 
     ```jsx live noInline
@@ -531,7 +528,7 @@ Hello world message with some **bold** text, some _italic_ text and a [link](/)
     ```
 
 ```jsx live noInline
-const project = 'Docusaurus';
+const project = "Docusaurus";
 
 const Greeting = () => <p>Hello {project}!</p>;
 
@@ -539,20 +536,21 @@ render(<Greeting />);
 ```
 
 ## 注释
+
 AnnotatedCommand 组件用于创建一个小文本注释。
 
 import AnnotatedCommand from '@site/src/components/AnnotatedCommmand';
 
 ```jsx
-import AnnotatedCommand from '@site/src/components/AnnotatedCommmand';
+import AnnotatedCommand from "@site/src/components/AnnotatedCommmand";
 ```
 
 示例
 
 ```jsx live
-<AnnotatedCommand
-  annotation="Go to beginning of buffer, change two words"
->gg2cw</AnnotatedCommand>
+<AnnotatedCommand annotation="Go to beginning of buffer, change two words">
+  gg2cw
+</AnnotatedCommand>
 ```
 
 ## Caret
@@ -562,19 +560,16 @@ Caret 组件可以显示一个块插入符号，这是 ASCII 终端的标准，�
 import Caret from '@site/src/components/Caret';
 
 ```jsx
-import Caret from '@site/src/components/Caret';
+import Caret from "@site/src/components/Caret";
 ```
 
 Use the component as below:
 
 ```jsx live
 <code className="language-python">
-    def search_for_word<Caret caretStyle='block'>(</Caret>word):
+  def search_for_word<Caret caretStyle="block">(</Caret>word):
 </code>
 ```
-
-
-
 
 ## 博客模板
 
@@ -599,7 +594,6 @@ authors:
     url: https://sebastienlorber.com
     image_url: https://github.com/slorber.png
 ---
-
 Welcome to this blog. This blog is created with
 
 <!-- truncate -->
@@ -608,14 +602,14 @@ This is my first post on Docusaurus 2.
 
 A whole bunch of exploration to follow.
 ```
+
 ## 文档列表
+
 ```
 import DocCardList from '@theme/DocCardList';
 
 <DocCardList />
 ```
-
-
 
 ## 文档模板
 
@@ -648,7 +642,9 @@ authors:
   email: jimarcey@gmail.com
 ---
 ```
+
 ## 更多示例
+
 - https://docusaurus.io/zh-CN/docs/next/markdown-features
 - https://docusaurus.io/docs/markdown-features/code-blocks
 - https://docusaurus.io/docs/styling-layout
@@ -657,19 +653,19 @@ authors:
 - [多文档导航栏](https://stackoverflow.com/questions/60783595/is-there-a-way-to-have-two-docs-in-docusaurus-2)
 - https://markdown.com.cn/
 
-<!-- 
+<!--
 ## 书写规范
 
 以安全分类来举例:
 
-- 有具体归属的放在各自中文件夹下面,打上安全标签 
+- 有具体归属的放在各自中文件夹下面,打上安全标签
   - k8s/安全
   - 容器/安全
   - linux/网络/安全
 
 - 没有具体归属的则放在以tagC命名的文件夹下,打上安全标签和自身标签
   - 安全/Jumpserver
-  - 安全/Metasploit 
+  - 安全/Metasploit
 名词解释缩写格式：子网广播转发 (Subnet Broadcast Forwarding，SBF)
 
 react引入均放在文档开头
@@ -683,7 +679,7 @@ readme 可以不写一句话简介，文章要写
 
 
 ### 代码块
-一般普通用户执行命令使用 $ 开头，root 用户执行命令使用 # 开头。  
+一般普通用户执行命令使用 $ 开头，root 用户执行命令使用 # 开头。
 
 但 docusaurus 代码块的复制按钮不会 ignore $ 所以在书写命令时候尽量不要带 $
 
@@ -716,7 +712,7 @@ import Source from '!!raw-loader!./kubesphere.yaml';
 - https://www.zhangxinxu.com/sp/svgo/
 - https://www.iconfinder.com/
 4. 国际化命令
-- `npm run docusaurus write-translations`  
+- `npm run docusaurus write-translations`
   默认情况下，文件会被写入 `website/i18n/<defaultLocale>/...`。
 5. 统计行数
 cloc --vcs git .
@@ -728,7 +724,7 @@ cloc --vcs git .
 - https://type.cyhsu.xyz/2022/03/markdown-linter-a-primer/
 - https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
 - https://docusaurus.io/docs/using-plugins#docusauruspreset-classic
-- https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-pages 
+- https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-pages
 - 导入md https://docusaurus.io/zh-CN/docs/markdown-features/react#importing-markdown
 
 https://docusaurus.io/docs/api/themes/configuration#hooks
@@ -740,5 +736,3 @@ https://github.com/wifecooky/thewang-blog/commits/main/
 
 https://github.com/facebook/docusaurus/issues/9715
 -->
-
-

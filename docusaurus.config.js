@@ -18,6 +18,9 @@ const pageOptions = {
 };
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+  future: {
+    experimental_faster: true,
+  },
   title: "CloudNative.love 💕",
   tagline: "脚下虽有万水千山，但行者必至！",
   url: "https://cloudnative.love",
