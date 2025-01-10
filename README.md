@@ -2,7 +2,7 @@
 
 <p align="center">
 <br>
-<a href="https://www.cloudnative.love">🖥 Online Preview</a>
+<a href="https://cloudnative.love">🖥 Online Preview</a>
 <br><br> 
 <a href="https://vercel.com/new/clone?repository-url=https://github.com/SJFCS/cloudnative.love/tree/main&project-name=cloudnative.love&repo-name=cloudnative.love" rel="nofollow"><img src="https://vercel.com/button"></a>
 <a href="https://app.netlify.com/start/deploy?repository=https://github.com/SJFCS/cloudnative.love" rel="nofollow"><img src="https://www.netlify.com/img/deploy/button.svg"></a>
