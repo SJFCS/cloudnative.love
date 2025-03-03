@@ -12,6 +12,7 @@
 This Wiki is used to organize and record various technical knowledge and practices related to DevOps technology.
 
 content:
+
 - [Kubernetes](docs/01-Kubernetes)
 - [Linux Guide](docs/02-Linux-Guide)
 - [Service Mesh](docs/03-Service-Mesh)
@@ -30,6 +31,7 @@ npm i
 npm start
 
 ```
+
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
 ## Build
@@ -40,4 +42,3 @@ npm run service
 ```
 
 This command generates static content into the build directory and can be served using any static contents hosting service.
-
