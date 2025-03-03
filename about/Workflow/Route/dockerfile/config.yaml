@@ -1,0 +1,94 @@
+mixed-port: 7890
+allow-lan: true
+external-controller: 127.0.0.1:28001
+secret: 8a09518e-5d92-4a7e-b811-9dfd3b611842
+
+mode: rule
+proxies:
+  - name: "本地xray"
+    type: socks5
+    server: 127.0.0.1
+    port: 1080
+    udp: true
+  # - name: "本地singbox"
+  #   type: socks5
+  #   server: 127.0.0.1
+  #   port: 8848
+  #   udp: true
+
+proxy-groups:
+  - name: "我的跳板"
+    type: select
+    proxies:
+      - "本地xray"
+      # - "本地singbox"
+  - name: "第三方跳板1"
+    type: select
+    use:
+      - "第三方订阅（名字要和 proxy-providers 里的一样）"
+  - name: "第三方跳板2"
+    type: url-test # 根据 HTTP 测速延迟自动选择
+    use:
+      - "第三方订阅2"
+
+# URL 延迟检测 通用配置
+my-url-test: &my-url-test # 延迟检测 URL
+  health-check:
+    enable: true
+    url: https://cp.cloudflare.com
+    # 节点连通性检测时间，单位为秒
+    interval: 300
+    # 节点超时延迟，单位为毫秒
+    timeout: 1000
+    # 节点自动切换差值，单位为毫秒
+    tolerance: 100
+
+proxy-providers:
+  "第三方订阅（名字要和 proxy-providers 里的一样）":
+    type: http
+    url: "https://你的第三方订阅URL，一般情况长这样，但不一定是这个样子/subscribe?token=2426efe5aaaaa492aaa458aaa4afa83d"
+    path: /root/.config/mihomo/di3fang.yaml
+    # 自动更新订阅时间，单位为秒
+    interval: 3600 # 一小时
+    # URL 延迟检测逻辑
+    <<: *my-url-test
+  "第三方订阅2":
+    type: http
+    url: "https://你的第三方订阅URL，一般情况长这样，但不一定是这个样子/subscribe?token=2426efe5acbda492aaa458aaa4afa83d"
+    path: /root/.config/mihomo/di3fang22222222222222222222222222222.yaml
+    # 自动更新订阅时间，单位为秒
+    interval: 3600 # 一小时
+    # URL 延迟检测逻辑
+    <<: *my-url-test
+
+dns:
+  enable: true
+  ipv6: true
+  nameserver:
+    - https://[2606:4700:4700::1111]/dns-query
+    - 223.5.5.5
+  fake-ip-filter:
+    - +.stun.*.*
+    - +.stun.*.*.*
+    - +.stun.*.*.*.*
+    - +.stun.*.*.*.*.*
+    - "*.n.n.srv.nintendo.net"
+    - +.stun.playstation.net
+    - xbox.*.*.microsoft.com
+    - "*.*.xboxlive.com"
+    - "*.msftncsi.com"
+    - "*.msftconnecttest.com"
+    - WORKGROUP
+
+rules:
+  #- PROCESS-PATH,/usr/bin/xray,DIRECT
+  - PROCESS-NAME,ddns-go,DIRECT
+  - PROCESS-NAME,xray,DIRECT
+  - PROCESS-NAME,qbittorrent-nox,DIRECT
+  - MATCH,我的跳板
+
+tun:
+  enable: false
+  stack: system
+  auto-route: true
+  auto-detect-interface: true

@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from 'react';
-import { Navigation, Scrollbar, A11y, EffectCoverflow, Autoplay } from 'swiper';
+import { Navigation, Scrollbar, A11y, EffectCoverflow, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -27,8 +27,7 @@ const data = [
   { cover: require('@site/static/img/cert/CKAD.webp').default, title: <Translate>Certified Kubernetes Application Developer (CKAD)</Translate> },
 ];
 
-// eslint-disable-next-line react/display-name
-export default () => {
+const SwiperCarousel = () => {
   const slides = data.map((item, index) => (
     <SwiperSlide key={index}>
       <div className="Swiper-flex">
@@ -75,3 +74,5 @@ export default () => {
     </Swiper>
   );
 };
+
+export default SwiperCarousel;

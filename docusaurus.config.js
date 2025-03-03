@@ -3,7 +3,7 @@
 const { themes } = require("prism-react-renderer");
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
-//docs options
+// docs options
 const pageOptions = {
   sidebarCollapsible: true,
   editUrl: "https://github.com/SJFCS/cloudnative.love/edit/main/",
@@ -16,8 +16,15 @@ const pageOptions = {
     "**/__tests__/**",
   ],
 };
+// svgr options
+// https://github.com/facebook/docusaurus/issues/10679
+// https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-svgr
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+  future: {
+    experimental_faster: true,
+  },
   title: "CloudNative.love 💕",
   tagline: "脚下虽有万水千山，但行者必至！",
   url: "https://cloudnative.love",
@@ -89,7 +96,6 @@ const config = {
     ],
   ],
   plugins: [
-    // 关闭docs
     // docs
     [
       "@docusaurus/plugin-content-docs",
@@ -101,96 +107,96 @@ const config = {
         ...pageOptions,
       },
     ],
-    // [
-    //   "@docusaurus/plugin-content-docs",
-    //   {
-    //     id: "Kubernetes",
-    //     path: "docs/01-Kubernetes",
-    //     routeBasePath: "Kubernetes",
-    //     sidebarPath: require.resolve("./sidebars/autogen.js"),
-    //     ...pageOptions,
-    //   },
-    // ],
-    // [
-    //   "@docusaurus/plugin-content-docs",
-    //   {
-    //     id: "Linux-Guide",
-    //     path: "docs/02-Linux-Guide",
-    //     routeBasePath: "Linux-Guide",
-    //     sidebarPath: require.resolve("./sidebars/autogen.js"),
-    //     ...pageOptions,
-    //   },
-    // ],
-    // [
-    //   "@docusaurus/plugin-content-docs",
-    //   {
-    //     id: "Service-Mesh",
-    //     path: "docs/03-Service-Mesh",
-    //     routeBasePath: "Service-Mesh",
-    //     sidebarPath: require.resolve("./sidebars/autogen.js"),
-    //     ...pageOptions,
-    //   },
-    // ],
-    // [
-    //   "@docusaurus/plugin-content-docs",
-    //   {
-    //     id: "Database",
-    //     path: "docs/04-Database",
-    //     routeBasePath: "Database",
-    //     sidebarPath: require.resolve("./sidebars/autogen.js"),
-    //     ...pageOptions,
-    //   },
-    // ],
-    // [
-    //   "@docusaurus/plugin-content-docs",
-    //   {
-    //     id: "Observability",
-    //     path: "docs/05-Observability",
-    //     routeBasePath: "Observability",
-    //     sidebarPath: require.resolve("./sidebars/autogen.js"),
-    //     ...pageOptions,
-    //   },
-    // ],
-    // [
-    //   "@docusaurus/plugin-content-docs",
-    //   {
-    //     id: "GitOps",
-    //     path: "docs/06-GitOps",
-    //     routeBasePath: "GitOps",
-    //     sidebarPath: require.resolve("./sidebars/autogen.js"),
-    //     ...pageOptions,
-    //   },
-    // ],
-    // [
-    //   "@docusaurus/plugin-content-docs",
-    //   {
-    //     id: "Infrastructure-as-Code",
-    //     path: "docs/07-Infrastructure-as-Code",
-    //     routeBasePath: "Infrastructure-as-Code",
-    //     sidebarPath: require.resolve("./sidebars/autogen.js"),
-    //     ...pageOptions,
-    //   },
-    // ],
-    // [
-    //   "@docusaurus/plugin-content-docs",
-    //   {
-    //     id: "Storage",
-    //     path: "docs/08-Storage",
-    //     routeBasePath: "Storage",
-    //     sidebarPath: require.resolve("./sidebars/autogen.js"),
-    //     ...pageOptions,
-    //   },
-    // ],
-    // [
-    //   "@docusaurus/plugin-content-docs",
-    //   {
-    //     id: "Proxy",
-    //     path: "docs/09-Proxy",
-    //     routeBasePath: "Proxy",
-    //     sidebarPath: require.resolve("./sidebars/autogen.js"),
-    //     ...pageOptions,
-    //   },
-    // ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "Kubernetes",
+        path: "docs/01-Kubernetes",
+        routeBasePath: "Kubernetes",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
+        ...pageOptions,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "Linux-Guide",
+        path: "docs/02-Linux-Guide",
+        routeBasePath: "Linux-Guide",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
+        ...pageOptions,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "Service-Mesh",
+        path: "docs/03-Service-Mesh",
+        routeBasePath: "Service-Mesh",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
+        ...pageOptions,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "Database",
+        path: "docs/04-Database",
+        routeBasePath: "Database",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
+        ...pageOptions,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "Observability",
+        path: "docs/05-Observability",
+        routeBasePath: "Observability",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
+        ...pageOptions,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "GitOps",
+        path: "docs/06-GitOps",
+        routeBasePath: "GitOps",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
+        ...pageOptions,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "Infrastructure-as-Code",
+        path: "docs/07-Infrastructure-as-Code",
+        routeBasePath: "Infrastructure-as-Code",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
+        ...pageOptions,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "Storage",
+        path: "docs/08-Storage",
+        routeBasePath: "Storage",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
+        ...pageOptions,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "Proxy",
+        path: "docs/09-Proxy",
+        routeBasePath: "Proxy",
+        sidebarPath: require.resolve("./sidebars/autogen.js"),
+        ...pageOptions,
+      },
+    ],
     //tailwindcss
     async function myPlugin(context, options) {
       return {
@@ -387,29 +393,28 @@ const config = {
       },
       footer: {
         style: "dark",
-        // 关闭docs
         links: [
-          // {
-          //   title: 'Document',
-          //   items: [
-          //     {
-          //       label: "Document",
-          //       to: "/Default",
-          //     },
-          //     {
-          //       label: 'Kubernetes',
-          //       to: '/Kubernetes',
-          //     },
-          //     {
-          //       label: 'Linux-Guide',
-          //       to: '/Linux-Guide',
-          //     },
-          //     {
-          //       label: 'Infrastructure-as-Code',
-          //       to: '/Infrastructure-as-Code',
-          //     },
-          //   ],
-          // },
+          {
+            title: 'Document',
+            items: [
+              {
+                label: "Document",
+                to: "/Default",
+              },
+              {
+                label: 'Kubernetes',
+                to: '/Kubernetes',
+              },
+              {
+                label: 'Linux-Guide',
+                to: '/Linux-Guide',
+              },
+              {
+                label: 'Infrastructure-as-Code',
+                to: '/Infrastructure-as-Code',
+              },
+            ],
+          },
           {
             title: "Blog",
             items: [

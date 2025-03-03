@@ -8,7 +8,7 @@ ssh root@192.168.8.1
 umount /tmp/mountd/disk1_part1
 yes|mkfs.ext4 /dev/mmcblk0p1
 # 打开 luci 界面： http://192.168.8.1/cgi-bin/luci/#
-# 系统-挂载点-新增（先删除无效的）-已启用-作为外部 overlay 使用（/overlay）-高级设置-文件系统-ext4-保存
+# 系统-挂载点-新增（先删除无效的）-已启用-作为外部 overlay 使用（/overlay）-保存
 # 注意点保存并应用
 reboot
 df -h
@@ -20,8 +20,8 @@ df -h
 sed -i s/fw.gl-inet.cn/fw.gl-inet.com/g /etc/opkg/distfeeds.conf
 opkg update 
 opkg list-upgradable | cut -f 1 -d ' ' | xargs opkg upgrade
-opkg install openssh-sftp-server bash vim tar wget curl   procps-ng-ps	 coreutils-printenv	
-sed -i 's|/bin/ash|/bin/bash|' /etc/passwd
+opkg install openssh-sftp-server vim tar wget curl   procps-ng-ps	 coreutils-printenv	
+sed -i 's|/bin/bash|/bin/ash|' /etc/passwd
 bash
 ```
 ## country code
@@ -45,21 +45,19 @@ sed -i s/繁體中文/简体中文\(解锁\)/g    /www/js/langs-label.json
 ## 安装主题 argon theme 
 ```bash
 opkg install luci-compat luci-lib-ipkg jq
-curl -sL $(curl -s https://api.github.com/repos/jerrykuku/luci-theme-argon/releases | jq -r '[.[] | select(.tag_name | startswith("v2."))] | sort_by(.created_at) | last | .assets[0].browser_download_url') -o /tmp/luci-theme-argon.ipk
-curl -sL $(curl -sL https://api.github.com/repos/jerrykuku/luci-app-argon-config/releases/latest | jq -r '.assets[0].browser_download_url') -o /tmp/luci-app-argon-config.ipk
-curl -sL $(curl -sL https://api.github.com/repos/jerrykuku/luci-app-argon-config/releases/latest | jq -r '.assets[].browser_download_url' |grep zh-cn) -o /tmp/luci-i18n-argon-config-zh-cn.ipk
+curl -sL $(curl -s https://api.github.com/repos/jerrykuku/luci-theme-argon/releases | jq -r '[.[] | select(.tag_name | startswith("v2."))] | sort_by(.created_at) | last | .assets[0].browser_download_url') -o luci-theme-argon.ipk
+curl -sL $(curl -sL https://api.github.com/repos/jerrykuku/luci-app-argon-config/releases/latest | jq -r '.assets[0].browser_download_url') -o luci-app-argon-config.ipk
+curl -sL $(curl -sL https://api.github.com/repos/jerrykuku/luci-app-argon-config/releases/latest | jq -r '.assets[].browser_download_url' |grep zh-cn) -o luci-i18n-argon-config-zh-cn.ipk
 
-opkg install /tmp/luci-theme-argon.ipk /tmp/luci-app-argon-config.ipk /tmp/luci-i18n-argon-config-zh-cn.ipk
-rm -f  /tmp/luci-theme-argon.ipk /tmp/luci-app-argon-config.ipk /tmp/luci-i18n-argon-config-zh-cn.ipk
+opkg install luci-theme-argon.ipk luci-app-argon-config.ipk /luci-i18n-argon-config-zh-cn.ipk
+rm -f luci-theme-argon.ipk luci-app-argon-config.ipk luci-i18n-argon-config-zh-cn.ipk
 ```
 ## clash
+https://github.com/MetaCubeX/mihomo/releases
+gunzip  
 /usr/bin/mihomo
 /root/.config/mihomo/config.yaml
-unzip metacubexd-gh-pages.zip && mv metacubexd-gh-pages ui
-## api init
-ssh
-mount 
-dhcp
+https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip
 ```bash
 # 添加静态dhcp
 http://192.168.8.1/cgi-bin/luci/admin/network/dhcp

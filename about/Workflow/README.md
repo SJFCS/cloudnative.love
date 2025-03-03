@@ -14,33 +14,35 @@ Arch Linux 最大的特色就是其包管理机制，包直接来自上游，不
 
 如果要我推荐几个 Linux Laptop 发行版的话，我会推荐一下几个：
 
-- Pop!_OS/Ubuntu  
-    Ubuntu 系列对机器学习等支持做的比较好，网络上文档也很多,任何问题都比较容易解决  
-- Arch Linux/EndeavourOS/Garuda Linux  
-    如果有信心解决你所出现的任何问题的话，可以了考虑用 Arch 系的发行版，你会得到一个十分省心的包管理  
-- Fedora Workstation  
-    红帽的 rpm 的应用可以说少得可怜了，如果喜欢红帽系的可以考虑
-- NixOS  
-    使用 Nix 语言提供了**声明式的包管理**，可以通过一个声明式文件定义系统的全部细节，实现系统完整可复现、版本快速切换等功能。  
+- Pop!_OS/Ubuntu
+Ubuntu 系列对机器学习等支持做的比较好，网络上文档也很多,任何问题都比较容易解决
+debian 对 non-free firmware 不友好，但近年来有所[改善](https://www.debian.org/vote/2022/vote_003)
+
+- Arch Linux/EndeavourOS/Garuda Linux
+如果有信心解决你所出现的任何问题的话，可以了考虑用 Arch 系的发行版，你会得到一个十分省心的包管理
+- Fedora Workstation
+红帽的 rpm 的应用可以说少得可怜了，如果喜欢红帽系的可以考虑
+- NixOS
+使用 Nix 语言提供了**声明式的包管理**，可以通过一个声明式文件定义系统的全部细节，实现系统完整可复现、版本快速切换等功能。
 - 不要用 Manjaro ！！！
-   - 1、虽然作为 Arch 发行版，但它没有 Archive 源你无法回滚你的系统，
-   - 2、延迟两周并不是在测试 Arch 包打包本身的质量，而是在测试他们拿来 Arch 的包和他们自己乱改的核心包之间的兼容性 
-   - 3、意味着你要放弃 Arch Linux 最大的特色 AUR 源或者忍受其可能因不兼容而导致问题
-   - 甚至有人专门建立了一个网站来吐槽 Manjaro： https://manjarno.snorlax.sh/
+ - 1、虽然作为 Arch 发行版，但它没有 Archive 源你无法回滚你的系统，
+ - 2、延迟两周并不是在测试 Arch 包打包本身的质量，而是在测试他们拿来 Arch 的包和他们自己乱改的核心包之间的兼容性 
+ - 3、意味着你要放弃 Arch Linux 最大的特色 AUR 源或者忍受其可能因不兼容而导致问题
+ - 甚至有人专门建立了一个网站来吐槽 Manjaro： https://manjarno.snorlax.sh/
 - 混合发行版
-  - https://bedrocklinux.org/
-  - https://blendos.co/
+- https://bedrocklinux.org/
+- https://blendos.co/
 
 下面是我的主力配置
 
 import AsciinemaPlayer from '@site/src/components/AsciinemaPlayer';
 
 <AsciinemaPlayer
-    src="/casts/neofetch.cast"
-    poster="npt:0:5"
-    preload={true}
-    autoPlay={true}
-    idleTimeLimit="2"
+src="/casts/neofetch.cast"
+poster="npt:0:5"
+preload={true}
+autoPlay={true}
+idleTimeLimit="2"
 />
 
 
@@ -48,7 +50,7 @@ import AsciinemaPlayer from '@site/src/components/AsciinemaPlayer';
 
 虽然 Arch Linux 的滚动更新较为激进容易出现问题，但好在官方提供了仓库快照 [archive源](https://archive.archlinux.org/)，如果发现问题你可以利用它将系统回滚到之前任意一天的状态。
 
-为了避免滚挂 我使用了 BTRFS 文件系统，其快照功能十分好用，但每次都通过 Timeshift 手动创建十分麻烦，推荐安装 [timeshift-autosnap](https://gitlab.com/gobonja/timeshift-autosnap)  利用 Pacman Hook 在包更新前自动使用 Timeshift 创建快照。
+为了避免滚挂 我使用了 BTRFS 文件系统，其快照功能十分好用，但每次都通过 Timeshift 手动创建十分麻烦，推荐安装 [timeshift-autosnap](https://gitlab.com/gobonja/timeshift-autosnap)利用 Pacman Hook 在包更新前自动使用 Timeshift 创建快照。
 
 并且建议使用 [grub-btrfs](https://github.com/Antynea/grub-btrfs) 实现在 grub 引导界面启动到快照的能力。注意要挂载 /run/timeshift/backup 为固定目录，不然每次开机 timeshift 会创建随机数字目录来存放快照，这会让 grub 找不到快照位置。
 
