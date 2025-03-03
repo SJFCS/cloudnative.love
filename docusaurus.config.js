@@ -319,43 +319,43 @@ const config = {
               },
             ],
           },
-          {
-            type: "dropdown",
-            label: "laboratory",
-            position: "right",
-            items: [
-              {
-                label: "Google Mirror",
-                to: "https://google.cloudnative.love/",
-                className: "header-google-link",
-                "aria-label": "google",
-              },
-              {
-                label: "Real-time visitors",
-                to: "https://analytics.cloudnative.love/",
-                className: "header-analytics-link",
-                "aria-label": "Analytics",
-              },
-              {
-                label: "Site monitoring",
-                to: "https://monitor.cloudnative.love/",
-                className: "header-monitor-link",
-                "aria-label": "monitor",
-              },
-              {
-                label: "GitHub Insight",
-                to: "https://ossinsight.cloudnative.love/",
-                className: "header-insight-link",
-                "aria-label": "insight",
-              },
-              {
-                label: "ChatGPT Next",
-                to: "https://chat.cloudnative.love/",
-                className: "header-chat-link",
-                "aria-label": "chat",
-              },
-            ],
-          },
+          // {
+          //   type: "dropdown",
+          //   label: "laboratory",
+          //   position: "right",
+          //   items: [
+          //     {
+          //       label: "Google Mirror",
+          //       to: "https://google.cloudnative.love/",
+          //       className: "header-google-link",
+          //       "aria-label": "google",
+          //     },
+          //     {
+          //       label: "Real-time visitors",
+          //       to: "https://analytics.cloudnative.love/",
+          //       className: "header-analytics-link",
+          //       "aria-label": "Analytics",
+          //     },
+          //     {
+          //       label: "Site monitoring",
+          //       to: "https://monitor.cloudnative.love/",
+          //       className: "header-monitor-link",
+          //       "aria-label": "monitor",
+          //     },
+          //     {
+          //       label: "GitHub Insight",
+          //       to: "https://ossinsight.cloudnative.love/",
+          //       className: "header-insight-link",
+          //       "aria-label": "insight",
+          //     },
+          //     {
+          //       label: "ChatGPT Next",
+          //       to: "https://chat.cloudnative.love/",
+          //       className: "header-chat-link",
+          //       "aria-label": "chat",
+          //     },
+          //   ],
+          // },
           {
             type: "dropdown",
             label: "About",
