@@ -196,6 +196,12 @@ https://www.lazyvim.org/
 https://www.lunarvim.org/
 https://nvchad.com/
 https://astronvim.com/
+AstroNvim！很喜欢。令人惊叹的用户自定义功能。很棒的社区包。老实说，默认设置非常好。我只需要添加一些我自己的映射。另外，我认为我无法像 Astro 团队那样优化 Lazy。非常愉快的体验。
+https://github.com/neovim/neovim/issues/12103
+如果你希望开箱即用且美观，选择 AstroNvim。
+如果你追求性能优先并享受自定义，选择 NvChad。
+如果你专注于代码开发，希望用 Neovim 替代 IDE，选择 LunarVim。
+如果你想自己打造一个极简的 Neovim 配置，或对 lazy.nvim 熟悉，选择 LazyVim。
 
 paru -S xclip nvim
 paru -R vim gvim
