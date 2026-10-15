@@ -1,3 +1,7 @@
+#在 Vim 中遇到无法粘贴、或者鼠标右键粘贴时变成“-- (insert) VISUAL --”（可视模式）的问题，通常是因为 Vim 8.0/9.0 以上版本默认开启了 set mouse=a 鼠标支持。
+#解决方法
+#:set mouse-=a
+
 mihomo >/dev/null 2>1 &
 #!/bin/bash
 # https://gist.github.com/Kr328/a81444f46e13c540a9b4c932ad1d482c
