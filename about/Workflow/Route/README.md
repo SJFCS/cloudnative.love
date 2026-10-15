@@ -9,7 +9,9 @@ umount /tmp/mountd/disk1_part1
 yes|mkfs.ext4 /dev/mmcblk0p1
 # 打开 luci 界面： http://192.168.8.1/cgi-bin/luci/#
 # 系统-挂载点-新增（先删除无效的）-已启用-作为外部 overlay 使用（/overlay）-保存
-# 注意点保存并应用
+######################
+# 注意点保存并应用！！！#
+######################
 reboot
 df -h
 ```
@@ -19,7 +21,8 @@ df -h
 # 打开 luci 界面设置ssh配置： http://192.168.8.1/cgi-bin/luci/#
 sed -i s/fw.gl-inet.cn/fw.gl-inet.com/g /etc/opkg/distfeeds.conf
 opkg update 
-opkg list-upgradable | cut -f 1 -d ' ' | xargs opkg upgrade
+opkg list-upgradable | cut -d' ' -f1 | xargs -r opkg update
+
 opkg install openssh-sftp-server vim tar wget curl   procps-ng-ps	 coreutils-printenv	
 sed -i 's|/bin/bash|/bin/ash|' /etc/passwd
 bash
@@ -49,15 +52,20 @@ curl -sL $(curl -s https://api.github.com/repos/jerrykuku/luci-theme-argon/relea
 curl -sL $(curl -sL https://api.github.com/repos/jerrykuku/luci-app-argon-config/releases/latest | jq -r '.assets[0].browser_download_url') -o luci-app-argon-config.ipk
 curl -sL $(curl -sL https://api.github.com/repos/jerrykuku/luci-app-argon-config/releases/latest | jq -r '.assets[].browser_download_url' |grep zh-cn) -o luci-i18n-argon-config-zh-cn.ipk
 
-opkg install luci-theme-argon.ipk luci-app-argon-config.ipk /luci-i18n-argon-config-zh-cn.ipk
+opkg install luci-theme-argon.ipk luci-app-argon-config.ipk luci-i18n-argon-config-zh-cn.ipk
 rm -f luci-theme-argon.ipk luci-app-argon-config.ipk luci-i18n-argon-config-zh-cn.ipk
+失败就手动下载scp上去
+  46 opkg install luci-theme-argon_2.4.8-2_all.ipk
+  47 opkg install luci-app-argon-config_2.4.8-2_all.ipk
+  48 opkg install luci-i18n-argon-config-zh-cn_git-26.281.11209-9bafffa_all.ipk
 ```
-## clash
+## mihomo
 https://github.com/MetaCubeX/mihomo/releases
-gunzip  
-/usr/bin/mihomo
+gunzip mihomo-linux-arm64-v1.19.32.gz
+mv mihomo-linux-arm64-v1.19.32 /usr/bin/mihomo
 /root/.config/mihomo/config.yaml
 https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip
+
 ```bash
 # 添加静态dhcp
 http://192.168.8.1/cgi-bin/luci/admin/network/dhcp
@@ -65,6 +73,8 @@ http://192.168.8.1/cgi-bin/luci/admin/network/dhcp
 sudo dhclient -r
 # 重新连接wifi
 ```
+
+## 进阶
 ## Clash
 ```bash
 #iptables
@@ -120,30 +130,7 @@ https://testingcf.jsdelivr.net/
 https://cdn.jsdelivr.net/
 https://raw.fastgit.org/
 ```
-## v2raya
-- https://github.com/v2raya/v2raya-openwrt
-- https://github.com/v2rayA/v2rayA/wiki/openwrt
-- https://blog.lzc256.com/post/openwrt-an-zhuang-ruan-jian-bu-xian-shi-zai-fu-wu-li-de-wen-ti
-```bash
-wget https://liquidtelecom.dl.sourceforge.net/project/v2raya/openwrt/v2raya.pub -O /etc/opkg/keys/94cc2a834fb0aa03
-echo "src/gz v2raya https://liquidtelecom.dl.sourceforge.net/project/v2raya/openwrt/$(. /etc/openwrt_release && echo "$DISTRIB_ARCH")" | tee -a "/etc/opkg/customfeeds.conf"
-opkg update
-opkg install iptables-mod-conntrack-extra \
-  iptables-mod-extra \
-  iptables-mod-filter \
-  iptables-mod-tproxy \
-  kmod-ipt-nat6
-opkg install v2raya xray-core v2fly-geoip v2fly-geosite luci-app-v2raya
-uci set v2raya.config.enabled='1'
-uci commit v2raya
-/etc/init.d/v2raya start
-# 打开 v2raya 界面： http://192.168.8.1:2017
-# 打开 luci-v2raya 界面：  http://192.168.8.1/cgi-bin/luci/admin/services/v2raya 
-# 没有菜单就执行下面的
-# rm /tmp/luci-indexcache
-# rm -rf /tmp/luci-*
-# reboot 重启
-```
+
 ## ddns
 这里我是用 Cloudflare DDNS
 - [OpenWrt Cloudflare DDNS](https://taoshu.in/unix/openwrt-ddns-cloudflare.html)
@@ -157,13 +144,7 @@ opkg install miniupnpd luci-i18n-upnp-zh-cn
 ```
 
 ## tailscale 
-ln -s /usr/sbin/tailscale /usr/bin/tailscale
-mkdir -p /tmp/.cache
-ln -s /tmp/.cache /root/.cache
-tailscale update
 
-
- sudo ls /var/lib/tailscale/files/
 - https://tailscale.com/kb/1082/firewall-ports/?q=port
 - https://www.9bingyin.com/archives/why-i-choose-tailscale.html
 - https://www.youtube.com/watch?v=mgDpJX3oNvI
@@ -200,6 +181,31 @@ tailscale ping --c 20 otherpi
 
 ## 其他
 ```bash
+
+## v2raya
+- https://github.com/v2raya/v2raya-openwrt
+- https://github.com/v2rayA/v2rayA/wiki/openwrt
+- https://blog.lzc256.com/post/openwrt-an-zhuang-ruan-jian-bu-xian-shi-zai-fu-wu-li-de-wen-ti
+```bash
+wget https://liquidtelecom.dl.sourceforge.net/project/v2raya/openwrt/v2raya.pub -O /etc/opkg/keys/94cc2a834fb0aa03
+echo "src/gz v2raya https://liquidtelecom.dl.sourceforge.net/project/v2raya/openwrt/$(. /etc/openwrt_release && echo "$DISTRIB_ARCH")" | tee -a "/etc/opkg/customfeeds.conf"
+opkg update
+opkg install iptables-mod-conntrack-extra \
+  iptables-mod-extra \
+  iptables-mod-filter \
+  iptables-mod-tproxy \
+  kmod-ipt-nat6
+opkg install v2raya xray-core v2fly-geoip v2fly-geosite luci-app-v2raya
+uci set v2raya.config.enabled='1'
+uci commit v2raya
+/etc/init.d/v2raya start
+# 打开 v2raya 界面： http://192.168.8.1:2017
+# 打开 luci-v2raya 界面：  http://192.168.8.1/cgi-bin/luci/admin/services/v2raya 
+# 没有菜单就执行下面的
+# rm /tmp/luci-indexcache
+# rm -rf /tmp/luci-*
+# reboot 重启
+```
 
 # 媒体服务器 dlna
 opkg install luci-app-minidlna luci-i18n-minidlna-zh-cn
