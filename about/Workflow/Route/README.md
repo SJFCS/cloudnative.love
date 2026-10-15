@@ -1,6 +1,8 @@
 ---
 title: OpenWrt
 ---
+## 适配ghostty
+TERM=xterm-256color 
 ## 扩容
 ```bash
 ssh root@192.168.8.1
