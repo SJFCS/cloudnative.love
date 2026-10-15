@@ -157,6 +157,7 @@ opkg install miniupnpd luci-i18n-upnp-zh-cn
 ```
 
 ## tailscale 
+ln -s /usr/sbin/tailscale /usr/bin/tailscale
  sudo ls /var/lib/tailscale/files/
 - https://tailscale.com/kb/1082/firewall-ports/?q=port
 - https://www.9bingyin.com/archives/why-i-choose-tailscale.html
